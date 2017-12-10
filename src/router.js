@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomePage from './views/HomePage.vue'
 import HelpCenterPage from './views/HelpCenterPage.vue'
+// 贷款列表页
+import List from './views/List.vue'
 
 let routes = [
     {
@@ -21,7 +23,13 @@ let routes = [
         component: HomePage,
         // redirect: { path: '/index.html' },
         hidden: true
+    },
+    {
+      path: '/list',
+      component: List,
+      hidden: true
     }
+
 ];
 
 Vue.use(VueRouter)
