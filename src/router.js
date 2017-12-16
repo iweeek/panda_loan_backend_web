@@ -4,6 +4,8 @@ import HomePage from './views/HomePage.vue'
 import HelpCenterPage from './views/HelpCenterPage.vue'
 // 贷款列表页
 import List from './views/List.vue'
+// 我的身份页
+import Identity from './views/Identity.vue'
 
 let routes = [
     {
@@ -27,6 +29,11 @@ let routes = [
     {
       path: '/list',
       component: List,
+      hidden: true
+    },
+    {
+      path: '/identity',
+      component: Identity,
       hidden: true
     }
 

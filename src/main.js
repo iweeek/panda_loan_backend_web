@@ -34,8 +34,10 @@ import 'font-awesome/css/font-awesome.min.css'
 })(window,document);
 
 // 按需引入mintUI 组件可优化
-import { InfiniteScroll, Toast } from 'mint-ui'
+import { InfiniteScroll, Toast, Picker } from 'mint-ui'
 Vue.use(InfiniteScroll)
+
+Vue.component(Picker.name, Picker);
 
 Vue.prototype.$ajax = axios;
 Vue.prototype.$toast = Toast
