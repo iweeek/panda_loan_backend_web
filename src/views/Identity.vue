@@ -1,8 +1,8 @@
 <template>
   <div class="identity">
     <div class="identity-info-top">
-      <input type="text" v-model="presonName" placeholder="请填写您的姓名" class="info-top-item preson-name">
-      <input type="text" v-model="presonCard" placeholder="请填写您的身份证号" class="info-top-item preson-card">
+      <input type="text" v-model="personName" placeholder="请填写您的姓名" class="info-top-item preson-name">
+      <input type="text" v-model="personCard" placeholder="请填写您的身份证号" class="info-top-item preson-card">
     </div>
     <div class="identity-info-bottom">
       <h3 class="info-bottom-title">留下您的个人信息，方便更好地为您服务</h3>
@@ -42,11 +42,12 @@
 </template>
 
 <script>
+import resources from '../resources'
 export default {
   data () {
     return {
-      presonName: '',
-      presonCard: '',
+      personName: '',
+      personCard: '',
       picker1: false,
       picker2: false,
       picker3: false,
@@ -87,19 +88,61 @@ export default {
         }
       },
       applyNow () {
-        this.$ajax({
-          url: 'https://api.creditm.cn/tags/v2/idCardAuth',
-          method: 'get',
-          params: {
-            name: this.presonName,
-            idCard: this.presonCard,
-            type: 'noPhoto', // photo 返回照片, noPhoto 不返回照片
-          },
-          // token value 获取请联系魔蝎数据为合作机构分配
-          headers: {'Authorization': 'token'},
-        }).then(res=>{
-          this.$toast('获取成功!')
-        })
+        if (this.personName == '') {
+          panda.showAlert("姓名不能为空");
+          return;
+        }
+
+        if (this.personCard == '' || this.personCard.length != 18) {
+          panda.showAlert("身份证信息不正确");
+          return;
+        }
+        
+        if (this.picker1Value == '请选择') {
+          panda.showAlert("请提供职业身份信息");
+          return; 
+        }
+
+        if (this.picker2Value == '请选择') {
+          panda.showAlert("请提供信用资质");
+          return; 
+        }
+
+        if (this.picker3Value == '请选择') {
+          panda.showAlert("请提供学历");
+          return; 
+        }
+
+        panda.verifyIdentity(this.personName, this.personCard, this.picker3Value, this.picker2Value, this.picker1Value);
+
+        // this.$ajax({
+        //   url: resources.host + "/clients",
+        //   method: 'post',
+        //   data: {
+        //     userId: 1,
+        //     name: this.personName,
+        //     idNo: this.personCard,
+        //     edu: this.picker3Value, 
+        //     guarantee: this.picker2Value,
+        //     profession: this.picker1Value 
+        //   },
+        //   transformRequest: [function (data) {
+        //     // Do whatever you want to transform the data
+        //     let ret = ''
+        //     for (let it in data) {
+        //       ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+        //     }
+        //     return ret
+        //   }],
+        //   headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
+        
+        // }).then(res=>{
+        //   if (res.status != 201) {
+        //     panda.showAlert("身份验证有误");
+        //   } else {
+        //     panda.showResult(res);
+        //   }
+        // })
     }
   }
 }
