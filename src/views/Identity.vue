@@ -43,6 +43,40 @@
 
 <script>
 import resources from '../resources'
+// function setupWebViewJavascriptBridge(callback) {
+//   if (window.WebViewJavascriptBridge) { 
+//     callback(WebViewJavascriptBridge); 
+//   } else {
+//     document.addEventListener('WebViewJavascriptBridgeReady' , function() {
+//       callback(WebViewJavascriptBridge)
+//     }, false);
+//   }
+
+//   if (window.WVJBCallbacks) { 
+//     return window.WVJBCallbacks.push(callback); 
+//   }
+
+//   window.WVJBCallbacks = [callback];
+
+//   var WVJBIframe = document.createElement('iframe');
+//   WVJBIframe.style.display = 'none';
+//   WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+//   document.documentElement.appendChild(WVJBIframe);
+//   setTimeout(function() { 
+//       document.documentElement.removeChild(WVJBIframe) 
+//     }, 0)
+// }
+
+// setupWebViewJavascriptBridge(function(bridge) {
+//     bridge.registerHandler('showAlert', function(data, responseCallback) {
+//         alert('JS方法被调用:'+data);
+//         responseCallback('js执行过了');
+//     })
+//     bridge.registerHandler('verifyIdentity', function(data, responseCallback) {
+//       alert('JS方法被调用:'+data);
+//       responseCallback('js执行过了');
+//     })
+// })
 export default {
   data () {
     return {
@@ -87,34 +121,78 @@ export default {
           this.picker3 = false
         }
       },
+      // showAlert() {
+      //   WebViewJavascriptBridge.callHandler('showAlert', "姓名不能为空", function(response) {
+      //       console.log(response);
+      //     });
+      // },
       applyNow () {
+        var ua = navigator.userAgent.toLowerCase();
+        var isIphone = true;
+        if (ua.indexOf("iphone") == -1) {
+          isIphone = false;
+        }
+
         if (this.personName == '') {
-          panda.showAlert("姓名不能为空");
-          return;
+          if (isIphone) {
+            window.webkit.messageHandlers.showAlert.postMessage("姓名不能为空"); 
+            return;
+          } else {
+            panda.showAlert("姓名不能为空");
+            return;
+          }
         }
 
         if (this.personCard == '' || this.personCard.length != 18) {
-          panda.showAlert("身份证信息不正确");
+          if (isIphone) {
+            window.webkit.messageHandlers.showAlert.postMessage("身份证信息不正确"); 
+          } else {
+            panda.showAlert("身份证信息不正确");
+          }
           return;
         }
         
         if (this.picker1Value == '请选择') {
-          panda.showAlert("请提供职业身份信息");
-          return; 
+          if (isIphone) {
+            window.webkit.messageHandlers.showAlert.postMessage("请提供职业身份信息");
+          } else {
+            panda.showAlert("请提供职业身份信息");
+          }
+          return;
         }
 
         if (this.picker2Value == '请选择') {
-          panda.showAlert("请提供信用资质");
+          if (isIphone) {
+            window.webkit.messageHandlers.showAlert.postMessage("请提供信用资质"); 
+          } else {
+            panda.showAlert("请提供信用资质");
+          }
           return; 
         }
 
         if (this.picker3Value == '请选择') {
-          panda.showAlert("请提供学历");
+          if (isIphone) {
+            window.webkit.messageHandlers.showAlert.postMessage("请提供学历");
+          } else {
+            panda.showAlert("请提供学历");
+          }
           return; 
         }
 
-        panda.verifyIdentity(this.personName, this.personCard, this.picker3Value, this.picker2Value, this.picker1Value);
+        var params = {
+            name: this.personName,
+            idNo: this.personCard,
+            edu: this.picker3Value, 
+            guarantee: this.picker2Value,
+            profession: this.picker1Value 
+        };
 
+        if (isIphone) {
+          window.webkit.messageHandlers.verifyIdentity.postMessage(params);
+        } else {
+          panda.verifyIdentity(this.personName, this.personCard, this.picker3Value, this.picker2Value, this.picker1Value);
+        }
+        
         // this.$ajax({
         //   url: resources.host + "/clients",
         //   method: 'post',

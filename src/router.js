@@ -6,6 +6,7 @@ import HelpCenterPage from './views/HelpCenterPage.vue'
 import List from './views/List.vue'
 // 我的身份页
 import Identity from './views/Identity.vue'
+import Agreement from './views/Agreement.vue'
 
 let routes = [
     {
@@ -35,8 +36,12 @@ let routes = [
       path: '/identity',
       component: Identity,
       hidden: true
+    },
+    {
+        path: '/agreement',
+        component: Agreement,
+        hidden: true
     }
-
 ];
 
 Vue.use(VueRouter)

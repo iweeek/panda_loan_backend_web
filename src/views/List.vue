@@ -46,6 +46,34 @@ export default {
   },
   methods: {
     fetchData () {
+         this.$ajax({
+          url: resources.host + "/graphql/query",
+          method: 'post',
+          data: {
+            userId: 1,
+            name: this.personName,
+            idNo: this.personCard,
+            edu: this.picker3Value, 
+            guarantee: this.picker2Value,
+            profession: this.picker1Value 
+          },
+          transformRequest: [function (data) {
+            // Do whatever you want to transform the data
+            let ret = ''
+            for (let it in data) {
+              ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+            }
+            return ret
+          }],
+          headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
+        
+        }).then(res=>{
+          if (res.status != 201) {
+            panda.showAlert("身份验证有误");
+          } else {
+            panda.showResult(res);
+          }
+        })
         // const paramQuery = isEmpty(this.$route.query) ? '' : this.$route.query
         // this.api.getCatePros(cateId, paramQuery).then((res) => {
         //   this.loading = false
