@@ -2,35 +2,27 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomePage from './views/HomePage.vue'
 import HelpCenterPage from './views/HelpCenterPage.vue'
-// 贷款列表页
-import List from './views/List.vue'
-// 我的身份页
+
+import About from './views/about.vue'
+import NotFound from './views/404.vue'
 import Identity from './views/Identity.vue'
 import Agreement from './views/Agreement.vue'
-import About from './views/About.vue'
+
 let routes = [
     {
-        path: '/home',
-        component: HomePage,
-        name: '验证学籍信息',
-        hidden: true
+        path:'/about',
+        component: About,
+        name: '熊猫贷款',
     },
     {
-        path: '/help',
-        component: HelpCenterPage,
-        name: '帮助中心',
-        hidden: true
+        path: '/',
+        redirect: { path: '/about' }
     },
     {
         path: '/',
         component: HomePage,
         // redirect: { path: '/index.html' },
         hidden: true
-    },
-    {
-      path: '/list',
-      component: List,
-      hidden: true
     },
     {
       path: '/identity',
@@ -45,7 +37,8 @@ let routes = [
     {
         path: '/agreement',
         component: Agreement,
-        hidden: true
+        hidden: true,
+        redirect: { path: '/404' }
     }
 ];
 

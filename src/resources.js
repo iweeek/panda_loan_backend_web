@@ -7,7 +7,7 @@ if (debug) {
     var host = 'http://192.168.2.133:8080/panda_loan';
 } else {
     //正式环境地址
-    var host = 'http://192.168.2.133:8080/panda_loan';
+    var host = 'https://api.pinganzhiyuan.com/panda_loan';
 }
 console.warn('当前resource: ', host);
 

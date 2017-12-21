@@ -39,6 +39,7 @@ Vue.use(InfiniteScroll)
 
 Vue.component(Picker.name, Picker);
 
+Vue.use(ElementUI)
 Vue.prototype.$ajax = axios;
 Vue.prototype.$toast = Toast
 
