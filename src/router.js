@@ -2,25 +2,23 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomePage from './views/HomePage.vue'
 import HelpCenterPage from './views/HelpCenterPage.vue'
+import About from './views/about.vue'
+import NotFound from './views/404.vue'
 
 let routes = [
     {
-        path: '/home',
-        component: HomePage,
-        name: '验证学籍信息',
-        hidden: true
-    },
-    {
-        path: '/help',
-        component: HelpCenterPage,
-        name: '帮助中心',
-        hidden: true
+        path:'/about',
+        component: About,
+        name: '熊猫贷款',
     },
     {
         path: '/',
-        component: HomePage,
-        // redirect: { path: '/index.html' },
-        hidden: true
+        redirect: { path: '/about' }
+    },
+    {
+        path: '*',
+        hidden: true,
+        redirect: { path: '/404' }
     }
 ];
 

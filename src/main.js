@@ -12,7 +12,6 @@ import md5 from 'js-md5'
 import 'font-awesome/css/font-awesome.min.css'
 
 Vue.use(ElementUI)
-
 Vue.prototype.$ajax = axios;
 
 new Vue({
