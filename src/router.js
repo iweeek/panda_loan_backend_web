@@ -7,7 +7,7 @@ import List from './views/List.vue'
 // 我的身份页
 import Identity from './views/Identity.vue'
 import Agreement from './views/Agreement.vue'
-
+import About from './views/About.vue'
 let routes = [
     {
         path: '/home',
@@ -37,6 +37,11 @@ let routes = [
       component: Identity,
       hidden: true
     },
+    {
+        path: '/about',
+        component: About,
+        hidden: true
+      },
     {
         path: '/agreement',
         component: Agreement,
