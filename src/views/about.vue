@@ -27,7 +27,7 @@
 			</div>
             <div class="mes">
 				<div class="letf-text">
-                    <span>QQ群</span>
+                    <span>客服QQ</span>
                 </div>
 				<div class="right-text">
                     <span >{{QQNumber}}</span>
@@ -57,7 +57,7 @@
         data() {
             return {
                 versionNumber:this.$route.query.version,
-                QQNumber:'123456789'
+                QQNumber:'617149963'
             }
         },
         methods: {
