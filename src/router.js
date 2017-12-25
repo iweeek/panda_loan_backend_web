@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import HomePage from './views/HomePage.vue'
 import HelpCenterPage from './views/HelpCenterPage.vue'
 
-import About from './views/about.vue'
+import About from './views/About.vue'
 import NotFound from './views/404.vue'
 import Identity from './views/Identity.vue'
 import Agreement from './views/Agreement.vue'
@@ -29,11 +29,6 @@ let routes = [
       component: Identity,
       hidden: true
     },
-    {
-        path: '/about',
-        component: About,
-        hidden: true
-      },
     {
         path: '/agreement',
         component: Agreement,
