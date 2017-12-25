@@ -227,7 +227,12 @@ export default {
 </script>
 
 <style lang="scss">
+  #app{
+      background: #f2f3f9;
+  }
+  
   .identity {
+    background: #f2f3f9;
     .identity-info-top {
       background: #fff;
       padding: 0 32px;
