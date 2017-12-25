@@ -19,7 +19,7 @@ let routes = [
         redirect: { path: '/about' }
     },
     {
-        path: '/',
+        path: '/homepage',
         component: HomePage,
         // redirect: { path: '/index.html' },
         hidden: true
