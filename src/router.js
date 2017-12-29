@@ -12,7 +12,7 @@ let routes = [
     {
         path:'/about',
         component: About,
-        name: '熊猫贷款',
+        name: '关于',
     },
     {
         path: '/',

@@ -16,6 +16,10 @@
                     <!-- <i class="fa fa-angle-right"></i> -->
                 </div>
 			</div>
+            <div>
+                <div class="letf"></div>
+                <div class="border"></div>
+            </div>
             <div class="mes">
 				<div class="letf-text">
                     <span>微信公众号</span>
@@ -25,6 +29,10 @@
                     <!-- <i class="fa fa-angle-right"></i> -->
                 </div>
 			</div>
+            <div>
+                <div class="letf"></div>
+                <div class="border"></div>
+            </div>
             <div class="mes">
 				<div class="letf-text">
                     <span>客服QQ</span>
@@ -93,7 +101,7 @@
                 font-family: "微软雅黑";
                 padding: 0.6rem 0.5rem;
                 height: 2rem;
-                border-bottom: 1px solid #dfdfdf;
+                //border-bottom: 1px solid #dfdfdf;
                 .letf-text{
                     float: left;
                     width: 49%;
@@ -109,6 +117,17 @@
                         color: #999999
                     }
                 }
+            }
+            .letf{
+                float: left;
+                background:#fff;
+                height: 1px;
+                width: 0.5rem;
+            }
+            .border{
+                overflow: hidden;
+                background: #e7e8f1;
+                height: 2px;
             }
         }
         .bottom{
