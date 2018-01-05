@@ -8,7 +8,7 @@
 
         <div class="mes-list">
             <div class="mes">
-				<div class="letf-text">
+				<div class="left-text">
                     <span>版本</span>
                 </div>
 				<div class="right-text">
@@ -21,7 +21,7 @@
                 <div class="right-border"></div>
             </div>
             <div class="mes">
-				<div class="letf-text">
+				<div class="left-text">
                     <span>微信公众号</span>
                 </div>
 				<div class="right-text" style="color:#999">
@@ -34,7 +34,7 @@
                 <div class="right-border"></div>
             </div>
             <div class="mes">
-				<div class="letf-text">
+				<div class="left-text">
                     <span>客服QQ</span>
                 </div>
 				<div class="right-text">
@@ -43,7 +43,7 @@
                 </div>
 			</div>
             <!-- <div class="mes">
-				<div class="letf-text">
+				<div class="left-text">
                     <span>4008-XXX-XXX</span>
                 </div>
 				<div class="right-text">
@@ -170,7 +170,7 @@ import resources from "../resources";
                 padding: 0.9rem 0.5rem;
                 height: 2.6rem;
                 //border-bottom: 1px solid #dfdfdf;
-                .letf-text{
+                .left-text{
                     float: left;
                     width: 49%;
                     text-align: left;
