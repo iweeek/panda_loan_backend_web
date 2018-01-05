@@ -17,8 +17,8 @@
                 </div>
 			</div>
             <div>
-                <div class="letf"></div>
-                <div class="border"></div>
+                <div class="left-border"></div>
+                <div class="right-border"></div>
             </div>
             <div class="mes">
 				<div class="letf-text">
@@ -30,8 +30,8 @@
                 </div>
 			</div>
             <div>
-                <div class="letf"></div>
-                <div class="border"></div>
+                <div class="left-border"></div>
+                <div class="right-border"></div>
             </div>
             <div class="mes">
 				<div class="letf-text">
@@ -61,6 +61,10 @@
 
 
 <script>
+
+import resources from "../resources";
+
+
     const versionQuery = `
         query (
             $platformId: Byte
@@ -88,7 +92,7 @@
                 versionCode: this.$route.query.versionCode,
                 QQNumber:'617149963',
                 Image: ''
-            }
+            };
         },
         methods: {
             //@click="awakeApp('weixi')"
@@ -116,8 +120,7 @@
                 } else {
                     params.platformId = 1
                 }
-
-                this.$ajax.post(`http://119.23.12.36:8081/panda_loan/graphql`, {
+                this.$ajax.post(`${resources.graphQlApi}`, {
                     'query': `${versionQuery}`,
                     variables: params
                 })
@@ -132,7 +135,7 @@
             //alert(this.version + " " + this.packageName + " " + this.channelId + " " + this.versionCode)
             this.getPic();
 		}
-    }
+    };
     
 </script>
 
@@ -183,13 +186,13 @@
                     }
                 }
             }
-            .letf{
+            .left-border{
                 float: left;
                 background:#fff;
                 height: 1px;
                 width: 0.5rem;
             }
-            .border{
+            .right-border{
                 overflow: hidden;
                 background: #e7e8f1;
                 height: 2px;
