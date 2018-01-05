@@ -25,15 +25,14 @@ let routes = [
         hidden: true
     },
     {
-      path: '/identity',
-      component: Identity,
-      hidden: true
+        path: '/identity',
+        component: Identity,
+        hidden: true
     },
     {
         path: '/agreement',
         component: Agreement,
-        hidden: true,
-        redirect: { path: '/404' }
+        hidden: true
     }
 ];
 
