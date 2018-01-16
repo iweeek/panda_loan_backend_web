@@ -9,11 +9,11 @@
             <input type="button" class="code-button" v-bind:class="{cantClick:is_show}" :value="count+codeButtonText"  @click="getCode()"/>
         </div>
         <div>
-            <input class="code-input" placeholder="请填写短信验证码"/>
+            <input class="code-input" placeholder="请填写短信验证码" v-model="smsCode"/>
         </div>
         <div v-if="picCode">
-            <input class="phone-input" placeholder="请填写验证码"/>
-            <img :src="imageCode" id="captchaImage" alt="" width="100" height="100">
+            <input class="phone-input" placeholder="请填写验证码" v-model="imaCode"/>
+            <img :src="imageCode" id="captchaImage" alt="" width="100" height="100" @click="getImageCode">
         </div>
         <div>
             <input type="button" class="comfirm-button" v-bind:class="{canClick:is_click}" value="立即借款" @click="comfirm()"/>
@@ -71,7 +71,9 @@
                 timer: null,
                 flagNum: 0,
                 imageCode: '',
-                phone: ''
+                phone: '',
+                smsCode: '',
+                imaCode: ''
             };
         },
         methods: {
@@ -117,40 +119,68 @@
                     .then(res => {
                         console.log(res)
                     });
-            },            
+            },    
+
             comfirm(){
                 this.flagNum ++ ;
-                // if (this.flagNum == 3) {
-                //     this.picCode = true;
-                // }
                 this.picCode = true;
                 this.getImageCode();
+                if (this.flagNum === 3) {
+                    //this.picCode = true;
+                    //this.getImageCode();
+                    if (this.phone == '' || this.imaCode == '' || this.smsCode == '') {
+                        return ;
+                    }
+                } else {
+                    if (this.phone == '' || this.smsCode == '') {
+                        return ;
+                    }
+
+
+                }
+                
             },
+
             getImageCode(){
                 // 普通的ajax接口
                 // 使用 application/x-www-form-urlencoded 格式化 
                 // 参考：http://blog.csdn.net/fantian001/article/details/70193938
-                $("#captchaImage").attr("src","/captchaImage" + Math.random());
                 let url = resources.imageCode();
-                let params = new URLSearchParams();
-                this.$ajax.post(url, params)
-                    .then(res => {
-                        console.log(res)
-                        this.imageCode = this.binToBase64(res.data)
-                    });
-            },
-            binToBase64(bitString) {
-                var header = "data:image/jpeg;base64,";
-                alert(encodeURI(bitString))
-                var 
-                return header + encodeURI(bitString);
+                this.$ajax({
+                    method: 'post',
+                    url: url,
+                    timeout: 10000,
+                    headers: {
+                        'Version': "1",
+                        'User-Id':'0',
+                        'Package-Name':'',
+                        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                        'Device-Id': '123',
+                        'Channel-Id': '1',
+                        'Long-lat':''
 
-                var xml = new ActiveXObject('Microsoft.XMLDOM');
-                node.dataType = "bin.base64";
-                obj = 'string' == typeof obj ? (node.text = obj, node.nodeTypedValue) : (node.nodeTypedValue = obj, node.text);
-                node = xml = null;
-                return obj;
-}        
+                    }
+                }).then((res) => {
+                    //console.log(res)
+                    console.log(res)
+                    this.imageCode = res;
+                });
+                // }, (resolve, reject, response) => {
+                //     console.log(resolve, reject, response)
+                //     this.$message({
+                //         message: '登录失败',
+                //         type: 'error'
+                //     });
+                // });
+                
+                // let url = resources.imageCode();
+
+                // //this.imageCode = url + "?" + Math.random();
+                
+                // let params = new URLSearchParams();
+                // this.$ajax.post(url, params)
+                //     .then(res => {
+                //     });
             }
         },
         mounted: function () {
