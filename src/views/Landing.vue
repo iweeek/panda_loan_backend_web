@@ -1,5 +1,5 @@
 <template>
-  <div class="loading-panda">
+  <div class="landing-panda">
     <div class="top">
         <img src="~@/assets/toppic.png" class="top-pic">
     </div>
@@ -13,7 +13,7 @@
         </div>
         <div v-if="picCode">
             <input class="phone-input" placeholder="请填写验证码" v-model="imaCode"/>
-            <img :src="imageCode" id="captchaImage" alt="" width="100" height="100" @click="getImageCode">
+            <img :src="imageCode" alt="" class="image-code" @click="getImageCode">
         </div>
         <div>
             <input type="button" class="comfirm-button" v-bind:class="{canClick:is_click}" value="立即借款" @click="comfirm()"/>
@@ -71,15 +71,22 @@
                 timer: null,
                 flagNum: 0,
                 imageCode: '',
+
                 phone: '',
                 smsCode: '',
-                imaCode: ''
+                imaCode: '',
+                keySMSCapt: '',
+                keyImage:''
             };
         },
         methods: {
             getCode(){
+                //倒计时的时候不能点按钮
+                if (this.is_show) {
+                    return;
+                }
                 //如果输入的手机号不符合格式直接返回，不走下面的逻辑
-                if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.phone))){ 
+                if (!(/^1\d{10}$/.test(this.phone))){
                     return ;
                 }
                 //获取验证码
@@ -115,72 +122,106 @@
                 let url = resources.smsCaptcha();
                 let params = new URLSearchParams();
                 params.append('phone',this.phone)
-                this.$ajax.post(url, params)
-                    .then(res => {
-                        console.log(res)
-                    });
+                this.$ajax.post(url, params,{
+                    headers: {
+                        'Version': '1',
+                        'User-Id': '0',
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Device-Id': '123',
+                        'Channel-Id': '1',
+                        'Request-Uri': '123'
+                    }
+                }).then(res => {
+                    this.keySMSCapt = res.data.obj1.keySMSCapt;
+                    console.log(res)
+                });
             },    
 
             comfirm(){
-                this.flagNum ++ ;
-                this.picCode = true;
-                this.getImageCode();
-                if (this.flagNum === 3) {
-                    //this.picCode = true;
-                    //this.getImageCode();
-                    if (this.phone == '' || this.imaCode == '' || this.smsCode == '') {
-                        return ;
-                    }
-                } else {
-                    if (this.phone == '' || this.smsCode == '') {
-                        return ;
-                    }
-
-
+                if (!this.is_click) {
+                    return ;
                 }
-                
+                if (this.phone == '') {
+                    this.lackMessage("手机号不能为空")
+                    return ;
+                } else if (this.smsCode == ''){
+                    this.lackMessage("短信验证码不能为空")
+                    return ;
+                }
+                if (this.flagNum < 4) {
+                    this.postMes();
+                    this.flagNum ++;
+                } else {
+                    if (this.imaCode == '') {
+                        this.lackMessage("图片验证码不能为空")
+                        return ;
+                    }
+                    this.postMes();
+                }
             },
-
+            postMes(){
+                let url = resources.token();
+                let params = new URLSearchParams();
+                params.append('username',this.phone)//用户名（手机号）
+                params.append('keySMSCapt',this.keySMSCapt)//短信验证码的key
+                params.append('smsCapt',this.smsCode)//短信验证码
+                if (this.keyImage != '') {
+                    params.append('keyImageCapt',this.keyImage)//图形验证码的key 
+                    params.append('imageCapt',this.imaCode)//图形验证码
+                }
+                console.log(params)
+                this.$ajax.post(url, params, {
+                    headers: {
+                        'Version': '1',
+                        'User-Id': '0',
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Device-Id': '123',
+                        'Channel-Id': '1',
+                        'Request-Uri': '123'
+                    },
+                }).then(res => {
+                    console.log(res)
+                }).catch(error => {
+                    this.lackMessage(error.response.data.statusMsg)
+                    if (this.flagNum == 3) {
+                        this.getImageCode()
+                    }
+                });
+            },
+            lackMessage(mistakeMes){
+                this.$notify({
+                    title: '警告',
+                    message: mistakeMes,
+                    type: 'warning'
+                    });
+            },
             getImageCode(){
                 // 普通的ajax接口
                 // 使用 application/x-www-form-urlencoded 格式化 
                 // 参考：http://blog.csdn.net/fantian001/article/details/70193938
                 let url = resources.imageCode();
-                this.$ajax({
-                    method: 'post',
-                    url: url,
-                    timeout: 10000,
+                let params = new URLSearchParams();
+                this.$ajax.post(url, params, {
                     headers: {
-                        'Version': "1",
-                        'User-Id':'0',
-                        'Package-Name':'',
-                        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                        'Version': '1',
+                        'User-Id': '0',
+                        'Content-Type': 'application/x-www-form-urlencoded',
                         'Device-Id': '123',
                         'Channel-Id': '1',
-                        'Long-lat':''
-
-                    }
-                }).then((res) => {
-                    //console.log(res)
-                    console.log(res)
-                    this.imageCode = res;
+                        'Request-Uri': '123'
+                    },
+                    responseType: 'arraybuffer'
+                }).then(res => {
+                    console.log(res.headers.keyimagecapt)
+                    this.keyImage = res.headers.keyimagecapt
+                    return 'data:image/jpeg;base64,' + btoa(
+                    new Uint8Array(res.data)
+                        .reduce((data, byte) => data + String.fromCharCode(byte), '')
+                    );
+                }).then(data => {
+                    this.imageCode = data;
+                    this.picCode = true;
                 });
-                // }, (resolve, reject, response) => {
-                //     console.log(resolve, reject, response)
-                //     this.$message({
-                //         message: '登录失败',
-                //         type: 'error'
-                //     });
-                // });
-                
-                // let url = resources.imageCode();
-
-                // //this.imageCode = url + "?" + Math.random();
-                
-                // let params = new URLSearchParams();
-                // this.$ajax.post(url, params)
-                //     .then(res => {
-                //     });
             }
         },
         mounted: function () {
@@ -191,7 +232,7 @@
 </script>
 
 <style lang="scss">
-    .loading-panda{
+    .landing-panda{
         position: absolute;
         width: 100%;
         top: 1px;
@@ -215,6 +256,13 @@
                 margin-top: 0.6rem;
                 background: #f2f3f9;
                 padding-left: 1rem;
+            }
+            .image-code{
+                vertical-align:middle;//img图片和div在同一排
+                height: 2.2rem;
+                width: 4.75rem;
+                margin-left: 0.3rem; 
+                margin-top: 0.6rem;
             }
             .code-button{
                 background: #2CCAD4;

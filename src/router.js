@@ -7,7 +7,7 @@ import About from './views/About.vue'
 import NotFound from './views/404.vue'
 import Identity from './views/Identity.vue'
 import Agreement from './views/Agreement.vue'
-import Loading from './views/Loading.vue'
+import Landing from './views/Landing.vue'
 
 let routes = [
     {
@@ -16,13 +16,13 @@ let routes = [
         name: '关于',
     },
     {
-        path:'/loading',
-        component: Loading,
+        path:'/landing',
+        component: Landing,
         name: '熊猫贷款',
     },
     {
         path: '/',
-        redirect: { path: '/loading' }
+        redirect: { path: '/landing' }
     },
     {
         path: '/homepage',
