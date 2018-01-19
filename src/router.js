@@ -16,13 +16,9 @@ let routes = [
         name: '关于',
     },
     {
-        path:'/landing',
+        path:'/landing/:Uid',
         component: Landing,
-        name: '熊猫贷款',
-    },
-    {
-        path: '/',
-        redirect: { path: '/landing' }
+        name: '熊猫贷款'
     },
     {
         path: '/homepage',

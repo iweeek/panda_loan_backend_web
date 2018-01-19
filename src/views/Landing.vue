@@ -1,41 +1,59 @@
 <template>
-  <div class="landing-panda">
-    <div class="top">
-        <img src="~@/assets/toppic.png" class="top-pic">
-    </div>
-    <div class="buttom">
-        <div>
-            <input class="phone-input" placeholder="请填写注册手机号" v-model="phone"/>
-            <input type="button" class="code-button" v-bind:class="{cantClick:is_show}" :value="count+codeButtonText"  @click="getCode()"/>
+    <div class="landing-panda firstpage" v-bind:class="{secondpage:download}">
+        <!-- <img style="position:absolute;left:0px;top:0px;width:100%;height:100%;z-Index:-1; border:1px solid blue" src="包囊.png" /> -->
+        <div class="top" v-if="!download">
+            <!-- <img src="~@/assets/toppic.png" class="top-pic"> -->
         </div>
-        <div>
-            <input class="code-input" placeholder="请填写短信验证码" v-model="smsCode"/>
-        </div>
-        <div v-if="picCode">
-            <input class="phone-input" placeholder="请填写验证码" v-model="imaCode"/>
-            <img :src="imageCode" alt="" class="image-code" @click="getImageCode">
-        </div>
-        <div>
-            <input type="button" class="comfirm-button" v-bind:class="{canClick:is_click}" value="立即借款" @click="comfirm()"/>
-        </div>
-        <div class="text-hint">
-            <span class="text-left">点击立即借款既表示同意</span><span class="text-right">《熊猫元宝平台服务协议》</span>
-        </div>
-        <div class="download">
-            <div class="down">
-                <div class="pic"><img src="~@/assets/apple.png"></div>
-                <div class="download-text">去App Store下载</div>
+        <div class="buttom" v-if="!download">
+            <div class="allinput twoinput" v-bind:class="{threeinput:picCode}">
+                <div>
+                    <input class="phone-input" placeholder="请填写注册手机号" v-model="phone"/>
+                    <input type="button" class="code-button" v-bind:class="{cantClick:is_show}" :value="count+codeButtonText"  @click="getCode()"/>
+                </div>
+                <div>
+                    <input class="code-input" placeholder="请填写短信验证码" v-model="smsCode"/>
+                </div>
+                <div v-if="picCode">
+                    <input class="phone-input" placeholder="请填写验证码" v-model="imaCode"/>
+                    <img :src="imageCode" alt="" class="image-code" @click="getImageCode">
+                </div>
+                <div>
+                    <input type="button" class="comfirm-button" v-bind:class="{canClick:is_click}" value="立即借款" @click="comfirm()"/>
+                </div>
+                <div class="text-hint twoinputhint" v-bind:class="{threeinputhint:picCode}" @click="agreement()" >
+                    <span class="text-left">点击立即借款既表示同意</span><span class="text-right">《熊猫元宝平台服务协议》</span>
+                </div>
             </div>
-            <div class="down">
-                <div class="pic"><img src="~@/assets/google.png"></div>
-                <div class="download-text">去Google Play下载</div>
+
+            <div class="download" v-if="false">
+                <div class="down">
+                    <div class="pic"><img src="~@/assets/apple.png"></div>
+                    <div class="download-text">去App Store下载</div>
+                </div>
+                <div class="down">
+                    <div class="pic"><img src="~@/assets/google.png"></div>
+                    <div class="download-text">去Google Play下载</div>
+                </div>
             </div>
         </div>
+
+        <div class="download-top" v-if="download">
+            <!-- <img src="~@/assets/downloadTop.png" class="top-pic"> -->
+        </div>
+        <div class="download-bottom" v-if="download">
+            <div style="text-align:center">
+                <span class="register-suc">注册成功</span>
+            </div>
+            <div>
+                <input type="button" class="download-button" value="马上下载" @click="downloadApp()"/>
+            </div>
+        </div>
+
+        <div class="footer">
+            Copyright © 2017 熊猫元宝 All Rights Reserved
+        </div>
     </div>
-    <div class="footer">
-        Copyright © 2017 熊猫元宝 All Rights Reserved
-    </div>
-  </div>
+  
 </template>
 
 <script>
@@ -62,6 +80,7 @@
     export default {
         data() {
             return {
+                download: false,
                 picCode: false,
                 is_show: false,
                 is_click: false,
@@ -71,15 +90,22 @@
                 timer: null,
                 flagNum: 0,
                 imageCode: '',
-
+                Sid: '0',
                 phone: '',
                 smsCode: '',
                 imaCode: '',
                 keySMSCapt: '',
-                keyImage:''
+                keyImage:'',
+                Uid: this.$route.params.Uid,
             };
         },
         methods: {
+            downloadApp(){
+                window.location.href = "http://sj.qq.com/myapp/detail.htm?apkName=com.dk.goppo";
+            },
+            agreement(){
+                this.$router.push({ path: '/agreement' })
+            },
             getCode(){
                 //倒计时的时候不能点按钮
                 if (this.is_show) {
@@ -124,12 +150,9 @@
                 params.append('phone',this.phone)
                 this.$ajax.post(url, params,{
                     headers: {
-                        'Version': '1',
-                        'User-Id': '0',
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Device-Id': '123',
-                        'Channel-Id': '1',
-                        'Request-Uri': '123'
+                        'Landing-Channel-Uid': this.Uid,
+                        'Sid': this.Sid,
+                        'Content-Type': 'application/x-www-form-urlencoded'
                     }
                 }).then(res => {
                     this.keySMSCapt = res.data.obj1.keySMSCapt;
@@ -172,19 +195,19 @@
                 console.log(params)
                 this.$ajax.post(url, params, {
                     headers: {
-                        'Version': '1',
-                        'User-Id': '0',
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Device-Id': '123',
-                        'Channel-Id': '1',
-                        'Request-Uri': '123'
+                        'Landing-Channel-Uid': this.Uid,
+                        'Sid': this.Sid,
+                        'Content-Type': 'application/x-www-form-urlencoded'
                     },
                 }).then(res => {
                     console.log(res)
+                    this.download = true;
                 }).catch(error => {
                     this.lackMessage(error.response.data.statusMsg)
-                    if (this.flagNum == 3) {
-                        this.getImageCode()
+                    if (this.flagNum > 2) { 
+                        if (!this.picCode) {   
+                            this.getImageCode();
+                        }
                     }
                 });
             },
@@ -203,12 +226,9 @@
                 let params = new URLSearchParams();
                 this.$ajax.post(url, params, {
                     headers: {
-                        'Version': '1',
-                        'User-Id': '0',
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Device-Id': '123',
-                        'Channel-Id': '1',
-                        'Request-Uri': '123'
+                        'Landing-Channel-Uid': this.Uid,
+                        'Sid': this.Sid,
+                        'Content-Type': 'application/x-www-form-urlencoded'
                     },
                     responseType: 'arraybuffer'
                 }).then(res => {
@@ -222,104 +242,167 @@
                     this.imageCode = data;
                     this.picCode = true;
                 });
+            },
+            //生成用户操作唯一标识
+            createSid(){
+                this.Sid = this.S4()+"-"+this.S4()+"-"+this.S4()+"-"+this.S4()+"-"+(new Date()).valueOf().toString(16);
+            },
+            //生成一个4位16进制字符串
+            S4() {  
+                return (((1+Math.random())*0x10000)|0).toString(16).substring(1);  
             }
         },
         mounted: function () {
-
+            //alert(this.Uid)
+            this.createSid()
+            //alert(this.Sid)
 		}
     };
     
 </script>
 
 <style lang="scss">
+    .firstpage{
+        background: url(~@/assets/firstpage.png) no-repeat fixed; 
+        background-size:100% 100%;
+    }
+    .secondpage{
+        background: url(~@/assets/downloadTop.png) no-repeat fixed; 
+        background-size:100% 100%;
+    }
     .landing-panda{
+        
         position: absolute;
         width: 100%;
         top: 1px;
         bottom: 1px;
-        .top{
-            height: 34%;
-            background: white;
+        .download-top{
+            height: 40%;
+            //background: white;
             .top-pic{
                 width: 100%;
                 height: 100%;
             }
         }
-        .buttom{
-            height: 66%;
-            background: white;
-            .phone-input{
-                background: #FFFFFF;
-                height: 2.2rem;
-                width: 10.5rem;
-                margin-left: 1.5rem; 
-                margin-top: 0.6rem;
-                background: #f2f3f9;
-                padding-left: 1rem;
+        .download-bottom{
+            height: 60%;
+            //background: white;
+            .register-suc{
+                display: inline-block;
+                margin-top: 1rem;
+                color: #ff5808;
+                font-size: 1rem;
+                //font-weight: bold;
+                text-align: center;
             }
-            .image-code{
-                vertical-align:middle;//img图片和div在同一排
-                height: 2.2rem;
-                width: 4.75rem;
-                margin-left: 0.3rem; 
-                margin-top: 0.6rem;
-            }
-            .code-button{
-                background: #2CCAD4;
-                color: #FFFFFF;
-                font-size: 0.7rem;
-                height: 2.2rem;
-                width: 4.75rem;
-                margin-left: 0.3rem; 
-                margin-top: 0.6rem;
-            }
-            .cantClick{
-                background: #d3d3d6;
-            }
-            .code-input{
-                background: #FFFFFF;
-                height: 2.2rem;
-                width: 15.75rem;
-                margin-left: 1.5rem;
-                margin-top: 0.5rem;
-                background: #f2f3f9;
-                padding-left: 1rem;
-            }
-            .comfirm-button{
-                background: #d3d3d6;
+            .download-button{
+                background: #ff5808;
                 color: #FFFFFF;
                 font-size: 0.8rem;
                 height: 2.2rem;
                 width: 15.75rem;
                 border-radius: 1rem;
                 margin-left: 1.5rem; 
-                margin-top: 0.6rem;
+                margin-top: 2rem;
             }
-            .canClick{
-                background: #2CCAD4; 
+
+        }
+        .top{
+            height: 45%;
+            //background: white;
+            .top-pic{
+                width: 100%;
+                height: 100%;
             }
-            .phone-input::-webkit-input-placeholder{
-                text-align: left;
-                color: #d3d3d6;
-                font-size: 0.7rem;
+        }
+        .buttom{
+            height: 55%;
+            //background: white;
+            .twoinput{
+                margin-top: 1.3rem;
             }
-            .code-input::-webkit-input-placeholder{
-                text-align: left;
-                color: #d3d3d6;
-                font-size: 0.7rem;
+            .threeinput{
+                margin-top: 0.2rem;
             }
-            .text-hint{
-                margin-top: 1rem;
-                margin-left: 2.8rem;
-                .text-left{
-                    color: #202020;
-                    font-size: 0.6rem;
+            .allinput{
+                .phone-input{
+                    background: #FFFFFF;
+                    height: 2.2rem;
+                    width: 9rem;//1
+                    margin-left: 2.6rem; //2
+                    margin-top: 0.6rem;
+                    padding-left: 1rem;
                 }
-                .text-right{
-                    color: #00abf3;
-                    font-size: 0.6rem;
+                .image-code{
+                    vertical-align:middle;//img图片和div在同一排
+                    height: 2.2rem;
+                    width: 4.75rem;
+                    margin-left: 0.3rem; 
+                    margin-top: 0.6rem;
                 }
+                .code-button{
+                    background: #ff5808;
+                    color: #FFFFFF;
+                    font-size: 0.7rem;
+                    height: 2.2rem;
+                    width: 4rem;
+                    margin-left: 0.3rem; 
+                    margin-top: 0.6rem;
+                }
+                .cantClick{
+                    background: #d3d3d6;
+                }
+                .code-input{
+                    background: #FFFFFF;
+                    height: 2.2rem;
+                    width: 13.5rem;
+                    margin-left: 2.6rem;
+                    margin-top: 0.5rem;
+                    padding-left: 1rem;
+                }
+                .comfirm-button{
+                    background: #d3d3d6;
+                    color: #FFFFFF;
+                    font-size: 0.8rem;
+                    height: 2.2rem;
+                    width: 13.5rem;
+                    border-radius: 1rem;
+                    margin-left: 2.6rem; 
+                    margin-top: 0.6rem;
+                }
+                .canClick{
+                    background: #ff5808; 
+                }
+                .phone-input::-webkit-input-placeholder{
+                    text-align: left;
+                    color: #d3d3d6;
+                    font-size: 0.7rem;
+                }
+                .code-input::-webkit-input-placeholder{
+                    text-align: left;
+                    color: #d3d3d6;
+                    font-size: 0.7rem;
+                }
+                .twoinputhint{
+                    margin-top: 0.6rem;
+                }
+                .threeinputhint{
+                    margin-top: 0.3rem;
+                }
+                .text-hint{
+                    margin-left: 2.6rem;
+                    .text-left{
+                        color: #202020;
+                        font-size: 0.6rem;
+                    }
+                    .text-right{
+                        color: #00abf3;
+                        font-size: 0.6rem;
+                    }
+                }
+
             }
+            
             .download{
                 margin-top: 1.7rem;
                 .down{
