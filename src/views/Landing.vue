@@ -4,8 +4,8 @@
         <div class="top" v-if="!download">
             <!-- <img src="~@/assets/toppic.png" class="top-pic"> -->
         </div>
-        <div class="buttom" v-if="!download">
-            <div class="allinput twoinput" v-bind:class="{threeinput:picCode}">
+        <div class="middle" v-if="!download">
+            <div class="allinput  " v-bind:class="{threeinput:picCode}">
                 <div>
                     <input class="phone-input" placeholder="请填写注册手机号" v-model="phone"/>
                     <input type="button" class="code-button" v-bind:class="{cantClick:is_show}" :value="count+codeButtonText"  @click="getCode()"/>
@@ -20,11 +20,11 @@
                 <div>
                     <input type="button" class="comfirm-button" v-bind:class="{canClick:is_click}" value="立即借款" @click="comfirm()"/>
                 </div>
-                <div class="text-hint twoinputhint" v-bind:class="{threeinputhint:picCode}" @click="agreement()" >
-                    <span class="text-left">点击立即借款既表示同意</span><span class="text-right">《熊猫元宝平台服务协议》</span>
-                </div>
             </div>
 
+            <div class="text-hint" @click="agreement()" >
+                <span class="text-left">点击立即借款既表示同意</span><span class="text-right">《熊猫元宝平台服务协议》</span>
+            </div>
             <div class="download" v-if="false">
                 <div class="down">
                     <div class="pic"><img src="~@/assets/apple.png"></div>
@@ -35,6 +35,9 @@
                     <div class="download-text">去Google Play下载</div>
                 </div>
             </div>
+        </div>
+        <div class="buttom">
+
         </div>
 
         <div class="download-top" v-if="download">
@@ -263,15 +266,14 @@
 
 <style lang="scss">
     .firstpage{
-        background: url(~@/assets/firstpage.png) no-repeat fixed; 
+        background: url(~@/assets/firstpage.png) no-repeat scroll; 
         background-size:100% 100%;
     }
     .secondpage{
-        background: url(~@/assets/downloadTop.png) no-repeat fixed; 
+        background: url(~@/assets/downloadTop.png) no-repeat scroll; 
         background-size:100% 100%;
     }
     .landing-panda{
-        
         position: absolute;
         width: 100%;
         top: 1px;
@@ -315,23 +317,29 @@
                 height: 100%;
             }
         }
-        .buttom{
-            height: 55%;
+        
+        .middle{
+            height: 37%;
             //background: white;
             .twoinput{
-                margin-top: 1.3rem;
+                margin-top: 0rem;
             }
             .threeinput{
                 margin-top: 0.2rem;
             }
             .allinput{
+                position: relative;
+                top: 50%;
+                transform: translateY(-50%);
+                //上面三行垂直居中
+                text-align:center;
+                
+                // height: 3rem;
                 .phone-input{
                     background: #FFFFFF;
                     height: 2.2rem;
                     width: 9rem;//1
-                    margin-left: 2.6rem; //2
                     margin-top: 0.6rem;
-                    padding-left: 1rem;
                 }
                 .image-code{
                     vertical-align:middle;//img图片和div在同一排
@@ -356,7 +364,6 @@
                     background: #FFFFFF;
                     height: 2.2rem;
                     width: 13.5rem;
-                    margin-left: 2.6rem;
                     margin-top: 0.5rem;
                     padding-left: 1rem;
                 }
@@ -367,7 +374,6 @@
                     height: 2.2rem;
                     width: 13.5rem;
                     border-radius: 1rem;
-                    margin-left: 2.6rem; 
                     margin-top: 0.6rem;
                 }
                 .canClick{
@@ -383,14 +389,16 @@
                     color: #d3d3d6;
                     font-size: 0.7rem;
                 }
-                .twoinputhint{
-                    margin-top: 0.6rem;
-                }
                 .threeinputhint{
                     margin-top: 0.3rem;
                 }
-                .text-hint{
-                    margin-left: 2.6rem;
+                
+
+            }
+            .text-hint{
+                    // position: absolute;
+                    // align-content: bottom;
+                    bottom: 0px;
                     .text-left{
                         color: #202020;
                         font-size: 0.6rem;
@@ -400,9 +408,6 @@
                         font-size: 0.6rem;
                     }
                 }
-
-            }
-            
             .download{
                 margin-top: 1.7rem;
                 .down{
@@ -426,6 +431,10 @@
             }
         }
         
+        .buttom{
+            margin-bottom: 1px;
+            height: 18%;
+        }
         .footer{ 
             margin-top:-1.3rem;
             height:0.6rem;
