@@ -13,12 +13,12 @@ let routes = [
     {
         path:'/about',
         component: About,
-        name: '关于',
+        name: '关于'
     },
     {
         path:'/landing/:Uid',
         component: Landing,
-        name: '熊猫贷款'
+        name: '微贷'
     },
     {
         path: '/homepage',

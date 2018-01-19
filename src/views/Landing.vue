@@ -5,7 +5,7 @@
             <!-- <img src="~@/assets/toppic.png" class="top-pic"> -->
         </div>
         <div class="middle" v-if="!download">
-            <div class="allinput  " v-bind:class="{threeinput:picCode}">
+            <div class="allinput">
                 <div>
                     <input class="phone-input" placeholder="请填写注册手机号" v-model="phone"/>
                     <input type="button" class="code-button" v-bind:class="{cantClick:is_show}" :value="count+codeButtonText"  @click="getCode()"/>
@@ -20,12 +20,13 @@
                 <div>
                     <input type="button" class="comfirm-button" v-bind:class="{canClick:is_click}" value="立即借款" @click="comfirm()"/>
                 </div>
+                <div class="text-hint" @click="agreement()" >
+                    <span class="text-left">点击立即借款既表示同意</span><span class="text-right">《微贷平台服务协议》</span>
+                </div>
             </div>
 
-            <div class="text-hint" @click="agreement()" >
-                <span class="text-left">点击立即借款既表示同意</span><span class="text-right">《熊猫元宝平台服务协议》</span>
-            </div>
-            <div class="download" v-if="false">
+            
+            <!-- <div class="download" v-if="false">
                 <div class="down">
                     <div class="pic"><img src="~@/assets/apple.png"></div>
                     <div class="download-text">去App Store下载</div>
@@ -34,26 +35,33 @@
                     <div class="pic"><img src="~@/assets/google.png"></div>
                     <div class="download-text">去Google Play下载</div>
                 </div>
-            </div>
+            </div> -->
         </div>
-        <div class="buttom">
+
+        <div class="buttom" v-if="!download">
 
         </div>
 
         <div class="download-top" v-if="download">
-            <!-- <img src="~@/assets/downloadTop.png" class="top-pic"> -->
+            
         </div>
         <div class="download-bottom" v-if="download">
             <div style="text-align:center">
-                <span class="register-suc">注册成功</span>
+                <span class="register-suc">恭喜你注册成功</span>
             </div>
-            <div>
-                <input type="button" class="download-button" value="马上下载" @click="downloadApp()"/>
+            <div style="text-align:center">
+                <input type="button" class="download-button" value="立即下载微贷APP" @click="downloadApp()"/>
             </div>
         </div>
 
-        <div class="footer">
-            Copyright © 2017 熊猫元宝 All Rights Reserved
+        <div class="twobuttom" v-if="download">
+
+        </div>
+
+        <div class="copyright">
+            <div class="footer">
+                Copyright © 2017 微贷 All Rights Reserved
+            </div>
         </div>
     </div>
   
@@ -258,7 +266,7 @@
         mounted: function () {
             //alert(this.Uid)
             this.createSid()
-            //alert(this.Sid)
+            //alert(this.Sid)        
 		}
     };
     
@@ -270,7 +278,7 @@
         background-size:100% 100%;
     }
     .secondpage{
-        background: url(~@/assets/downloadTop.png) no-repeat scroll; 
+        background: url(~@/assets/secondpage.png) no-repeat scroll; 
         background-size:100% 100%;
     }
     .landing-panda{
@@ -279,7 +287,7 @@
         top: 1px;
         bottom: 1px;
         .download-top{
-            height: 40%;
+            height: 38%;
             //background: white;
             .top-pic{
                 width: 100%;
@@ -287,28 +295,32 @@
             }
         }
         .download-bottom{
-            height: 60%;
+            height: 31%;
             //background: white;
+            //上面三行垂直居中
             .register-suc{
+                letter-spacing:0.2rem;//字间距
                 display: inline-block;
-                margin-top: 1rem;
-                color: #ff5808;
+                margin-top: 3rem;
+                color: #BE2E1B;
                 font-size: 1rem;
-                //font-weight: bold;
-                text-align: center;
+                font-weight: bold;//文字加粗
             }
             .download-button{
-                background: #ff5808;
+                background: #BE2E1B;
                 color: #FFFFFF;
                 font-size: 0.8rem;
-                height: 2.2rem;
-                width: 15.75rem;
-                border-radius: 1rem;
-                margin-left: 1.5rem; 
-                margin-top: 2rem;
+                height: 2rem;
+                width: 12rem;
+                border-radius: 0.2rem;
+                margin-top: 1.5rem;
             }
-
         }
+        .twobuttom{
+            margin-bottom: 1px;
+            height: 25%;
+        }
+
         .top{
             height: 45%;
             //background: white;
@@ -329,52 +341,63 @@
             }
             .allinput{
                 position: relative;
-                top: 50%;
+                top: 47%;
                 transform: translateY(-50%);
                 //上面三行垂直居中
                 text-align:center;
-                
+
                 // height: 3rem;
                 .phone-input{
                     background: #FFFFFF;
-                    height: 2.2rem;
+                    height: 2rem;
                     width: 9rem;//1
-                    margin-top: 0.6rem;
+                    margin-top: 0.3rem;
+                    padding-left: 1rem;
+                    border:1px solid #d3d3d6;
+                    border-radius: 0.2rem;
                 }
                 .image-code{
                     vertical-align:middle;//img图片和div在同一排
-                    height: 2.2rem;
-                    width: 4.75rem;
+                    height: 2rem;
+                    width: 4rem;
                     margin-left: 0.3rem; 
-                    margin-top: 0.6rem;
+                    margin-top: 0.3rem;
+                    //border:1px solid #d3d3d6;
+                    border-radius: 0.2rem;
                 }
                 .code-button{
                     background: #ff5808;
                     color: #FFFFFF;
                     font-size: 0.7rem;
-                    height: 2.2rem;
+                    height: 2rem;
                     width: 4rem;
                     margin-left: 0.3rem; 
-                    margin-top: 0.6rem;
+                    margin-top: 0.3rem;
+                    //border:1px solid #d3d3d6;
+                    border-radius: 0.2rem;
                 }
                 .cantClick{
                     background: #d3d3d6;
                 }
                 .code-input{
                     background: #FFFFFF;
-                    height: 2.2rem;
+                    height: 2rem;
                     width: 13.5rem;
-                    margin-top: 0.5rem;
+                    margin-top: 0.3rem;
                     padding-left: 1rem;
+                    border:1px solid #d3d3d6;
+                    border-radius: 0.2rem;
                 }
                 .comfirm-button{
                     background: #d3d3d6;
                     color: #FFFFFF;
                     font-size: 0.8rem;
-                    height: 2.2rem;
+                    height: 2rem;
                     width: 13.5rem;
                     border-radius: 1rem;
-                    margin-top: 0.6rem;
+                    margin-top: 0.3rem;
+                    //border:1px solid #d3d3d6;
+                    border-radius: 0.2rem;
                 }
                 .canClick{
                     background: #ff5808; 
@@ -389,18 +412,17 @@
                     color: #d3d3d6;
                     font-size: 0.7rem;
                 }
-                .threeinputhint{
-                    margin-top: 0.3rem;
-                }
-                
-
-            }
-            .text-hint{
-                    // position: absolute;
+                .text-hint{
+                    //position: absolute;
                     // align-content: bottom;
-                    bottom: 0px;
+                    // bottom: 0.4rem;
+                    // position: absolute;
+                    // margin-left: 14%;
+                    margin-top: 0.3rem;
+                    text-align: center;
+
                     .text-left{
-                        color: #202020;
+                        color: #d3d3d6;
                         font-size: 0.6rem;
                     }
                     .text-right{
@@ -408,6 +430,9 @@
                         font-size: 0.6rem;
                     }
                 }
+
+            }
+            
             .download{
                 margin-top: 1.7rem;
                 .down{
@@ -433,14 +458,21 @@
         
         .buttom{
             margin-bottom: 1px;
-            height: 18%;
+            height: 12%;
         }
-        .footer{ 
-            margin-top:-1.3rem;
-            height:0.6rem;
-            text-align: center;
-            color: #d9dadd;
-            font-size: 0.6rem;
+        .copyright{
+            height: 6%;
+            .footer{
+                position: relative;
+                top: 50%;
+                transform: translateY(-50%);
+                //margin-top:-1rem;
+                //height:0.5rem;
+                text-align: center;
+                color: #d9dadd;
+                font-size: 0.6rem;
+            }
         }
+        
     }
 </style>
