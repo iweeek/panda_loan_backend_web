@@ -214,6 +214,7 @@
                     console.log(res)
                     this.download = true;
                 }).catch(error => {
+                    this.getImageCode()
                     this.lackMessage(error.response.data.statusMsg)
                     if (this.flagNum > 2) { 
                         if (!this.picCode) {   
