@@ -193,6 +193,7 @@
                     this.postMes();
                 }
             },
+            
             postMes(){
                 let url = resources.token();
                 let params = new URLSearchParams();
@@ -407,12 +408,12 @@
                 .phone-input::-webkit-input-placeholder{
                     text-align: left;
                     color: #d3d3d6;
-                    font-size: 0.7rem;
+                    font-size: 0.6rem;
                 }
                 .code-input::-webkit-input-placeholder{
                     text-align: left;
                     color: #d3d3d6;
-                    font-size: 0.7rem;
+                    font-size: 0.6rem;
                 }
                 .text-hint{
                     //position: absolute;
