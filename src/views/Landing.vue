@@ -7,14 +7,14 @@
         <div class="middle" v-if="!download">
             <div class="allinput">
                 <div>
-                    <input class="phone-input" placeholder="请填写注册手机号" v-model="phone"/>
+                    <input type="number" class="phone-input" placeholder="请填写注册手机号" v-model="phone"/>
                     <input type="button" class="code-button" v-bind:class="{cantClick:is_show}" :value="count+codeButtonText"  @click="getCode()"/>
                 </div>
                 <div>
-                    <input class="code-input" placeholder="请填写短信验证码" v-model="smsCode"/>
+                    <input type="number" class="code-input" placeholder="请填写短信验证码" v-model="smsCode"/>
                 </div>
                 <div v-if="picCode">
-                    <input class="phone-input" placeholder="请填写验证码" v-model="imaCode"/>
+                    <input type="number" class="phone-input" placeholder="请填写验证码" v-model="imaCode"/>
                     <img :src="imageCode" alt="" class="image-code" @click="getImageCode">
                 </div>
                 <div>
@@ -115,7 +115,7 @@
                 window.location.href = "http://sj.qq.com/myapp/detail.htm?apkName=com.dk.goppo";
             },
             agreement(){
-                this.$router.push({ path: '/agreement' })
+                this.$router.push({ path: '/weidaiAgreement' })
             },
             getCode(){
                 //倒计时的时候不能点按钮
@@ -276,12 +276,12 @@
 
 <style lang="scss">
     .firstpage{
-        background: url(~@/assets/firstpage.png) no-repeat scroll; 
+        background: url(~@/assets/firstpage.jpg) no-repeat scroll; 
         background-size:100% 100%;
         min-height: 32rem;
     }
     .secondpage{
-        background: url(~@/assets/secondpage.png) no-repeat scroll; 
+        background: url(~@/assets/secondpage.jpg) no-repeat scroll; 
         background-size:100% 100%;
     }
     .landing-panda{
