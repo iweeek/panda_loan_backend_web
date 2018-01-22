@@ -156,10 +156,18 @@
                 // 普通的ajax接口
                 // 使用 application/x-www-form-urlencoded 格式化 
                 // 参考：http://blog.csdn.net/fantian001/article/details/70193938
+                
                 let url = resources.smsCaptcha();
-                let params = new URLSearchParams();
-                params.append('phone',this.phone)
-                this.$ajax.post(url, params,{
+
+                // let params = new URLSearchParams();
+                // params.append('phone',this.phone)
+
+                let params = {
+                    'phone': this.phone
+                }
+                
+                var qs = require('qs');
+                this.$ajax.post(url, qs.stringify(params),{
                     headers: {
                         'Landing-Channel-Uid': this.Uid,
                         'Sid': this.Sid,
@@ -168,7 +176,22 @@
                 }).then(res => {
                     this.keySMSCapt = res.data.obj1.keySMSCapt;
                     console.log(res)
-                });
+                })
+
+                
+
+                // let url = resources.smsCaptcha();
+                // let myParams = {
+				// 	phone: this.phone,
+                // };
+                // this.$ajax({
+                //     method: 'post',
+                //     url: url,
+                //     params: myParams
+                // }).then((res) => {
+                //     this.keySMSCapt = res.data.obj1.keySMSCapt;
+                //     console.log(res)
+                // })
             },    
 
             comfirm(){
@@ -192,20 +215,40 @@
                     }
                     this.postMes();
                 }
-            },
-            
+            },          
             postMes(){
+
                 let url = resources.token();
-                let params = new URLSearchParams();
-                params.append('username',this.phone)//用户名（手机号）
-                params.append('keySMSCapt',this.keySMSCapt)//短信验证码的key
-                params.append('smsCapt',this.smsCode)//短信验证码
+                // let params = new URLSearchParams();
+                // params.append('username',this.phone)//用户名（手机号）
+                // params.append('keySMSCapt',this.keySMSCapt)//短信验证码的key
+                // params.append('smsCapt',this.smsCode)//短信验证码
+                // if (this.keyImage != '') {
+                //     params.append('keyImageCapt',this.keyImage)//图形验证码的key 
+                //     params.append('imageCapt',this.imaCode)//图形验证码
+                // }
+
+                let params = { }
                 if (this.keyImage != '') {
-                    params.append('keyImageCapt',this.keyImage)//图形验证码的key 
-                    params.append('imageCapt',this.imaCode)//图形验证码
+                    params = {
+                        'username': this.phone,
+                        'keySMSCapt': this.keySMSCapt,
+                        'smsCapt': this.smsCode,
+                        'keyImageCapt': this.keyImage,
+                        'imageCapt': this.imaCode
+                    }
+                } else {
+                    params = {
+                        'username': this.phone,
+                        'keySMSCapt': this.keySMSCapt,
+                        'smsCapt': this.smsCode
+                    }
                 }
+
+                var qs = require('qs');
                 console.log(params)
-                this.$ajax.post(url, params, {
+
+                this.$ajax.post(url, qs.stringify(params), {
                     headers: {
                         'Landing-Channel-Uid': this.Uid,
                         'Sid': this.Sid,
@@ -236,8 +279,12 @@
                 // 使用 application/x-www-form-urlencoded 格式化 
                 // 参考：http://blog.csdn.net/fantian001/article/details/70193938
                 let url = resources.imageCode();
-                let params = new URLSearchParams();
-                this.$ajax.post(url, params, {
+                //let params = new URLSearchParams();
+                
+                var qs = require('qs');
+                let params = { }
+
+                this.$ajax.post(url, qs.stringify(params), {
                     headers: {
                         'Landing-Channel-Uid': this.Uid,
                         'Sid': this.Sid,
@@ -245,6 +292,9 @@
                     },
                     responseType: 'arraybuffer'
                 }).then(res => {
+                    if (this.flagNum === 3) {
+                        this.smsCode = ''
+                    }
                     console.log(res.headers.keyimagecapt)
                     this.keyImage = res.headers.keyimagecapt
                     return 'data:image/jpeg;base64,' + btoa(
@@ -276,12 +326,12 @@
 
 <style lang="scss">
     .firstpage{
-        background: url(~@/assets/firstpage.jpg) no-repeat scroll; 
+        background: url(~@/assets/firstpage.png) no-repeat scroll; 
         background-size:100% 100%;
         min-height: 32rem;
     }
     .secondpage{
-        background: url(~@/assets/secondpage.jpg) no-repeat scroll; 
+        background: url(~@/assets/secondpage.png) no-repeat scroll; 
         background-size:100% 100%;
     }
     .landing-panda{
@@ -352,19 +402,21 @@
                 // height: 3rem;
                 .phone-input{
                     background: #FFFFFF;
-                    height: 2rem;
+                    height: 2.2rem;
                     width: 9rem;//1
-                    margin-top: 0.3rem;
+                    margin-top: 0.2rem;
                     padding-left: 1rem;
                     border:1px solid #d3d3d6;
                     border-radius: 0.2rem;
+                    font-size: 0.7rem;                    
+                    line-height: 2rem;
                 }
                 .image-code{
                     vertical-align:middle;//img图片和div在同一排
-                    height: 2rem;
+                    height: 2.2rem;
                     width: 4rem;
                     margin-left: 0.3rem; 
-                    margin-top: 0.3rem;
+                    margin-top: 0.2rem;
                     //border:1px solid #d3d3d6;
                     border-radius: 0.2rem;
                 }
@@ -372,10 +424,10 @@
                     background: #ff5808;
                     color: #FFFFFF;
                     font-size: 0.7rem;
-                    height: 2rem;
+                    height: 2.2rem;
                     width: 4rem;
                     margin-left: 0.3rem; 
-                    margin-top: 0.3rem;
+                    margin-top: 0.2rem;
                     //border:1px solid #d3d3d6;
                     border-radius: 0.2rem;
                 }
@@ -384,12 +436,14 @@
                 }
                 .code-input{
                     background: #FFFFFF;
-                    height: 2rem;
+                    height: 2.2rem;
                     width: 13.5rem;
-                    margin-top: 0.3rem;
+                    margin-top: 0.2rem;
                     padding-left: 1rem;
                     border:1px solid #d3d3d6;
                     border-radius: 0.2rem;
+                    font-size: 0.7rem;
+                    line-height: 2rem;
                 }
                 .comfirm-button{
                     background: #d3d3d6;
@@ -398,7 +452,7 @@
                     height: 2rem;
                     width: 13.5rem;
                     border-radius: 1rem;
-                    margin-top: 0.3rem;
+                    margin-top: 0.2rem;
                     //border:1px solid #d3d3d6;
                     border-radius: 0.2rem;
                 }
@@ -408,12 +462,12 @@
                 .phone-input::-webkit-input-placeholder{
                     text-align: left;
                     color: #d3d3d6;
-                    font-size: 0.6rem;
+                    font-size: 0.7rem;
                 }
                 .code-input::-webkit-input-placeholder{
                     text-align: left;
                     color: #d3d3d6;
-                    font-size: 0.6rem;
+                    font-size: 0.7rem;
                 }
                 .text-hint{
                     //position: absolute;
