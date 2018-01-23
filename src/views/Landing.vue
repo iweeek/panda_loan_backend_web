@@ -382,12 +382,12 @@
 
 
     .firstpage{
-        background: url(~@/assets/firstpage.png) no-repeat scroll; 
+        background: url(~@/assets/firstpage.jpg) no-repeat scroll; 
         background-size:100% 100%;
         min-height: 32rem;
     }
     .secondpage{
-        background: url(~@/assets/secondpage.png) no-repeat scroll; 
+        background: url(~@/assets/secondpage.jpg) no-repeat scroll; 
         background-size:100% 100%;
     }
     .landing-panda{
