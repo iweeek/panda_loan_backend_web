@@ -9,6 +9,7 @@ import Identity from './views/Identity.vue'
 import Agreement from './views/Agreement.vue'
 import Landing from './views/Landing.vue'
 import WeidaiAgreement from './views/WeidaiAgreement.vue'
+import LoanRate from './views/LoanRate.vue'
 
 let routes = [
     {
@@ -40,6 +41,12 @@ let routes = [
     {
         path: '/weidaiAgreement',
         component: WeidaiAgreement,
+        hidden: true
+    },
+    {
+        path: '/loanRate',
+        component: LoanRate,
+        name: '2018年贷款利率',
         hidden: true
     }
 ];
