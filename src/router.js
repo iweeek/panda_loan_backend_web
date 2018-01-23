@@ -7,16 +7,19 @@ import About from './views/About.vue'
 import NotFound from './views/404.vue'
 import Identity from './views/Identity.vue'
 import Agreement from './views/Agreement.vue'
+import Landing from './views/Landing.vue'
+import WeidaiAgreement from './views/WeidaiAgreement.vue'
 
 let routes = [
     {
         path:'/about',
         component: About,
-        name: '关于',
+        name: '关于'
     },
     {
-        path: '/',
-        redirect: { path: '/about' }
+        path:'/landing/:Uid',
+        component: Landing,
+        name: '微贷'
     },
     {
         path: '/homepage',
@@ -32,6 +35,11 @@ let routes = [
     {
         path: '/agreement',
         component: Agreement,
+        hidden: true
+    },
+    {
+        path: '/weidaiAgreement',
+        component: WeidaiAgreement,
         hidden: true
     }
 ];

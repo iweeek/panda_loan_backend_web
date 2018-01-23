@@ -5,7 +5,6 @@
                 <img v-bind:src="Image" alt="" class="head-pic">
             </div>
         </div>
-
         <div class="mes-list">
             <div class="mes">
 				<div class="left-text">
