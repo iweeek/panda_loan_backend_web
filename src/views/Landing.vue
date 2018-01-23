@@ -24,8 +24,7 @@
                     <span class="text-left">点击立即借款既表示同意</span><span class="text-right">《微贷平台服务协议》</span>
                 </div>
             </div>
-
-            
+           
             <!-- <div class="download" v-if="false">
                 <div class="down">
                     <div class="pic"><img src="~@/assets/apple.png"></div>
@@ -63,8 +62,13 @@
                 Copyright © 2017 微贷 All Rights Reserved
             </div>
         </div>
+
+        <div class="toast-wrap">
+            <span class="toast-msg"></span>
+        </div>
     </div>
-  
+    
+    
 </template>
 
 <script>
@@ -111,6 +115,16 @@
             };
         },
         methods: {
+            toast(msg){
+                setTimeout(function(){
+                    document.getElementsByClassName('toast-wrap')[0].getElementsByClassName('toast-msg')[0].innerHTML=msg;
+                    var toastTag = document.getElementsByClassName('toast-wrap')[0];
+                    toastTag.className = toastTag.className.replace('toastAnimate','');
+                    setTimeout(function(){
+                        toastTag.className = toastTag.className + ' toastAnimate';
+                    }, 100);
+                },500);
+            },
             downloadApp(){
                 window.location.href = "http://sj.qq.com/myapp/detail.htm?apkName=com.dk.goppo";
             },
@@ -124,6 +138,8 @@
                 }
                 //如果输入的手机号不符合格式直接返回，不走下面的逻辑
                 if (!(/^1\d{10}$/.test(this.phone))){
+                    this.toast('手机号格式不符')
+                    //this.lackMessage('手机号格式不符')
                     return ;
                 }
                 //获取验证码
@@ -199,10 +215,12 @@
                     return ;
                 }
                 if (this.phone == '') {
-                    this.lackMessage("手机号不能为空")
+                    //this.lackMessage("手机号不能为空")
+                    this.toast('手机号不能为空')
                     return ;
                 } else if (this.smsCode == ''){
-                    this.lackMessage("短信验证码不能为空")
+                    //this.lackMessage("短信验证码不能为空")
+                    this.toast('短信验证码不能为空')
                     return ;
                 }
                 if (this.flagNum < 4) {
@@ -210,7 +228,8 @@
                     this.flagNum ++;
                 } else {
                     if (this.imaCode == '') {
-                        this.lackMessage("图片验证码不能为空")
+                        //this.lackMessage("图片验证码不能为空")
+                        this.toast('图片验证码不能为空')
                         return ;
                     }
                     this.postMes();
@@ -257,9 +276,14 @@
                 }).then(res => {
                     console.log(res)
                     this.download = true;
-                }).catch(error => {
-                    this.lackMessage(error.response.data.statusMsg)
+                }).catch(error => {              
+                    //this.lackMessage(error.response.data.statusMsg)
+                    this.toast(error.response.data.statusMsg)
+                    if (error.response.data.statusMsg === '短信验证码不正确') {
+                        this.smsCode = '';
+                    }
                     if (this.flagNum > 2) {
+                        this.imaCode = '';
                         this.getImageCode()
                         // if (!this.picCode) {   
                         //     this.getImageCode();
@@ -267,13 +291,13 @@
                     }
                 });
             },
-            lackMessage(mistakeMes){
-                this.$notify({
-                    title: '警告',
-                    message: mistakeMes,
-                    type: 'warning'
-                    });
-            },
+            // lackMessage(mistakeMes){
+            //     this.$notify({
+            //         title: '警告',
+            //         message: mistakeMes,
+            //         type: 'warning'
+            //         });
+            // },
             getImageCode(){
                 // 普通的ajax接口
                 // 使用 application/x-www-form-urlencoded 格式化 
@@ -292,9 +316,9 @@
                     },
                     responseType: 'arraybuffer'
                 }).then(res => {
-                    if (this.flagNum === 3) {
-                        this.smsCode = ''
-                    }
+                    // if (this.flagNum === 3) {
+                    //     this.smsCode = ''
+                    // }
                     console.log(res.headers.keyimagecapt)
                     this.keyImage = res.headers.keyimagecapt
                     return 'data:image/jpeg;base64,' + btoa(
@@ -318,13 +342,43 @@
         mounted: function () {
             //alert(this.Uid)
             this.createSid()
-            //alert(this.Sid)        
+            //alert(this.Sid)
 		}
     };
     
 </script>
 
 <style lang="scss">
+    .toast-wrap{
+        opacity: 0;
+        position: fixed;
+        bottom: 10%;
+        color: #fff;
+        width: 100%;
+        text-align: center;
+    }
+    .toast-msg{
+        height: 1rem;
+        background-color: #7a260f;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+        border-radius: 0.2rem;
+        color: #ffeeb9;
+        border:1px solid #ffeeb9; 
+    }
+    .toastAnimate{
+        animation: toastKF 2s;
+    }
+    @keyframes toastKF{
+        0% {opacity: 0;}
+        25% {opacity: 1; z-index: 9999}
+        50% {opacity: 1; z-index: 9999}
+        75% {opacity: 1; z-index: 9999}
+        100% {opacity: 0; z-index: 0}
+    }
+
+
     .firstpage{
         background: url(~@/assets/firstpage.png) no-repeat scroll; 
         background-size:100% 100%;
@@ -409,7 +463,7 @@
                     border:1px solid #d3d3d6;
                     border-radius: 0.2rem;
                     font-size: 0.7rem;                    
-                    line-height: 2rem;
+                    line-height: 0.7rem;
                 }
                 .image-code{
                     vertical-align:middle;//img图片和div在同一排
@@ -443,7 +497,7 @@
                     border:1px solid #d3d3d6;
                     border-radius: 0.2rem;
                     font-size: 0.7rem;
-                    line-height: 2rem;
+                    line-height: 0.7rem;
                 }
                 .comfirm-button{
                     background: #d3d3d6;
