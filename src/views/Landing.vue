@@ -352,20 +352,22 @@
     .toast-wrap{
         opacity: 0;
         position: fixed;
-        bottom: 10%;
+        bottom: 50%;
         color: #fff;
         width: 100%;
         text-align: center;
     }
     .toast-msg{
         height: 1rem;
-        background-color: #7a260f;
+        background-color: #333333;
+        //background-color: #7a260f;
         padding: 0.5rem 0.8rem;
         font-size: 0.8rem;
         letter-spacing: 1px;
         border-radius: 0.2rem;
-        color: #ffeeb9;
-        border:1px solid #ffeeb9; 
+        color: #fff
+        //color: #ffeeb9;
+        //border:1px solid #ffeeb9; 
     }
     .toastAnimate{
         animation: toastKF 2s;
