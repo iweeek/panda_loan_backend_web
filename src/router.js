@@ -19,7 +19,7 @@ let routes = [
     {
         path:'/landing/:Uid',
         component: Landing,
-        name: '微贷'
+        name: '微贷-现金贷款'
     },
     {
         path: '/homepage',
