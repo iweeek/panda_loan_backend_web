@@ -30,8 +30,8 @@ let resources = {
     token(){
         return `${host}\/tokens`
     },
-    emptyRequest(){
-        return `${host}\/emptyRequest`
+    landingPage(){
+        return `${host}\/landingPage`
     }
 };
 

@@ -299,7 +299,7 @@
             //         });
             // },
             enterMes(){
-                let url = resources.emptyRequest();
+                let url = resources.landingPage();
                 var qs = require('qs');
                 let params = { }
 
