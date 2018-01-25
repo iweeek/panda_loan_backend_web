@@ -298,6 +298,21 @@
             //         type: 'warning'
             //         });
             // },
+            enterMes(){
+                let url = resources.emptyRequest();
+                var qs = require('qs');
+                let params = { }
+
+                this.$ajax.post(url,qs.stringify(params),{
+                    headers: {
+                        'Landing-Channel-Uid': this.Uid,
+                        'Sid': this.Sid,
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                }).then(res => {
+                    console.log(res)
+                })
+            },
             getImageCode(){
                 // 普通的ajax接口
                 // 使用 application/x-www-form-urlencoded 格式化 
@@ -341,7 +356,8 @@
         },
         mounted: function () {
             //alert(this.Uid)
-            this.createSid()
+            this.createSid();
+            this.enterMes();
             //alert(this.Sid)
 		}
     };
