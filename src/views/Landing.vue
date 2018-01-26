@@ -21,7 +21,7 @@
                     <input type="button" class="comfirm-button" v-bind:class="{canClick:is_click}" value="立即借款" @click="comfirm()"/>
                 </div>
                 <div class="text-hint" @click="agreement()" >
-                    <span class="text-left">点击立即借款既表示同意</span><span class="text-right">《微贷平台服务协议》</span>
+                    <span class="text-left">点击立即借款既表示同意</span><span class="text-right">《熊猫贷款平台服务协议》</span>
                 </div>
             </div>
            
@@ -49,7 +49,7 @@
                 <span class="register-suc">恭喜你注册成功</span>
             </div>
             <div style="text-align:center">
-                <input type="button" class="download-button" value="立即下载微贷APP" @click="downloadApp()"/>
+                <input type="button" class="download-button" value="立即下载熊猫贷款APP" @click="downloadApp()"/>
             </div>
         </div>
 
@@ -59,7 +59,7 @@
 
         <div class="copyright">
             <div class="footer">
-                Copyright © 2017 微贷 All Rights Reserved
+                Copyright © 2017 熊猫贷款 All Rights Reserved
             </div>
         </div>
 
@@ -126,10 +126,10 @@
                 },500);
             },
             downloadApp(){
-                window.location.href = "http://sj.qq.com/myapp/detail.htm?apkName=com.dk.goppo";
+                window.location.href = "http://sj.qq.com/myapp/detail.htm?apkName=com.mg.pandaloan";
             },
             agreement(){
-                this.$router.push({ path: '/weidaiAgreement' })
+                this.$router.push({ path: '/agreement' })
             },
             getCode(){
                 //倒计时的时候不能点按钮

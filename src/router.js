@@ -20,7 +20,7 @@ let routes = [
     {
         path:'/landing/:Uid',
         component: Landing,
-        name: '微贷-现金贷款'
+        name: '熊猫贷款'
     },
     {
         path: '/homepage',
