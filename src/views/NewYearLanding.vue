@@ -4,12 +4,13 @@
         <div class="ynmiddle" v-if="!download">
             <div class="ynallinput">
                 <div style="padding-right:0.1rem;">
-                    <input type="number" class="ynphone-input" placeholder="请填写注册手机号" v-model="phone"/>
-                    <input type="button" class="yncode-button" v-bind:class="{yncantClick:is_show}" :value="count+codeButtonText"  @click="getCode()"/>
+                    <input type="number" class="yncode-input" placeholder="请填写注册手机号" v-model="phone"/>
                 </div>
                 <div style="padding-right:0.1rem;">
-                    <input type="number" class="yncode-input" placeholder="请填写短信验证码" v-model="smsCode"/>
+                    <input type="number" class="ynphone-input" placeholder="请填写短信验证码" v-model="smsCode"/>
+                    <input type="button" class="yncode-button" v-bind:class="{yncantClick:is_show}" :value="count+codeButtonText"  @click="getCode()"/>
                 </div>
+                
                 <div v-if="picCode" style="padding-right:0.1rem;">
                     <input type="number" class="ynphone-input" placeholder="请填写验证码" v-model="imaCode"/>
                     <img :src="imageCode" alt="" class="ynimage-code" @click="getImageCode">
@@ -17,8 +18,8 @@
                 <div style="padding-right:0.1rem;">
                     <input type="button" class="yncomfirm-button" v-bind:class="{yncanClick:is_click}" value="立即借款" @click="comfirm()"/>
                 </div>
-                <div class="yntext-hint" @click="agreement()" >
-                    <span class="yntext-left">点击立即借款既表示同意</span><span class="yntext-right">《微贷平台服务协议》</span>
+                <div class="yntext-hint">
+                    <span class="yntext-left">点击立即借款既表示同意</span><span class="yntext-right" @click="agreement()">《微贷平台服务协议》</span>
                 </div>
             </div>
         </div>
@@ -373,13 +374,12 @@
                 transform: translateY(-50%);
                 //上面三行垂直居中
                 text-align:center;
-
                 // height: 3rem;
                 .ynphone-input{
                     background: #FFFFFF;
                     height: 2.1rem;
                     width: 7.4rem;//1
-                    margin-top: 0.1rem;
+                    margin-top: 0.2rem;
                     padding-top: 0.2rem;
                     padding-left: 1rem;
                     //border:1px solid #d3d3d6;
@@ -392,7 +392,7 @@
                     height: 2.1rem;
                     width: 3.9rem;
                     margin-left: 0.1rem; 
-                    margin-top: 0.1rem;
+                    margin-top: 0.2rem;
                     //border:1px solid #d3d3d6;
                     border-radius: 0.2rem;
                 }
@@ -403,7 +403,7 @@
                     height: 2.1rem;
                     width: 3.9rem;
                     margin-left: 0.05rem; 
-                    margin-top: 0.1rem;
+                    margin-top: 0.2rem;
                     //border:1px solid #d3d3d6;
                     border-radius: 0.2rem;
                 }
@@ -415,7 +415,7 @@
                     background: #FFFFFF;
                     height: 2.1rem;
                     width: 11.5rem;
-                    margin-top: 0.1rem;
+                    margin-top: 0.2rem;
                     padding-top: 0.2rem;
                     padding-left: 1rem;
                     //border:1px solid #d3d3d6;
@@ -427,10 +427,10 @@
                     background: #d3d3d6;
                     color: #FFFFFF;
                     font-size: 0.8rem;
+                    margin-top: 0.2rem;
                     height: 2rem;
                     width: 11.5rem;
                     border-radius: 1rem;
-                    margin-top: 0.2rem;
                     //border:1px solid #d3d3d6;
                     border-radius: 0.2rem;
                 }
@@ -455,16 +455,16 @@
                     // bottom: 0.4rem;
                     // position: absolute;
                     // margin-left: 14%;
-                    margin-top: 0.3rem;
+                    margin-top: 1rem;
                     text-align: center;
 
                     .yntext-left{
-                        color: #d3d3d6;
-                        font-size: 0.5rem;
+                        color: #999999;
+                        font-size: 0.4rem;
                     }
                     .yntext-right{
                         color: #00abf3;
-                        font-size: 0.5rem;
+                        font-size: 0.4rem;
                     }
                 }
 
