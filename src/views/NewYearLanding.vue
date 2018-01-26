@@ -1,5 +1,6 @@
 <template>
     <div class="ynlanding-panda ynfirstpage" v-bind:class="{ynsecondpage:download}">
+        <img src="~@/assets/weidai.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%">
         <div class="yntop" v-if="!download"></div>
         <div class="ynmiddle" v-if="!download">
             <div class="ynallinput">
@@ -311,7 +312,7 @@
         100% {opacity: 0; z-index: 0}
     }
     .ynfirstpage{
-        background: url(~@/assets/NYF.png) no-repeat scroll; 
+        background: url(~@/assets/nnyf.png) no-repeat scroll; 
         background-size:100% 100%;
         height: 1400px;
         min-height: 32rem;
@@ -501,13 +502,13 @@
             height: 5%;
             .ynfooter{
                 position: relative;
-                top: 50%;
+                top: 60%;
                 transform: translateY(-50%);
                 //margin-top:-1rem;
                 //height:0.5rem;
                 text-align: center;
                 color: #d9dadd;
-                font-size: 0.6rem;
+                font-size: 0.5rem;
             }
         }
         
