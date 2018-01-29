@@ -7,7 +7,8 @@ import router from './router'
 import resources from './resources'
 import axios from 'axios'
 import md5 from 'js-md5'
-
+import MintUi from 'mint-ui'
+Vue.use(MintUi)
 import 'font-awesome/css/font-awesome.min.css'
 
 	//FIX rem 适配 配合postcss  将来提到工具方法里
@@ -36,7 +37,7 @@ import 'font-awesome/css/font-awesome.min.css'
 	})(window,document);
 
 	// 按需引入mintUI 组件可优化
-	import { InfiniteScroll, Toast, Picker } from 'mint-ui'
+	import { InfiniteScroll, Toast, Picker} from 'mint-ui'
 	Vue.use(InfiniteScroll)
 
 	Vue.component(Picker.name, Picker);

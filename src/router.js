@@ -11,8 +11,20 @@ import Landing from './views/Landing.vue'
 import WeidaiAgreement from './views/WeidaiAgreement.vue'
 import LoanRate from './views/LoanRate.vue'
 import NewYearLanding from './views/NewYearLanding.vue'
+import Product from './views/Product.vue'
+import test from './views/test.vue'
 
 let routes = [
+    {
+        path:'/test',
+        component: test,
+        name: '贷款'
+    },
+    {
+        path:'/',
+        component: Product,
+        name: '贷款'
+    },
     {
         path:'/about',
         component: About,
