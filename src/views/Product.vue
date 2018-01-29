@@ -6,46 +6,40 @@
             <span class="hint-text">同时申请3个产品，通过率更高哦</span>
             <img src="~@/assets/cancel.png" class="cancel" @click="hideHint()">
         </div>
-        <div v-for="product in allProduct" :key="product.id" class="product">
+        <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
 
-            <div class="title">
-                <img v-bind:src="product.imgUrl" alt="" class="avatar">
-                <span class="title-word">{{product.title}}</span>
-                <span class="isNew" v-if="product.isNew"><span class="isNew-border">新上线</span></span>
-                <span class="firstTages" v-if="product.isFirstTags"><span class="firstTages-border">{{product.firstTags}}</span></span>
-            </div>
+            <mt-loadmore  :bottom-method="loadBottom" 
+                :bottom-all-loaded="bottomAllLoaded" 
+                ref="loadmore" @bottom-status-change="handleBottomChange"
+                :auto-fill="false">
+            
+                <div v-for="product in allProduct" :key="product.id" class="product">
+                    <div class="title">
+                        <img v-bind:src="product.imgUrl" alt="" class="avatar">
+                        <span class="title-word">{{product.title}}</span>
+                        <span class="isNew" v-if="product.isNew"><span class="isNew-border">新上线</span></span>
+                        <span class="firstTages" v-if="product.isFirstTags"><span class="firstTages-border">{{product.firstTags}}</span></span>
+                    </div>
 
-            <div class="main-mes">
-                <div class="left-block">
-                    <span class="left-top">最高{{product.edu}}元</span>
-                    <br/>
-                    <span class="left-bottom">期限2个月</span>
+                    <div class="main-mes">
+                        <div class="left-block">
+                            <span class="left-top">最高{{product.edu}}元</span>
+                            <br/>
+                            <span class="left-bottom">期限2个月</span>
+                        </div>
+                        <div class="middle-block"></div>
+                        <div class="right-block">
+                            <span class="right-top">日利率{{product.dayRate}}%起</span>
+                            <br/>
+                            <span class="right-bottom">{{product.description}}</span>
+                        </div>
+                        <div class="icon">
+                            <img src="~@/assets/clickicon.png" class="click-icon">
+                        </div>
+                    </div>
                 </div>
-                <div class="middle-block"></div>
-                <div class="right-block">
-                    <span class="right-top">日利率{{product.dayRate}}%起</span>
-                    <br/>
-                    <span class="right-bottom">{{product.description}}</span>
-                </div>
-                <div class="icon">
-                    <img src="~@/assets/clickicon.png" class="click-icon">
-                </div>
-            </div>
-            
-            
-            <!-- <div class="message">
-                <div class="top">
-                    <span class="top-left">{{product.title}}</span>
-                    <span class="top-right">{{product.firstTages}}</span>
-                </div>
-                <div class="middle">
-                    <span class="middle-left">{{product.secondTagesLeft}}</span>
-                    <span class="middle-right">{{product.secondTagesRight}}</span>
-                </div>
-                <div class="bottom">
-                    <span>{{product.description}}</span>
-                </div>
-            </div> -->
+
+            </mt-loadmore>
         </div>
     </div>
 </template>
@@ -84,11 +78,23 @@
 			return {
                 allProduct: [],
                 tophint: true,
-                pageSize: 10,
-                pageNumber: 1
+                pageSize: 6,
+                pageNumber: 1,
+                bottomAllLoaded: false,
+                wrapperHeight: 0
             }
 		},
 		methods: {
+            handleBottomChange(status) {
+                this.bottomStatus = status;
+            },
+            loadBottom() {
+                setTimeout(() => {
+                this.pageNumber ++;
+                this.getProduct();
+                this.$refs.loadmore.onBottomLoaded();
+                }, 1000);
+            },
             hideHint() {
                 this.tophint = false;
             },
@@ -112,8 +118,12 @@
                     }
                 })
                 .then(res => {
+                    console.log(res.data.data.recommendProducts)
                     var array = res.data.data.recommendProducts;
-                    this.allProduct = array;
+                    this.allProduct = this.allProduct.concat(array);
+                    if (this.allProduct.length < this.pageSize) {
+                        this.bottomAllLoaded=true;
+                    }
                     this.allProduct.forEach(item => {
                         if (item.maxAmount > 10000) {
                             item.edu = item.maxAmount/10000 + '万';
@@ -132,6 +142,7 @@
         },
         mounted: function () {
             this.getProduct()
+            this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
 		}
     }
 </script>
@@ -171,110 +182,113 @@
             //padding-top: 0.1rem;
         }
     }
-
-    .product{
-        background: #f5f5f5;
-        height: auto;
-        border-bottom: 0.15rem solid #dfdfdf;
-        .title{
-            height: 2rem;
-            padding-left: 0.9rem;
-            padding-top: 0.625rem;
-            .avatar{
-                border-radius: 50%;
-                width: 1.3rem;
-                height: 1.3rem;
-            }
-            .title-word{
-                padding-left: 0.25rem;
-                padding-bottom: 1rem;
-                display: inline-block;
-                vertical-align: middle;
-                font-size: 0.6rem;
-            }
-            .isNew{
-                padding-left: 0.25rem;
-                padding-bottom: 1rem;
-                display: inline-block;
-                vertical-align: middle;
-                font-size: 0.4rem;
-                .isNew-border{
-                    padding: 0.07rem 0.1rem 0 0.1rem;
-                    color: rgb(236, 18, 16);
-                    border: 1px solid rgb(236, 18, 16);
+    .page-loadmore-wrapper{
+        overflow: scroll;
+        .product{
+            background: #f5f5f5;
+            height: auto;
+            border-bottom: 0.15rem solid #dfdfdf;
+            .title{
+                height: 2rem;
+                padding-left: 0.9rem;
+                padding-top: 0.625rem;
+                .avatar{
+                    border-radius: 50%;
+                    width: 1.3rem;
+                    height: 1.3rem;
                 }
-            }
-            .firstTages{
-                padding-left: 0.2rem;
-                padding-bottom: 1rem;
-                display: inline-block;
-                vertical-align: middle;
-                font-size: 0.4rem;
-                .firstTages-border{
-                    padding: 0.07rem 0.1rem 0 0.1rem;
-                    color: rgb(111, 143, 120);
-                    border: 1px solid rgb(111, 143, 120);;
-                }
-            }
-        }
-        .main-mes{
-            margin-left: 0.9rem;
-            margin-top: 0.625rem;
-            margin-bottom: 0.625rem;
-            .left-block{
-                vertical-align: top;
-                display: inline-block;
-                .left-top{
+                .title-word{
+                    padding-left: 0.25rem;
+                    padding-bottom: 1rem;
                     display: inline-block;
-                    color: rgb(236, 18, 16);
-                    font-size: 0.8rem;
+                    vertical-align: middle;
+                    font-size: 0.6rem;
                 }
-                .left-bottom{
-                    padding-top: 0.25rem;
+                .isNew{
+                    padding-left: 0.25rem;
+                    padding-bottom: 1rem;
                     display: inline-block;
-                    color: rgb(102, 102, 102);
-                    font-size: 0.55rem;
+                    vertical-align: middle;
+                    font-size: 0.4rem;
+                    .isNew-border{
+                        padding: 0.07rem 0.1rem 0 0.1rem;
+                        color: rgb(236, 18, 16);
+                        border: 1px solid rgb(236, 18, 16);
+                    }
+                }
+                .firstTages{
+                    padding-left: 0.2rem;
+                    padding-bottom: 1rem;
+                    display: inline-block;
+                    vertical-align: middle;
+                    font-size: 0.4rem;
+                    .firstTages-border{
+                        padding: 0.07rem 0.1rem 0 0.1rem;
+                        color: rgb(111, 143, 120);
+                        border: 1px solid rgb(111, 143, 120);;
+                    }
                 }
             }
-            .middle-block{
-                margin-left: 1.8rem;
-                vertical-align: top;
-                display: inline-block;
-                width: 0.05rem;
-                height: 1.4rem;
-                background: rgb(214, 214, 214)
-            }
-            .right-block{
-                width: 9.2rem;
+            .main-mes{
                 margin-left: 0.9rem;
-                vertical-align: top;
-                display: inline-block;
-                .right-top{
+                margin-top: 0.625rem;
+                margin-bottom: 0.625rem;
+                .left-block{
+                    vertical-align: top;
                     display: inline-block;
-                    font-size: 0.54rem;
-                    color: rgb(153, 153, 153);
+                    .left-top{
+                        display: inline-block;
+                        color: rgb(236, 18, 16);
+                        font-size: 0.8rem;
+                    }
+                    .left-bottom{
+                        padding-top: 0.25rem;
+                        display: inline-block;
+                        color: rgb(102, 102, 102);
+                        font-size: 0.55rem;
+                    }
                 }
-                .right-bottom{
-                    width: 8rem;
-                    line-height: 0.6rem;
-                    padding-top: 0.35rem;
+                .middle-block{
+                    margin-left: 1.8rem;
+                    vertical-align: top;
                     display: inline-block;
-                    // white-space:pre-wrap;
-                    // width:6rem;
-                    // overflow: hidden;
-                    // display: inline-block;
-                    font-size: 0.54rem;
-                    color: rgb(153, 153, 153);
+                    width: 0.05rem;
+                    height: 1.4rem;
+                    background: rgb(214, 214, 214)
                 }
-            }
-            .icon{
-                vertical-align: center;
-                display: inline-block;
-                .click-icon{
-                    margin-top: 0.2rem;
-                    width:0.4rem;
+                .right-block{
+                    width: 9.2rem;
+                    margin-left: 0.9rem;
+                    vertical-align: top;
+                    display: inline-block;
+                    .right-top{
+                        display: inline-block;
+                        font-size: 0.54rem;
+                        color: rgb(153, 153, 153);
+                    }
+                    .right-bottom{
+                        width: 8rem;
+                        line-height: 0.6rem;
+                        padding-top: 0.35rem;
+                        display: inline-block;
+                        // white-space:pre-wrap;
+                        // width:6rem;
+                        // overflow: hidden;
+                        // display: inline-block;
+                        font-size: 0.54rem;
+                        color: rgb(153, 153, 153);
+                    }
+                }
+                .icon{
+                    vertical-align: center;
+                    display: inline-block;
+                    .click-icon{
+                        margin-top: 0.2rem;
+                        width:0.4rem;
+                    }
                 }
             }
         }
     }
+    
 </style>

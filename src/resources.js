@@ -10,7 +10,8 @@ if (debug) {
     // var host = 'http://119.23.12.36:8081/panda_loan';
 } else {
     //正式环境地址
-    var host = 'https://api.pinganzhiyuan.com/panda_loan';
+    //var host = 'https://api.pinganzhiyuan.com/panda_loan';
+    var host = 'http://119.23.12.36:8081/panda_loan';
 }
 console.warn('当前resource: ', host);
 
