@@ -10,6 +10,7 @@ import Agreement from './views/Agreement.vue'
 import Landing from './views/Landing.vue'
 import WeidaiAgreement from './views/WeidaiAgreement.vue'
 import LoanRate from './views/LoanRate.vue'
+import NewYearLanding from './views/NewYearLanding.vue'
 
 let routes = [
     {
@@ -21,6 +22,11 @@ let routes = [
         path:'/landing/:Uid',
         component: Landing,
         name: '熊猫贷款'
+    },
+    {
+        path:'/nyLanding/:Uid',
+        component: NewYearLanding,
+        name: '微贷-现金贷款'
     },
     {
         path: '/homepage',
