@@ -6,6 +6,7 @@
             <span class="hint-text">同时申请3个产品，通过率更高哦</span>
             <img src="~@/assets/cancel.png" class="cancel" @click="hideHint()">
         </div>
+
         <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
 
             <mt-loadmore  :bottom-method="loadBottom" 
@@ -40,7 +41,13 @@
                 </div>
 
             </mt-loadmore>
+            <div class="nomore" v-if="nomore"> 
+                <span class="nomore-border">—</span><span class="nomore-text">没有更多了哦</span><span class="nomore-border">—</span>
+            </div>
         </div>
+
+        
+
     </div>
 </template>
 
@@ -81,7 +88,8 @@
                 pageSize: 6,
                 pageNumber: 1,
                 bottomAllLoaded: false,
-                wrapperHeight: 0
+                wrapperHeight: 0,
+                nomore: false
             }
 		},
 		methods: {
@@ -93,7 +101,7 @@
                 this.pageNumber ++;
                 this.getProduct();
                 this.$refs.loadmore.onBottomLoaded();
-                }, 1000);
+                }, 1500);
             },
             hideHint() {
                 this.tophint = false;
@@ -121,8 +129,12 @@
                     console.log(res.data.data.recommendProducts)
                     var array = res.data.data.recommendProducts;
                     this.allProduct = this.allProduct.concat(array);
-                    if (this.allProduct.length < this.pageSize) {
+                    //this.wrapperHeight = this.wrapperHeight + 40;
+                    if (array.length < this.pageSize) {
                         this.bottomAllLoaded=true;
+                        this.nomore = true;
+                    } else {
+                        this.bottomAllLoaded = false;
                     }
                     this.allProduct.forEach(item => {
                         if (item.maxAmount > 10000) {
@@ -147,11 +159,26 @@
     }
 </script>
 <style lang="scss">
-
-    .top{
+    .nomore{
+        padding-top: 0.6rem;
+        height: 2rem;
         background: #f5f5f5;
-        height: 2.2rem;
-        border-bottom: 0.3rem solid #dfdfdf;
+        text-align: center;
+        .nomore-border{
+            color: #999999;
+            font-size: 0.7rem;
+        }
+        .nomore-text{
+            color: #999999;
+            padding-right: 0.2rem;
+            padding-left: 0.2rem;
+            font-size: 0.7rem;
+        }
+    }
+    .top{
+        background: #ffffff;
+        height: 2.5rem;
+        border-bottom: 0.5rem solid #f5f5f5;
         .hint-pic{
             margin-left: 0.8rem;
             padding-top: 0.3rem;
@@ -175,27 +202,28 @@
             transform:translateY(-70%);
         }
         .cancel{
-            margin-left: 2rem;
-            width: 1rem;
+            margin-left: 2.4rem;
+            width: 0.8rem;
             display: inline-block;
-            transform:translateY(-15%);
+            transform:translateY(-30%);
             //padding-top: 0.1rem;
         }
     }
     .page-loadmore-wrapper{
         overflow: scroll;
         .product{
-            background: #f5f5f5;
+            background: #ffffff;
             height: auto;
-            border-bottom: 0.15rem solid #dfdfdf;
+            border-bottom: 0.25rem solid #f5f5f5;
             .title{
                 height: 2rem;
                 padding-left: 0.9rem;
                 padding-top: 0.625rem;
                 .avatar{
                     border-radius: 50%;
-                    width: 1.3rem;
-                    height: 1.3rem;
+                    width: 1.4rem;
+                    height: 1.4rem;
+                    border: 1px solid #f5f5f5;
                 }
                 .title-word{
                     padding-left: 0.25rem;
@@ -234,6 +262,7 @@
                 margin-top: 0.625rem;
                 margin-bottom: 0.625rem;
                 .left-block{
+                    width: 4.5rem;
                     vertical-align: top;
                     display: inline-block;
                     .left-top{
@@ -249,7 +278,7 @@
                     }
                 }
                 .middle-block{
-                    margin-left: 1.8rem;
+                    margin-left: 1.3rem;
                     vertical-align: top;
                     display: inline-block;
                     width: 0.05rem;
@@ -257,25 +286,25 @@
                     background: rgb(214, 214, 214)
                 }
                 .right-block{
-                    width: 9.2rem;
-                    margin-left: 0.9rem;
+                    width: 9.4rem;
+                    margin-left: 1rem;
                     vertical-align: top;
                     display: inline-block;
                     .right-top{
                         display: inline-block;
-                        font-size: 0.54rem;
+                        font-size: 0.6rem;
                         color: rgb(153, 153, 153);
                     }
                     .right-bottom{
-                        width: 8rem;
-                        line-height: 0.6rem;
-                        padding-top: 0.35rem;
+                        width: 8.8rem;
+                        line-height: 0.7rem;
+                        padding-top: 0.3rem;
                         display: inline-block;
                         // white-space:pre-wrap;
                         // width:6rem;
                         // overflow: hidden;
                         // display: inline-block;
-                        font-size: 0.54rem;
+                        font-size: 0.6rem;
                         color: rgb(153, 153, 153);
                     }
                 }
