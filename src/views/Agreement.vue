@@ -1,8 +1,8 @@
 <!--  微页面  -->
 <template>
     <div class="help-page">
-    <title>用户注册协议</title></head><body><article class="markdown-body"><h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a><center>熊猫贷款平台服务协议</center></h3>
-<p><strong>   正在访问熊猫贷款app(以下简称“平台”)，我们依照以下协议内容向您提供本协议涉及的相关服务。请您使用平台服务前前仔细阅读本协议。若要继续访问和使用平台服务，您必须不加修改地完全接受本服务协议中所包含的各项条款、政策以及指南，并同意平台即时刊登的通告，并且遵守中国政府有关互联网的相关法律政策，以及遵守本网站制定的各项规定与规则。如对本协议存有任何异议或疑问，请您不要注册或使用平台的相关服务。</strong><br />
+    <title>用户注册协议</title></head><body><article class="markdown-body"><h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a><center><span v-if="!iphone">熊猫贷款</span><span v-if="iphone">熊猫钱包</span>平台服务协议</center></h3>
+<p><strong>   正在访问<span v-if="!iphone">熊猫贷款</span><span v-if="iphone">熊猫钱包</span>app(以下简称“平台”)，我们依照以下协议内容向您提供本协议涉及的相关服务。请您使用平台服务前前仔细阅读本协议。若要继续访问和使用平台服务，您必须不加修改地完全接受本服务协议中所包含的各项条款、政策以及指南，并同意平台即时刊登的通告，并且遵守中国政府有关互联网的相关法律政策，以及遵守本网站制定的各项规定与规则。如对本协议存有任何异议或疑问，请您不要注册或使用平台的相关服务。</strong><br />
 <br />
 <strong>   您一旦注册或使用平台的服务，即视为您已理解并完全同意本协议各项内容，包括平台对用户注册协议随时做的任何修改。任何变更或修改将在修订内容于平台发布之时立即生效，您对平台的访问和使用将表明您接受此变更或修改。如您不同意本协议及/或不同意平台有权随时对本协议进行修改，您应当停止访问平台并放弃选择平台提供的服务。</strong><br />
 <br />
@@ -110,14 +110,25 @@
         data() {
             return {
                 activeNames: [],
-                activeNames2: []
+                activeNames2: [],
+                iphone: false
             };
         },
         methods: {
             handleChange() {
+            },
+            phoneType() {
+                var ua = navigator.userAgent.toLowerCase();
+                if (ua.indexOf("iphone") == -1) {
+                    //安卓跳转
+                    this.iphone = false;
+                } else {
+                    this.iphone = true;
+                }
             }
         },
         mounted: function () {
+          this.phoneType();
         }
     }
 

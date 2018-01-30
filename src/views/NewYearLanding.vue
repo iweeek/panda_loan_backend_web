@@ -1,6 +1,10 @@
 <template>
     <div class="ynlanding-panda ynfirstpage" v-bind:class="{ynsecondpage:download}">
-        <img src="~@/assets/weidai.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%">
+        <!-- <img src="~@/assets/weidai.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%"> //微贷 --> 
+
+        <img src="~@/assets/XMDKFLOAT.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%" v-if="!iphone">
+        <img src="~@/assets/xmqb.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%" v-if="iphone">
+
         <div class="yntop" v-if="!download"></div>
         <div class="ynmiddle" v-if="!download">
             <div class="ynallinput">
@@ -20,7 +24,8 @@
                     <input type="button" class="yncomfirm-button" v-bind:class="{yncanClick:is_click}" value="立即借款" @click="comfirm()"/>
                 </div>
                 <div class="yntext-hint">
-                    <span class="yntext-left">点击立即借款既表示同意</span><span class="yntext-right" @click="agreement()">《微贷平台服务协议》</span>
+                    <span class="yntext-left">点击立即借款既表示同意</span><span class="yntext-right" @click="agreement()">
+                        《<span v-if="!iphone" class="yntext-right">熊猫贷款</span><span v-if="iphone" class="yntext-right">熊猫钱包</span>平台服务协议》</span>
                 </div>
             </div>
         </div>
@@ -34,7 +39,7 @@
         <div class="yntwobuttom" v-if="download"></div>
         <div class="yncopyright">
             <div class="ynfooter">
-                Copyright © 2017 微贷 All Rights Reserved
+                Copyright © 2017 <span v-if="!iphone" class="brand-text">熊猫贷款</span><span v-if="iphone" class="brand-text">熊猫钱包</span> All Rights Reserved
             </div>
         </div>
         <div class="yntoast-wrap">
@@ -50,6 +55,7 @@
     export default {
         data() {
             return {
+                iphone: false,
                 download: false,
                 picCode: false,
                 is_show: false,
@@ -81,10 +87,17 @@
                 },500);
             },
             downloadApp(){
-                window.location.href = "http://sj.qq.com/myapp/detail.htm?apkName=com.dk.goppo";
+                var ua = navigator.userAgent.toLowerCase();
+                if (ua.indexOf("iphone") == -1) {
+                    //安卓跳转
+                    window.location.href = "http://sj.qq.com/myapp/detail.htm?apkName=com.mg.pandaloan";
+                } else {
+                    //苹果跳转
+                    window.location.href = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1330125527&mt=8";
+                }
             },
             agreement(){
-                this.$router.push({ path: '/weidaiAgreement' })
+                this.$router.push({ path: '/agreement' })
             },
             getCode(){
                 //倒计时的时候不能点按钮
@@ -164,7 +177,6 @@
                 }
             },          
             postMes(){
-
                 let url = resources.token();
                 // let params = new URLSearchParams();
                 // params.append('username',this.phone)//用户名（手机号）
@@ -174,7 +186,6 @@
                 //     params.append('keyImageCapt',this.keyImage)//图形验证码的key 
                 //     params.append('imageCapt',this.imaCode)//图形验证码
                 // }
-
                 let params = { }
                 if (this.keyImage != '') {
                     params = {
@@ -268,10 +279,23 @@
             //生成一个4位16进制字符串
             S4() {  
                 return (((1+Math.random())*0x10000)|0).toString(16).substring(1);  
+            },
+            phoneType() {
+                var ua = navigator.userAgent.toLowerCase();
+                if (ua.indexOf("iphone") == -1) {
+                    //安卓
+                    this.iphone = false;
+                    document.title= "熊猫贷款";
+                } else {
+                    //苹果
+                    this.iphone = true;
+                    document.title = "熊猫钱包";
+                }
             }
         },
         mounted: function () {
             //alert(this.Uid)
+            this.phoneType();
             this.createSid();
             this.enterMes();
             //alert(this.Sid)
@@ -509,6 +533,10 @@
                 text-align: center;
                 color: #d9dadd;
                 font-size: 0.5rem;
+                .brand-text {   
+                    color: #d9dadd;
+                    font-size: 0.5rem;
+                }
             }
         }
         
