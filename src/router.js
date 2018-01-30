@@ -38,7 +38,7 @@ let routes = [
     {
         path:'/nyLanding/:Uid',
         component: NewYearLanding,
-        name: '微贷-现金贷款'
+        name: ''
     },
     {
         path: '/homepage',
