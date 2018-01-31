@@ -336,13 +336,13 @@
         100% {opacity: 0; z-index: 0}
     }
     .ynfirstpage{
-        background: url(~@/assets/nnyf.png) no-repeat scroll; 
+        background: url(~@/assets/mnyf.jpg) no-repeat scroll; 
         background-size:100% 100%;
         height: 1400px;
         min-height: 32rem;
     }
     .ynsecondpage{
-        background: url(~@/assets/NYS.png) no-repeat scroll; 
+        background: url(~@/assets/mnys.jpg) no-repeat scroll; 
         background-size:100% 100%;
         height: 32rem;
     }
