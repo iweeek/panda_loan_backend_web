@@ -30,7 +30,7 @@
     export default {
 		data() {
 			return {
-                unused: false,
+                unused: true,
                 expired: false,
                 used: false
             }
