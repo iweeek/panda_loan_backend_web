@@ -16,6 +16,7 @@ import test from './views/test.vue'
 import Feedback from './views/Feedback.vue' //意见反馈
 import BindingBankcard from './views/BindingBankcard.vue' //绑定银行卡
 import MyCoupon from './views/MyCoupon.vue' //我的优惠券
+import AboutUs from './views/AboutUs.vue' //关于我们
 
 let routes = [{
         path: '/test',
@@ -87,7 +88,12 @@ let routes = [{
         name: '我的优惠券',
         hidden: true
     },
-
+    {
+        path: '/AboutUs',
+        component: AboutUs,
+        name: '关于我们',
+        hidden: true
+    }
 ];
 
 Vue.use(VueRouter)

@@ -5,16 +5,16 @@
             使用规则
             </div>
             <div class="titleNameson">
-                <div class="titleCircular"></div> 优惠券一经使用立即生效。
+                <div class="titleCircular">●</div> 优惠券一经使用立即生效。
             </div>
             <div class="titleNameson">
-                <div class="titleCircular"></div> 如何申请X贷款
+                <div class="titleCircular">●</div> 如何申请X贷款
             </div>
             <div class="titleNameson">
-                <div class="titleCircular"></div> 如何申请X贷款
+                <div class="titleCircular">●</div> 如何申请X贷款
             </div>
             <div class="titleNameson" style="border:none">
-                <div class="titleCircular"></div> 如何申请X贷款
+                <div class="titleCircular">●</div> 如何申请X贷款
             </div>
         </div>
 	</div>
@@ -57,11 +57,11 @@ $rem: 1rem/40; //rem配置
 
 .titleCircular {
   margin-right: 12*$rem;
-  display: inline-block;
-  width: 10*$rem;
-  height: 10*$rem;
-  background: #fec946;
-  border-radius: 100%;
+  vertical-align: middle;
+  margin-top: .1*$rem;
+  font-size: 10*$rem;
+  display: inline;
+  color: #fec946;
 }
 .titleNameson {
   width: 100%;
