@@ -14,6 +14,21 @@ const NewYearLanding = resolve => require.ensure([], () => resolve(require('@/vi
 const Product = resolve => require.ensure([], () => resolve(require('@/views/Product.vue')), 'Product')
 const HelpCenter = resolve => require.ensure([], () => resolve(require('./views/HelpCenter.vue')), 'HelpCenter')
 const Coupon = resolve => require.ensure([], () => resolve(require('./views/Coupon.vue')), 'Coupon')
+import About from './views/About.vue'
+import NotFound from './views/404.vue'
+import Identity from './views/Identity.vue'
+import Agreement from './views/Agreement.vue'
+import Landing from './views/Landing.vue'
+import WeidaiAgreement from './views/WeidaiAgreement.vue'
+import LoanRate from './views/LoanRate.vue'
+import NewYearLanding from './views/NewYearLanding.vue'
+import Product from './views/Product.vue'
+import test from './views/test.vue'
+
+import Feedback from './views/Feedback.vue' //意见反馈
+import BindingBankcard from './views/BindingBankcard.vue' //绑定银行卡
+import MyCoupon from './views/MyCoupon.vue' //我的优惠券
+import AboutUs from './views/AboutUs.vue' //关于我们
 
 let routes = [
     {
@@ -24,25 +39,31 @@ let routes = [
     {
         path:'/helpCenter',
         component: HelpCenter,
-        name: '帮助中心'
+		name: '帮助中心'
+	},
+    {
+        path:'/test',
+        component: test,
+        name: '贷款'
+
     },
     {
-        path:'/',
+        path: '/',
         component: Product,
         name: '贷款'
     },
     {
-        path:'/about',
+        path: '/about',
         component: About,
         name: '关于'
     },
     {
-        path:'/landing/:Uid',
+        path: '/landing/:Uid',
         component: Landing,
         name: '熊猫贷款'
     },
     {
-        path:'/nyLanding/:Uid',
+        path: '/nyLanding/:Uid',
         component: NewYearLanding,
         name: ''
     },
@@ -72,12 +93,36 @@ let routes = [
         component: LoanRate,
         name: '2018年贷款利率',
         hidden: true
+    },
+    {
+        path: '/Feedback',
+        component: Feedback,
+        name: '意见反馈',
+        hidden: true
+    },
+    {
+        path: '/BindingBankcard',
+        component: BindingBankcard,
+        name: '绑定银行卡',
+        hidden: true
+    },
+    {
+        path: '/MyCoupon',
+        component: MyCoupon,
+        name: '我的优惠券',
+        hidden: true
+    },
+    {
+        path: '/AboutUs',
+        component: AboutUs,
+        name: '关于我们',
+        hidden: true
     }
 ];
 
 Vue.use(VueRouter)
 const router = new VueRouter({
-	routes
+    routes
 })
 
 router.beforeEach((to, from, next) => {
