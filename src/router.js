@@ -1,19 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomePage from './views/HomePage.vue'
-import HelpCenterPage from './views/HelpCenterPage.vue'
 
-import About from './views/About.vue'
-import NotFound from './views/404.vue'
-import Identity from './views/Identity.vue'
-import Agreement from './views/Agreement.vue'
-import Landing from './views/Landing.vue'
-import WeidaiAgreement from './views/WeidaiAgreement.vue'
-import LoanRate from './views/LoanRate.vue'
-import NewYearLanding from './views/NewYearLanding.vue'
-import Product from './views/Product.vue'
-import test from './views/test.vue'
-
+const HomePage = resolve => require.ensure([], () => resolve(require('@/views/HomePage.vue')), 'HomePage')
+const HelpCenterPage = resolve => require.ensure([], () => resolve(require('@/views/HelpCenterPage.vue')), 'HelpCenterPage')
+const About = resolve => require.ensure([], () => resolve(require('@/views/About.vue')), 'About')
+const NotFound = resolve => require.ensure([], () => resolve(require('@/views/404.vue')), '404')
+const Identity = resolve => require.ensure([], () => resolve(require('@/views/Identity.vue')), 'Identity')
+const Agreement = resolve => require.ensure([], () => resolve(require('@/views/Agreement.vue')), 'Agreement')
+const Landing = resolve => require.ensure([], () => resolve(require('@/views/Landing.vue')), 'Landing')
+const WeidaiAgreement = resolve => require.ensure([], () => resolve(require('@/views/WeidaiAgreement.vue')), 'WeidaiAgreement')
+const LoanRate = resolve => require.ensure([], () => resolve(require('@/views/LoanRate.vue')), 'LoanRate')
+const NewYearLanding = resolve => require.ensure([], () => resolve(require('@/views/NewYearLanding.vue')), 'NewYearLanding')
+const Product = resolve => require.ensure([], () => resolve(require('@/views/Product.vue')), 'Product')
 const HelpCenter = resolve => require.ensure([], () => resolve(require('./views/HelpCenter.vue')), 'HelpCenter')
 
 let routes = [
@@ -21,11 +19,6 @@ let routes = [
         path:'/helpCenter',
         component: HelpCenter,
         name: '帮助中心'
-    },
-    {
-        path:'/test',
-        component: test,
-        name: '贷款'
     },
     {
         path:'/',
