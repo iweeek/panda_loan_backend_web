@@ -13,8 +13,14 @@ const LoanRate = resolve => require.ensure([], () => resolve(require('@/views/Lo
 const NewYearLanding = resolve => require.ensure([], () => resolve(require('@/views/NewYearLanding.vue')), 'NewYearLanding')
 const Product = resolve => require.ensure([], () => resolve(require('@/views/Product.vue')), 'Product')
 const HelpCenter = resolve => require.ensure([], () => resolve(require('./views/HelpCenter.vue')), 'HelpCenter')
+const Coupon = resolve => require.ensure([], () => resolve(require('./views/Coupon.vue')), 'Coupon')
 
 let routes = [
+    {
+        path:'/coupon',
+        component: Coupon,
+        name: '我的优惠券'
+    },
     {
         path:'/helpCenter',
         component: HelpCenter,
