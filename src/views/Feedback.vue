@@ -1,5 +1,5 @@
 <template>
-	<div id="app">
+	<div id="app1">
 
         <!-- 时间 -->
         <div class="thisTime" v-model="time">
