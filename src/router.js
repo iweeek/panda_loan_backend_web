@@ -13,30 +13,31 @@ import LoanRate from './views/LoanRate.vue'
 import NewYearLanding from './views/NewYearLanding.vue'
 import Product from './views/Product.vue'
 import test from './views/test.vue'
+import Feedback from './views/Feedback.vue' //意见反馈
 
-let routes = [
-    {
-        path:'/test',
+
+let routes = [{
+        path: '/test',
         component: test,
         name: '贷款'
     },
     {
-        path:'/',
+        path: '/',
         component: Product,
         name: '贷款'
     },
     {
-        path:'/about',
+        path: '/about',
         component: About,
         name: '关于'
     },
     {
-        path:'/landing/:Uid',
+        path: '/landing/:Uid',
         component: Landing,
         name: '熊猫贷款'
     },
     {
-        path:'/nyLanding/:Uid',
+        path: '/nyLanding/:Uid',
         component: NewYearLanding,
         name: ''
     },
@@ -66,12 +67,18 @@ let routes = [
         component: LoanRate,
         name: '2018年贷款利率',
         hidden: true
+    },
+    {
+        path: '/Feedback',
+        component: Feedback,
+        name: '意见反馈',
+        hidden: true
     }
 ];
 
 Vue.use(VueRouter)
 const router = new VueRouter({
-	routes
+    routes
 })
 
 router.beforeEach((to, from, next) => {
