@@ -14,7 +14,14 @@ import NewYearLanding from './views/NewYearLanding.vue'
 import Product from './views/Product.vue'
 import test from './views/test.vue'
 
+const HelpCenter = resolve => require.ensure([], () => resolve(require('./views/HelpCenter.vue')), 'HelpCenter')
+
 let routes = [
+    {
+        path:'/helpCenter',
+        component: HelpCenter,
+        name: '帮助中心'
+    },
     {
         path:'/test',
         component: test,
