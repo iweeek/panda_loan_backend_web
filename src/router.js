@@ -14,7 +14,8 @@ import NewYearLanding from './views/NewYearLanding.vue'
 import Product from './views/Product.vue'
 import test from './views/test.vue'
 import Feedback from './views/Feedback.vue' //意见反馈
-
+import BindingBankcard from './views/BindingBankcard.vue' //绑定银行卡
+import MyCoupon from './views/MyCoupon.vue' //我的优惠券
 
 let routes = [{
         path: '/test',
@@ -73,7 +74,20 @@ let routes = [{
         component: Feedback,
         name: '意见反馈',
         hidden: true
-    }
+    },
+    {
+        path: '/BindingBankcard',
+        component: BindingBankcard,
+        name: '绑定银行卡',
+        hidden: true
+    },
+    {
+        path: '/MyCoupon',
+        component: MyCoupon,
+        name: '我的优惠券',
+        hidden: true
+    },
+
 ];
 
 Vue.use(VueRouter)

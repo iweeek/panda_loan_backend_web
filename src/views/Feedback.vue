@@ -1,5 +1,5 @@
 <template>
-	<div id="app1">
+	<div id="app">
 
         <!-- 时间 -->
         <div class="thisTime" v-model="time">
@@ -49,7 +49,7 @@ export default {
   methods: {
     submit(){ //提交
         if(this.inputData==''){
-            alert('请输入内容哦')
+            return
         }else{
             this.news = true;
             this.myData =  this.inputData;
@@ -63,12 +63,20 @@ export default {
             _this.outher = true
         },2000);
     },
+    zero(month){
+        return month < 10 ? '0' + month: month;
+    },
     getTime(){ //获取当前时间
-        var myDate = new Date();    
-        var toLocaleDateString = myDate.toLocaleDateString()    //可以获取当前日期
-        var toLocaleTimeString = myDate.toLocaleTimeString()    //可以获取当前时间
-        var dataTime = toLocaleDateString + '  '  +toLocaleTimeString
-        this.time = dataTime
+        var date= new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var day = date.getDate();
+        var WeekDay = date.getDay();    //获取当前星期X(0-6,0代表星期天)
+        var Hour = date.getHours();      //获取当前小时数(0-23)
+        var Minute = date.getMinutes();   // 获取当前分钟数(0-59)
+        var Sec =date.getSeconds();      //获取当前秒数(0-59)
+        var str = this.zero(month) + '月' + this.zero(day)+ '日    ' + this.zero(Hour) + ':' +this.zero(Minute)   ;
+        this.time = str
     }
   },
   mounted(){
@@ -78,11 +86,17 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
+<style> /*全局样式*/
+    #app{
+        background: #fff;
+    }
+</style>
+
 <style lang="scss" scoped>
-@import '../styles/mixin'; /*引入配置scss*/
+
+$rem:1rem/40; //rem配置
 
 // 底部样式
-
 .feedback-foot{
     position: absolute;
     bottom: 0;
