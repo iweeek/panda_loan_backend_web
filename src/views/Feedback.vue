@@ -173,7 +173,6 @@ $rem:1rem/40; //rem配置
     margin-right: 15*$rem;
     width: auto;
     height: auto;
-    line-height: 40*$rem;
     max-width: 500*$rem;
     word-break: break-all;
     padding: 25*$rem;
@@ -181,6 +180,7 @@ $rem:1rem/40; //rem配置
     background  : #81b0fb;
     color:#fff;
     font-size: 25*$rem;
+    line-height: 40*$rem;
     text-align: left;
 }
 

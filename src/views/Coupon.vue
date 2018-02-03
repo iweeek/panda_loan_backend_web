@@ -21,7 +21,7 @@
             <!-- <img src="~@/assets/coupon.png" class="coupon"> -->
             <div class="validity">
                 <div class="validity-top">有效期至：2017.8.8-2017.8.20</div>
-                <div class="validity-bottom">借款金额满3000元可用,最低抵扣9元</div>
+                <div class="validity-bottom">借款金额满3000元可用,最高抵扣9元</div>
             </div>
         </div>
     </div>

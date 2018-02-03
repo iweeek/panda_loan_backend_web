@@ -18,7 +18,7 @@
         </div>
         <div v-if="!show">
             <div class="helpt-top" @click="back()">
-                <span class="topt-text">常见问题</span>
+                <span class="topt-text">{{listQuestion[questionNum].value}}</span>
             </div>
             <div class="help-middle" v-for="(item,index) in listAnswer" :key="item.index" v-if="index === questionNum">
                 <div class="middlet-block" >
@@ -66,10 +66,10 @@
                 this.questionNum = index;
                 this.show = false;
             },
-            back() {
-                this.questionNum = '';
-                this.show = true;
-            }
+            // back() {
+            //     this.questionNum = '';
+            //     this.show = true;
+            // }
         }
     }
 </script>
