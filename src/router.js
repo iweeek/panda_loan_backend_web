@@ -54,7 +54,8 @@ let routes = [
     {
         path: '/agreement',
         component: Agreement,
-        hidden: true
+        hidden: true,
+        name: '注册协议'
     },
     {
         path: '/weidaiAgreement',
