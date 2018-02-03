@@ -14,43 +14,58 @@ const NewYearLanding = resolve => require.ensure([], () => resolve(require('@/vi
 const Product = resolve => require.ensure([], () => resolve(require('@/views/Product.vue')), 'Product')
 const HelpCenter = resolve => require.ensure([], () => resolve(require('./views/HelpCenter.vue')), 'HelpCenter')
 const Coupon = resolve => require.ensure([], () => resolve(require('./views/Coupon.vue')), 'Coupon')
-import About from './views/About.vue'
-import NotFound from './views/404.vue'
-import Identity from './views/Identity.vue'
-import Agreement from './views/Agreement.vue'
-import Landing from './views/Landing.vue'
-import WeidaiAgreement from './views/WeidaiAgreement.vue'
-import LoanRate from './views/LoanRate.vue'
-import NewYearLanding from './views/NewYearLanding.vue'
-import Product from './views/Product.vue'
-import test from './views/test.vue'
+const MyCoupon = resolve => require.ensure([], () => resolve(require('./views/MyCoupon.vue')), 'MyCoupon')
+const Feedback = resolve => require.ensure([], () => resolve(require('./views/Feedback.vue')), 'Feedback')
+const BindingBankcard = resolve => require.ensure([], () => resolve(require('./views/BindingBankcard.vue')), 'BindingBankcard')
+const AboutUs = resolve => require.ensure([], () => resolve(require('./views/AboutUs.vue')), 'AboutUs')
 
-import Feedback from './views/Feedback.vue' //意见反馈
-import BindingBankcard from './views/BindingBankcard.vue' //绑定银行卡
-import MyCoupon from './views/MyCoupon.vue' //我的优惠券
-import AboutUs from './views/AboutUs.vue' //关于我们
+//import test from './views/test.vue'
 
 let routes = [
+    // {
+    //     path: '/test',
+    //     component: test
+    // },
+    {
+        path: '/feedback',
+        component: Feedback,
+        name: '意见反馈',
+        hidden: true
+    },
+    {
+        path: '/bindingBankcard',
+        component: BindingBankcard,
+        name: '绑定银行卡',
+        hidden: true
+    },
+    {
+        path: '/myCoupon',
+        component: MyCoupon,
+        name: '我的优惠券',
+        hidden: true
+    },
+    {
+        path: '/aboutUs',
+        component: AboutUs,
+        name: '关于我们',
+        hidden: true
+    },
     {
         path:'/coupon',
         component: Coupon,
-        name: '我的优惠券'
+        name: '我的优惠券',
+        hidden: true
     },
     {
         path:'/helpCenter',
         component: HelpCenter,
-		name: '帮助中心'
+        name: '帮助中心',
+        hidden: true
 	},
-    {
-        path:'/test',
-        component: test,
-        name: '贷款'
-
-    },
     {
         path: '/',
         component: Product,
-        name: '贷款'
+        name: '产品列表'
     },
     {
         path: '/about',
@@ -92,30 +107,6 @@ let routes = [
         path: '/loanRate',
         component: LoanRate,
         name: '2018年贷款利率',
-        hidden: true
-    },
-    {
-        path: '/Feedback',
-        component: Feedback,
-        name: '意见反馈',
-        hidden: true
-    },
-    {
-        path: '/BindingBankcard',
-        component: BindingBankcard,
-        name: '绑定银行卡',
-        hidden: true
-    },
-    {
-        path: '/MyCoupon',
-        component: MyCoupon,
-        name: '我的优惠券',
-        hidden: true
-    },
-    {
-        path: '/AboutUs',
-        component: AboutUs,
-        name: '关于我们',
         hidden: true
     }
 ];
