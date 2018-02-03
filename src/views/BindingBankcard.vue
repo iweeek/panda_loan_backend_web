@@ -4,21 +4,35 @@
         <input type="text" class="normal-input" placeholder="银行预留手机号">
         <div class="phoneDiv"> <!--获取手机号-->
             <input type="text" class="Independentlong-input" placeholder="填写短信验证码">
-            <div class="Independentsmall-input">短信验证码</div>
+            <div class="Independentsmall-input" @click="showAlerttoast">短信验证码</div>
         </div>
-        <div class="confirmButton">确认</div>
+        <div class="confirmButton" >确认</div>
+        <alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
 	</div>
 </template>
 <script>
+import alertTip from 'common/alertTip'
 export default {
-
+	components: {
+        alertTip,
+    },
   data() {
     return {
-
+        showAlert: false, //显示提示组件
+        alertText: '请输入正确的银行卡信息', //提示的内容
     };
   },
   methods: {
-
+        closeTip(){ //关闭alert组件
+            this.showAlert = false;
+        },
+        showAlerttoast(){ //显示
+            this.showAlert = true;
+            var _this = this;
+            setTimeout(function(){
+                _this.closeTip()
+            },2000)
+        }
   },
   mounted(){
 
