@@ -18,14 +18,19 @@ const MyCoupon = resolve => require.ensure([], () => resolve(require('./views/My
 const Feedback = resolve => require.ensure([], () => resolve(require('./views/Feedback.vue')), 'Feedback')
 const BindingBankcard = resolve => require.ensure([], () => resolve(require('./views/BindingBankcard.vue')), 'BindingBankcard')
 const AboutUs = resolve => require.ensure([], () => resolve(require('./views/AboutUs.vue')), 'AboutUs')
-
+const test = resolve => require.ensure([], () => resolve(require('./views/test.vue')), 'test')
+const newtest = resolve => require.ensure([], () => resolve(require('./views/newtest.vue')), 'newtest')
 //import test from './views/test.vue'
 
 let routes = [
-    // {
-    //     path: '/test',
-    //     component: test
-    // },
+    {
+        path: '/newtest',
+        component: newtest
+    },
+    {
+        path: '/test',
+        component: test
+    },
     {
         path: '/feedback',
         component: Feedback,
