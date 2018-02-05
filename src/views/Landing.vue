@@ -1,7 +1,7 @@
 <template>
     <div class="landing-panda firstpage" v-bind:class="{secondpage:download}">
         <!-- <img style="position:absolute;left:0px;top:0px;width:100%;height:100%;z-Index:-1; border:1px solid blue" src="包囊.png" /> -->
-        <div class="top" v-if="!download">
+        <div class="landing-top" v-if="!download">
             <!-- <img src="~@/assets/toppic.png" class="top-pic"> -->
         </div>
         <div class="middle" v-if="!download">
@@ -446,7 +446,7 @@
             height: 25%;
         }
 
-        .top{
+        .landing-top{
             height: 45%;
             //background: white;
             .top-pic{
