@@ -37,9 +37,24 @@
             </div>
         </div>
         <div class="yntwobuttom" v-if="download"></div>
-        <div class="yncopyright">
+        <div class="yncopyright"> <!--版权-->
             <div class="ynfooter">
                 Copyright © 2017 <span v-if="!iphone" class="brand-text">熊猫贷款</span><span v-if="iphone" class="brand-text">熊猫钱包</span> All Rights Reserved
+            </div>
+        </div>
+        <div class="downPanda"> <!--下载样式-->
+            <div class="downlogoText">
+                 <div class="downPandaImg"> <!--logo-->
+                <img src="~@/assets/logoAboutpic.png" alt="">
+                <div class="downText">
+                    <p>熊猫贷款</p>
+                    <p>123</p>
+                </div>
+                </div>
+            </div>
+           
+            <div class="downzip" @click="downloadApp">
+                <span>立即下载</span>
             </div>
         </div>
         <div class="yntoast-wrap">
@@ -51,7 +66,7 @@
 </template>
 
 <script>
-    import resources from "../resources";
+    import resources from "../../resources";
     export default {
         data() {
             return {
@@ -98,6 +113,9 @@
             },
             agreement(){
                 this.$router.push({ path: '/agreement' })
+            },
+            toProduct(){ //跳转产品列表页面
+                this.$router.push({ path: '/ProductList' })
             },
             getCode(){
                 //倒计时的时候不能点按钮
@@ -152,6 +170,7 @@
             },    
 
             comfirm(){
+
                 if (!this.is_click) {
                     return ;
                 }
@@ -214,6 +233,9 @@
                     },
                 }).then(res => {
                     console.log(res)
+                    this.toProduct()
+                    console.log('跳转')
+
                     this.download = true;
                 }).catch(error => {              
                     //this.lackMessage(error.response.data.statusMsg)
@@ -305,6 +327,65 @@
 </script>
 
 <style lang="scss">
+    // 底部下载样式
+    $rem:1rem/40;
+
+    .downlogoText{
+        
+    }
+
+    .downPanda{
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: auto;
+        background: rgba(255,255,255,0.7);
+        overflow: hidden
+    }
+    .downPandaImg{
+        float: left;
+        width: auto;
+        height: 100*$rem;
+        line-height: 100*$rem;
+        margin-left: 50*$rem;
+    }
+
+    .downPandaImg img{
+        width: 60px;
+        vertical-align: middle
+    }
+
+    .downText{
+        margin-left: 20px;
+        margin-top: 15px;
+        float: right;
+        width: auto;
+        height: auto;
+        line-height: 10*$rem;
+    }
+
+    .downText p {
+        line-height: 30px;
+    }
+
+    // 底部下载
+    .downzip{
+        float: right;
+        width: auto;
+        height: 100*$rem;
+        line-height: 100*$rem;
+        margin-right: 50*$rem;
+        // background: #2ba7cf;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .downzip span{
+        padding: 5px;
+        background:#2ba7cf;
+        color:#fff;
+    }
+
     .yntoast-wrap{
         opacity: 0;
         position: fixed;
