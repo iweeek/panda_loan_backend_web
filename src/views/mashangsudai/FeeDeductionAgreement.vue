@@ -1,7 +1,7 @@
 <!--  微页面  -->
 <template>
     <div class="help-page"><head>
-    <title>自动扣款协议书</title></head><body><article class="markdown-body"><h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a><center>自动扣款协议书</center></h3>
+    <title>自动扣款协议书</title></head><body><article class="markdown-body"><h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a><center>马上速贷自动扣款协议书</center></h3>
 <P><strong>重要提示：</strong></P>
 <p><strong>   1、本协议系申请人（借款人）与厦门神马财富金融技术服务有限公司（以下简称“厦门神马财富”）依据《中华人民共和国合同法》及其他相关法律、法规的规定，依据《借款合同》规定自动扣收借款人交易资金的协议，请借款人仔细阅读本协议的全部条款。</strong><br />
 <br />

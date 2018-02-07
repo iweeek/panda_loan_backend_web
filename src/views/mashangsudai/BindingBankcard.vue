@@ -8,7 +8,7 @@
         </div>
         <div class="fee">
             <span class="left-text">本人已阅读并同意与厦门神马财富金融技术服务有限公司签署</span>
-            <span class="right-text" @click="agreement()">《自动扣款协议书》</span>
+            <span class="right-text" @click="agreement()">《马上速贷自动扣款协议书》</span>
         </div>
         <div class="confirmButton" >确认</div>
         <alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
