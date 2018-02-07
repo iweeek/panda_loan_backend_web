@@ -7,26 +7,27 @@
             <img src="~@/assets/cancel.png" class="cancel" @click="hideHint()">
         </div>
 
-        <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
+        <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px'}" v-bind:class="{tophint:!tophint}">
 
             <mt-loadmore  :bottom-method="loadBottom" 
                 :bottom-all-loaded="bottomAllLoaded" 
                 ref="loadmore" @bottom-status-change="handleBottomChange"
                 :auto-fill="false">
             
-                <div v-for="product in allProduct" :key="product.id" class="product">
+                <div v-for="product in allProduct" :key="product.id" class="product" @click="skip(product.url)">
                     <div class="title">
                         <img v-bind:src="product.imgUrl" alt="" class="avatar">
                         <span class="title-word">{{product.title}}</span>
                         <span class="isNew" v-if="product.isNew"><span class="isNew-border">新上线</span></span>
-                        <span class="firstTages" v-if="product.isFirstTags"><span class="firstTages-border">{{product.firstTags}}</span></span>
+                        <span class="firstTages" v-for="(FirstTag,index) in product.firstTagArray" :key="index"><span class="firstTages-border">{{FirstTag}}</span></span>
                     </div>
 
                     <div class="main-mes">
                         <div class="left-block">
                             <span class="left-top">最高{{product.edu}}元</span>
                             <br/>
-                            <span class="left-bottom">期限2个月</span>
+                            <span class="left-bottom" v-if="product.minTerm === product.maxTerm">期限{{product.minTerm}}个月</span>
+                            <span class="left-bottom" v-if="product.minTerm != product.maxTerm">期限{{product.minTerm}}~{{product.maxTerm}}个月</span>
                         </div>
                         <div class="middle-block"></div>
                         <div class="right-block">
@@ -93,6 +94,9 @@
             }
 		},
 		methods: {
+            skip(url){
+                window.location.href = url;
+            },
             handleBottomChange(status) {
                 this.bottomStatus = status;
             },
@@ -105,6 +109,7 @@
             },
             hideHint() {
                 this.tophint = false;
+                this.wrapperHeight = this.wrapperHeight + 50;
             },
             getProduct() {
                 let params = {
@@ -126,8 +131,13 @@
                     }
                 })
                 .then(res => {
-                    console.log(res.data.data.recommendProducts)
+                    console.log(res.data.data.recommendProducts);
                     var array = res.data.data.recommendProducts;
+                    for (var i = 0; i < array.length ;i ++) {
+                        array[i].firstTagArray = array[i].firstTags.split("|");
+                        //console.log(array[i].firstTagArray)
+                    }
+                    
                     this.allProduct = this.allProduct.concat(array);
                     //this.wrapperHeight = this.wrapperHeight + 40;
                     if (array.length < this.pageSize) {
@@ -159,23 +169,12 @@
     }
 </script>
 <style lang="scss">
-    .nomore{
-        padding-top: 0.6rem;
-        height: 2rem;
-        background: #f5f5f5;
-        text-align: center;
-        .nomore-border{
-            color: #999999;
-            font-size: 0.7rem;
-        }
-        .nomore-text{
-            color: #999999;
-            padding-right: 0.2rem;
-            padding-left: 0.2rem;
-            font-size: 0.7rem;
-        }
+    .mint-loadmore-text{
+        font-size: 0.6rem;
     }
     .top{
+        position: relative;
+        float: top;
         background: #ffffff;
         height: 2.5rem;
         border-bottom: 0.5rem solid #f5f5f5;
@@ -211,6 +210,22 @@
     }
     .page-loadmore-wrapper{
         overflow: scroll;
+        .nomore{
+            padding-top: 0.6rem;
+            height: 2rem;
+            background: #f5f5f5;
+            text-align: center;
+            .nomore-border{
+                color: #999999;
+                font-size: 0.7rem;
+            }
+            .nomore-text{
+                color: #999999;
+                padding-right: 0.2rem;
+                padding-left: 0.2rem;
+                font-size: 0.7rem;
+            }
+        }
         .product{
             background: #ffffff;
             height: auto;
@@ -239,7 +254,7 @@
                     vertical-align: middle;
                     font-size: 0.4rem;
                     .isNew-border{
-                        padding: 0.07rem 0.1rem 0 0.1rem;
+                        padding: 0.05rem 0.1rem 0 0.1rem;
                         color: rgb(236, 18, 16);
                         border: 1px solid rgb(236, 18, 16);
                     }
@@ -251,7 +266,7 @@
                     vertical-align: middle;
                     font-size: 0.4rem;
                     .firstTages-border{
-                        padding: 0.07rem 0.1rem 0 0.1rem;
+                        padding: 0.05rem 0.1rem 0 0.1rem;
                         color: rgb(111, 143, 120);
                         border: 1px solid rgb(111, 143, 120);;
                     }
