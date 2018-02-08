@@ -52,12 +52,11 @@ $rem:1rem/40; //rem配置
 
 .companyDiv{
     width: 100%;
-    height: 100%;
+    height: auto;
 }
 
 .companyCount{
     width: 100%;
-    height: 92%;
     overflow: hidden;
 }
 
@@ -101,7 +100,7 @@ $rem:1rem/40; //rem配置
 }
 
 .companyFoot{
-
+    padding: 1rem 0;
 }
 
 .companyaddress{
