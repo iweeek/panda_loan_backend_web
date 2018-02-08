@@ -41,6 +41,7 @@ const YRJKCouponRule = resolve => require.ensure([], () => resolve(require('./vi
 const YRJKFeedback = resolve => require.ensure([], () => resolve(require('./views/yirenjiekuan/Feedback.vue')), 'YRJKFeedback')
 const YRJKBindingBankcard = resolve => require.ensure([], () => resolve(require('./views/yirenjiekuan/BindingBankcard.vue')), 'YRJKBindingBankcard')
 const YRJKAboutUs = resolve => require.ensure([], () => resolve(require('./views/yirenjiekuan/AboutUs.vue')), 'YRJKAboutUs')
+const YRJKFeeDeductionAgreement = resolve => require.ensure([], () => resolve(require('./views/yirenjiekuan/FeeDeductionAgreement.vue')), 'YRJKFeeDeductionAgreement')
 
 let routes = [
     {
@@ -164,6 +165,12 @@ let routes = [
         path:'/yrjkhelpCenter',
         component: YRJKHelpCenter,
         name: '帮助中心',
+        hidden: true
+    },
+    {
+        path:'/yrjkfeeDeductionAgreement',
+        component: YRJKFeeDeductionAgreement,
+        name: '自动划扣协议',
         hidden: true
     },
 
