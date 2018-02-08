@@ -6,6 +6,10 @@
             <input type="text" class="Independentlong-input" placeholder="填写短信验证码">
             <div class="Independentsmall-input" @click="showAlerttoast">短信验证码</div>
         </div>
+        <div class="fee">
+            <span class="left-text">本人已阅读并同意与平凉崆峒融兴村镇银行有限责任公司签署</span>
+            <span class="right-text" @click="agreement()">《宜人借款自动扣款协议书》</span>
+        </div>
         <div class="confirmButton" >确认</div>
         <alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
 	</div>
@@ -23,6 +27,9 @@ export default {
     };
   },
   methods: {
+        agreement(){
+            this.$router.push({ path: '/yrjkfeeDeductionAgreement' });
+        },
         closeTip(){ //关闭alert组件
             this.showAlert = false;
         },
@@ -49,6 +56,21 @@ $rem:1rem/40; //rem配置
 #app{
     padding: 0 37*$rem;
     background: #f5f5f5;
+}
+
+//协议
+.fee{
+    margin-top: 0.75rem;
+    padding: 0 1rem;
+    .left-text{
+       font-size: 0.6rem;
+       line-height: 0.8rem;
+    }
+    .right-text{
+       font-size: 0.6rem;
+       line-height: 0.8rem;
+       color: blue;
+    }
 }
 
 // 普通表单长度
@@ -99,8 +121,8 @@ $rem:1rem/40; //rem配置
 .confirmButton{
     margin-top:30*$rem;
     width: 100%;
-    height: 105*$rem;
-    line-height: 105*$rem;
+    height: 80*$rem;
+    line-height: 80*$rem;
     font-size: 40*$rem;
     overflow: hidden;
     text-align: center;
