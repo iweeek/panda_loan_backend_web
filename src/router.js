@@ -26,6 +26,7 @@ const MSSDFeedback = resolve => require.ensure([], () => resolve(require('./view
 const MSSDBindingBankcard = resolve => require.ensure([], () => resolve(require('./views/mashangsudai/BindingBankcard.vue')), 'MSSDBindingBankcard')
 const MSSDAboutUs = resolve => require.ensure([], () => resolve(require('./views/mashangsudai/AboutUs.vue')), 'MSSDAboutUs')
 const MSSDFeeDeductionAgreement = resolve => require.ensure([], () => resolve(require('./views/mashangsudai/FeeDeductionAgreement.vue')), 'MSSDFeeDeductionAgreement')
+const NewYearActivity = resolve => require.ensure([], () => resolve(require('./views/mashangsudai/NewYearActivity.vue')), 'NewYearActivity')
 
 const PAKDHelpCenter = resolve => require.ensure([], () => resolve(require('./views/pingankuaidai/HelpCenter.vue')), 'PAKDHelpCenter')
 const PAKDCoupon = resolve => require.ensure([], () => resolve(require('./views/pingankuaidai/Coupon.vue')), 'PAKDCoupon')
@@ -86,7 +87,13 @@ let routes = [
         name: '自动划扣协议',
         hidden: true
     },
-
+    {
+        path:'/nyActivity',
+        component: NewYearActivity,
+        name: '新春大礼包，立得50元减息红包',
+        hidden: true
+    },
+    
     {
         path: '/pakdfeedback',
         component: PAKDFeedback,
