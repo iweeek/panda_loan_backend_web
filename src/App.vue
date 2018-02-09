@@ -24,12 +24,6 @@ body {
 	-webkit-font-smoothing: antialiased;
 }
 
-#app {
-	position: absolute;
-	top: 0px;
-	bottom: 0px;
-	width: 100%;
-}
 
 .el-submenu [class^=fa] {
 	vertical-align: baseline;
@@ -60,6 +54,6 @@ body {
 .fade-leave-active {
 	opacity: 0;
 }
-@import './assets/styles/reset.scss';
+
 @import 'styles/main.scss';
 </style>

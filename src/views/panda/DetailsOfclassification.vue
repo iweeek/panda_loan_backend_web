@@ -1,15 +1,11 @@
 <template>
-    <div >
-            <div class="header" v-show="noHeader">
-                <Xheader v-if="showBack" :showBack="showBack" :nameText="nameText" :backone="backone"></Xheader>
-            </div>
-      <div class="page-infinite-list page-loadmore-wrapper">
-          <div class="productList-header"> <!--栏目-->
-                    <div class="productListHeader-list" @click="toClassification(index)" v-for="(item,index) in productListArrar" :key="index"> <!--单个-->
-                    <img :src="item.imgUrl" alt="">
-                    <p>{{item.title}}</p>
-                    </div>
-                </div>
+    <div>
+        <div class="header" v-show="noHeader">
+            <Xheader v-if="showBack" :showBack="showBack" :nameText="nameText" :backone="backone"></Xheader>
+        </div>
+        <div class="backgeound-img">
+                  <div class="page-loadmore-wrapper">
+        
         <div v-for="(product,index) in allProduct" :key="product.id,index" class="product" @click="demo(index)">
                 <div class="title">
                     <img v-bind:src="product.imgUrl" alt="" class="avatar">
@@ -37,13 +33,16 @@
                     </div>
                 </div>
             </div>
+            <p v-if="showBottom" class="page-infinite-loading" @click="SetProduct">
+              {{loading}}
+            </p>
+             <div class="nomore" v-if="nomore"> 
+                 <span class="nomore-border">—</span><span class="nomore-text">没有更多了哦</span><span class="nomore-border">—</span>
+            </div>
       </div>
-      <p v-if="showBottom" class="page-infinite-loading" @click="SetProduct">
-        {{loading}}
-      </p>
-      <div class="nomore" v-if="nomore"> 
-                <span class="nomore-border">—</span><span class="nomore-text">没有更多了哦</span><span class="nomore-border">—</span>
-      </div>
+        </div>
+
+ 
     </div>
 </template>
 
@@ -52,33 +51,6 @@
 <script type="text/babel">
     import resources from '../../resources'
     import Xheader from '../common/X-header'
-    const recommendProductQuery = `
-        query(
-            $productTypeId: Int
-        ) {
-            recommendProducts(
-                productTypeId: $productTypeId
-            ){
-                id
-                title
-                description
-                imgUrl
-                url
-                isNew
-                firstTags
-                secondTag
-	        } 
-    }
-    `
-    const topnavQuery = `
-        query(){	
-            topNavs(){
-                id
-                title
-                iconUrl
-            }
-        }
-    `
     const productQuery = `
         query(
             $pageNumber: Int
@@ -110,7 +82,6 @@
         },
     data() {
       return {
-        topNavs:[],
         showBottom:true,
         list: [],
         loading: true,
@@ -151,45 +122,6 @@
       };
     },
     methods: {
-        getRecommendProduct() {
-            let params = {
-                "productTypeId": 2
-            }
-            this.$ajax.post(`${resources.graphQlApi}`,{
-                'query': `${recommendProductQuery}`,
-                variables:params,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Version': '1',
-                    'User-Id': '25027',
-                    'User-Agent': '123',
-                    'Channel-Id': '14',
-                    'Device-Id': '111',
-                    'Request-Uri': 'http://192.168.123.222/graphgl/query',
-                    'Package-Name': 'com.dk.yuchendai'
-                }
-            }).then(res=>{
-                console.log(res)
-            })
-        },
-        getTopNavs() {
-            let params = { };
-            this.$ajax.post(`${resources.graphQlApi}`,{
-                'query': `${topnavQuery}`,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Version': '1',
-                    'User-Id': '25027',
-                    'User-Agent': '123',
-                    'Channel-Id': '14',
-                    'Device-Id': '111',
-                    'Request-Uri': 'http://192.168.123.222/graphgl/query',
-                    'Package-Name': 'com.dk.yuchendai'
-                }
-            }).then(res=>{
-                console.log(res)
-            })
-        },
       SetProduct(){ //添加数据 
           this.pageNumber ++;
           this.getProduct()
@@ -237,12 +169,21 @@
                     // path: '/Detailspage?url=' +  this.allProduct[index].url +  '&title=' + this.allProduct[index].title
                     path: '/DetailsOfclassification?title=' + this.productListArrar[index].title
 				});
-            }
+            },
+             getTitle(){
+                console.log(this.$route.query.title)
+                this.nameText = this.$route.query.title
+            },
+            demo(index){  //测试跳转
+                this.$router.push({
+					path: '/Detailspage?url=' +  this.allProduct[index].url +  '&title=' + this.allProduct[index].title
+				});
+            },
     },
     mounted() {
-        this.getTopNavs()
-        this.getProduct() //首次请求
-        this.getRecommendProduct()
+
+      this.getProduct() //首次请求
+      this.getTitle()
     }
     
   };
@@ -251,6 +192,15 @@
 <style lang="scss" scoped>
     $rem:1rem/40; //配置rem比例
 
+    .backgeound-img{
+        width:100%;
+        height: auto;
+        background: url("../../assets/new.png")  no-repeat;
+        background-size:100%;
+        background-color:#f6d085;
+        overflow:hidden;
+        
+    }
     .header{  //顶部header
         position: fixed;
         top: 0;
@@ -359,14 +309,17 @@
         }
     }
     .page-loadmore-wrapper{
-        margin-top: -1px;
         overflow: scroll;
-         -webkit-overflow-scrolling: touch; //ios加载缓慢
-         margin-top: 88*$rem;
+        -webkit-overflow-scrolling: touch; //ios加载缓慢
+        margin-top: 485*$rem;
         .product{
+            margin: 0 auto;
+            width:630*$rem;
             background: #ffffff;
             height: auto;
-            border-bottom: 0.25rem solid #f5f5f5;
+            border: 7*$rem  solid rgb(245, 228, 88);
+            margin-bottom: 20*$rem;
+            border-radius: 10*$rem;
             .title{
                 height: 2rem;
                 padding-left: 0.9rem;
@@ -405,7 +358,7 @@
                     .firstTages-border{
                         padding: 0.07rem 0.1rem 0 0.1rem;
                         color: rgb(111, 143, 120);
-                        border: 1px solid rgb(111, 143, 120);;
+                        border: 1px solid rgb(111, 143, 120);
                     }
                 }
             }
@@ -438,7 +391,7 @@
                     background: rgb(214, 214, 214)
                 }
                 .right-block{
-                    width: 9.4rem;
+                    width: 200*$rem;;
                     margin-left: 1rem;
                     vertical-align: top;
                     display: inline-block;
@@ -448,16 +401,15 @@
                         color: rgb(153, 153, 153);
                     }
                     .right-bottom{
-                        width: 8.8rem;
+                        width: 5rem;
+                        height: 40*$rem;
+                        word-break: break-all;
+                        text-overflow: ellipsis;
                         line-height: 0.7rem;
                         padding-top: 0.3rem;
-                        display: inline-block;
-                        // white-space:pre-wrap;
-                        // width:6rem;
-                        // overflow: hidden;
-                        // display: inline-block;
                         font-size: 0.6rem;
                         color: rgb(153, 153, 153);
+                        overflow: hidden;
                     }
                 }
                 .iconlist{
