@@ -233,9 +233,9 @@
                     },
                 }).then(res => {
                     console.log(res)
+                    sessionStorage.setItem("userId",res.data.obj1.id)
                     this.toProduct()
                     console.log('跳转')
-
                     this.download = true;
                 }).catch(error => {              
                     //this.lackMessage(error.response.data.statusMsg)
@@ -326,7 +326,7 @@
     
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     // 底部下载样式
     $rem:1rem/40;
 
@@ -357,7 +357,7 @@
 
     .downText{
         margin-left: 10px;
-        margin-top: 25px;
+        margin-top: 30px;
         float: right;
         width: auto;
         height: auto;
@@ -387,7 +387,7 @@
         vertical-align: middle;
         background:rgb(72,147,255);
         border-radius: 10*$rem;
-        margin-top: 25px;
+        margin-top: 35*$rem;
     }
 
     .downzip span{

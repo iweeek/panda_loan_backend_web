@@ -16,7 +16,7 @@ export default {
         },
   data() {
     return {
-        htmlUrl:'',
+        htmlUrl:'https://www.baidu.com',
         showAlert: false, //显示提示组件
         alertText: null, //提示的内容
         tabs: ["对我感兴趣", "看过我"], //tab数据

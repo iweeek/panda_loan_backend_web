@@ -161,6 +161,18 @@
                         this.nomore = true
                     }
                     this.allProduct = this.allProduct.concat(array);
+                    this.allProduct.forEach(item => {
+                        if (item.maxAmount > 10000) {
+                            item.edu = item.maxAmount/10000 + '万';
+                        } else {
+                            item.edu = item.maxAmount;
+                        }
+                        if (item.firstTags === '') {
+                            item.isFirstTags = false;
+                        } else {
+                            item.isFirstTags = true;
+                        }
+                    });
                 })
             },
             hideHint(){ //点击隐藏

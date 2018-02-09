@@ -5,6 +5,9 @@
         </div>
         <div class="backgeound-img" :class="{ newBackgroundimg: newBackgroundimg,appleBackgroundimg:appleBackgroundimg,kaBackgroundimg:kaBackgroundimg,jijinBack:jijinBack}">
             <div class="pageloadmorewrapper" :class="{jijinTop:jijinTop,pageloadmorewrapper:pageloadmorewrapper}">
+                <div class="lasttime">
+                    最后更新：
+                </div>
                 <div v-for="(product,index) in allProduct" :key="product.id,index"  @click="demo(index)" :class="{product:product,productthree:productthree}">
                     <div class="title">
                         <img v-bind:src="product.imgUrl" alt="" class="avatar">
@@ -31,7 +34,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="jijinBottom" v-show="liwushow">
+                <div class="jijinBottom" v-if="liwushow">
                     <img src="../../assets/bottom2.png" alt="">
                 </div>
                 <p v-if="showBottom" class="page-infinite-loading" @click="SetProduct">
@@ -168,44 +171,27 @@
                     this.loading = '点击加载'
                     console.log(res.data.data.recommendProducts)
                     var array = res.data.data.recommendProducts;
-                            this.showBottom = false
-                            this.nomore = true
+                    this.showBottom = false
+                    this.nomore = true
                     this.allProduct = this.allProduct.concat(array);
+                    this.allProduct.forEach(item => {
+                        if (item.maxAmount > 10000) {
+                            item.edu = item.maxAmount/10000 + '万';
+                        } else {
+                            item.edu = item.maxAmount;
+                        }
+                        if (item.firstTags === '') {
+                            item.isFirstTags = false;
+                        } else {
+                            item.isFirstTags = true;
+                        }
+                    });
+                    if(this.$route.query.id==2){
+                        this.liwushow = true
+                    }
+                    
                 })
             },
-       getProduct() { //请求数据
-            let params = {
-                "pageSize": this.pageSize,
-                "pageNumber": this.pageNumber
-            };
-            this.$ajax.post(`${resources.graphQlApi}`, {
-                'query': `${productQuery}`,
-                variables: params,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Version': '1',
-                    'User-Id': '25027',
-                    'User-Agent': '123',
-                    'Channel-Id': '0',
-                    'Device-Id': '111',
-                    'Request-Uri': 'http://192.168.123.222'
-                }
-            })
-            .then(res => {
-                this.loading = '点击加载'
-                console.log(res.data.data.recommendProducts)
-                var array = res.data.data.recommendProducts;
-                    if(res.data.data.recommendProducts.length<this.pageSize){
-                        this.showBottom = false
-                        this.nomore = true
-                    }else{
-                    }
-                this.allProduct = this.allProduct.concat(array);
-            })
-        },
-        hideHint(){ //点击隐藏
-            this.tophint = false
-        },
         toClassification(index){ //跳转商品分类详情
             this.$router.push({
              path: '/DetailsOfclassification?title=' + this.productListArrar[index].title
@@ -228,14 +214,13 @@
     created(){ //背景切换
         if(this.$route.query.id==1){
             this.newBackgroundimg = true
-        }else if(this.$route.query.id==2){
+        }else if(this.$route.query.id==4){
             this.appleBackgroundimg = true
         }else if(this.$route.query.id==3){
             this.productthree = true,
             this.product = false
             this.kaBackgroundimg = true
-        }else if(this.$route.query.id==4){
-            this.liwushow = true
+        }else if(this.$route.query.id==2){
             this.jijinBack = true
             this.pageloadmorewrapper = false,
             this.jijinTop = true
@@ -255,7 +240,15 @@
         background-size:100%;
         background-color:#f6d085;
         margin-top: 88*$rem;
+        position: relative;
         overflow:hidden;
+    }
+    .lasttime{
+        font-size: 38*$rem;
+        color: #fff;
+        position: absolute;
+        top:380*$rem;
+        left:280*$rem;
     }
     .appleBackgroundimg{    //苹果专区
         width:100%;
