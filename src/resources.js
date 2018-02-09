@@ -33,8 +33,10 @@ let resources = {
     },
     landingPage() {
         return `${host}\/landingPage`
+    },
+    recordUrl() {
+        return `${host}\/recordH5`
     }
-
 };
 
 export default resources;

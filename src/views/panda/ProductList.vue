@@ -10,12 +10,12 @@
                     <p>{{item.title}}</p>
                 </div>
             </div>
-            <div v-for="(product,index) in allProduct" :key="product.id,index" class="product" @click="demo(index)">
+            <div v-for="(product,index) in allProduct" :key="product.id,index" class="product" @click="getUrl(product.id)">
                 <div class="title">
                     <img v-bind:src="product.imgUrl" alt="" class="avatar">
                     <span class="title-word">{{product.title}}</span>
                     <span class="isNew" v-if="product.isNew"><span class="isNew-border">新上线</span></span>
-                    <span class="firstTages" v-if="product.isFirstTags"><span class="firstTages-border">{{product.firstTags}}</span></span>
+                    <span class="firstTages" v-for="(FirstTag,index) in product.firstTagArray" :key="index"><span class="firstTages-border">{{FirstTag}}</span></span>
                 </div>
 
                 <div class="main-mes">
@@ -127,16 +127,33 @@
                 this.pageNumber ++;
                 this.getProduct()
             },
-            demo(index){  //测试跳转
-                this.$router.push({
-                    path: '/Detailspage?url=' +  this.allProduct[index].url +  '&title=' + this.allProduct[index].title
-                });
+            getUrl(pid){
+                let url = resources.recordUrl();
+                let params = { 
+                    'userId': sessionStorage.getItem("userId"),
+                    'productId': pid,
+                }
+                var qs = require('qs');
+                this.$ajax.post(url,qs.stringify(params),{
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Version': '1',
+                        'User-Id': sessionStorage.getItem("userId"),
+                        'Channel-Id': '14',
+                        'Device-Id': '111',
+                        'Request-Uri': 'http://192.168.123.222/graphgl/query',
+                        'Package-Name': 'com.h5'
+                    },
+                }).then(res => {
+                    console.log(res.data)
+                    this.$router.push({path: '/Detailspage?url=' +  res.data});
+                })
             },
             getProduct() { //请求数据
                 let params = {
                     "pageSize": this.pageSize,
                     "pageNumber": this.pageNumber,
-                    "packageName": "com.dk.yuchendai",
+                    "packageName": "com.h5",
                     "channelId": "14"
                 };
                 this.$ajax.post(`${resources.graphQlApi}`, {
@@ -145,17 +162,20 @@
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'Version': '1',
-                        'User-Id': '25027',
-                        'User-Agent': '123',
-                        'Channel-Id': '0',
+                        'User-Id': sessionStorage.getItem("userId"),
+                        'Channel-Id': '14',
                         'Device-Id': '111',
-                        'Request-Uri': 'http://192.168.123.222'
+                        'Request-Uri': 'http://192.168.123.222/graphgl/query',
+                        'Package-Name': 'com.h5'
                     }
                 })
                 .then(res => {
-                    this.loading = '点击加载'
+                    this.loading = '加载更多'
                     console.log(res.data.data.recommendProducts)
                     var array = res.data.data.recommendProducts;
+                    for (var i = 0; i < array.length ;i ++) {
+                        array[i].firstTagArray = array[i].firstTags.split("|");
+                    }
                     if(res.data.data.recommendProducts.length<this.pageSize){
                         this.showBottom = false
                         this.nomore = true
@@ -230,9 +250,9 @@
     // 加载更多
     .page-infinite-loading{
         text-align: center;
-        height: 100px;
-        line-height: 100px;
-        font-size: 0.6rem;
+        height: 2rem;
+        line-height: 2rem;
+        font-size: 0.7rem;
         background: #f5f5f5;
         div {
             display: inline-block;

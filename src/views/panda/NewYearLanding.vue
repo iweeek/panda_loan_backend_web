@@ -170,7 +170,6 @@
             },    
 
             comfirm(){
-
                 if (!this.is_click) {
                     return ;
                 }

@@ -5,15 +5,15 @@
         </div>
         <div class="backgeound-img" :class="{ newBackgroundimg: newBackgroundimg,appleBackgroundimg:appleBackgroundimg,kaBackgroundimg:kaBackgroundimg,jijinBack:jijinBack}">
             <div class="pageloadmorewrapper" :class="{jijinTop:jijinTop,pageloadmorewrapper:pageloadmorewrapper}">
-                <div class="lasttime">
+                <div class="lasttime" v-if="this.$route.query.id==1">
                     最后更新：
                 </div>
-                <div v-for="(product,index) in allProduct" :key="product.id,index"  @click="demo(index)" :class="{product:product,productthree:productthree}">
+                <div v-for="(product,index) in allProduct" :key="product.id,index"  @click="getUrl(product.id)" :class="{product:product,productthree:productthree}">
                     <div class="title">
                         <img v-bind:src="product.imgUrl" alt="" class="avatar">
                         <span class="title-word">{{product.title}}</span>
                         <span class="isNew" v-if="product.isNew"><span class="isNew-border">新上线</span></span>
-                        <span class="firstTages" v-if="product.isFirstTags"><span class="firstTages-border">{{product.firstTags}}</span></span>
+                        <span class="firstTages" v-for="(FirstTag,index) in product.firstTagArray" :key="index"><span class="firstTages-border">{{FirstTag}}</span></span>
                     </div>
                         <div class="main-mes">
                         <div class="left-block">
@@ -114,27 +114,27 @@
         backone:true,
         jijinTop:false,
         productListArrar:[
-                    {
-                        title:'新品推荐',
-                        id:'',
-                        imgUrl:require("../../assets/new@2x.png")
-                    },
-                    {
-                        title:'苹果专区',
-                        id:'',
-                        imgUrl:require("../../assets/apple@2x.png")
-                    },
-                    {
-                        title:'用信用卡贷',
-                        id:'',
-                        imgUrl:require("../../assets/xinyong@2x.png")
-                    },
-                    {
-                        title:'用公积金贷',
-                        id:'',
-                        imgUrl:require("../../assets/gongjijin@2x.png")
-                    },
-                ],
+            {
+                title:'新品推荐',
+                id:'',
+                imgUrl:require("../../assets/new@2x.png")
+            },
+            {
+                title:'苹果专区',
+                id:'',
+                imgUrl:require("../../assets/apple@2x.png")
+            },
+            {
+                title:'用信用卡贷',
+                id:'',
+                imgUrl:require("../../assets/xinyong@2x.png")
+            },
+            {
+                title:'用公积金贷',
+                id:'',
+                imgUrl:require("../../assets/gongjijin@2x.png")
+            },
+        ],
       };
     },
     methods: {
@@ -142,15 +142,32 @@
           this.pageNumber ++;
           this.getProduct()
         },
-       demo(index){  //测试跳转
-            this.$router.push({
-                path: '/Detailspage?url=' +  this.allProduct[index].url +  '&title=' + this.allProduct[index].title
-            });
+        getUrl(pid){
+            let url = resources.recordUrl();
+            let params = { 
+                'userId': sessionStorage.getItem("userId"),
+                'productId': pid,
+            }
+            var qs = require('qs');
+            this.$ajax.post(url,qs.stringify(params),{
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Version': '1',
+                    'User-Id': sessionStorage.getItem("userId"),
+                    'Channel-Id': '14',
+                    'Device-Id': '111',
+                    'Request-Uri': 'http://192.168.123.222/graphgl/query',
+                    'Package-Name': 'com.h5'
+                },
+            }).then(res => {
+                console.log(res.data)
+                this.$router.push({path: '/Detailspage?url=' +  res.data});
+            })
         },
         getRecommendProduct() {
             let params = {
                 "productTypeId": this.$route.query.id,
-                "packageName": "com.dk.yuchendai",
+                "packageName": "com.h5",
                 "channelId": "14"
             }
             this.$ajax.post(`${resources.graphQlApi}`,{
@@ -160,17 +177,19 @@
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'Version': '1',
                     'User-Id': '25027',
-                    'User-Agent': '123',
                     'Channel-Id': '14',
                     'Device-Id': '111',
                     'Request-Uri': 'http://192.168.123.222/graphgl/query',
-                    'Package-Name': 'com.dk.yuchendai'
+                    'Package-Name': 'com.h5'
                 }
                 }).then(res => {
                     console.log(res)
                     this.loading = '点击加载'
                     console.log(res.data.data.recommendProducts)
                     var array = res.data.data.recommendProducts;
+                    for (var i = 0; i < array.length ;i ++) {
+                        array[i].firstTagArray = array[i].firstTags.split("|");
+                    }
                     this.showBottom = false
                     this.nomore = true
                     this.allProduct = this.allProduct.concat(array);
