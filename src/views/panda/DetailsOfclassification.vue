@@ -1,64 +1,66 @@
 <template>
     <div>
-        <div class="header" v-show="noHeader">
+        <div class="header" v-show="noHeader"> <!--头部信息-->
             <Xheader v-if="showBack" :showBack="showBack" :nameText="nameText" :backone="backone"></Xheader>
         </div>
-        <div class="backgeound-img">
-                  <div class="page-loadmore-wrapper">
-        
-        <div v-for="(product,index) in allProduct" :key="product.id,index" class="product" @click="demo(index)">
-                <div class="title">
-                    <img v-bind:src="product.imgUrl" alt="" class="avatar">
-                    <span class="title-word">{{product.title}}</span>
-                    <span class="isNew" v-if="product.isNew"><span class="isNew-border">新上线</span></span>
-                    <span class="firstTages" v-if="product.isFirstTags"><span class="firstTages-border">{{product.firstTags}}</span></span>
+        <div class="backgeound-img" :class="{ newBackgroundimg: newBackgroundimg,appleBackgroundimg:appleBackgroundimg,kaBackgroundimg:kaBackgroundimg,jijinBack:jijinBack}">
+            <div class="pageloadmorewrapper" :class="{jijinTop:jijinTop,pageloadmorewrapper:pageloadmorewrapper}">
+                <div v-for="(product,index) in allProduct" :key="product.id,index"  @click="demo(index)" :class="{product:product,productthree:productthree}">
+                    <div class="title">
+                        <img v-bind:src="product.imgUrl" alt="" class="avatar">
+                        <span class="title-word">{{product.title}}</span>
+                        <span class="isNew" v-if="product.isNew"><span class="isNew-border">新上线</span></span>
+                        <span class="firstTages" v-if="product.isFirstTags"><span class="firstTages-border">{{product.firstTags}}</span></span>
+                    </div>
+                        <div class="main-mes">
+                        <div class="left-block">
+                            <span class="left-top">最高{{product.edu}}元</span>
+                            <br/>
+                            <!-- 期限判断 -->
+                            <span class="left-bottom" v-if="product.minTerm == product.maxTerm">期限{{product.maxTerm}}个月</span> 
+                            <span class="left-bottom" v-else>期限{{product.minTerm}}~{{product.maxTerm}}个月</span>
+                        </div>
+                        <div class="middle-block"></div>
+                        <div class="right-block">
+                            <span class="right-top">日利率{{product.dayRate}}%起</span>
+                            <br/>
+                            <span class="right-bottom">{{product.description}}</span>
+                        </div>
+                        <div class="iconlist">
+                            <img src="~@/assets/clickicon.png" class="click-icon">
+                        </div>
+                    </div>
                 </div>
-
-                <div class="main-mes">
-                    <div class="left-block">
-                        <span class="left-top">最高{{product.edu}}元</span>
-                        <br/>
-                        <!-- 期限判断 -->
-                        <span class="left-bottom" v-if="product.minTerm == product.maxTerm">期限{{product.maxTerm}}个月</span> 
-                        <span class="left-bottom" v-else>期限{{product.minTerm}}~{{product.maxTerm}}个月</span>
-                    </div>
-                    <div class="middle-block"></div>
-                    <div class="right-block">
-                        <span class="right-top">日利率{{product.dayRate}}%起</span>
-                        <br/>
-                        <span class="right-bottom">{{product.description}}</span>
-                    </div>
-                    <div class="iconlist">
-                        <img src="~@/assets/clickicon.png" class="click-icon">
-                    </div>
+                <div class="jijinBottom" v-show="liwushow">
+                    <img src="../../assets/bottom2.png" alt="">
                 </div>
-            </div>
-            <p v-if="showBottom" class="page-infinite-loading" @click="SetProduct">
-              {{loading}}
-            </p>
-             <div class="nomore" v-if="nomore"> 
+                <p v-if="showBottom" class="page-infinite-loading" @click="SetProduct">
+                    {{loading}}
+                </p>
+                <div class="nomore" v-if="nomore"> 
                  <span class="nomore-border">—</span><span class="nomore-text">没有更多了哦</span><span class="nomore-border">—</span>
+                </div>
             </div>
-      </div>
         </div>
-
- 
     </div>
 </template>
 
 
 
 <script type="text/babel">
+
     import resources from '../../resources'
     import Xheader from '../common/X-header'
-    const productQuery = `
+    const recommendProductQuery = `
         query(
-            $pageNumber: Int
-            $pageSize: Int
+            $productTypeId: Long
+            $packageName: String
+            $channelId: Long
         ){
             recommendProducts(
-                pageNumber:$pageNumber,
-                pageSize:$pageSize
+                productTypeId: $productTypeId
+                packageName: $packageName
+                channelId: $channelId
             ){
                 id
                 title
@@ -75,7 +77,8 @@
                 maxTerm
                 minTerm
             }
-	}`
+    }`
+    
   export default {
       components: {
             Xheader
@@ -94,10 +97,20 @@
         nomore:false,
         noHeader:true,
         showBack:true,
+        liwushow:false,
+        product:true,
+        productthree:false,
+        pageloadmorewrapper:true,
+        // 切换背景
+        newBackgroundimg:false,
+        appleBackgroundimg:false,
+        kaBackgroundimg:false,
+        jijinBack:false,
         loading:'正在加载',
         nameText:'商品列表',
         backone:true,
-           productListArrar:[
+        jijinTop:false,
+        productListArrar:[
                     {
                         title:'新品推荐',
                         id:'',
@@ -122,68 +135,111 @@
       };
     },
     methods: {
-      SetProduct(){ //添加数据 
+        SetProduct(){ //添加数据 
           this.pageNumber ++;
           this.getProduct()
-      },
+        },
        demo(index){  //测试跳转
-                this.$router.push({
-					path: '/Detailspage?url=' +  this.allProduct[index].url +  '&title=' + this.allProduct[index].title
-				});
-            },
-       getProduct() { //请求数据
-                let params = {
-                    "pageSize": this.pageSize,
-                    "pageNumber": this.pageNumber
-                };
-                this.$ajax.post(`${resources.graphQlApi}`, {
-                    'query': `${productQuery}`,
-                    variables: params,
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Version': '1',
-                        'User-Id': '25027',
-                        'User-Agent': '123',
-                        'Channel-Id': '0',
-                        'Device-Id': '111',
-                        'Request-Uri': 'http://192.168.123.222'
-                    }
-                })
-                .then(res => {
+            this.$router.push({
+                path: '/Detailspage?url=' +  this.allProduct[index].url +  '&title=' + this.allProduct[index].title
+            });
+        },
+        getRecommendProduct() {
+            let params = {
+                "productTypeId": this.$route.query.id,
+                "packageName": "com.dk.yuchendai",
+                "channelId": "14"
+            }
+            this.$ajax.post(`${resources.graphQlApi}`,{
+                'query': `${recommendProductQuery}`,
+                variables:params,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Version': '1',
+                    'User-Id': '25027',
+                    'User-Agent': '123',
+                    'Channel-Id': '14',
+                    'Device-Id': '111',
+                    'Request-Uri': 'http://192.168.123.222/graphgl/query',
+                    'Package-Name': 'com.dk.yuchendai'
+                }
+                }).then(res => {
+                    console.log(res)
                     this.loading = '点击加载'
                     console.log(res.data.data.recommendProducts)
                     var array = res.data.data.recommendProducts;
-                     if(res.data.data.recommendProducts.length<this.pageSize){
-                         this.showBottom = false
-                         this.nomore = true
-                     }else{
-                     }
+                            this.showBottom = false
+                            this.nomore = true
                     this.allProduct = this.allProduct.concat(array);
                 })
             },
-            hideHint(){ //点击隐藏
-                this.tophint = false
-            },
-             toClassification(index){ //跳转商品分类详情
-                 this.$router.push({
-                    // path: '/Detailspage?url=' +  this.allProduct[index].url +  '&title=' + this.allProduct[index].title
-                    path: '/DetailsOfclassification?title=' + this.productListArrar[index].title
-				});
-            },
-             getTitle(){
-                console.log(this.$route.query.title)
-                this.nameText = this.$route.query.title
-            },
-            demo(index){  //测试跳转
-                this.$router.push({
-					path: '/Detailspage?url=' +  this.allProduct[index].url +  '&title=' + this.allProduct[index].title
-				});
-            },
+       getProduct() { //请求数据
+            let params = {
+                "pageSize": this.pageSize,
+                "pageNumber": this.pageNumber
+            };
+            this.$ajax.post(`${resources.graphQlApi}`, {
+                'query': `${productQuery}`,
+                variables: params,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Version': '1',
+                    'User-Id': '25027',
+                    'User-Agent': '123',
+                    'Channel-Id': '0',
+                    'Device-Id': '111',
+                    'Request-Uri': 'http://192.168.123.222'
+                }
+            })
+            .then(res => {
+                this.loading = '点击加载'
+                console.log(res.data.data.recommendProducts)
+                var array = res.data.data.recommendProducts;
+                    if(res.data.data.recommendProducts.length<this.pageSize){
+                        this.showBottom = false
+                        this.nomore = true
+                    }else{
+                    }
+                this.allProduct = this.allProduct.concat(array);
+            })
+        },
+        hideHint(){ //点击隐藏
+            this.tophint = false
+        },
+        toClassification(index){ //跳转商品分类详情
+            this.$router.push({
+             path: '/DetailsOfclassification?title=' + this.productListArrar[index].title
+            });
+         },
+        getTitle(){
+            console.log(this.$route.query.title)
+            this.nameText = this.$route.query.title
+        },
+        demo(index){  //测试跳转
+            this.$router.push({
+                path: '/Detailspage?url=' +  this.allProduct[index].url +  '&title=' + this.allProduct[index].title
+            });
+        }
     },
     mounted() {
-
-      this.getProduct() //首次请求
+      this.getRecommendProduct() //首次请求
       this.getTitle()
+    },
+    created(){ //背景切换
+        if(this.$route.query.id==1){
+            this.newBackgroundimg = true
+        }else if(this.$route.query.id==2){
+            this.appleBackgroundimg = true
+        }else if(this.$route.query.id==3){
+            this.productthree = true,
+            this.product = false
+            this.kaBackgroundimg = true
+        }else if(this.$route.query.id==4){
+            this.liwushow = true
+            this.jijinBack = true
+            this.pageloadmorewrapper = false,
+            this.jijinTop = true
+        }
     }
     
   };
@@ -192,15 +248,55 @@
 <style lang="scss" scoped>
     $rem:1rem/40; //配置rem比例
 
-    .backgeound-img{
+    .newBackgroundimg{ //新品推荐
         width:100%;
         height: auto;
         background: url("../../assets/new.png")  no-repeat;
         background-size:100%;
         background-color:#f6d085;
+        margin-top: 88*$rem;
         overflow:hidden;
-        
     }
+    .appleBackgroundimg{    //苹果专区
+        width:100%;
+        height: auto;
+        background: url("../../assets/appleBack.png")  no-repeat;
+        background-size:100%;
+        background-color:#3b8dfb;
+        margin-top: 88*$rem;
+        overflow:hidden;
+    }
+    .kaBackgroundimg{    //信用卡
+        width:100%;
+        height: auto;
+        background: url("../../assets/xinyongka.png")  no-repeat;
+        background-size:100%;
+        background-color:#3d4ca9;
+        margin-top: 88*$rem;
+        overflow:hidden;
+    }
+    .jijinBack{ //基金
+        width:100%;
+        height: auto;
+        background: url("../../assets/jiben.png")  no-repeat;
+        background-size:100%;
+        background-color:#fb264a;
+        margin-top: 50*$rem;
+        overflow:hidden;
+    }
+    .jijinBottom{ //基金底部
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+    }
+    .jijinBottom img{
+        display: block;
+        width: 100%;
+    }
+    .jijinTop{
+        margin-top: 666*$rem !important;
+    }
+
     .header{  //顶部header
         position: fixed;
         top: 0;
@@ -308,7 +404,11 @@
             //padding-top: 0.1rem;
         }
     }
-    .page-loadmore-wrapper{
+
+    .productthree{
+         border: 7*$rem  solid #005edd !important;
+    }
+    .pageloadmorewrapper{
         overflow: scroll;
         -webkit-overflow-scrolling: touch; //ios加载缓慢
         margin-top: 485*$rem;
@@ -423,5 +523,6 @@
             }
         }
     }
+
     
 </style>

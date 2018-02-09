@@ -4,8 +4,8 @@
 			<div class="back" v-if="backSs">
 				<img src="../../assets/ll_btn_back_pressed.png" alt="" />
 			</div>
-			<div class="back" v-if="backSss">
-				<img src="../../assets/ll_btn_back_pressed.png" alt="" />
+			<div class="back" v-if="backSss" @click="goBack">
+				<img src="../../assets/backto.png" alt="" />
 			</div>
 			<h3>{{nameText}}</h3>
 			<!-- <h2>{{backone}}</h2> -->
@@ -27,6 +27,9 @@
 		methods: {
 			handleclick() { //提交公司名称函数
 				alert("测试")
+			},
+			goBack(){
+				this.$router.go(-1);
 			}
 		}
 	}
@@ -35,8 +38,8 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 
-	// @import 'src/style/mixin';
-      $rem:1rem/40;
+    $rem:1rem/40;
+
 	.componey{
 		width:100%;
 		height: 88*$rem;
@@ -47,12 +50,13 @@
 	.componey .back{
 		width: auto;
 		height:88*$rem;
-		line-height: 95*$rem;
+		line-height: 88*$rem;
 		position:absolute;
-		left: 0;
+		left: 24*$rem;
 	}
 	.componey .back img{
-		width: 100%;
+		width: 19*$rem;
+		height: 36*$rem;
 		vertical-align:middle;
 	}
 	.componey h3{

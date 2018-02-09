@@ -345,19 +345,19 @@
     .downPandaImg{
         float: left;
         width: auto;
-        height: 100*$rem;
-        line-height: 100*$rem;
-        margin-left: 50*$rem;
+        height: 120*$rem;
+        line-height: 120*$rem;
+        margin-left: 42*$rem;
     }
 
     .downPandaImg img{
-        width: 60px;
+        width: 77px;
         vertical-align: middle
     }
 
     .downText{
-        margin-left: 20px;
-        margin-top: 15px;
+        margin-left: 10px;
+        margin-top: 25px;
         float: right;
         width: auto;
         height: auto;
@@ -365,24 +365,34 @@
     }
 
     .downText p {
-        line-height: 30px;
+        font-size:24*$rem;
+        color:rgb(51,51,51);
+        line-height:30px;
+    }
+
+    .downText p:last-child{
+        font-size:18*$rem;
+        color:rgb(51,51,51);
+        line-height:30px;
     }
 
     // 底部下载
     .downzip{
         float: right;
-        width: auto;
-        height: 100*$rem;
-        line-height: 100*$rem;
-        margin-right: 50*$rem;
-        // background: #2ba7cf;
+        width: 165*$rem;
+        height: 50*$rem;
+        line-height: 50*$rem;
+        margin-right: 42*$rem;
         text-align: center;
         vertical-align: middle;
+        background:rgb(72,147,255);
+        border-radius: 10*$rem;
+        margin-top: 25px;
     }
 
     .downzip span{
         padding: 5px;
-        background:#2ba7cf;
+      
         color:#fff;
     }
 

@@ -52,41 +52,20 @@
 <script type="text/babel">
     import resources from '../../resources'
     import Xheader from '../common/X-header'
-    const recommendProductQuery = `
-        query(
-            $productTypeId: Int
-        ) {
-            recommendProducts(
-                productTypeId: $productTypeId
-            ){
-                id
-                title
-                description
-                imgUrl
-                url
-                isNew
-                firstTags
-                secondTag
-	        } 
-    }
-    `
-    const topnavQuery = `
-        query(){	
-            topNavs(){
-                id
-                title
-                iconUrl
-            }
-        }
-    `
+    
+   
     const productQuery = `
         query(
             $pageNumber: Int
             $pageSize: Int
+            $packageName: String
+            $channelId: Long
         ){
             recommendProducts(
-                pageNumber:$pageNumber,
+                pageNumber:$pageNumber
                 pageSize:$pageSize
+                packageName: $packageName
+                channelId: $channelId
             ){
                 id
                 title
@@ -129,67 +108,29 @@
            productListArrar:[
                     {
                         title:'新品推荐',
-                        id:'',
+                        id:'1',
                         imgUrl:require("../../assets/new@2x.png")
                     },
                     {
                         title:'苹果专区',
-                        id:'',
+                        id:'2',
                         imgUrl:require("../../assets/apple@2x.png")
                     },
                     {
                         title:'用信用卡贷',
-                        id:'',
+                        id:'3',
                         imgUrl:require("../../assets/xinyong@2x.png")
                     },
                     {
                         title:'用公积金贷',
-                        id:'',
+                        id:'4',
                         imgUrl:require("../../assets/gongjijin@2x.png")
                     },
                 ],
       };
     },
     methods: {
-        getRecommendProduct() {
-            let params = {
-                "productTypeId": 2
-            }
-            this.$ajax.post(`${resources.graphQlApi}`,{
-                'query': `${recommendProductQuery}`,
-                variables:params,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Version': '1',
-                    'User-Id': '25027',
-                    'User-Agent': '123',
-                    'Channel-Id': '14',
-                    'Device-Id': '111',
-                    'Request-Uri': 'http://192.168.123.222/graphgl/query',
-                    'Package-Name': 'com.dk.yuchendai'
-                }
-            }).then(res=>{
-                console.log(res)
-            })
-        },
-        getTopNavs() {
-            let params = { };
-            this.$ajax.post(`${resources.graphQlApi}`,{
-                'query': `${topnavQuery}`,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Version': '1',
-                    'User-Id': '25027',
-                    'User-Agent': '123',
-                    'Channel-Id': '14',
-                    'Device-Id': '111',
-                    'Request-Uri': 'http://192.168.123.222/graphgl/query',
-                    'Package-Name': 'com.dk.yuchendai'
-                }
-            }).then(res=>{
-                console.log(res)
-            })
-        },
+       
       SetProduct(){ //添加数据 
           this.pageNumber ++;
           this.getProduct()
@@ -202,7 +143,9 @@
        getProduct() { //请求数据
                 let params = {
                     "pageSize": this.pageSize,
-                    "pageNumber": this.pageNumber
+                    "pageNumber": this.pageNumber,
+                    "packageName": "com.dk.yuchendai",
+                    "channelId": "14"
                 };
                 this.$ajax.post(`${resources.graphQlApi}`, {
                     'query': `${productQuery}`,
@@ -235,14 +178,12 @@
              toClassification(index){ //跳转商品分类详情
                  this.$router.push({
                     // path: '/Detailspage?url=' +  this.allProduct[index].url +  '&title=' + this.allProduct[index].title
-                    path: '/DetailsOfclassification?title=' + this.productListArrar[index].title
+                    path: '/DetailsOfclassification?title=' + this.productListArrar[index].title  + '&id=' + this.productListArrar[index].id
 				});
             }
     },
     mounted() {
-        this.getTopNavs()
         this.getProduct() //首次请求
-        this.getRecommendProduct()
     }
     
   };
