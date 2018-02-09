@@ -2,6 +2,7 @@
 	<div style="height:32rem">
         <Xheader v-if="showBack" :showBack="showBack" :nameText="title" :backone="backone"></Xheader>
         <iframe ref="iframe" :src="htmlUrl" width="100%" height="100%"></iframe>
+        <div>{{htmlUrl}}</div>
 	</div>
 </template>
 <script>
@@ -23,6 +24,14 @@ export default {
             backone:true,
             title:''
         };
+    },
+    watch: {
+        htmlUrl: function (newUrl,oldUrl) {
+            alert(newUrl)
+            if (newUrl.indexOf("itunes") != -1) {
+                window.location = newUrl;
+            }
+        },
     },
     methods: {
         getUrl(){
