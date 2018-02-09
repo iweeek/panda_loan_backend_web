@@ -46,14 +46,9 @@
         </div>
     </div>
 </template>
-
-
-
 <script type="text/babel">
     import resources from '../../resources'
     import Xheader from '../common/X-header'
-    
-   
     const productQuery = `
         query(
             $pageNumber: Int
@@ -83,110 +78,108 @@
                 minTerm
             }
 	}`
-  export default {
-      components: {
+    export default {
+        components: {
             Xheader
         },
-    data() {
-      return {
-        topNavs:[],
-        showBottom:true,
-        list: [],
-        loading: true,
-        allLoaded: false,//这个
-        wrapperHeight: 0,
-        allProduct: [],
-        pageSize: 6,
-        pageNumber: 1,
-        tophint:true,
-        nomore:false,
-        noHeader:true,
-        showBack:true,
-        loading:'正在加载',
-        nameText:'商品列表',
-        backone:true,
-        productListArrar:[{
-            title:'新品推荐',
-            id:'1',
-            imgUrl:require("../../assets/new@2x.png")
-        },
-        {
-            title:'苹果专区',
-            id:'4',
-            imgUrl:require("../../assets/apple@2x.png")
-        },
-        {
-            title:'用信用卡贷',
-            id:'3',
-            imgUrl:require("../../assets/xinyong@2x.png")
-        },
-        {
-            title:'用公积金贷',
-            id:'2',
-            imgUrl:require("../../assets/gongjijin@2x.png")
-        }],
-      };
-    },
-    methods: {
-        SetProduct(){ //添加数据 
-            this.pageNumber ++;
-            this.getProduct()
-        },
-        demo(index){  //测试跳转
-            this.$router.push({
-                path: '/Detailspage?url=' +  this.allProduct[index].url +  '&title=' + this.allProduct[index].title
-            });
-        },
-        getProduct() { //请求数据
-            let params = {
-                "pageSize": this.pageSize,
-                "pageNumber": this.pageNumber,
-                "packageName": "com.dk.yuchendai",
-                "channelId": "14"
+        data() {
+            return {
+                topNavs:[],
+                showBottom:true,
+                list: [],
+                loading: true,
+                allLoaded: false,//这个
+                wrapperHeight: 0,
+                allProduct: [],
+                pageSize: 6,
+                pageNumber: 1,
+                tophint:true,
+                nomore:false,
+                noHeader:true,
+                showBack:true,
+                loading:'正在加载',
+                nameText:'商品列表',
+                backone:true,
+                productListArrar:[{
+                    title:'新品推荐',
+                    id:'1',
+                    imgUrl:require("../../assets/new@2x.png")
+                },
+                {
+                    title:'苹果专区',
+                    id:'4',
+                    imgUrl:require("../../assets/apple@2x.png")
+                },
+                {
+                    title:'用信用卡贷',
+                    id:'3',
+                    imgUrl:require("../../assets/xinyong@2x.png")
+                },
+                {
+                    title:'用公积金贷',
+                    id:'2',
+                    imgUrl:require("../../assets/gongjijin@2x.png")
+                }],
             };
-            this.$ajax.post(`${resources.graphQlApi}`, {
-                'query': `${productQuery}`,
-                variables: params,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Version': '1',
-                    'User-Id': '25027',
-                    'User-Agent': '123',
-                    'Channel-Id': '0',
-                    'Device-Id': '111',
-                    'Request-Uri': 'http://192.168.123.222'
-                }
-            })
-            .then(res => {
-                this.loading = '点击加载'
-                console.log(res.data.data.recommendProducts)
-                var array = res.data.data.recommendProducts;
-                if(res.data.data.recommendProducts.length<this.pageSize){
-                    this.showBottom = false
-                    this.nomore = true
-                }
-                this.allProduct = this.allProduct.concat(array);
-            })
         },
-        hideHint(){ //点击隐藏
-            this.tophint = false
+        methods: {
+            SetProduct(){ //添加数据 
+                this.pageNumber ++;
+                this.getProduct()
+            },
+            demo(index){  //测试跳转
+                this.$router.push({
+                    path: '/Detailspage?url=' +  this.allProduct[index].url +  '&title=' + this.allProduct[index].title
+                });
+            },
+            getProduct() { //请求数据
+                let params = {
+                    "pageSize": this.pageSize,
+                    "pageNumber": this.pageNumber,
+                    "packageName": "com.dk.yuchendai",
+                    "channelId": "14"
+                };
+                this.$ajax.post(`${resources.graphQlApi}`, {
+                    'query': `${productQuery}`,
+                    variables: params,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Version': '1',
+                        'User-Id': '25027',
+                        'User-Agent': '123',
+                        'Channel-Id': '0',
+                        'Device-Id': '111',
+                        'Request-Uri': 'http://192.168.123.222'
+                    }
+                })
+                .then(res => {
+                    this.loading = '点击加载'
+                    console.log(res.data.data.recommendProducts)
+                    var array = res.data.data.recommendProducts;
+                    if(res.data.data.recommendProducts.length<this.pageSize){
+                        this.showBottom = false
+                        this.nomore = true
+                    }
+                    this.allProduct = this.allProduct.concat(array);
+                })
+            },
+            hideHint(){ //点击隐藏
+                this.tophint = false
+            },
+            toClassification(index){ //跳转商品分类详情
+                this.$router.push({
+                path: '/DetailsOfclassification?title=' + this.productListArrar[index].title  + '&id=' + this.productListArrar[index].id
+                });
+            }
         },
-        toClassification(index){ //跳转商品分类详情
-            this.$router.push({
-               path: '/DetailsOfclassification?title=' + this.productListArrar[index].title  + '&id=' + this.productListArrar[index].id
-            });
+        mounted() {
+            this.getProduct() //首次请求
         }
-    },
-    mounted() {
-        this.getProduct() //首次请求
-    }
-    
-  };
+    };
 </script>
 
 <style lang="scss" scoped>
     $rem:1rem/40; //配置rem比例
-
     .header{  //顶部header
         position: fixed;
         top: 0;
@@ -197,7 +190,6 @@
         border-bottom: 1*$rem  solid #ececef;
         overflow: hidden;
     }
-
     .productList-header{ //头部滑动菜单
         width: 100%;
         height: 200*$rem;
