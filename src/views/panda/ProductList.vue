@@ -1,16 +1,16 @@
 <template>
     <div >
-            <div class="header" v-show="noHeader">
-                <Xheader v-if="showBack" :showBack="showBack" :nameText="nameText" :backone="backone"></Xheader>
-            </div>
-      <div class="page-infinite-list page-loadmore-wrapper">
-          <div class="productList-header"> <!--栏目-->
-                    <div class="productListHeader-list" @click="toClassification(index)" v-for="(item,index) in productListArrar" :key="index"> <!--单个-->
+        <div class="header" v-show="noHeader">
+            <Xheader v-if="showBack" :showBack="showBack" :nameText="nameText" :backone="backone"></Xheader>
+        </div>
+        <div class="page-infinite-list page-loadmore-wrapper">
+            <div class="productList-header"> <!--栏目-->
+                <div class="productListHeader-list" @click="toClassification(index)" v-for="(item,index) in productListArrar" :key="index"> <!--单个-->
                     <img :src="item.imgUrl" alt="">
                     <p>{{item.title}}</p>
-                    </div>
                 </div>
-        <div v-for="(product,index) in allProduct" :key="product.id,index" class="product" @click="demo(index)">
+            </div>
+            <div v-for="(product,index) in allProduct" :key="product.id,index" class="product" @click="demo(index)">
                 <div class="title">
                     <img v-bind:src="product.imgUrl" alt="" class="avatar">
                     <span class="title-word">{{product.title}}</span>
@@ -22,7 +22,7 @@
                     <div class="left-block">
                         <span class="left-top">最高{{product.edu}}元</span>
                         <br/>
-                        <!-- 期限判断 -->
+                            <!-- 期限判断 -->
                         <span class="left-bottom" v-if="product.minTerm == product.maxTerm">期限{{product.maxTerm}}个月</span> 
                         <span class="left-bottom" v-else>期限{{product.minTerm}}~{{product.maxTerm}}个月</span>
                     </div>
@@ -37,13 +37,13 @@
                     </div>
                 </div>
             </div>
-      </div>
-      <p v-if="showBottom" class="page-infinite-loading" @click="SetProduct">
-        {{loading}}
-      </p>
-      <div class="nomore" v-if="nomore"> 
-                <span class="nomore-border">—</span><span class="nomore-text">没有更多了哦</span><span class="nomore-border">—</span>
-      </div>
+        </div>
+        <p v-if="showBottom" class="page-infinite-loading" @click="SetProduct">
+            {{loading}}
+        </p>
+        <div class="nomore" v-if="nomore"> 
+            <span class="nomore-border">—</span><span class="nomore-text">没有更多了哦</span><span class="nomore-border">—</span>
+        </div>
     </div>
 </template>
 
@@ -105,82 +105,77 @@
         loading:'正在加载',
         nameText:'商品列表',
         backone:true,
-           productListArrar:[
-                    {
-                        title:'新品推荐',
-                        id:'1',
-                        imgUrl:require("../../assets/new@2x.png")
-                    },
-                    {
-                        title:'苹果专区',
-                        id:'2',
-                        imgUrl:require("../../assets/apple@2x.png")
-                    },
-                    {
-                        title:'用信用卡贷',
-                        id:'3',
-                        imgUrl:require("../../assets/xinyong@2x.png")
-                    },
-                    {
-                        title:'用公积金贷',
-                        id:'4',
-                        imgUrl:require("../../assets/gongjijin@2x.png")
-                    },
-                ],
+        productListArrar:[{
+            title:'新品推荐',
+            id:'1',
+            imgUrl:require("../../assets/new@2x.png")
+        },
+        {
+            title:'苹果专区',
+            id:'4',
+            imgUrl:require("../../assets/apple@2x.png")
+        },
+        {
+            title:'用信用卡贷',
+            id:'3',
+            imgUrl:require("../../assets/xinyong@2x.png")
+        },
+        {
+            title:'用公积金贷',
+            id:'2',
+            imgUrl:require("../../assets/gongjijin@2x.png")
+        }],
       };
     },
     methods: {
-       
-      SetProduct(){ //添加数据 
-          this.pageNumber ++;
-          this.getProduct()
-      },
-       demo(index){  //测试跳转
-                this.$router.push({
-					path: '/Detailspage?url=' +  this.allProduct[index].url +  '&title=' + this.allProduct[index].title
-				});
-            },
-       getProduct() { //请求数据
-                let params = {
-                    "pageSize": this.pageSize,
-                    "pageNumber": this.pageNumber,
-                    "packageName": "com.dk.yuchendai",
-                    "channelId": "14"
-                };
-                this.$ajax.post(`${resources.graphQlApi}`, {
-                    'query': `${productQuery}`,
-                    variables: params,
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Version': '1',
-                        'User-Id': '25027',
-                        'User-Agent': '123',
-                        'Channel-Id': '0',
-                        'Device-Id': '111',
-                        'Request-Uri': 'http://192.168.123.222'
-                    }
-                })
-                .then(res => {
-                    this.loading = '点击加载'
-                    console.log(res.data.data.recommendProducts)
-                    var array = res.data.data.recommendProducts;
-                     if(res.data.data.recommendProducts.length<this.pageSize){
-                         this.showBottom = false
-                         this.nomore = true
-                     }else{
-                     }
-                    this.allProduct = this.allProduct.concat(array);
-                })
-            },
-            hideHint(){ //点击隐藏
-                this.tophint = false
-            },
-             toClassification(index){ //跳转商品分类详情
-                 this.$router.push({
-                    // path: '/Detailspage?url=' +  this.allProduct[index].url +  '&title=' + this.allProduct[index].title
-                    path: '/DetailsOfclassification?title=' + this.productListArrar[index].title  + '&id=' + this.productListArrar[index].id
-				});
-            }
+        SetProduct(){ //添加数据 
+            this.pageNumber ++;
+            this.getProduct()
+        },
+        demo(index){  //测试跳转
+            this.$router.push({
+                path: '/Detailspage?url=' +  this.allProduct[index].url +  '&title=' + this.allProduct[index].title
+            });
+        },
+        getProduct() { //请求数据
+            let params = {
+                "pageSize": this.pageSize,
+                "pageNumber": this.pageNumber,
+                "packageName": "com.dk.yuchendai",
+                "channelId": "14"
+            };
+            this.$ajax.post(`${resources.graphQlApi}`, {
+                'query': `${productQuery}`,
+                variables: params,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Version': '1',
+                    'User-Id': '25027',
+                    'User-Agent': '123',
+                    'Channel-Id': '0',
+                    'Device-Id': '111',
+                    'Request-Uri': 'http://192.168.123.222'
+                }
+            })
+            .then(res => {
+                this.loading = '点击加载'
+                console.log(res.data.data.recommendProducts)
+                var array = res.data.data.recommendProducts;
+                if(res.data.data.recommendProducts.length<this.pageSize){
+                    this.showBottom = false
+                    this.nomore = true
+                }
+                this.allProduct = this.allProduct.concat(array);
+            })
+        },
+        hideHint(){ //点击隐藏
+            this.tophint = false
+        },
+        toClassification(index){ //跳转商品分类详情
+            this.$router.push({
+               path: '/DetailsOfclassification?title=' + this.productListArrar[index].title  + '&id=' + this.productListArrar[index].id
+            });
+        }
     },
     mounted() {
         this.getProduct() //首次请求
@@ -236,9 +231,9 @@
         font-size: 0.6rem;
         background: #f5f5f5;
         div {
-          display: inline-block;
-          vertical-align: middle;
-          margin-right: 5px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 5px;
         }
     }
 
