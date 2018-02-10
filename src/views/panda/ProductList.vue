@@ -36,9 +36,9 @@
                         <img src="~@/assets/clickicon.png" class="click-icon">
                     </div>
                 </div>
-                
+
             </div>
-               
+
         </div>
          <div class="nomore" v-if="nomore">
                     <span class="nomore-border">—</span><span class="nomore-text">没有更多了哦</span><span class="nomore-border">—</span>
@@ -127,7 +127,7 @@
             };
         },
         methods: {
-            SetProduct(){ //添加数据 
+            SetProduct(){ //添加数据
                 var _this = this
                 _this.loadingIf = true
                 setTimeout(function(){
@@ -154,7 +154,7 @@
                         'User-Id': sessionStorage.getItem("userId"),
                         'Channel-Id': '14',
                         'Device-Id': '111',
-                        'Request-Uri': 'http://192.168.123.222/graphgl/query',
+                        'Request-Uri': this.allProduct[index].url,
                         'Package-Name': 'com.h5'
                     },
                 }).then(res => {
@@ -180,12 +180,10 @@
                         'User-Id': sessionStorage.getItem("userId"),
                         'Channel-Id': '14',
                         'Device-Id': '111',
-                        'Request-Uri': 'http://192.168.123.222/graphgl/query',
+                        'Request-Uri': 'https://api.pinganzhiyuan.com/panda_loan/graphql/query',
                         'Package-Name': 'com.h5'
                     }
-                })
-
-                .then(res => {
+                }).then(res => {
                     this.loadingIf = false
                     this.loading = '加载更多'
                     console.log(res.data.data.recommendProducts)
