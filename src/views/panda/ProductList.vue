@@ -38,10 +38,11 @@
                 </div>
                 
             </div>
-                <div class="nomore" v-if="nomore">
+               
+        </div>
+         <div class="nomore" v-if="nomore">
                     <span class="nomore-border">—</span><span class="nomore-text">没有更多了哦</span><span class="nomore-border">—</span>
                 </div>
-        </div>
         <p v-if="showBottom" class="page-infinite-loading" @click="SetProduct">
             <img src="~@/assets/loading.gif" alt="" v-if="loadingIf">{{loading}}
         </p>
@@ -158,8 +159,8 @@
                     },
                 }).then(res => {
                     console.log(res.data)
-                  
-                    this.$router.push({path: '/Detailspage?url=' +  res.data + '&title=' +   this.allProduct[index].title});
+                    window.location.href = res.data
+                    // this.$router.push({path: '/Detailspage?url=' +  res.data + '&title=' +   this.allProduct[index].title});
                 })
             },
             getProduct() { //请求数据
@@ -327,14 +328,14 @@
     .nomore{
         padding-top: 0.6rem;
         height: 2rem;
-        background: red;
+        background: #f5f5f5;
         text-align: center;
         .nomore-border{
-            color: #fff;
+            color: #999;
             font-size: 0.7rem;
         }
         .nomore-text{
-            color: #fff;
+            color: #999;
             padding-right: 0.2rem;
             padding-left: 0.2rem;
             font-size: 0.7rem;

@@ -163,8 +163,8 @@
                 },
             }).then(res => {
                 console.log(res.data)
-                this.$router.push({path: '/Detailspage?url=' +  res.data + '&title=' +   this.allProduct[index].title});
-                // this.$router.push({path: '/Detailspage?url=' +  res.data});
+                window.location.href = res.data //新标签页
+                // this.$router.push({path: '/Detailspage?url=' +  res.data + '&title=' +   this.allProduct[index].title}); 本vue
             })
         },
         getRecommendProduct() {
