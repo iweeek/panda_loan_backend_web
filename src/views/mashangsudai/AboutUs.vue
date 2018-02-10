@@ -3,7 +3,7 @@
         <div class="companyDiv">
             <div class="companyCount">
                 <div class="companyLogo"> <!--logo文字-->
-                    <img src="~@/assets/pakdlogo.png" alt="">
+                    <img src="~@/assets/mssdlogo.png" alt="">
                     <div class="companyName">
                         马上速贷
                     </div>
