@@ -12,17 +12,17 @@
             <img src="~@/assets/nocoupon.png" class="nocoupon">
             <div class="center-text">您没有可使用的优惠券</div>
         </div>
-        <div class="center" v-if="used">
-            <img src="~@/assets/nocoupon.png" class="nocoupon">
-            <div class="center-text">您没有已使用的优惠券</div>
-        </div>
-        <div class="coupon-top" v-if="expired">
+        <div class="coupon-top" v-if="used">
             <div class="discount">9.8折</div>
             <!-- <img src="~@/assets/coupon.png" class="coupon"> -->
             <div class="validity">
-                <div class="validity-top">有效期至：2017.8.8-2017.8.20</div>
+                <div class="validity-top">有效期至：2017.8.8-2018.2.10</div>
                 <div class="validity-bottom">借款金额满3000元可用,最高抵扣9元</div>
             </div>
+        </div>
+        <div class="center" v-if="expired">
+            <img src="~@/assets/nocoupon.png" class="nocoupon">
+            <div class="center-text">您没有已过期的优惠券</div>
         </div>
     </div>
 </template>
@@ -56,7 +56,7 @@
 </script>
 <style lang="scss" scoped>
     .click{
-        color: rgb(254, 201, 70);
+        color: #2ea0fe;
     }
     .copon{
         height: 100%;
@@ -64,7 +64,7 @@
         background-color: #f5f5f5;
         .coupon-top{
             height: 7.5rem;
-            background: url(~@/assets/coupon.png) no-repeat scroll;
+            background: url(~@/assets/mssdcoupon.png) no-repeat scroll;
             background-size: 95%;
             background-position-x: 0.5rem;
             margin-top: 0.5rem;
@@ -121,12 +121,12 @@
         .hint-top{
             //width: 100%;
             height:1.5rem;
-            background-color: rgb(255, 251, 214);
+            background-color: #d6ecff;
             .hint-text{
                 display: inline-block;
                 line-height: 1.5rem;
                 font-size: 0.65rem;
-                color: rgb(255, 209, 95);
+                color: #64b9ff;
                 text-align: center;
                 width: 100%;
             }
