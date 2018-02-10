@@ -45,10 +45,10 @@
         <div class="downPanda"> <!--下载样式-->
             <div class="downlogoText">
                  <div class="downPandaImg"> <!--logo-->
-                <img src="~@/assets/logoAboutpic.png" alt="">
+                <img src="~@/assets/pandaLogo.png" alt="">
                 <div class="downText">
-                    <p>熊猫贷款</p>
-                    <p>123</p>
+                    <p>熊猫钱包</p>
+                    <p>好信用，不逾期</p>
                 </div>
                 </div>
             </div>
@@ -338,7 +338,7 @@
         bottom: 0;
         width: 100%;
         height: auto;
-        background: rgba(255,255,255,0.7);
+        background: rgba(255,255,255,0.85);
         overflow: hidden
     }
     .downPandaImg{
@@ -391,7 +391,7 @@
 
     .downzip span{
         padding: 5px;
-      
+        font-size: 32*$rem;
         color:#fff;
     }
 
