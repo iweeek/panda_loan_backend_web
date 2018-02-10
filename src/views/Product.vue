@@ -168,7 +168,7 @@
 		}
     }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     .mint-loadmore-text{
         font-size: 0.6rem;
     }
