@@ -154,7 +154,7 @@
                         'User-Id': sessionStorage.getItem("userId"),
                         'Channel-Id': '14',
                         'Device-Id': '111',
-                        'Request-Uri': 'http://192.168.123.222/graphgl/query',
+                        'Request-Uri': this.allProduct[index].url,
                         'Package-Name': 'com.h5'
                     },
                 }).then(res => {
@@ -183,9 +183,7 @@
                         'Request-Uri': 'http://192.168.123.222/graphgl/query',
                         'Package-Name': 'com.h5'
                     }
-                })
-
-                .then(res => {
+                }).then(res => {
                     this.loadingIf = false
                     this.loading = '加载更多'
                     console.log(res.data.data.recommendProducts)

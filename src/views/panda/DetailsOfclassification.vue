@@ -158,7 +158,7 @@
                     'User-Id': sessionStorage.getItem("userId"),
                     'Channel-Id': '14',
                     'Device-Id': '111',
-                    'Request-Uri': 'http://192.168.123.222/graphgl/query',
+                    'Request-Uri': this.allProduct[index].url,
                     'Package-Name': 'com.h5'
                 },
             }).then(res => {
@@ -179,7 +179,7 @@
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'Version': '1',
-                    'User-Id': '25027',
+                    'User-Id': sessionStorage.getItem("userId"),
                     'Channel-Id': '14',
                     'Device-Id': '111',
                     'Request-Uri': 'http://192.168.123.222/graphgl/query',
