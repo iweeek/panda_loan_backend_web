@@ -44,8 +44,13 @@ const YRJKBindingBankcard = resolve => require.ensure([], () => resolve(require(
 const YRJKAboutUs = resolve => require.ensure([], () => resolve(require('./views/yirenjiekuan/AboutUs.vue')), 'YRJKAboutUs')
 const YRJKFeeDeductionAgreement = resolve => require.ensure([], () => resolve(require('./views/yirenjiekuan/FeeDeductionAgreement.vue')), 'YRJKFeeDeductionAgreement')
 
-let routes = [
-    {
+// 熊猫贷款
+const yearLanding = resolve => require.ensure([], () => resolve(require('./views/panda/yearLanding.vue')), 'yearLanding') //熊猫贷款登录页面
+const ProductList = resolve => require.ensure([], () => resolve(require('./views/panda/ProductList.vue')), 'ProductList') //熊猫贷款产品页面
+const Detailspage = resolve => require.ensure([], () => resolve(require('./views/panda/Detailspage.vue')), 'Detailspage') //熊猫贷款第三方页面
+const DetailsOfclassification = resolve => require.ensure([], () => resolve(require('./views/panda/DetailsOfclassification.vue')), 'DetailsOfclassification') //熊猫贷款产品分类页面
+
+let routes = [{
         path: '/MSSDfeedback',
         component: MSSDFeedback,
         name: '意见反馈',
@@ -70,30 +75,30 @@ let routes = [
         hidden: true
     },
     {
-        path:'/MSSDcoupon',
+        path: '/MSSDcoupon',
         component: MSSDCoupon,
         name: '我的优惠券',
         hidden: true
     },
     {
-        path:'/MSSDhelpCenter',
+        path: '/MSSDhelpCenter',
         component: MSSDHelpCenter,
         name: '帮助中心',
         hidden: true
     },
     {
-        path:'/mssdfeeDeductionAgreement',
+        path: '/mssdfeeDeductionAgreement',
         component: MSSDFeeDeductionAgreement,
         name: '自动划扣协议',
         hidden: true
     },
     {
-        path:'/nyActivity',
+        path: '/nyActivity',
         component: NewYearActivity,
         name: '新春大礼包，立得50元减息红包',
         hidden: true
     },
-    
+
     {
         path: '/pakdfeedback',
         component: PAKDFeedback,
@@ -119,25 +124,25 @@ let routes = [
         hidden: true
     },
     {
-        path:'/pakdcoupon',
+        path: '/pakdcoupon',
         component: PAKDCoupon,
         name: '我的优惠券',
         hidden: true
     },
     {
-        path:'/pakdhelpCenter',
+        path: '/pakdhelpCenter',
         component: PAKDHelpCenter,
         name: '帮助中心',
         hidden: true
     },
     {
-        path:'/pakdfeeDeductionAgreement',
+        path: '/pakdfeeDeductionAgreement',
         component: PAKDFeeDeductionAgreement,
         name: '自动划扣协议',
         hidden: true
     },
-    
-    
+
+
     {
         path: '/yrjkfeedback',
         component: YRJKFeedback,
@@ -163,19 +168,19 @@ let routes = [
         hidden: true
     },
     {
-        path:'/yrjkcoupon',
+        path: '/yrjkcoupon',
         component: YRJKCoupon,
         name: '我的优惠券',
         hidden: true
     },
     {
-        path:'/yrjkhelpCenter',
+        path: '/yrjkhelpCenter',
         component: YRJKHelpCenter,
         name: '帮助中心',
         hidden: true
     },
     {
-        path:'/yrjkfeeDeductionAgreement',
+        path: '/yrjkfeeDeductionAgreement',
         component: YRJKFeeDeductionAgreement,
         name: '自动划扣协议',
         hidden: true
@@ -206,17 +211,17 @@ let routes = [
         hidden: true
     },
     {
-        path:'/coupon',
+        path: '/coupon',
         component: Coupon,
         name: '我的优惠券',
         hidden: true
     },
     {
-        path:'/helpCenter',
+        path: '/helpCenter',
         component: HelpCenter,
         name: '帮助中心',
         hidden: true
-	},
+    },
     {
         path: '/',
         component: Product,
@@ -264,7 +269,34 @@ let routes = [
         component: LoanRate,
         name: '2018年贷款利率',
         hidden: true
-    }
+    },
+
+    // 熊猫贷款
+    {
+        path: '/yearLanding/:Uid',
+        component: yearLanding,
+        name: '',
+        hidden: true
+    },
+    {
+        path: '/ProductList',
+        component: ProductList,
+        name: '产品类表',
+        hidden: true
+    },
+    {
+        path: '/Detailspage',
+        component: Detailspage,
+        name: '',
+        hidden: true
+    },
+    {
+        path: '/DetailsOfclassification',
+        component: DetailsOfclassification,
+        name: '',
+        hidden: true
+    },
+
 ];
 
 Vue.use(VueRouter)
