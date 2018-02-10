@@ -2,8 +2,8 @@
 	<div class="scroll-wrapper">
         <Xheader v-if="showBack" :showBack="showBack" :nameText="title" :backone="backone"></Xheader>
         <!-- <iframe ref="iframe" :src="htmlUrl" width="100%" height="100%"></iframe> -->
-         <frameset>
-                      <frame :src="htmlUrl">
+        <frameset>
+            <frame :src="htmlUrl">
         </frameset>
         <!-- <div>{{htmlUrl}}</div> -->
 	</div>

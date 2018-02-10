@@ -20,7 +20,7 @@
                             <span class="left-top">最高{{product.edu}}元</span>
                             <br/>
                             <!-- 期限判断 -->
-                            <span class="left-bottom" v-if="product.minTerm == product.maxTerm">期限{{product.maxTerm}}个月</span> 
+                            <span class="left-bottom" v-if="product.minTerm == product.maxTerm">期限{{product.maxTerm}}个月</span>
                             <span class="left-bottom" v-else>期限{{product.minTerm}}~{{product.maxTerm}}个月</span>
                         </div>
                         <div class="middle-block"></div>
@@ -40,7 +40,7 @@
                 <p v-if="showBottom" class="page-infinite-loading" @click="SetProduct">
                     <img src="~@/assets/loading.gif" alt="" v-if="loadingIf"> {{loading}}
                 </p>
-                <div class="nomore" v-if="nomore"> 
+                <div class="nomore" v-if="nomore">
                     <span class="nomore-border">—</span><span class="nomore-text">没有更多了哦</span><span class="nomore-border">—</span>
                 </div>
             </div>
@@ -81,7 +81,7 @@
                 minTerm
             }
     }`
-    
+
   export default {
       components: {
             Xheader
@@ -139,13 +139,13 @@
       };
     },
     methods: {
-        SetProduct(){ //添加数据 
+        SetProduct(){ //添加数据
           this.pageNumber ++;
           this.getProduct()
         },
         getUrl(pid,index){
             let url = resources.recordUrl();
-            let params = { 
+            let params = {
                 'userId': sessionStorage.getItem("userId"),
                 'pid': pid,
             }
@@ -158,7 +158,7 @@
                     'User-Id': sessionStorage.getItem("userId"),
                     'Channel-Id': '14',
                     'Device-Id': '111',
-                    'Request-Uri': 'http://192.168.123.222/graphgl/query',
+                    'Request-Uri': this.allProduct[index].url,
                     'Package-Name': 'com.h5'
                 },
             }).then(res => {
@@ -179,10 +179,10 @@
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'Version': '1',
-                    'User-Id': '25027',
+                    'User-Id': sessionStorage.getItem("userId"),
                     'Channel-Id': '14',
                     'Device-Id': '111',
-                    'Request-Uri': 'http://192.168.123.222/graphgl/query',
+                    'Request-Uri': 'https://api.pinganzhiyuan.com/panda_loan/graphql/query',
                     'Package-Name': 'com.h5'
                 }
                 }).then(res => {
@@ -212,7 +212,7 @@
                     if(this.$route.query.id==2){
                         this.liwushow = true
                     }
-                    
+
                 })
             },
         toClassification(index){ //跳转商品分类详情
@@ -249,7 +249,7 @@
             this.jijinTop = true
         }
     }
-    
+
   };
 </script>
 
@@ -348,7 +348,7 @@
         margin-top: 20*$rem;
         color:rgb(102, 102, 102)
     }
-    
+
     // 加载更多
     .page-infinite-loading{
         text-align: center;
@@ -544,5 +544,5 @@
         }
     }
 
-    
+
 </style>
