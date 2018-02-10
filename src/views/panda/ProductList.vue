@@ -23,7 +23,7 @@
                         <span class="left-top">最高{{product.edu}}元</span>
                         <br/>
                             <!-- 期限判断 -->
-                        <span class="left-bottom" v-if="product.minTerm == product.maxTerm">期限{{product.maxTerm}}个月</span> 
+                        <span class="left-bottom" v-if="product.minTerm == product.maxTerm">期限{{product.maxTerm}}个月</span>
                         <span class="left-bottom" v-else>期限{{product.minTerm}}~{{product.maxTerm}}个月</span>
                     </div>
                     <div class="middle-block"></div>
@@ -41,7 +41,7 @@
         <p v-if="showBottom" class="page-infinite-loading" @click="SetProduct">
             {{loading}}
         </p>
-        <div class="nomore" v-if="nomore"> 
+        <div class="nomore" v-if="nomore">
             <span class="nomore-border">—</span><span class="nomore-text">没有更多了哦</span><span class="nomore-border">—</span>
         </div>
     </div>
@@ -123,15 +123,15 @@
             };
         },
         methods: {
-            SetProduct(){ //添加数据 
+            SetProduct(){ //添加数据
                 this.pageNumber ++;
                 this.getProduct()
             },
             getUrl(pid){
                 let url = resources.recordUrl();
-                let params = { 
+                let params = {
                     'userId': sessionStorage.getItem("userId"),
-                    'productId': pid,
+                    'pid': pid,
                 }
                 var qs = require('qs');
                 this.$ajax.post(url,qs.stringify(params),{
@@ -246,7 +246,7 @@
         margin-top: 20*$rem;
         color:rgb(102, 102, 102)
     }
-    
+
     // 加载更多
     .page-infinite-loading{
         text-align: center;
@@ -431,5 +431,5 @@
             }
         }
     }
-    
+
 </style>
