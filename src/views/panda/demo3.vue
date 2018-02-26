@@ -1,15 +1,16 @@
-<template>
-    <div >
-        <div class="header" v-show="noHeader">
-            <Xheader v-if="showBack" :showBack="showBack" :nameText="nameText" :backone="backone"></Xheader>
-        </div>
-        <div class="page-infinite-list page-loadmore-wrapper">
-            <div class="productList-header"> <!--栏目-->
-                <div class="productListHeader-list" @click="toClassification(index)" v-for="(item,index) in productListArrar" :key="index"> <!--单个-->
-                    <img :src="item.imgUrl" alt="">
-                    <p>{{item.title}}</p>
-                </div>
+<template> <!--基础部分-->
+  <div class="page-infinite">
+    <div class="header" v-show="noHeader">
+        <Xheader v-if="showBack" :showBack="showBack" :nameText="nameText" :backone="backone"></Xheader>
+    </div>
+    <div class="page-infinite-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }"> <!--最外层盒子-->
+      <div class="page-infinite-list" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="50" >
+        <div class="productList-header"> <!--栏目-->
+            <div class="productListHeader-list" @click="toClassification(index)" v-for="(item,index) in productListArrar" :key="index"> <!--单个-->
+                <img :src="item.imgUrl" alt="">
+                <p>{{item.title}}</p>
             </div>
+        </div>
             <div v-for="(product,index) in allProduct" :key="product.id,index" class="product" @click="getUrl(product.id,index)">
                 <div class="title">
                     <img v-bind:src="product.imgUrl" alt="" class="avatar">
@@ -38,18 +39,25 @@
                 </div>
 
             </div>
-
-        </div>
-         <div class="nomore" v-if="nomore">
-                    <span class="nomore-border">—</span><span class="nomore-text">没有更多了哦</span><span class="nomore-border">—</span>
-                </div>
-        <p v-if="showBottom" class="page-infinite-loading" @click="SetProduct">
-            <img src="~@/assets/loading.gif" alt="" v-if="loadingIf">{{loading}}
+      </div>
+       <!--底部正在加载html-->
+      <div class="loadwrap" ref="loadwrap" style="height:1.8rem;" v-if="showLoading">
+        <p v-if="loading" class="page-infinite-loading">
+          <mt-spinner type="fading-circle"></mt-spinner>
+          加载中...
         </p>
-
+      </div>
+       <!--底部加载完毕样式-->
+      <div class="loadwrap" ref="loadwrap" style="height:1.8rem;" v-else>
+        <p class="nolive">
+          我是有底线的
+        </p>
+      </div>
     </div>
+  </div>
 </template>
-<script type="text/babel">
+
+<script> //js部分
     import resources from '../../resources'
     import Xheader from '../common/X-header'
     const productQuery = `
@@ -77,63 +85,50 @@
                 minTerm
             }
 	}`
-    export default {
-        components: {
-            Xheader
-        },
-        data() {
-            return {
-                topNavs:[],
-                showBottom:true,
-                list: [],
-                loading: true,
-                allLoaded: false,//这个
-                wrapperHeight: 0,
-                allProduct: [],
-                pageSize: 6,
-                pageNumber: 1,
-                tophint:true,
-                nomore:false,
-                noHeader:true,
-                loadingIf:false,
-                showBack:true,
-                loading:'正在加载',
-                nameText:'热门推荐',
-                backone:true,
-                productListArrar:[{
-                    title:'新品推荐',
-                    id:'1',
-                    imgUrl:require("../../assets/new@2x.png")
-                },
-                {
-                    title:'苹果专区',
-                    id:'4',
-                    imgUrl:require("../../assets/apple@2x.png")
-                },
-                {
-                    title:'用信用卡贷',
-                    id:'3',
-                    imgUrl:require("../../assets/xinyong@2x.png")
-                },
-                {
-                    title:'用公积金贷',
-                    id:'2',
-                    imgUrl:require("../../assets/gongjijin@2x.png")
-                }],
-            };
-        },
-        methods: {
-            SetProduct(){ //添加数据
-                var _this = this
-                _this.loadingIf = true
-                setTimeout(function(){
-                    console.log('正在等待')
-                _this.pageNumber ++;
-                _this.getProduct()
-                _this.loadingIf = false
-                },1500)
-
+  export default {
+    components: {
+        Xheader
+    },
+    data() {
+      return {
+        list: [], //数组
+        showLoading:true, //底部显示加载还是到底
+        loading: false, //加载中
+        wrapperHeight: 0,
+        currentPage:0,
+        showBack:true,
+        nameText:'热门推荐',
+        noHeader:true,
+        backone:true,
+        allProduct:[],
+        pageSize: 6,
+        pageNumber: 0,
+        showLoading:true, //底部显示加载还是到底
+        productListArrar:[ //tab数组
+            {
+                title:'新品推荐',
+                id:'1',
+                imgUrl:require("../../assets/new@2x.png")
             },
+            {
+                title:'苹果专区',
+                id:'4',
+                imgUrl:require("../../assets/apple@2x.png")
+            },
+            {
+                title:'用信用卡贷',
+                id:'3',
+                imgUrl:require("../../assets/xinyong@2x.png")
+            },
+            {
+                title:'用公积金贷',
+                id:'2',
+                imgUrl:require("../../assets/gongjijin@2x.png")
+            }
+        ]
+      };
+    },
+    methods: {
             getUrl(pid,index){
                 console.log('第几个')
                 console.log(index)
@@ -159,14 +154,17 @@
                     // this.$router.push({path: '/Detailspage?url=' +  res.data + '&title=' +   this.allProduct[index].title});
                 })
             },
-            getProduct() { //请求数据
-                             this.loadingIf = true
+        getProduct() { //请求数据
+            console.log('第       '+ this.pageNumber+'       页')
+          this.loading = true;
                 let params = {
                     "pageSize": this.pageSize,
                     "pageNumber": this.pageNumber,
                     "packageName": "com.h5",
                     "channelId": "14"
                 };
+            setTimeout(() => { //延时请求数据
+
                 this.$ajax.post(`${resources.graphQlApi}`, {
                     'query': `${productQuery}`,
                     variables: params,
@@ -180,62 +178,100 @@
                         'Package-Name': 'com.h5'
                     }
                 }).then(res => {
-                    this.loadingIf = false
-                    this.loading = '加载更多'
-                    console.log(res)
-                    // console.log(res.data.data.recommendProducts)
-                    var array = res.data.data.recommendProducts;
-                    for (var i = 0; i < array.length ;i ++) {
-                        array[i].firstTagArray = array[i].firstTags.split("|");
+
+                var array = res.data.data.recommendProducts;
+                for (var i = 0; i < array.length ;i ++) {
+                    array[i].firstTagArray = array[i].firstTags.split("|");
+                }
+                if(res.data.data.recommendProducts.length==0){
+                    this.showLoading = false
+                    return
+                }
+                this.allProduct = this.allProduct.concat(array);
+                this.loading = false;
+                this.allProduct.forEach(item => {
+                    if (item.maxAmount > 10000) {
+                        item.edu = item.maxAmount/10000 + '万';
+                    } else {
+                        item.edu = item.maxAmount;
                     }
-                    if(res.data.data.recommendProducts.length<this.pageSize){
-                        this.showBottom = false
-                        this.nomore = true
+                    if (item.firstTags === '') {
+                        item.isFirstTags = false;
+                    } else {
+                        item.isFirstTags = true;
                     }
-                    this.allProduct = this.allProduct.concat(array);
-                    this.allProduct.forEach(item => {
-                        if (item.maxAmount > 10000) {
-                            item.edu = item.maxAmount/10000 + '万';
-                        } else {
-                            item.edu = item.maxAmount;
-                        }
-                        if (item.firstTags === '') {
-                            item.isFirstTags = false;
-                        } else {
-                            item.isFirstTags = true;
-                        }
-                    });
-                })
-            },
-            hideHint(){ //点击隐藏
-                this.tophint = false
-            },
-            toClassification(index){ //跳转商品分类详情
-                this.$router.push({
-                path: '/DetailsOfclassification?title=' + this.productListArrar[index].title  + '&id=' + this.productListArrar[index].id
                 });
-            }
+            })
+            
+            },1000);
+
         },
-        mounted() {
-            this.getProduct() //首次请求
-        }
-    };
+        getData(){ //请求数据
+        console.log('第       '+ this.currentPage+'       页')
+        this.loading = true;
+        setTimeout(() => { //延时请求数据
+            this.$ajax.get(api.getmoments(this.currentPage,7)).then((res) => {
+              if(res.data.obj.object.list.length==0){ //如果没有数据了
+                this.showLoading = false
+                return
+              }else{ //有数据的话
+                this.list = this.list.concat(res.data.obj.object.list);
+                this.loading = false;
+              }
+          })
+        },1000);
+      },
+      loadMore() { //底部判断
+        console.log('加载中')
+          if(!this.loading) {
+            this.pageNumber ++
+            this.getProduct();
+          }
+      },
+    toClassification(index){ //跳转商品分类详情
+        this.$router.push({
+            path: '/DetailsOfclassification?title=' + this.productListArrar[index].title  + '&id=' + this.productListArrar[index].id
+        });
+    }
+    },
+    mounted() { //第一次请求数据
+      this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
+      this.getProduct()
+      if(!this.loading){
+          console.log('第一次请求')
+        this.getProduct();
+      }
+    }
+  };
 </script>
 
-<style lang="scss" scoped>
-    $rem:1rem/40; //配置rem比例
+<style> /*组件样式*/
+    .page-infinite-loading{
+        text-align: center;
+        height: 1.8rem;
+        line-height: 1.8rem;
+    }
+    .page-infinite-loading div{
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 5px;
+    }
+</style>
 
-    .header{  //顶部header
-        position: fixed;
-        top: 0;
-        z-index: 20;
-        width: 100%;
-        background: #fff;
-        height:auto;
-        border-bottom: 1*$rem  solid #ececef;
+<style lang="scss" scoped> /*单页面样式*/
+    $rem:1rem/40;
+    .page-infinite{
+        text-align: center;
+        color: #666;
         overflow: hidden;
     }
 
+    .nolive{  /*我是有底线的*/
+      text-align: center;
+      height: 1.8rem;
+      line-height: 1.8rem;
+    }
+    
     .productList-header{ //头部滑动菜单
         width: 100%;
         height: auto;
@@ -264,94 +300,19 @@
         color:rgb(102, 102, 102)
     }
 
-    // 加载更多
-    .page-infinite-loading{
-        text-align: center;
-        height: 2rem;
-        line-height: 2rem;
-        font-size: 0.7rem;
-        background: #f5f5f5;
-        div {
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 5px;
-        }
-    }
-
-    .page-infinite-loading img{
-        width: 0.7rem
-    }
-
-    .page-infinite-listitem{
-         height: 50px;
-        line-height: 50px;
-        border-bottom: solid 1px #eee;
-        text-align: center;
-    }
-    .top{
-        background: #ffffff;
-        height: 2.5rem;
-        border-bottom: 0.5rem solid #f5f5f5;
-        .hint-pic{
-            margin-left: 0.8rem;
-            padding-top: 0.3rem;
-            width: 1.6rem;
-        }
-        .vertical{
-            margin-left: 0.8rem;
-            margin-top: 0.3rem;
-            vertical-align: top;
-            display: inline-block;
-            width: 0.05rem;
-            height: 1.4rem;
-            background: rgb(214, 214, 214)
-        }
-        .hint-text{
-            margin-left: 0.8rem;
-            color: rgb(51, 51, 51);
-            font-size: 0.7rem;
-            display: inline-block;
-            //top:40%;
-            transform:translateY(-70%);
-        }
-        .cancel{
-            margin-left: 2.4rem;
-            width: 0.8rem;
-            display: inline-block;
-            transform:translateY(-30%);
-            //padding-top: 0.1rem;
-        }
-    }
-
-    .nomore{
-        padding-top: 0.6rem;
-        height: 2rem;
-        background: #f5f5f5;
-        text-align: center;
-        .nomore-border{
-            color: #999;
-            font-size: 0.7rem;
-        }
-        .nomore-text{
-            color: #999;
-            padding-right: 0.2rem;
-            padding-left: 0.2rem;
-            font-size: 0.7rem;
-        }
-    }
-    .page-loadmore-wrapper{
-        margin-top: -1px;
+    .page-infinite-wrapper{ /*样式最外层*/
         overflow: scroll;
-         -webkit-overflow-scrolling: touch; //ios加载缓慢
-         margin-top: 88*$rem;
+        -webkit-overflow-scrolling: touch;
         .product{
             background: #ffffff;
             height: auto;
             border-bottom: 0.25rem solid #f5f5f5;
             .title{
+                text-align: left;
                 height: 2rem;
                 padding-left: 0.9rem;
                 padding-top: 0.625rem;
+                
                 .avatar{
                     border-radius: 50%;
                     width: 1.4rem;
@@ -391,9 +352,8 @@
                 }
             }
             .main-mes{
-                margin-left: 0.9rem;
-                margin-top: 0.625rem;
-                margin-bottom: 0.625rem;
+                text-align: left;
+                margin: 0.625rem 0.9rem;
                 .left-block{
                     width: 4.5rem;
                     vertical-align: top;
@@ -420,7 +380,7 @@
                 }
                 .right-block{
                     width: 9.4rem;
-                    margin-left: 1rem;
+                    margin-left: 0.1rem;
                     vertical-align: top;
                     display: inline-block;
                     .right-top{
@@ -451,6 +411,7 @@
                 }
             }
         }
-    }
+    }  
 
+    
 </style>

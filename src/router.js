@@ -49,6 +49,9 @@ const yearLanding = resolve => require.ensure([], () => resolve(require('./views
 const ProductList = resolve => require.ensure([], () => resolve(require('./views/panda/ProductList.vue')), 'ProductList') //熊猫贷款产品页面
 const Detailspage = resolve => require.ensure([], () => resolve(require('./views/panda/Detailspage.vue')), 'Detailspage') //熊猫贷款第三方页面
 const DetailsOfclassification = resolve => require.ensure([], () => resolve(require('./views/panda/DetailsOfclassification.vue')), 'DetailsOfclassification') //熊猫贷款产品分类页面
+const demo = resolve => require.ensure([], () => resolve(require('./views/panda/demo.vue')), 'demo') //测试首页
+const demoClass = resolve => require.ensure([], () => resolve(require('./views/panda/demoClass.vue')), 'demoClass') //测试分类页
+const demo3 = resolve => require.ensure([], () => resolve(require('./views/panda/demo3.vue')), 'demo3') //测试
 
 let routes = [{
         path: '/MSSDfeedback',
@@ -296,6 +299,27 @@ let routes = [{
         name: '',
         hidden: true
     },
+    {
+        path: '/demo',
+        component: demo,
+        name: 'demo',
+        hidden: true
+    },
+    {
+        path: '/demoClass',
+        component: demoClass,
+        name: 'demoClass',
+        hidden: true
+    },
+    {
+        path: '/demo3',
+        component: demo3,
+        name: 'demo3',
+        hidden: true
+    },
+
+
+
 
 ];
 
