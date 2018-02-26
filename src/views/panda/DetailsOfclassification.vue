@@ -54,16 +54,40 @@
 
     import resources from '../../resources'
     import Xheader from '../common/X-header'
-    const recommendProductQuery = `
+    // const recommendProductQuery = `
+    //     query(
+    //         $productTypeId: Long
+    //         $packageName: String
+    //         $channelId: Long
+    //     ){
+    //         recommendProducts(
+    //             productTypeId: $productTypeId
+    //             packageName: $packageName
+    //             channelId: $channelId
+    //         ){
+    //             id
+    //             title
+    //             isNew
+    //             firstTags
+    //             secondTags
+    //             description
+    //             imgUrl
+    //             url
+    //             minAmount
+    //             maxAmount
+    //             dayRate
+    //             creditAuth
+    //             maxTerm
+    //             minTerm
+    //         }
+	// }`
+
+	const recommendProductQuery = `
         query(
             $productTypeId: Long
-            $packageName: String
-            $channelId: Long
         ){
             recommendProducts(
                 productTypeId: $productTypeId
-                packageName: $packageName
-                channelId: $channelId
             ){
                 id
                 title

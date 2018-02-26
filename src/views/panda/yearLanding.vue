@@ -1,9 +1,10 @@
 <template>
     <div class="ynlanding-panda ynfirstpage" v-bind:class="{ynsecondpage:download}">
-        <!-- <img src="~@/assets/weidai.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%"> //微贷 --> 
+        <!-- <img src="~@/assets/weidai.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%"> //微贷 -->
 
-        <img src="~@/assets/XMDKFLOAT.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%" v-if="!iphone">
-        <img src="~@/assets/xmqb.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%" v-if="iphone">
+        <!-- <img src="~@/assets/XMDKFLOAT.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%" v-if="!iphone"> -->
+        <!-- <img src="~@/assets/xmqb.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%" v-if="iphone"> -->
+		<img src="~@/assets/xmqb.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%">
 
         <div class="yntop" v-if="!download"></div>
         <div class="ynmiddle" v-if="!download">
@@ -15,7 +16,7 @@
                     <input type="number" class="ynphone-input" placeholder="请填写短信验证码" v-model="smsCode"/>
                     <input type="button" class="yncode-button" v-bind:class="{yncantClick:is_show}" :value="count+codeButtonText"  @click="getCode()"/>
                 </div>
-                
+
                 <div v-if="picCode" style="padding-right:0.1rem;">
                     <input type="number" class="ynphone-input" placeholder="请填写验证码" v-model="imaCode"/>
                     <img :src="imageCode" alt="" class="ynimage-code" @click="getImageCode">
@@ -52,7 +53,7 @@
                 </div>
                 </div>
             </div>
-           
+
             <div class="downzip" @click="downloadApp">
                 <span>立即下载</span>
             </div>
@@ -61,8 +62,8 @@
             <span class="yntoast-msg"></span>
         </div>
     </div>
-    
-    
+
+
 </template>
 
 <script>
@@ -105,7 +106,7 @@
                 var ua = navigator.userAgent.toLowerCase();
                 if (ua.indexOf("iphone") == -1) {
                     //安卓跳转
-                    window.location.href = "http://sj.qq.com/myapp/detail.htm?apkName=com.mg.pandaloan";
+                    window.location.href = "http://sj.qq.com/myapp/detail.htm?apkName=com.mg.pandawalletdaikuan";
                 } else {
                     //苹果跳转
                     window.location.href = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1330125527&mt=8";
@@ -146,12 +147,12 @@
                     }, 1000)
                 }
             },
-            
+
             smsCaptcha()
             {
                 // 普通的ajax接口
-                // 使用 application/x-www-form-urlencoded 格式化 
-                // 参考：http://blog.csdn.net/fantian001/article/details/70193938         
+                // 使用 application/x-www-form-urlencoded 格式化
+                // 参考：http://blog.csdn.net/fantian001/article/details/70193938
                 let url = resources.smsCaptcha();
                 let params = {
                     'phone': this.phone
@@ -167,7 +168,7 @@
                     this.keySMSCapt = res.data.obj1.keySMSCapt;
                     console.log(res)
                 })
-            },    
+            },
 
             comfirm(){
                 if (!this.is_click) {
@@ -193,7 +194,7 @@
                     }
                     this.postMes();
                 }
-            },          
+            },
             postMes(){
                 let url = resources.token();
                 // let params = new URLSearchParams();
@@ -201,7 +202,7 @@
                 // params.append('keySMSCapt',this.keySMSCapt)//短信验证码的key
                 // params.append('smsCapt',this.smsCode)//短信验证码
                 // if (this.keyImage != '') {
-                //     params.append('keyImageCapt',this.keyImage)//图形验证码的key 
+                //     params.append('keyImageCapt',this.keyImage)//图形验证码的key
                 //     params.append('imageCapt',this.imaCode)//图形验证码
                 // }
                 let params = { }
@@ -236,7 +237,7 @@
                     this.toProduct()
                     console.log('跳转')
                     //this.download = true;
-                }).catch(error => {              
+                }).catch(error => {
                     //this.lackMessage(error.response.data.statusMsg)
                     this.toast(error.response.data.statusMsg)
                     if (error.response.data.statusMsg === '短信验证码不正确') {
@@ -245,7 +246,7 @@
                     if (this.flagNum > 2) {
                         this.imaCode = '';
                         this.getImageCode()
-                        // if (!this.picCode) {   
+                        // if (!this.picCode) {
                         //     this.getImageCode();
                         // }
                     }
@@ -268,7 +269,7 @@
             },
             getImageCode(){
                 // 普通的ajax接口
-                // 使用 application/x-www-form-urlencoded 格式化 
+                // 使用 application/x-www-form-urlencoded 格式化
                 // 参考：http://blog.csdn.net/fantian001/article/details/70193938
                 let url = resources.imageCode();
                 //let params = new URLSearchParams();
@@ -303,15 +304,15 @@
             },
             phoneType() {
                 var ua = navigator.userAgent.toLowerCase();
-                if (ua.indexOf("iphone") == -1) {
-                    //安卓
-                    this.iphone = false;
-                    document.title= "熊猫贷款";
-                } else {
-                    //苹果
+                // if (ua.indexOf("iphone") == -1) {
+                //     //安卓
+                    // this.iphone = false;
+                    // document.title= "熊猫贷款";
+                // } else {
+                //     //苹果
                     this.iphone = true;
                     document.title = "熊猫钱包";
-                }
+                // }
             }
         },
         mounted: function () {
@@ -322,7 +323,7 @@
             //alert(this.Sid)
 		}
     };
-    
+
 </script>
 
 <style lang="scss" scoped>
@@ -330,7 +331,7 @@
     $rem:1rem/40;
 
     .downlogoText{
-        
+
     }
 
     .downPanda{
@@ -413,7 +414,7 @@
         border-radius: 0.2rem;
         color: #fff
         //color: #ffeeb9;
-        //border:1px solid #ffeeb9; 
+        //border:1px solid #ffeeb9;
     }
     .yntoastAnimate{
         animation: toastKF 2s;
@@ -426,13 +427,13 @@
         100% {opacity: 0; z-index: 0}
     }
     .ynfirstpage{
-        background: url(~@/assets/mnyf.jpg) no-repeat scroll; 
+        background: url(~@/assets/mnyf.jpg) no-repeat scroll;
         background-size:100% 100%;
         height: 1400px;
         min-height: 32rem;
     }
     .ynsecondpage{
-        background: url(~@/assets/mnys.jpg) no-repeat scroll; 
+        background: url(~@/assets/mnys.jpg) no-repeat scroll;
         background-size:100% 100%;
         height: 32rem;
     }
@@ -473,7 +474,7 @@
                 height: 100%;
             }
         }
-        
+
         .ynmiddle{
             height: 33%;
             //background: white;
@@ -499,14 +500,14 @@
                     padding-left: 1rem;
                     //border:1px solid #d3d3d6;
                     border-radius: 0.2rem;
-                    font-size: 0.7rem;                    
+                    font-size: 0.7rem;
                     line-height: 0.7rem;
                 }
                 .ynimage-code{
                     vertical-align:middle;//img图片和div在同一排
                     height: 2.1rem;
                     width: 3.9rem;
-                    margin-left: 0.1rem; 
+                    margin-left: 0.1rem;
                     margin-top: 0.2rem;
                     //border:1px solid #d3d3d6;
                     border-radius: 0.2rem;
@@ -517,7 +518,7 @@
                     font-size: 0.7rem;
                     height: 2.1rem;
                     width: 3.9rem;
-                    margin-left: 0.05rem; 
+                    margin-left: 0.05rem;
                     margin-top: 0.2rem;
                     //border:1px solid #d3d3d6;
                     border-radius: 0.2rem;
@@ -557,7 +558,7 @@
                     text-align: left;
                     color: #d3d3d6;
                     font-size: 0.7rem;
-                    
+
                 }
                 .yncode-input::-webkit-input-placeholder{
                     text-align: left;
@@ -584,7 +585,7 @@
                 }
 
             }
-            
+
             .yndownload{
                 margin-top: 1.7rem;
                 .yndown{
@@ -607,7 +608,7 @@
                 }
             }
         }
-        
+
         .ynbuttom{
             margin-bottom: 1px;
             height: 2%;
@@ -623,12 +624,12 @@
                 text-align: center;
                 color: #d9dadd;
                 font-size: 0.5rem;
-                .brand-text {   
+                .brand-text {
                     color: #d9dadd;
                     font-size: 0.5rem;
                 }
             }
         }
-        
+
     }
 </style>

@@ -9,11 +9,11 @@
 
         <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px'}" v-bind:class="{tophint:!tophint}">
 
-            <mt-loadmore  :bottom-method="loadBottom" 
-                :bottom-all-loaded="bottomAllLoaded" 
+            <mt-loadmore  :bottom-method="loadBottom"
+                :bottom-all-loaded="bottomAllLoaded"
                 ref="loadmore" @bottom-status-change="handleBottomChange"
                 :auto-fill="false">
-            
+
                 <div v-for="product in allProduct" :key="product.id" class="product" @click="skip(product.url)">
                     <div class="title">
                         <img v-bind:src="product.imgUrl" alt="" class="avatar">
@@ -42,12 +42,12 @@
                 </div>
 
             </mt-loadmore>
-            <div class="nomore" v-if="nomore"> 
+            <div class="nomore" v-if="nomore">
                 <span class="nomore-border">—</span><span class="nomore-text">没有更多了哦</span><span class="nomore-border">—</span>
             </div>
         </div>
 
-        
+
 
     </div>
 </template>
@@ -126,7 +126,7 @@
                         'User-Id': '25027',
                         'User-Agent': '123',
                         'Channel-Id': '0',
-                        'Device-Id': '111',
+                        'Device-Id': '',
                         'Request-Uri': 'http://192.168.123.222'
                     }
                 })
@@ -137,7 +137,7 @@
                         array[i].firstTagArray = array[i].firstTags.split("|");
                         //console.log(array[i].firstTagArray)
                     }
-                    
+
                     this.allProduct = this.allProduct.concat(array);
                     //this.wrapperHeight = this.wrapperHeight + 40;
                     if (array.length < this.pageSize) {
@@ -334,5 +334,5 @@
             }
         }
     }
-    
+
 </style>

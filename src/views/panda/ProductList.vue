@@ -56,14 +56,10 @@
         query(
             $pageNumber: Int
             $pageSize: Int
-            $packageName: String
-            $channelId: Long
         ){
             recommendProducts(
                 pageNumber:$pageNumber
                 pageSize:$pageSize
-                packageName: $packageName
-                channelId: $channelId
             ){
                 id
                 title
