@@ -1,7 +1,7 @@
 <template>
     <div style="background-color:#ffffff">
         <div class="top">
-            <img src="~@/assets/nyat.png" style="width:100%;display:block">
+            <img src="~@/assets/activity-date.png" style="width:100%;display:block">
         </div>
         <div class="middle">
             <div class="title-pic">
@@ -67,7 +67,7 @@
         </div>
         <div class="buttom">
             福建泰宁晋农商大金湖村镇银行股份有限公司<br/>
-            2018-02-10
+            2018-03-01
         </div>
     </div>
 </template>
