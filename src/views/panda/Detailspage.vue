@@ -1,13 +1,17 @@
 <template>
 	<div class="scroll-wrapper">
-        <Xheader v-if="showBack" :showBack="showBack" :nameText="title" :backone="backone"></Xheader>
-        <!-- <iframe ref="iframe" :src="htmlUrl" width="100%" height="100%"></iframe> -->
-        <frameset>
-            <frame :src="htmlUrl">
-        </frameset>
+        <div class="header">
+            <Xheader v-if="showBack" :showBack="showBack" :nameText="title" :backone="backone"></Xheader>
+        </div>
+        <iframe ref="iframe" :src="htmlUrl" width="100%" height="100%"></iframe>
         <!-- <div>{{htmlUrl}}</div> -->
+    <!-- <iframe name="__SF__0" :src="htmlUrl" data-src="null" sandbox="allow-popups allow-scripts allow-forms allow-pointer-lock allow-popups-to-escape-sandbox allow-same-origin allow-modals allow-top-navigation" scrolling="yes" style="height: 100%; display: block;">
+    </iframe> -->
+       
 	</div>
 </template>
+
+
 <script>
     import Xheader from '../common/X-header'
 
@@ -28,20 +32,12 @@ export default {
             title:''
         };
     },
-    watch: {
-        // htmlUrl: function (newUrl,oldUrl) {
-        //     alert(newUrl)
-        //     if (newUrl.indexOf("itunes") != -1) {
-        //         window.location = newUrl;
-        //     }
-        // },
-    },
     methods: {
         getUrl(){
             this.htmlUrl = this.$route.query.url
             console.log(  this.htmlUrl)
             this.title = this.$route.query.title
-        }
+        },
     },
     mounted(){
         this.getUrl()
@@ -53,7 +49,7 @@ export default {
 <style lang="scss" scoped>
 
     $rem:1rem/40; //rem配置   
-        .scroll-wrapper {
+    .scroll-wrapper {
         position: fixed;
         right: 0;
         bottom: 0;
@@ -63,8 +59,26 @@ export default {
         overflow-y: scroll;
     }
 
+    .header{  //顶部header
+        position: fixed;
+        top: 0;
+        z-index: 20;
+        width: 100%;
+        background: #fff;
+        height:auto;
+        border-bottom: 1*$rem  solid #ececef;
+        overflow: hidden;
+    }
+
     .scroll-wrapper iframe {
+        margin-top: 89*$rem;
         height: 100%;
+        width: 100%;
+        border: none;
+    }
+    .scroll-wrapper object {
+        margin-top: 89*$rem;
+        // height: 100%;
         width: 100%;
         border: none;
     }

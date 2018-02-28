@@ -11,34 +11,32 @@
                 <p>{{item.title}}</p>
             </div>
         </div>
-            <div v-for="(product,index) in allProduct" :key="product.id,index" class="product" @click="getUrl(product.id,index)">
-                <div class="title">
-                    <img v-bind:src="product.imgUrl" alt="" class="avatar">
-                    <span class="title-word">{{product.title}}</span>
-                    <span class="isNew" v-if="product.isNew"><span class="isNew-border">新上线</span></span>
-                    <span class="firstTages" v-for="(FirstTag,index) in product.firstTagArray" :key="index"><span class="firstTages-border">{{FirstTag}}</span></span>
-                </div>
-
-                <div class="main-mes">
-                    <div class="left-block">
-                        <span class="left-top">最高{{product.edu}}元</span>
-                        <br/>
-                            <!-- 期限判断 -->
-                        <span class="left-bottom" v-if="product.minTerm == product.maxTerm">期限{{product.maxTerm}}个月</span>
-                        <span class="left-bottom" v-else>期限{{product.minTerm}}~{{product.maxTerm}}个月</span>
-                    </div>
-                    <div class="middle-block"></div>
-                    <div class="right-block">
-                        <span class="right-top">日利率{{product.dayRate}}%起</span>
-                        <br/>
-                        <span class="right-bottom">{{product.description}}</span>
-                    </div>
-                    <div class="iconlist">
-                        <img src="~@/assets/clickicon.png" class="click-icon">
-                    </div>
-                </div>
-
+        <div v-for="(product,index) in allProduct" :key="product.id,index" class="product" @click="getUrl(product.id,index)"> <!--内容部分-->
+            <div class="title">
+                <img v-bind:src="product.imgUrl" alt="" class="avatar">
+                <span class="title-word">{{product.title}}</span>
+                <span class="isNew" v-if="product.isNew"><span class="isNew-border">新上线</span></span>
+                <span class="firstTages" v-for="(FirstTag,index) in product.firstTagArray" :key="index"><span class="firstTages-border">{{FirstTag}}</span></span>
             </div>
+            <div class="main-mes">
+                <div class="left-block">
+                    <span class="left-top">最高{{product.edu}}元</span>
+                    <br/>
+                        <!-- 期限判断 -->
+                    <span class="left-bottom" v-if="product.minTerm == product.maxTerm">期限{{product.maxTerm}}个月</span>
+                    <span class="left-bottom" v-else>期限{{product.minTerm}}~{{product.maxTerm}}个月</span>
+                </div>
+                <div class="middle-block"></div>
+                <div class="right-block">
+                    <span class="right-top">日利率{{product.dayRate}}%起</span>
+                    <br/>
+                    <span class="right-bottom">{{product.description}}</span>
+                </div>
+                <div class="iconlist">
+                    <img src="~@/assets/clickicon.png" class="click-icon">
+                </div>
+            </div>
+        </div>
       </div>
        <!--底部正在加载html-->
       <div class="loadwrap" ref="loadwrap" style="height:1.8rem;" v-if="showLoading">
@@ -86,6 +84,7 @@
             }
 	}`
   export default {
+    name:'demo3',
     components: {
         Xheader
     },
@@ -99,10 +98,11 @@
         showBack:true,
         nameText:'热门推荐',
         noHeader:true,
+        safari:false,
         backone:true,
         allProduct:[],
         pageSize: 6,
-        pageNumber: 0,
+        pageNumber: 1,
         showLoading:true, //底部显示加载还是到底
         productListArrar:[ //tab数组
             {
@@ -129,7 +129,7 @@
       };
     },
     methods: {
-            getUrl(pid,index){
+            getUrl(pid,index){ //数据通知与跳转详情
                 console.log('第几个')
                 console.log(index)
                 let url = resources.recordUrl();
@@ -150,46 +150,49 @@
                     },
                 }).then(res => {
                     console.log(res.data)
-                    window.location.href = res.data
-                    // this.$router.push({path: '/Detailspage?url=' +  res.data + '&title=' +   this.allProduct[index].title});
+                    // window.location.href = res.data
+                    var explorer =navigator.userAgent ;
+                    var isiOS = !!explorer.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+                    if(isiOS){
+                        window.location.href = res.data
+                    }else{
+                        this.$router.push({path: '/Detailspage?url=' +  res.data + '&title=' +   this.allProduct[index].title});
+                    }
                 })
             },
-        getProduct() { //请求数据
-            console.log('第       '+ this.pageNumber+'       页')
-          this.loading = true;
+            getProduct() { //请求数据
+                this.loading = true;
                 let params = {
                     "pageSize": this.pageSize,
                     "pageNumber": this.pageNumber,
                     "packageName": "com.h5",
                     "channelId": "14"
                 };
-            setTimeout(() => { //延时请求数据
-
+                setTimeout(() => { //延时请求数据
                 this.$ajax.post(`${resources.graphQlApi}`, {
                     'query': `${productQuery}`,
                     variables: params,
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Version': '1',
-                        'User-Id': sessionStorage.getItem("userId"),
-                        'Channel-Id': '14',
-                        'Device-Id': '111',
-                        'Request-Uri': 'https://api.pinganzhiyuan.com/panda_loan/graphql/query',
-                        'Package-Name': 'com.h5'
-                    }
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Version': '1',
+                    'User-Id': sessionStorage.getItem("userId"),
+                    'Channel-Id': '14',
+                    'Device-Id': '111',
+                    'Request-Uri': 'https://api.pinganzhiyuan.com/panda_loan/graphql/query',
+                    'Package-Name': 'com.h5'
+                }
                 }).then(res => {
-
-                var array = res.data.data.recommendProducts;
-                for (var i = 0; i < array.length ;i ++) {
-                    array[i].firstTagArray = array[i].firstTags.split("|");
-                }
-                if(res.data.data.recommendProducts.length==0){
-                    this.showLoading = false
-                    return
-                }
-                this.allProduct = this.allProduct.concat(array);
-                this.loading = false;
-                this.allProduct.forEach(item => {
+                    var array = res.data.data.recommendProducts;
+                    for (var i = 0; i < array.length ;i ++) {
+                        array[i].firstTagArray = array[i].firstTags.split("|");
+                    }
+                    if(res.data.data.recommendProducts.length==0){
+                        this.showLoading = false
+                        return
+                    }
+                    this.allProduct = this.allProduct.concat(array);
+                    this.loading = false;
+                    this.allProduct.forEach(item => {
                     if (item.maxAmount > 10000) {
                         item.edu = item.maxAmount/10000 + '万';
                     } else {
@@ -200,45 +203,40 @@
                     } else {
                         item.isFirstTags = true;
                     }
+                    });
+                })
+                },1000);
+            },
+            getData(){ //请求数据
+                this.loading = true;
+                setTimeout(() => { //延时请求数据
+                    this.$ajax.get(api.getmoments(this.currentPage,7)).then((res) => {
+                        if(res.data.obj.object.list.length==0){ //如果没有数据了
+                            this.showLoading = false
+                        return
+                        }else{ //有数据的话
+                            this.list = this.list.concat(res.data.obj.object.list);
+                            this.loading = false;
+                        }
+                    })
+                },1000);
+            },
+            loadMore() { //底部判断
+                if(!this.loading) {
+                    this.pageNumber ++
+                    this.getProduct();
+                }
+            },
+            toClassification(index){ //跳转商品分类详情
+                this.$router.push({
+                    path: '/DetailsOfclassification?title=' + this.productListArrar[index].title  + '&id=' + this.productListArrar[index].id
                 });
-            })
-            
-            },1000);
-
-        },
-        getData(){ //请求数据
-        console.log('第       '+ this.currentPage+'       页')
-        this.loading = true;
-        setTimeout(() => { //延时请求数据
-            this.$ajax.get(api.getmoments(this.currentPage,7)).then((res) => {
-              if(res.data.obj.object.list.length==0){ //如果没有数据了
-                this.showLoading = false
-                return
-              }else{ //有数据的话
-                this.list = this.list.concat(res.data.obj.object.list);
-                this.loading = false;
-              }
-          })
-        },1000);
-      },
-      loadMore() { //底部判断
-        console.log('加载中')
-          if(!this.loading) {
-            this.pageNumber ++
-            this.getProduct();
-          }
-      },
-    toClassification(index){ //跳转商品分类详情
-        this.$router.push({
-            path: '/DetailsOfclassification?title=' + this.productListArrar[index].title  + '&id=' + this.productListArrar[index].id
-        });
-    }
+            }
     },
     mounted() { //第一次请求数据
       this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
       this.getProduct()
       if(!this.loading){
-          console.log('第一次请求')
         this.getProduct();
       }
     }
@@ -250,6 +248,7 @@
         text-align: center;
         height: 1.8rem;
         line-height: 1.8rem;
+        font-size: 0.6rem;
     }
     .page-infinite-loading div{
         display: inline-block;
@@ -260,6 +259,17 @@
 
 <style lang="scss" scoped> /*单页面样式*/
     $rem:1rem/40;
+
+    .header{  //顶部header
+        position: fixed;
+        top: 0;
+        z-index: 20;
+        width: 100%;
+        background: #fff;
+        height:auto;
+        border-bottom: 1*$rem  solid #ececef;
+        overflow: hidden;
+    }
     .page-infinite{
         text-align: center;
         color: #666;
@@ -270,6 +280,7 @@
       text-align: center;
       height: 1.8rem;
       line-height: 1.8rem;
+      font-size: 0.6rem;
     }
     
     .productList-header{ //头部滑动菜单
@@ -303,6 +314,7 @@
     .page-infinite-wrapper{ /*样式最外层*/
         overflow: scroll;
         -webkit-overflow-scrolling: touch;
+        margin-top: 88*$rem;
         .product{
             background: #ffffff;
             height: auto;
@@ -404,6 +416,7 @@
                 .iconlist{
                     vertical-align: center;
                     display: inline-block;
+                    float: right;
                     .click-icon{
                         margin-top: 0.5rem;
                         width:0.4rem;

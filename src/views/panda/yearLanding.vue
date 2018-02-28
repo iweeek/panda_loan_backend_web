@@ -321,7 +321,16 @@
             this.createSid();
             this.enterMes();
             //alert(this.Sid)
-		}
+        },
+        created(){
+            console.log(sessionStorage.getItem("userId"))
+            if(sessionStorage.getItem("userId")==null){
+                console.log('我没有登录奥')
+            }else{
+                this.$router.push({ path: '/ProductList' })
+                console.log('已经登录了奥')
+            }
+        }
     };
 
 </script>
