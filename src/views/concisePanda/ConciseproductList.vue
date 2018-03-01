@@ -1,59 +1,61 @@
 <template> <!--基础部分-->
   <div class="page-infinite">
     <div class="header" v-show="noHeader">
-          <Xheader v-if="showBack" :showBack="showBack" :nameText="nameText" :backone="backone"   :backtwo="backtwo" ></Xheader>
+        <Xheader v-if="showBack" :showBack="showBack" :nameText="nameText" :backone="backone"   :backtwo="backtwo" ></Xheader>
     </div>
-    <div class="pageOn">
-            <div class="page-infinite-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }"> <!--最外层盒子-->
-      <div class="page-infinite-list" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="50" >
-        <div v-for="(product,index) in allProduct" :key="product.id,index" class="product" @click="getUrl(product.id,index)"> <!--内容部分-->
-            <div class="title">
-                <img v-bind:src="product.imgUrl" alt="" class="avatar">
-                <span class="title-word">{{product.title}}</span>
-                <span class="isNew" v-if="product.isNew"><span class="isNew-border">新上线</span></span>
-                <span class="firstTages" v-for="(FirstTag,index) in product.firstTagArray" :key="index"><span class="firstTages-border">{{FirstTag}}</span></span>
+    <div class="infiniteWai"> <!--组件外层div为了现在底部下载熊猫贷款特加的-->
+        <div class="page-infinite-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }"> <!--最外层盒子-->
+            <div class="page-infinite-list" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="50" >
+                <!-- 外层背景 -->
+                <div class="productExternal"> 
+                    <div v-for="(product,index) in allProduct" :key="product.id,index" class="product" @click="getUrl(product.id,index)"> <!--内容部分-->
+                        <div class="title">
+                            <img v-bind:src="product.imgUrl" alt="" class="avatar">
+                            <span class="title-word">{{product.title}}</span>
+                            <span class="isNew" v-if="product.isNew"><span class="isNew-border">新上线</span></span>
+                            <span class="firstTages" v-for="(FirstTag,index) in product.firstTagArray" :key="index"><span class="firstTages-border">{{FirstTag}}</span></span>
+                        </div>
+                        <div class="main-mes">
+                            <div class="left-block">
+                                <span class="left-top">最高{{product.edu}}元</span>
+                                <br/>
+                                    <!-- 期限判断 -->
+                                <span class="left-bottom" v-if="product.minTerm == product.maxTerm">期限{{product.maxTerm}}个月</span>
+                                <span class="left-bottom" v-else>期限{{product.minTerm}}~{{product.maxTerm}}个月</span>
+                            </div>
+                            <div class="middle-block"></div>
+                            <div class="right-block">
+                                <span class="right-top">日利率{{product.dayRate}}%起</span>
+                                <br/>
+                                <span class="right-bottom">{{product.description}}</span>
+                            </div>
+                            <div class="iconlist">
+                                <img src="~@/assets/clickicon.png" class="click-icon">
+                            </div>
+                        </div>
+                    </div>
+                    <!--底部正在加载html-->
+                    <div class="loadwrap" ref="loadwrap" style="height:1.8rem;" v-if="showLoading">
+                        <p v-if="loading" class="page-infinite-loading">
+                        <mt-spinner type="sanke"></mt-spinner>
+                        加载中...
+                        </p>
+                    </div>
+                    <!--底部加载完毕样式-->
+                    <div class="loadwrap" ref="loadwrap" style="height:1.8rem;" v-else>
+                        <div class="nolive">
+                            <div class="style-two" style="float:left"></div>
+                                我是有底线的
+                            <div class="style-two" style="float:right"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="main-mes">
-                <div class="left-block">
-                    <span class="left-top">最高{{product.edu}}元</span>
-                    <br/>
-                        <!-- 期限判断 -->
-                    <span class="left-bottom" v-if="product.minTerm == product.maxTerm">期限{{product.maxTerm}}个月</span>
-                    <span class="left-bottom" v-else>期限{{product.minTerm}}~{{product.maxTerm}}个月</span>
-                </div>
-                <div class="middle-block"></div>
-                <div class="right-block">
-                    <span class="right-top">日利率{{product.dayRate}}%起</span>
-                    <br/>
-                    <span class="right-bottom">{{product.description}}</span>
-                </div>
-                <div class="iconlist">
-                    <img src="~@/assets/clickicon.png" class="click-icon">
-                </div>
-            </div>
-        </div>
-      </div>
-       <!--底部正在加载html-->
-      <div class="loadwrap" ref="loadwrap" style="height:1.8rem;" v-if="showLoading">
-        <p v-if="loading" class="page-infinite-loading">
-          <mt-spinner type="fading-circle"></mt-spinner>
-          加载中...
-        </p>
-      </div>
-       <!--底部加载完毕样式-->
-      <div class="loadwrap" ref="loadwrap" style="height:1.8rem;" v-else>
-        <p class="nolive">
-          我是有底线的
-        </p>
-      </div>
-    </div>
-    </div>
-    <div class="footer">
-        
-    </div>
 
+        </div>
+    </div>
     <!-- 底部固定下载 -->
-    <!-- <div class="downPanda"> 
+    <div class="downPanda"> 
         <div class="downlogoText">
                 <div class="downPandaImg">
             <img src="~@/assets/pandaLogo.png" alt="">
@@ -66,7 +68,7 @@
         <div class="downzip" @click="downloadApp">
             <span>立即下载</span>
         </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -217,7 +219,10 @@
             }
     },
     mounted() { //第一次请求数据
-      this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
+        console.log(document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top)
+        this.wrapperHeight = (document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top)-60;
+      console.log(this.wrapperHeight)
+
       this.getProduct()
       if(!this.loading){
         this.getProduct();
@@ -226,42 +231,37 @@
   };
 </script>
 
-<style> /*组件样式*/
+<style lang="scss">
+ /*组件样式*/
+    $rem:1rem/40;
     .page-infinite-loading{
         text-align: center;
         height: 1.8rem;
         line-height: 1.8rem;
-        font-size: 0.6rem;
+        font-size: 28*$rem;
+        color: rgb(56, 137, 255);
     }
     .page-infinite-loading div{
         display: inline-block;
         vertical-align: middle;
         margin-right: 5px;
+        color: rgb(56, 137, 255);
+    }
+    .mint-spinner-snake{
+        border-top-color: rgb(56, 137, 255) !important;
+        border-left-color:  rgb(56, 137, 255) !important;
+        border-bottom-color:  rgb(56, 137, 255) !important;
     }
 </style>
 
 <style lang="scss" scoped> /*单页面样式*/
     $rem:1rem/40;
-    .pageOn{
-        // margin-bottom: 88*$rem;
-    }
-    .footer{
-        position: fixed;
-        bottom: 0;
-        z-index: 20;
+    // 内容外层背景
+    .productExternal{
+        padding: 10*$rem;
         width: 100%;
-        background:rgba(57,138,255,0.5);
-        height:1.8rem;
-        overflow: hidden;
-    }
-    // 底部下载
-    .downBottom{
-        position: fixed;
-        bottom: 0rem;
-        z-index: 20;
-        width: 100%;
-        background: red;
-        height:1.8rem;
+        height: auto;
+        background: #f5f5f5;
         overflow: hidden;
     }
     .header{  //顶部header
@@ -269,31 +269,45 @@
         top: 0;
         z-index: 20;
         width: 100%;
-        background: red;
+        background: #3889ff !important;
         height:auto;
         border-bottom: 2*$rem  solid #ececef;
         overflow: hidden;
     }
+
     .page-infinite{
         text-align: center;
         color: #666;
         overflow: hidden;
     }
-
     .nolive{  /*我是有底线的*/
-      text-align: center;
-      height: 1.8rem;
-      line-height: 1.8rem;
-      font-size: 0.6rem;
+        margin:0 auto;
+        width:370*$rem;
+        text-align: center;
+        height: 1.8rem;
+        line-height: 1.8rem;
+        font-size: 0.6rem;
+        color: rgb(56, 137, 255);
+    }
+    .style-two{
+        width:110*$rem;
+        height: 2*$rem;
+        margin-top: 0.9rem;
+        // 56, 137, 255
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(56, 137, 255, 1), rgba(0, 0, 0, 0));
     }
     .page-infinite-wrapper{ /*样式最外层*/
         overflow: scroll;
         -webkit-overflow-scrolling: touch;
         margin-top: 88*$rem;
         .product{
-            background: #ffffff;
+            margin: 0 auto;
+            width: 725*$rem;
             height: auto;
-            border-bottom: 0.25rem solid #f5f5f5;
+            margin-bottom:20*$rem;
+            padding: 30*$rem 20*$rem 15*$rem 20*$rem;
+            background: #fff;
+            overflow: hidden;
             .title{
                 text-align: left;
                 height: 2rem;
@@ -401,17 +415,14 @@
         }
     }  
 
-      .downlogoText{
-
-    }
-
     .downPanda{
         position: fixed;
         bottom: 0;
         width: 100%;
         height: auto;
-        background: rgba(255,255,255,0.85);
-        overflow: hidden
+        background: rgba(255,255,255,1);
+        overflow: hidden;
+        // border-top: 2px solid blueviolet
     }
     .downPandaImg{
         float: left;
@@ -460,12 +471,9 @@
         border-radius: 10*$rem;
         margin-top: 35*$rem;
     }
-
     .downzip span{
         padding: 5px;
         font-size: 32*$rem;
         color:#fff;
     }
-
-    
 </style>

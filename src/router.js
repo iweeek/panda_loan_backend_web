@@ -53,6 +53,11 @@ const demo = resolve => require.ensure([], () => resolve(require('./views/panda/
 const demoClass = resolve => require.ensure([], () => resolve(require('./views/panda/demoClass.vue')), 'demoClass') //测试分类页
 const demo3 = resolve => require.ensure([], () => resolve(require('./views/panda/demo3.vue')), 'demo3') //测试
 
+// 熊猫贷款简版
+const Concisedetails = resolve => require.ensure([], () => resolve(require('./views/concisePanda/Concisedetails.vue')), 'Concisedetails') //简版详情页面
+const Conciselogin = resolve => require.ensure([], () => resolve(require('./views/concisePanda/Conciselogin.vue')), 'Conciselogin') //简版登录
+const ConciseproductList = resolve => require.ensure([], () => resolve(require('./views/concisePanda/ConciseproductList.vue')), 'ConciseproductList') //简版列表
+
 let routes = [{
         path: '/MSSDfeedback',
         component: MSSDFeedback,
@@ -317,6 +322,28 @@ let routes = [{
         name: 'demo3',
         hidden: true
     },
+
+
+    //熊猫贷款简版
+    {
+        path: '/Concisedetails', //详情
+        component: Concisedetails,
+        name: 'Concisedetails',
+        hidden: true
+    },
+    {
+        path: '/Conciselogin', //登录
+        component: Conciselogin,
+        name: 'Conciselogin',
+        hidden: true
+    },
+    {
+        path: '/ConciseproductList', //产品列表
+        component: ConciseproductList,
+        name: 'ConciseproductList',
+        hidden: true
+    }
+
 
 
 
