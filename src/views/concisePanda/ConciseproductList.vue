@@ -9,31 +9,43 @@
                 <!-- 外层背景 -->
                 <div class="productExternal"> 
                     <div v-for="(product,index) in allProduct" :key="product.id,index" class="product" @click="getUrl(product.id,index)"> <!--内容部分-->
-                        <div class="title">
+                        <div class="productIcon"> <!--图标-->
                             <img v-bind:src="product.imgUrl" alt="" class="avatar">
-                            <span class="title-word">{{product.title}}</span>
-                            <span class="isNew" v-if="product.isNew"><span class="isNew-border">新上线</span></span>
-                            <span class="firstTages" v-for="(FirstTag,index) in product.firstTagArray" :key="index"><span class="firstTages-border">{{FirstTag}}</span></span>
                         </div>
-                        <div class="main-mes">
-                            <div class="left-block">
-                                <span class="left-top">最高{{product.edu}}元</span>
-                                <br/>
-                                    <!-- 期限判断 -->
-                                <span class="left-bottom" v-if="product.minTerm == product.maxTerm">期限{{product.maxTerm}}个月</span>
-                                <span class="left-bottom" v-else>期限{{product.minTerm}}~{{product.maxTerm}}个月</span>
+                        <div class="productText"> <!--列表介绍-->
+                            <div class="title">
+                                <span class="title-word">{{product.title}}</span>
+                                <div>
+                                    <!-- <span v-if="product.isNew"><span class="firstTages-border">新上线</span></span> -->
+                                    <span v-for="(FirstTag,index) in product.firstTagArray" :key="index"  class="firstTages-border">{{FirstTag}}</span>
+                                </div>
                             </div>
-                            <div class="middle-block"></div>
-                            <div class="right-block">
-                                <span class="right-top">日利率{{product.dayRate}}%起</span>
-                                <br/>
-                                <span class="right-bottom">{{product.description}}</span>
+                            <div class="main-mes">
+                                <div class="left-block">
+                                    <span class="left-top">最高{{product.edu}}元</span>
+                                    <br/>
+                                        <!-- 期限判断 -->
+                                    <span class="left-bottom" v-if="product.minTerm == product.maxTerm">期限{{product.maxTerm}}个月</span>
+                                    <span class="left-bottom" v-else>期限{{product.minTerm}}~{{product.maxTerm}}个月</span>
+                                </div>
+                                <div class="right-block">
+                                    <span class="right-top">日利率{{product.dayRate}}%起</span>
+                                    <br/>
+                                    <span class="right-bottom">{{product.description}}</span>
+                                    <!-- <span class="right-bottom">五分钟审核，最快30秒放款</span> -->
+                                </div>
                             </div>
-                            <div class="iconlist">
-                                <img src="~@/assets/clickicon.png" class="click-icon">
-                            </div>
+                        </div>
+                        <!-- 右侧箭头 -->
+                        <div class="iconlist">
+                            <img src="~@/assets/rightjian.png" class="click-icon">
+                        </div>
+                        <!-- 新品显示 -->
+                        <div class="newButton" v-if="product.isNew">
+                            <img src="~@/assets/newlist.png">
                         </div>
                     </div>
+
                     <!--底部正在加载html-->
                     <div class="loadwrap" ref="loadwrap" style="height:1.8rem;" v-if="showLoading">
                         <p v-if="loading" class="page-infinite-loading">
@@ -55,7 +67,7 @@
         </div>
     </div>
     <!-- 底部固定下载 -->
-    <div class="downPanda"> 
+    <div class="downPanda" v-if="downshow"> 
         <div class="downlogoText">
                 <div class="downPandaImg">
             <img src="~@/assets/pandaLogo.png" alt="">
@@ -65,8 +77,13 @@
             </div>
             </div>
         </div>
-        <div class="downzip" @click="downloadApp">
-            <span>立即下载</span>
+        <div class="downright">
+            <div class="downzip" @click="downloadApp">
+                <span>立即下载</span>
+            </div>
+            <div class="dowmexit" @click="downExit">
+                <img src="~@/assets/exit.png" alt="">
+            </div>
         </div>
     </div>
   </div>
@@ -120,6 +137,7 @@
         pageSize: 6,
         pageNumber: 1,
         showLoading:true, //底部显示加载还是到底
+        downshow:true
       };
     },
     methods: {
@@ -216,6 +234,10 @@
                     //苹果跳转
                     window.location.href = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1330125527&mt=8";
                 }
+            },
+            downExit(){
+                this.downshow = false;
+                this.wrapperHeight = (document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top);
             }
     },
     mounted() { //第一次请求数据
@@ -293,7 +315,6 @@
         width:110*$rem;
         height: 2*$rem;
         margin-top: 0.9rem;
-        // 56, 137, 255
         background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(56, 137, 255, 1), rgba(0, 0, 0, 0));
     }
     .page-infinite-wrapper{ /*样式最外层*/
@@ -301,64 +322,72 @@
         -webkit-overflow-scrolling: touch;
         margin-top: 88*$rem;
         .product{
+            position: relative;
             margin: 0 auto;
             width: 725*$rem;
             height: auto;
             margin-bottom:20*$rem;
-            padding: 30*$rem 20*$rem 15*$rem 20*$rem;
-            background: #fff;
+            padding: 37*$rem 27*$rem 33*$rem 27*$rem;
+            background: url(~@/assets/listBack1.png) no-repeat;
+            background-size:100% 100%;
+            // background:#fff;
             overflow: hidden;
-            .title{
-                text-align: left;
-                height: 2rem;
-                padding-left: 0.9rem;
-                padding-top: 0.625rem;
-                
+
+            //图标
+            .productIcon{
+                float: left;
+                width:130*$rem;
+                height:130*$rem;
                 .avatar{
-                    border-radius: 50%;
-                    width: 1.4rem;
-                    height: 1.4rem;
-                    border: 1px solid #f5f5f5;
+                    width:100%;
+                    height: 100%;
+                    border-radius: 10%;
                 }
+            }
+            .productText{
+                margin-left:24*$rem;
+                float: left;
+                width: 495*$rem;
+                height:auto;
+                overflow: hidden;
+                .title{
+                    text-align:left;
+                    width: 495*$rem;
+                    height:auto;
                 .title-word{
-                    padding-left: 0.25rem;
-                    padding-bottom: 1rem;
+                    float: left;
+                    padding-top:2*$rem;
                     display: inline-block;
                     vertical-align: middle;
-                    font-size: 0.6rem;
+                    color:rgb(51,51,51);
+                    font-size:30*$rem;
                 }
-                .isNew{
-                    padding-left: 0.25rem;
-                    padding-bottom: 1rem;
+                .firstTages-border{
                     display: inline-block;
                     vertical-align: middle;
-                    font-size: 0.4rem;
-                    .isNew-border{
-                        padding: 0.07rem 0.1rem 0 0.1rem;
-                        color: rgb(236, 18, 16);
-                        border: 1px solid rgb(236, 18, 16);
-                    }
-                }
-                .firstTages{
-                    padding-left: 0.2rem;
-                    padding-bottom: 1rem;
-                    display: inline-block;
-                    vertical-align: middle;
-                    font-size: 0.4rem;
-                    .firstTages-border{
-                        padding: 0.07rem 0.1rem 0 0.1rem;
-                        color: rgb(111, 143, 120);
-                        border: 1px solid rgb(111, 143, 120);;
-                    }
+                    margin-left:20*$rem;
+                    padding:8*$rem 10*$rem;
+                    color: #999;
+                    border: 1px solid #999;
+                    font-size:18*$rem;
+                    border-radius:5px;
+                    line-height:18*$rem;
                 }
             }
             .main-mes{
                 text-align: left;
-                margin: 0.625rem 0.9rem;
+                border-top:1px solid rgb(238,238,238);
+                margin-top:15*$rem;
+                padding-top:15*$rem;
+                overflow: hidden;
                 .left-block{
-                    width: 4.5rem;
+                    float: left;
+                    text-align:left;
+                    width: 180*$rem;
                     vertical-align: top;
                     display: inline-block;
+                    border-right:1px solid rgb(238,238,238);
+                    overflow: hidden;
                     .left-top{
                         display: inline-block;
                         color: rgb(236, 18, 16);
@@ -380,37 +409,43 @@
                     background: rgb(214, 214, 214)
                 }
                 .right-block{
-                    width: 9.4rem;
-                    margin-left: 0.1rem;
-                    vertical-align: top;
-                    display: inline-block;
+                    float: left;
+                    width:315*$rem;
+                    padding-left: 40*$rem;
                     .right-top{
                         display: inline-block;
-                        font-size: 0.6rem;
-                        color: rgb(153, 153, 153);
+                        font-size: 24*$rem;
+                        color:#666;
                     }
                     .right-bottom{
-                        width: 8.8rem;
-                        line-height: 0.7rem;
+                        line-height: 0.8rem;
                         padding-top: 0.3rem;
                         display: inline-block;
-                        // white-space:pre-wrap;
-                        // width:6rem;
-                        // overflow: hidden;
-                        // display: inline-block;
-                        font-size: 0.6rem;
-                        color: rgb(153, 153, 153);
+                        font-size: 24*$rem;
+                        color:#666;
                     }
                 }
-                .iconlist{
-                    vertical-align: center;
-                    display: inline-block;
-                    float: right;
-                    .click-icon{
-                        margin-top: 0.5rem;
-                        width:0.4rem;
-                    }
+            }
+        }
+        .iconlist{
+                position: absolute;
+                top:100*$rem;
+                // right:30*$rem;
+                vertical-align: center;
+                display: inline-block;
+                float: right;
+                .click-icon{
+                    margin-top: 0.5rem;
+                    width:0.4rem;
                 }
+            }
+        .newButton{ //新品
+                position: absolute;
+                top:0rem;
+                right:0rem;
+                    img{
+                        width:65*$rem;
+                    }
             }
         }
     }  
@@ -422,7 +457,6 @@
         height: auto;
         background: rgba(255,255,255,1);
         overflow: hidden;
-        // border-top: 2px solid blueviolet
     }
     .downPandaImg{
         float: left;
@@ -447,6 +481,7 @@
     }
 
     .downText p {
+        text-align:left;
         font-size:24*$rem;
         color:rgb(51,51,51);
         line-height:30px;
@@ -457,23 +492,44 @@
         color:rgb(51,51,51);
         line-height:30px;
     }
+    
+    //关闭下载
+    .dowmexit{
+        margin-right: 42*$rem;
+        float: right;
+        width: auto;
+        height: 120*$rem;
+        line-height: 120*$rem;
+    }
+
+    .dowmexit img{
+        vertical-align: middle;
+        width: 40*$rem;
+    }
+
+    
 
     // 底部下载
-    .downzip{
+    .downright{
         float: right;
-        width: 165*$rem;
-        height: 50*$rem;
-        line-height: 50*$rem;
+    }
+
+    .downzip{
+        float: left;
+        width: 150*$rem;
+        height: 64*$rem;
+        line-height: 64*$rem;
         margin-right: 42*$rem;
         text-align: center;
         vertical-align: middle;
         background:rgb(72,147,255);
         border-radius: 10*$rem;
-        margin-top: 35*$rem;
+        margin-top: 28*$rem;
     }
     .downzip span{
         padding: 5px;
-        font-size: 32*$rem;
+        font-size: 24*$rem;
         color:#fff;
     }
+
 </style>
