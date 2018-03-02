@@ -50,7 +50,8 @@ const ProductList = resolve => require.ensure([], () => resolve(require('./views
 const Detailspage = resolve => require.ensure([], () => resolve(require('./views/panda/Detailspage.vue')), 'Detailspage') //熊猫贷款第三方页面
 const DetailsOfclassification = resolve => require.ensure([], () => resolve(require('./views/panda/DetailsOfclassification.vue')), 'DetailsOfclassification') //熊猫贷款产品分类页面
 
-let routes = [{
+let routes = [
+    {
         path: '/MSSDfeedback',
         component: MSSDFeedback,
         name: '意见反馈',
@@ -99,92 +100,92 @@ let routes = [{
         hidden: true
     },
 
-    {
-        path: '/pakdfeedback',
-        component: PAKDFeedback,
-        name: '意见反馈',
-        hidden: true
-    },
-    {
-        path: '/pakdbindingBankcard',
-        component: PAKDBindingBankcard,
-        name: '绑定银行卡',
-        hidden: true
-    },
-    {
-        path: '/pakdcouponRule',
-        component: PAKDCouponRule,
-        name: '优惠券规则',
-        hidden: true
-    },
-    {
-        path: '/pakdaboutUs',
-        component: PAKDAboutUs,
-        name: '关于我们',
-        hidden: true
-    },
-    {
-        path: '/pakdcoupon',
-        component: PAKDCoupon,
-        name: '我的优惠券',
-        hidden: true
-    },
-    {
-        path: '/pakdhelpCenter',
-        component: PAKDHelpCenter,
-        name: '帮助中心',
-        hidden: true
-    },
-    {
-        path: '/pakdfeeDeductionAgreement',
-        component: PAKDFeeDeductionAgreement,
-        name: '自动划扣协议',
-        hidden: true
-    },
+    // {
+    //     path: '/pakdfeedback',
+    //     component: PAKDFeedback,
+    //     name: '意见反馈',
+    //     hidden: true
+    // },
+    // {
+    //     path: '/pakdbindingBankcard',
+    //     component: PAKDBindingBankcard,
+    //     name: '绑定银行卡',
+    //     hidden: true
+    // },
+    // {
+    //     path: '/pakdcouponRule',
+    //     component: PAKDCouponRule,
+    //     name: '优惠券规则',
+    //     hidden: true
+    // },
+    // {
+    //     path: '/pakdaboutUs',
+    //     component: PAKDAboutUs,
+    //     name: '关于我们',
+    //     hidden: true
+    // },
+    // {
+    //     path: '/pakdcoupon',
+    //     component: PAKDCoupon,
+    //     name: '我的优惠券',
+    //     hidden: true
+    // },
+    // {
+    //     path: '/pakdhelpCenter',
+    //     component: PAKDHelpCenter,
+    //     name: '帮助中心',
+    //     hidden: true
+    // },
+    // {
+    //     path: '/pakdfeeDeductionAgreement',
+    //     component: PAKDFeeDeductionAgreement,
+    //     name: '自动划扣协议',
+    //     hidden: true
+    // },
 
 
-    {
-        path: '/yrjkfeedback',
-        component: YRJKFeedback,
-        name: '意见反馈',
-        hidden: true
-    },
-    {
-        path: '/yrjkbindingBankcard',
-        component: YRJKBindingBankcard,
-        name: '绑定银行卡',
-        hidden: true
-    },
-    {
-        path: '/yrjkcouponRule',
-        component: YRJKCouponRule,
-        name: '优惠券规则',
-        hidden: true
-    },
-    {
-        path: '/yrjkaboutUs',
-        component: YRJKAboutUs,
-        name: '关于我们',
-        hidden: true
-    },
-    {
-        path: '/yrjkcoupon',
-        component: YRJKCoupon,
-        name: '我的优惠券',
-        hidden: true
-    },
-    {
-        path: '/yrjkhelpCenter',
-        component: YRJKHelpCenter,
-        name: '帮助中心',
-        hidden: true
-    },
-    {
-        path: '/yrjkfeeDeductionAgreement',
-        component: YRJKFeeDeductionAgreement,
-        name: '自动划扣协议',
-        hidden: true
-    },
+    // {
+    //     path: '/yrjkfeedback',
+    //     component: YRJKFeedback,
+    //     name: '意见反馈',
+    //     hidden: true
+    // },
+    // {
+    //     path: '/yrjkbindingBankcard',
+    //     component: YRJKBindingBankcard,
+    //     name: '绑定银行卡',
+    //     hidden: true
+    // },
+    // {
+    //     path: '/yrjkcouponRule',
+    //     component: YRJKCouponRule,
+    //     name: '优惠券规则',
+    //     hidden: true
+    // },
+    // {
+    //     path: '/yrjkaboutUs',
+    //     component: YRJKAboutUs,
+    //     name: '关于我们',
+    //     hidden: true
+    // },
+    // {
+    //     path: '/yrjkcoupon',
+    //     component: YRJKCoupon,
+    //     name: '我的优惠券',
+    //     hidden: true
+    // },
+    // {
+    //     path: '/yrjkhelpCenter',
+    //     component: YRJKHelpCenter,
+    //     name: '帮助中心',
+    //     hidden: true
+    // },
+    // {
+    //     path: '/yrjkfeeDeductionAgreement',
+    //     component: YRJKFeeDeductionAgreement,
+    //     name: '自动划扣协议',
+    //     hidden: true
+    // },
 
     {
         path: '/feedBack',
