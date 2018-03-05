@@ -57,7 +57,7 @@
                     <div class="loadwrap" ref="loadwrap" style="height:1.8rem;" v-else>
                         <div class="nolive">
                             <div class="style-two" style="float:left"></div>
-                                我是有底线的
+                                更多产品请下载APP
                             <div class="style-two" style="float:right"></div>
                         </div>
                     </div>
@@ -304,7 +304,7 @@
     }
     .nolive{  /*我是有底线的*/
         margin:0 auto;
-        width:370*$rem;
+        width:450*$rem;
         text-align: center;
         height: 1.8rem;
         line-height: 1.8rem;
@@ -368,7 +368,7 @@
                     margin-left:20*$rem;
                     padding:8*$rem 10*$rem;
                     color: #999;
-                    border: 1px solid #999;
+                    border: 2.1*$rem solid #999;
                     font-size:18*$rem;
                     border-radius:5px;
                     line-height:18*$rem;
@@ -376,7 +376,7 @@
             }
             .main-mes{
                 text-align: left;
-                border-top:1px solid rgb(238,238,238);
+                border-top:2.1*$rem solid rgb(238,238,238);
                 margin-top:15*$rem;
                 padding-top:15*$rem;
                 overflow: hidden;
@@ -386,18 +386,18 @@
                     width: 180*$rem;
                     vertical-align: top;
                     display: inline-block;
-                    border-right:1px solid rgb(238,238,238);
+                    border-right:2.1*$rem solid rgb(238,238,238);
                     overflow: hidden;
                     .left-top{
                         display: inline-block;
                         color: rgb(236, 18, 16);
-                        font-size: 0.8rem;
+                        font-size: 26*$rem;
                     }
                     .left-bottom{
                         padding-top: 0.25rem;
                         display: inline-block;
                         color: rgb(102, 102, 102);
-                        font-size: 0.55rem;
+                        font-size: 26*$rem;
                     }
                 }
                 .middle-block{

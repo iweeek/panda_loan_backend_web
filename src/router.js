@@ -352,7 +352,7 @@ let routes = [
         hidden: true
     },
     {
-        path: '/Conciselogin', //登录
+        path: '/Conciselogin/:Uid', //登录
         component: Conciselogin,
         name: 'Conciselogin',
         hidden: true
