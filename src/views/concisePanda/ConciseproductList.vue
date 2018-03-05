@@ -118,7 +118,7 @@
             }
 	}`
   export default {
-    name:'demo3',
+    name:'Conciselogin',
     components: {
         Xheader
     },
