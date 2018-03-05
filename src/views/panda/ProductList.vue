@@ -98,7 +98,7 @@
                 loadingIf:false,
                 showBack:true,
                 loading:'正在加载',
-                nameText:'商品列表',
+                nameText:'热门推荐',
                 backone:true,
                 productListArrar:[{
                     title:'新品推荐',
@@ -182,7 +182,8 @@
                 }).then(res => {
                     this.loadingIf = false
                     this.loading = '加载更多'
-                    console.log(res.data.data.recommendProducts)
+                    console.log(res)
+                    // console.log(res.data.data.recommendProducts)
                     var array = res.data.data.recommendProducts;
                     for (var i = 0; i < array.length ;i ++) {
                         array[i].firstTagArray = array[i].firstTags.split("|");
@@ -237,21 +238,24 @@
 
     .productList-header{ //头部滑动菜单
         width: 100%;
-        height: 200*$rem;
+        height: auto;
         background: #fff;
-        border-bottom: 10*$rem solid #f5f5f5
+        border-bottom: 10*$rem solid #f5f5f5;
+        overflow: hidden;
     }
 
     .productListHeader-list{
         float: left;
         width: 25%;
-        height: 200*$rem;
+        // height: 200*$rem;
         text-align: center;
-        padding-top: 50*$rem;
+        padding-top: 40*$rem;
+        padding-bottom: 40*$rem;
     }
 
     .productListHeader-list img{
-        width: 50*$rem
+        width: 50*$rem;
+        height: 50*$rem;
     }
 
     .productListHeader-list p{

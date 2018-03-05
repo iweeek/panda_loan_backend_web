@@ -4,17 +4,11 @@
             <Xheader v-if="showBack" :showBack="showBack" :nameText="title" :backone="backone"></Xheader>
         </div>
         <iframe ref="iframe" :src="htmlUrl" width="100%" height="100%"></iframe>
-        <!-- <div>{{htmlUrl}}</div> -->
-    <!-- <iframe name="__SF__0" :src="htmlUrl" data-src="null" sandbox="allow-popups allow-scripts allow-forms allow-pointer-lock allow-popups-to-escape-sandbox allow-same-origin allow-modals allow-top-navigation" scrolling="yes" style="height: 100%; display: block;">
-    </iframe> -->
-       
 	</div>
 </template>
 
-
 <script>
     import Xheader from '../common/X-header'
-
 export default {
     components: {
         Xheader
@@ -23,9 +17,6 @@ export default {
         return {
             htmlUrl:'',
             showAlert: false, //显示提示组件
-            alertText: null, //提示的内容
-            tabs: ["对我感兴趣", "看过我"], //tab数据
-            num:0, 		//tab选种值
             showBack:true,
             nameText:'123',
             backone:true,

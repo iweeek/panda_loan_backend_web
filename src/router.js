@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+
+const Address = resolve => require.ensure([], () => resolve(require('@/views/Address.vue')), 'Address') //地址
+const Setaddress = resolve => require.ensure([], () => resolve(require('@/views/Setaddress.vue')), 'Setaddress') //新增地址
+
 const HomePage = resolve => require.ensure([], () => resolve(require('@/views/HomePage.vue')), 'HomePage')
 const HelpCenterPage = resolve => require.ensure([], () => resolve(require('@/views/HelpCenterPage.vue')), 'HelpCenterPage')
 const About = resolve => require.ensure([], () => resolve(require('@/views/About.vue')), 'About')
@@ -49,8 +53,28 @@ const yearLanding = resolve => require.ensure([], () => resolve(require('./views
 const ProductList = resolve => require.ensure([], () => resolve(require('./views/panda/ProductList.vue')), 'ProductList') //熊猫贷款产品页面
 const Detailspage = resolve => require.ensure([], () => resolve(require('./views/panda/Detailspage.vue')), 'Detailspage') //熊猫贷款第三方页面
 const DetailsOfclassification = resolve => require.ensure([], () => resolve(require('./views/panda/DetailsOfclassification.vue')), 'DetailsOfclassification') //熊猫贷款产品分类页面
+const demo = resolve => require.ensure([], () => resolve(require('./views/panda/demo.vue')), 'demo') //测试首页
+const demoClass = resolve => require.ensure([], () => resolve(require('./views/panda/demoClass.vue')), 'demoClass') //测试分类页
+const demo3 = resolve => require.ensure([], () => resolve(require('./views/panda/demo3.vue')), 'demo3') //测试
+
+// 熊猫贷款简版
+const Concisedetails = resolve => require.ensure([], () => resolve(require('./views/concisePanda/Concisedetails.vue')), 'Concisedetails') //简版详情页面
+const Conciselogin = resolve => require.ensure([], () => resolve(require('./views/concisePanda/Conciselogin.vue')), 'Conciselogin') //简版登录
+const ConciseproductList = resolve => require.ensure([], () => resolve(require('./views/concisePanda/ConciseproductList.vue')), 'ConciseproductList') //简版列表
 
 let routes = [
+    {
+        path: '/Setaddress',
+        component: Setaddress,
+        name: '添加地址',
+        hidden: true
+    },
+    {
+        path: '/Address',
+        component: Address,
+        name: '我的收货地址',
+        hidden: true
+    },
     {
         path: '/MSSDfeedback',
         component: MSSDFeedback,
@@ -297,6 +321,49 @@ let routes = [
         name: '',
         hidden: true
     },
+    {
+        path: '/demo',
+        component: demo,
+        name: 'demo',
+        hidden: true
+    },
+    {
+        path: '/demoClass',
+        component: demoClass,
+        name: 'demoClass',
+        hidden: true
+    },
+    {
+        path: '/demo3',
+        component: demo3,
+        name: 'demo3',
+        hidden: true
+    },
+
+
+    //熊猫贷款简版
+    {
+        path: '/Concisedetails', //详情
+        component: Concisedetails,
+        name: 'Concisedetails',
+        hidden: true
+    },
+    {
+        path: '/Conciselogin/:Uid', //登录
+        component: Conciselogin,
+        name: 'Conciselogin',
+        hidden: true
+    },
+    {
+        path: '/ConciseproductList', //产品列表
+        component: ConciseproductList,
+        name: 'ConciseproductList',
+        hidden: true
+    }
+
+
+
+
 
 ];
 

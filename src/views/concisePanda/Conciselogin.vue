@@ -1,69 +1,36 @@
 <template>
-    <div class="ynlanding-panda ynfirstpage" v-bind:class="{ynsecondpage:download}">
-        <!-- <img src="~@/assets/weidai.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%"> //微贷 -->
-
-        <!-- <img src="~@/assets/XMDKFLOAT.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%" v-if="!iphone"> -->
-        <!-- <img src="~@/assets/xmqb.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%" v-if="iphone"> -->
-		<img src="~@/assets/xmqb.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%">
-
-        <div class="yntop" v-if="!download"></div>
-        <div class="ynmiddle" v-if="!download">
+    <div class="ynlanding-panda ynfirstpage">
+        <div class="yntop"></div> <!--占位div-->
+        <div class="ynmiddle">  <!--表单-->
             <div class="ynallinput">
-                <div style="padding-right:0.1rem;">
-                    <input type="number" class="yncode-input" placeholder="请填写注册手机号" v-model="phone"/>
+                <div> 
+                    <input type="number" class="yncode-input" placeholder="请输入手机号码" v-model="phone"/>
                 </div>
-                <div style="padding-right:0.1rem;">
+                <div>
                     <input type="number" class="ynphone-input" placeholder="请填写短信验证码" v-model="smsCode"/>
                     <input type="button" class="yncode-button" v-bind:class="{yncantClick:is_show}" :value="count+codeButtonText"  @click="getCode()"/>
                 </div>
-
-                <div v-if="picCode" style="padding-right:0.1rem;">
+                <!-- 图片验证码 -->
+                <div v-if="picCode"> 
                     <input type="number" class="ynphone-input" placeholder="请填写验证码" v-model="imaCode"/>
                     <img :src="imageCode" alt="" class="ynimage-code" @click="getImageCode">
                 </div>
-                <div style="padding-right:0.1rem;">
-                    <input type="button" class="yncomfirm-button" v-bind:class="{yncanClick:is_click}" value="立即借款" @click="comfirm()"/>
-                </div>
+                <!-- 协议 -->
                 <div class="yntext-hint">
                     <span class="yntext-left">点击立即借款既表示同意</span><span class="yntext-right" @click="agreement()">
-                        《<span v-if="!iphone" class="yntext-right">熊猫贷款</span><span v-if="iphone" class="yntext-right">熊猫钱包</span>平台服务协议》</span>
+                        《<span class="yntext-right"></span>平台服务协议》</span>
                 </div>
-            </div>
-        </div>
-        <div class="ynbuttom" v-if="!download"></div>
-        <div class="yndownload-top" v-if="download"></div>
-        <div class="yndownload-bottom" v-if="download">
-            <div style="text-align:center">
-                <img src="~@/assets/NYB.png" class="yndownload-button" @click="downloadApp()">
-            </div>
-        </div>
-        <div class="yntwobuttom" v-if="download"></div>
-        <div class="yncopyright"> <!--版权-->
-            <div class="ynfooter">
-                Copyright © 2017 <span v-if="!iphone" class="brand-text">熊猫贷款</span><span v-if="iphone" class="brand-text">熊猫钱包</span> All Rights Reserved
-            </div>
-        </div>
-        <div class="downPanda"> <!--下载样式-->
-            <div class="downlogoText">
-                 <div class="downPandaImg"> <!--logo-->
-                <img src="~@/assets/pandaLogo.png" alt="">
-                <div class="downText">
-                    <p>熊猫钱包</p>
-                    <p>好信用，不逾期</p>
+                <div class="yncomfirm-button" @click="comfirm()">
+                    <!-- <input type="button" class="yncomfirm-button" v-bind:class="{yncanClick:is_click}" value="立即借款" @click="comfirm()"/> -->
                 </div>
-                </div>
-            </div>
 
-            <div class="downzip" @click="downloadApp">
-                <span>立即下载</span>
             </div>
         </div>
+        <!-- 提示框 -->
         <div class="yntoast-wrap">
             <span class="yntoast-msg"></span>
         </div>
     </div>
-
-
 </template>
 
 <script>
@@ -92,7 +59,7 @@
             };
         },
         methods: {
-            toast(msg){
+            toast(msg){ //提示框
                 setTimeout(function(){
                     document.getElementsByClassName('yntoast-wrap')[0].getElementsByClassName('yntoast-msg')[0].innerHTML=msg;
                     var toastTag = document.getElementsByClassName('yntoast-wrap')[0];
@@ -102,21 +69,11 @@
                     }, 100);
                 },500);
             },
-            downloadApp(){
-                var ua = navigator.userAgent.toLowerCase();
-                if (ua.indexOf("iphone") == -1) {
-                    //安卓跳转
-                    window.location.href = "http://sj.qq.com/myapp/detail.htm?apkName=com.mg.pandawalletdaikuan";
-                } else {
-                    //苹果跳转
-                    window.location.href = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1330125527&mt=8";
-                }
-            },
-            agreement(){
+            agreement(){ //跳转协议
                 this.$router.push({ path: '/agreement' })
             },
             toProduct(){ //跳转产品列表页面
-                this.$router.push({ path: '/ProductList' })
+                this.$router.push({ path: '/ConciseproductList' })
             },
             getCode(){
                 //倒计时的时候不能点按钮
@@ -147,9 +104,7 @@
                     }, 1000)
                 }
             },
-
-            smsCaptcha()
-            {
+            smsCaptcha(){
                 // 普通的ajax接口
                 // 使用 application/x-www-form-urlencoded 格式化
                 // 参考：http://blog.csdn.net/fantian001/article/details/70193938
@@ -169,7 +124,6 @@
                     console.log(res)
                 })
             },
-
             comfirm(){
                 if (!this.is_click) {
                     return ;
@@ -179,7 +133,6 @@
                     this.toast('手机号不能为空')
                     return ;
                 } else if (this.smsCode == ''){
-                    //this.lackMessage("短信验证码不能为空")
                     this.toast('短信验证码不能为空')
                     return ;
                 }
@@ -188,7 +141,6 @@
                     this.flagNum ++;
                 } else {
                     if (this.imaCode == '') {
-                        //this.lackMessage("图片验证码不能为空")
                         this.toast('图片验证码不能为空')
                         return ;
                     }
@@ -256,7 +208,6 @@
                 let url = resources.landingPage();
                 var qs = require('qs');
                 let params = { }
-
                 this.$ajax.post(url,qs.stringify(params),{
                     headers: {
                         'Landing-Channel-Uid': this.Uid,
@@ -267,7 +218,7 @@
                     console.log(res)
                 })
             },
-            getImageCode(){
+            getImageCode(){ //获取验证码
                 // 普通的ajax接口
                 // 使用 application/x-www-form-urlencoded 格式化
                 // 参考：http://blog.csdn.net/fantian001/article/details/70193938
@@ -294,12 +245,10 @@
                     this.picCode = true;
                 });
             },
-            //生成用户操作唯一标识
-            createSid(){
+            createSid(){  //生成用户操作唯一标识
                 this.Sid = this.S4()+"-"+this.S4()+"-"+this.S4()+"-"+this.S4()+"-"+(new Date()).valueOf().toString(16);
             },
-            //生成一个4位16进制字符串
-            S4() {  
+            S4() {     //生成一个4位16进制字符串
                 return (((1+Math.random())*0x10000)|0).toString(16).substring(1);  
             },
             phoneType() {
@@ -315,7 +264,7 @@
                 // }
             }
         },
-        mounted: function () {
+        mounted() {
             //alert(this.Uid)
             this.phoneType();
             this.createSid();
@@ -327,7 +276,7 @@
             if(sessionStorage.getItem("userId")==null){
                 console.log('我没有登录奥')
             }else{
-                this.$router.push({ path: '/ProductList' })
+                this.$router.push({ path: '/ConciseproductList' })
                 console.log('已经登录了奥')
             }
         }
@@ -338,52 +287,7 @@
 <style lang="scss" scoped>
     // 底部下载样式
     $rem:1rem/40;
-
-    .downlogoText{
-
-    }
-
-    .downPanda{
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        height: auto;
-        background: rgba(255,255,255,0.85);
-        overflow: hidden
-    }
-    .downPandaImg{
-        float: left;
-        width: auto;
-        height: 120*$rem;
-        line-height: 120*$rem;
-        margin-left: 42*$rem;
-    }
-
-    .downPandaImg img{
-        width: 77px;
-        vertical-align: middle
-    }
-
-    .downText{
-        margin-left: 10px;
-        margin-top: 30px;
-        float: right;
-        width: auto;
-        height: auto;
-        line-height: 10*$rem;
-    }
-
-    .downText p {
-        font-size:24*$rem;
-        color:rgb(51,51,51);
-        line-height:30px;
-    }
-
-    .downText p:last-child{
-        font-size:18*$rem;
-        color:rgb(51,51,51);
-        line-height:30px;
-    }
+    $height:(682/1438)*100;
 
     // 底部下载
     .downzip{
@@ -398,13 +302,13 @@
         border-radius: 10*$rem;
         margin-top: 35*$rem;
     }
-
     .downzip span{
         padding: 5px;
         font-size: 32*$rem;
         color:#fff;
     }
 
+    // 提示框样式
     .yntoast-wrap{
         opacity: 0;
         position: fixed;
@@ -422,8 +326,6 @@
         letter-spacing: 1px;
         border-radius: 0.2rem;
         color: #fff
-        //color: #ffeeb9;
-        //border:1px solid #ffeeb9;
     }
     .yntoastAnimate{
         animation: toastKF 2s;
@@ -435,100 +337,53 @@
         75% {opacity: 1; z-index: 9999}
         100% {opacity: 0; z-index: 0}
     }
+
+    // 背景图以及最大外部div
     .ynfirstpage{
-        background: url(~@/assets/mnyf.jpg) no-repeat scroll;
+        background: url(~@/assets/conciseloginBackgroungimg2.png) no-repeat scroll;
         background-size:100% 100%;
-        height: 1400px;
-        min-height: 32rem;
-    }
-    .ynsecondpage{
-        background: url(~@/assets/mnys.jpg) no-repeat scroll;
-        background-size:100% 100%;
-        height: 32rem;
+        height: 1438px;
+        min-height:1438*$rem;
     }
     .ynlanding-panda{
-        position: absolute;
-        width: 100%;
-        top: 1px;
-        bottom: 1px;
-        .yndownload-top{
-            height: 60%;
-            //background: white;
-            .yntop-pic{
-                width: 100%;
-                height: 100%;
-            }
+        .yntop{ //占位样式
+            height:645*$rem;
         }
-        .yndownload-bottom{
-            height: 12%;
-            .yndownload-button{
-                //background: #BE2E1B;
-                //color: #FFFFFF;
-                //font-size: 0.8rem;
-                margin-top: 1.5rem;
-                height: 3rem;
-                width: 9.4rem;
-            }
-        }
-        .yntwobuttom{
-            margin-bottom: 1px;
-            height: 23%;
-        }
-
-        .yntop{
-            height: 60%;
-            //background: white;
-            .yntop-pic{
-                width: 100%;
-                height: 100%;
-            }
-        }
-
         .ynmiddle{
-            height: 33%;
-            //background: white;
-            .yntwoinput{
-                margin-top: 0rem;
-            }
-            .ynthreeinput{
-                margin-top: 0.2rem;
-            }
+            padding-top:70*$rem; 
+            height:auto;
+            overflow: hidden;
             .ynallinput{
-                position: relative;
-                top: 50%;
-                transform: translateY(-50%);
                 //上面三行垂直居中
                 text-align:center;
                 // height: 3rem;
                 .ynphone-input{
                     background: #FFFFFF;
-                    height: 2.1rem;
-                    width: 7.4rem;//1
-                    margin-top: 0.2rem;
-                    padding-top: 0.2rem;
-                    padding-left: 1rem;
+                    height: 86*$rem;
+                    width: 333*$rem;//1
+                    margin-top: 34*$rem;
+                    padding-left:30*$rem;
                     //border:1px solid #d3d3d6;
                     border-radius: 0.2rem;
                     font-size: 0.7rem;
-                    line-height: 0.7rem;
+                    line-height:86*$rem;
                 }
                 .ynimage-code{
                     vertical-align:middle;//img图片和div在同一排
-                    height: 2.1rem;
-                    width: 3.9rem;
+                    height: 86*$rem;
+                    width: 190*$rem;//1
                     margin-left: 0.1rem;
-                    margin-top: 0.2rem;
-                    //border:1px solid #d3d3d6;
+                    margin-top: 34*$rem;
                     border-radius: 0.2rem;
                 }
                 .yncode-button{
-                    background: #b9121f;
-                    color: #FFFFFF;
+                    background:rgb(255,216,64);
+                    color: rgb(224,89,37);
                     font-size: 0.7rem;
                     height: 2.1rem;
-                    width: 3.9rem;
+                    width: 190*$rem;
                     margin-left: 0.05rem;
-                    margin-top: 0.2rem;
+                    margin-top: 34*$rem;
                     //border:1px solid #d3d3d6;
                     border-radius: 0.2rem;
                 }
@@ -538,26 +393,20 @@
                 }
                 .yncode-input{
                     background: #FFFFFF;
-                    height: 2.1rem;
-                    width: 11.5rem;
-                    margin-top: 0.2rem;
-                    padding-top: 0.2rem;
-                    padding-left: 1rem;
-                    //border:1px solid #d3d3d6;
+                    height: 86*$rem;
+                    width: 535*$rem;
+                    padding-left:30*$rem;
                     border-radius: 0.2rem;
                     font-size: 0.7rem;
-                    line-height: 0.7rem;
+                    line-height: 86*$rem;
                 }
                 .yncomfirm-button{
-                    background: #d3d3d6;
-                    color: #FFFFFF;
-                    font-size: 0.8rem;
-                    margin-top: 0.2rem;
-                    height: 2rem;
-                    width: 11.5rem;
-                    border-radius: 1rem;
-                    //border:1px solid #d3d3d6;
-                    border-radius: 0.2rem;
+                    margin: 0 auto;
+                    background: url(~@/assets/liji.png) no-repeat;
+                    background-size:100% 100%;
+                    margin-top:24*$rem;
+                    height:100*$rem;
+                    width: 460*$rem;
                 }
                 .yncanClick{
                     background: #ffbb2b;
@@ -574,71 +423,25 @@
                     color: #d3d3d6;
                     font-size: 0.7rem;
                 }
-                .yntext-hint{
-                    //position: absolute;
-                    // align-content: bottom;
-                    // bottom: 0.4rem;
-                    // position: absolute;
-                    // margin-left: 14%;
-                    margin-top: 1rem;
+                .yntext-hint{ //协议
+                    margin: 0 auto;
+                    width: 540*$rem;
+                    height: auto;
+                    overflow: hidden;
+                    margin-top:24*$rem;
                     text-align: center;
-
+                    padding-top: 0.1rem;
+                    overflow: hidden;
                     .yntext-left{
-                        color: #999999;
-                        font-size: 0.4rem;
+                        color: #fff;
+                        font-size: 22*$rem;
                     }
                     .yntext-right{
-                        color: #00abf3;
-                        font-size: 0.4rem;
-                    }
-                }
-
-            }
-
-            .yndownload{
-                margin-top: 1.7rem;
-                .yndown{
-                    margin-left: 1.5rem;
-                    background: #333333;
-                    float: left;
-                    width: 7.5rem;
-                    height: 3rem;
-                    border-radius: 0.2rem;
-                    .ynpic{
-                        text-align: center;
-                        margin-top: 0.4rem;
-                    }
-                    .yndownload-text{
-                        text-align: center;
-                        color: #FFFFFF;
-                        font-size: 0.7rem;
-                        margin-top: 0.3rem;
+                        color: #ffb800;
+                        font-size: 22*$rem;
                     }
                 }
             }
         }
-
-        .ynbuttom{
-            margin-bottom: 1px;
-            height: 2%;
-        }
-        .yncopyright{
-            height: 5%;
-            .ynfooter{
-                position: relative;
-                top: 60%;
-                transform: translateY(-50%);
-                //margin-top:-1rem;
-                //height:0.5rem;
-                text-align: center;
-                color: #d9dadd;
-                font-size: 0.5rem;
-                .brand-text {
-                    color: #d9dadd;
-                    font-size: 0.5rem;
-                }
-            }
-        }
-
     }
 </style>
