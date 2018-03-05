@@ -7,7 +7,6 @@
     <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon" />
     <!-- UI组件库 1.0 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <meta "apple-itunes-app"content "app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL">
 </head>
 
 <body>
@@ -15,6 +14,14 @@
     </div>
     <!-- built files will be auto injected -->
 </body>
+<script>
+    // 禁止页面双指缩放
+    document.documentElement.addEventListener('touchstart', function(event) {
+        if (event.touches.length > 1) {
+            event.preventDefault();
+        }
+    }, false);
+</script>
 <!-- <script>
 	(function () {
 		if (location.hash !== '#/help') {

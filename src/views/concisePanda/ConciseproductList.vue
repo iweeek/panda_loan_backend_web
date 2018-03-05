@@ -1,8 +1,8 @@
 <template> <!--基础部分-->
   <div class="page-infinite">
-    <div class="header" v-show="noHeader">
+    <!-- <div class="header" v-show="noHeader">
         <Xheader v-if="showBack" :showBack="showBack" :nameText="nameText" :backone="backone"   :backtwo="backtwo" ></Xheader>
-    </div>
+    </div> -->
     <div class="infiniteWai"> <!--组件外层div为了现在底部下载熊猫贷款特加的-->
         <div class="page-infinite-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }"> <!--最外层盒子-->
             <div class="page-infinite-list" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="50" >
@@ -320,7 +320,7 @@
     .page-infinite-wrapper{ /*样式最外层*/
         overflow: scroll;
         -webkit-overflow-scrolling: touch;
-        margin-top: 88*$rem;
+        // margin-top: 88*$rem;
         .product{
             position: relative;
             margin: 0 auto;

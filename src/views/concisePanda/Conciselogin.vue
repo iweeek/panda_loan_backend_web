@@ -272,13 +272,13 @@
             //alert(this.Sid)
         },
         created(){
-            // console.log(sessionStorage.getItem("userId"))
-            // if(sessionStorage.getItem("userId")==null){
-            //     console.log('我没有登录奥')
-            // }else{
-            //     this.$router.push({ path: '/ProductList' })
-            //     console.log('已经登录了奥')
-            // }
+            console.log(sessionStorage.getItem("userId"))
+            if(sessionStorage.getItem("userId")==null){
+                console.log('我没有登录奥')
+            }else{
+                this.$router.push({ path: '/ConciseproductList' })
+                console.log('已经登录了奥')
+            }
         }
     };
 
@@ -340,7 +340,7 @@
 
     // 背景图以及最大外部div
     .ynfirstpage{
-        background: url(~@/assets/conciseloginBackgroungimg.png) no-repeat scroll;
+        background: url(~@/assets/conciseloginBackgroungimg2.png) no-repeat scroll;
         background-size:100% 100%;
         height: 1438px;
         min-height:1438*$rem;
@@ -362,11 +362,11 @@
                     height: 86*$rem;
                     width: 333*$rem;//1
                     margin-top: 34*$rem;
-                    padding-left: 1rem;
+                    padding-left:30*$rem;
                     //border:1px solid #d3d3d6;
                     border-radius: 0.2rem;
                     font-size: 0.7rem;
-                    line-height: 0.7rem;
+                    line-height:86*$rem;
                 }
                 .ynimage-code{
                     vertical-align:middle;//img图片和div在同一排
@@ -395,7 +395,6 @@
                     background: #FFFFFF;
                     height: 86*$rem;
                     width: 535*$rem;
-                    padding-top: 0.2rem;
                     padding-left:30*$rem;
                     border-radius: 0.2rem;
                     font-size: 0.7rem;
@@ -426,18 +425,20 @@
                 }
                 .yntext-hint{ //协议
                     margin: 0 auto;
-                    width: 535*$rem;
+                    width: 540*$rem;
                     height: auto;
                     overflow: hidden;
                     margin-top:24*$rem;
-                    text-align: left;
+                    text-align: center;
+                    padding-top: 0.1rem;
+                    overflow: hidden;
                     .yntext-left{
                         color: #fff;
-                        font-size: 0.2rem;
+                        font-size: 22*$rem;
                     }
                     .yntext-right{
-                        color: #00abf3;
-                        font-size: 0.2rem;
+                        color: #ffb800;
+                        font-size: 22*$rem;
                     }
                 }
             }

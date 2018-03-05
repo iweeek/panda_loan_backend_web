@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+
+const Address = resolve => require.ensure([], () => resolve(require('@/views/Address.vue')), 'Address') //地址
+const Setaddress = resolve => require.ensure([], () => resolve(require('@/views/Setaddress.vue')), 'Setaddress') //新增地址
+
 const HomePage = resolve => require.ensure([], () => resolve(require('@/views/HomePage.vue')), 'HomePage')
 const HelpCenterPage = resolve => require.ensure([], () => resolve(require('@/views/HelpCenterPage.vue')), 'HelpCenterPage')
 const About = resolve => require.ensure([], () => resolve(require('@/views/About.vue')), 'About')
@@ -58,7 +62,23 @@ const Concisedetails = resolve => require.ensure([], () => resolve(require('./vi
 const Conciselogin = resolve => require.ensure([], () => resolve(require('./views/concisePanda/Conciselogin.vue')), 'Conciselogin') //简版登录
 const ConciseproductList = resolve => require.ensure([], () => resolve(require('./views/concisePanda/ConciseproductList.vue')), 'ConciseproductList') //简版列表
 
-let routes = [{
+let routes = [
+
+
+    {
+        path: '/Setaddress',
+        component: Setaddress,
+        name: '添加地址',
+        hidden: true
+    },
+    {
+        path: '/Address',
+        component: Address,
+        name: '我的收货地址',
+        hidden: true
+    },
+
+    {
         path: '/MSSDfeedback',
         component: MSSDFeedback,
         name: '意见反馈',
