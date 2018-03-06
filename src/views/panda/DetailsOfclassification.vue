@@ -88,6 +88,8 @@
         ){
             recommendProducts(
                 productTypeId: $productTypeId
+                packageName: "com.h5"
+                channelId: "99"
             ){
                 id
                 title
@@ -195,7 +197,7 @@
             let params = {
                 "productTypeId": this.$route.query.id,
                 "packageName": "com.h5",
-                "channelId": "14"
+                "channelId": "99"
             }
             this.$ajax.post(`${resources.graphQlApi}`,{
                 'query': `${recommendProductQuery}`,

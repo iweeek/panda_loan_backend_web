@@ -61,7 +61,7 @@
                 pageNumber:$pageNumber
                 pageSize:$pageSize
                 packageName: "com.h5"
-                channelId: "14"
+                channelId: "99"
             ){
                 id
                 title
@@ -167,7 +167,7 @@
                     "pageSize": this.pageSize,
                     "pageNumber": this.pageNumber,
                     "packageName": "com.h5",
-                    "channelId": "14"
+                    "channelId": "99"
                 };
                 this.$ajax.post(`${resources.graphQlApi}`, {
                     'query': `${productQuery}`,

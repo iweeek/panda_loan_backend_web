@@ -166,7 +166,7 @@
                     "pageSize": this.pageSize,
                     "pageNumber": this.pageNumber,
                     "packageName": "com.h5",
-                    "channelId": "14"
+                    "channelId": "99"
                 };
                 setTimeout(() => { //延时请求数据
                 this.$ajax.post(`${resources.graphQlApi}`, {
