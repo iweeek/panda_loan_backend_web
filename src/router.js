@@ -1,10 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+// 手机回收H5页面
+const Address = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/Address.vue')), 'Address') //地址
+const Setaddress = resolve => require.ensure([], () => resolve(require('@/views/mobilePhonerecycling/Setaddress.vue')), 'Setaddress') //新增地址
+const HelpCenter = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/HelpCenter.vue')), 'HelpCenter')
+const Phonerecyclingcoupon = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/MyCoupon.vue')), 'Phonerecyclingcoupon')
+const BindingBankcard = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/BindingBankcard.vue')), 'BindingBankcard')
+const mobilePhonerecyclingCoupon = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/Coupon.vue')), 'mobilePhonerecyclingCoupon') //增价卷
 
-const Address = resolve => require.ensure([], () => resolve(require('@/views/Address.vue')), 'Address') //地址
-const Setaddress = resolve => require.ensure([], () => resolve(require('@/views/Setaddress.vue')), 'Setaddress') //新增地址
-
+// 其他
 const HomePage = resolve => require.ensure([], () => resolve(require('@/views/HomePage.vue')), 'HomePage')
 const HelpCenterPage = resolve => require.ensure([], () => resolve(require('@/views/HelpCenterPage.vue')), 'HelpCenterPage')
 const About = resolve => require.ensure([], () => resolve(require('@/views/About.vue')), 'About')
@@ -16,22 +21,18 @@ const WeidaiAgreement = resolve => require.ensure([], () => resolve(require('@/v
 const LoanRate = resolve => require.ensure([], () => resolve(require('@/views/LoanRate.vue')), 'LoanRate')
 const NewYearLanding = resolve => require.ensure([], () => resolve(require('@/views/NewYearLanding.vue')), 'NewYearLanding')
 const Product = resolve => require.ensure([], () => resolve(require('@/views/Product.vue')), 'Product')
-const HelpCenter = resolve => require.ensure([], () => resolve(require('./views/HelpCenter.vue')), 'HelpCenter')
 const Coupon = resolve => require.ensure([], () => resolve(require('./views/Coupon.vue')), 'Coupon')
-const MyCoupon = resolve => require.ensure([], () => resolve(require('./views/MyCoupon.vue')), 'MyCoupon')
 const Feedback = resolve => require.ensure([], () => resolve(require('./views/Feedback.vue')), 'Feedback')
-const BindingBankcard = resolve => require.ensure([], () => resolve(require('./views/BindingBankcard.vue')), 'BindingBankcard')
 const AboutUs = resolve => require.ensure([], () => resolve(require('./views/AboutUs.vue')), 'AboutUs')
-
 const MSSDHelpCenter = resolve => require.ensure([], () => resolve(require('./views/mashangsudai/HelpCenter.vue')), 'MSSDHelpCenter')
-const MSSDCoupon = resolve => require.ensure([], () => resolve(require('./views/mashangsudai/Coupon.vue')), 'MSSDCoupon')
+const MSSDCoupon = resolve => require.ensure([], () => resolve(require('@/views/mashangsudai/Coupon.vue')), 'MSSDCoupon')
 const MSSDCouponRule = resolve => require.ensure([], () => resolve(require('./views/mashangsudai/CouponRule.vue')), 'MSSDCouponRule')
 const MSSDFeedback = resolve => require.ensure([], () => resolve(require('./views/mashangsudai/Feedback.vue')), 'MSSDFeedback')
 const MSSDBindingBankcard = resolve => require.ensure([], () => resolve(require('./views/mashangsudai/BindingBankcard.vue')), 'MSSDBindingBankcard')
 const MSSDAboutUs = resolve => require.ensure([], () => resolve(require('./views/mashangsudai/AboutUs.vue')), 'MSSDAboutUs')
+const MSSDcoupon = resolve => require.ensure([], () => resolve(require('./views/mashangsudai/MyCoupon.vue')), 'MSSDcoupon')
 const MSSDFeeDeductionAgreement = resolve => require.ensure([], () => resolve(require('./views/mashangsudai/FeeDeductionAgreement.vue')), 'MSSDFeeDeductionAgreement')
 const NewYearActivity = resolve => require.ensure([], () => resolve(require('./views/mashangsudai/NewYearActivity.vue')), 'NewYearActivity')
-
 const PAKDHelpCenter = resolve => require.ensure([], () => resolve(require('./views/pingankuaidai/HelpCenter.vue')), 'PAKDHelpCenter')
 const PAKDCoupon = resolve => require.ensure([], () => resolve(require('./views/pingankuaidai/Coupon.vue')), 'PAKDCoupon')
 const PAKDCouponRule = resolve => require.ensure([], () => resolve(require('./views/pingankuaidai/CouponRule.vue')), 'PAKDCouponRule')
@@ -39,7 +40,6 @@ const PAKDFeedback = resolve => require.ensure([], () => resolve(require('./view
 const PAKDBindingBankcard = resolve => require.ensure([], () => resolve(require('./views/pingankuaidai/BindingBankcard.vue')), 'PAKDBindingBankcard')
 const PAKDAboutUs = resolve => require.ensure([], () => resolve(require('./views/pingankuaidai/AboutUs.vue')), 'PAKDAboutUs')
 const PAKDFeeDeductionAgreement = resolve => require.ensure([], () => resolve(require('./views/pingankuaidai/FeeDeductionAgreement.vue')), 'PAKDFeeDeductionAgreement')
-
 const YRJKHelpCenter = resolve => require.ensure([], () => resolve(require('./views/yirenjiekuan/HelpCenter.vue')), 'YRJKHelpCenter')
 const YRJKCoupon = resolve => require.ensure([], () => resolve(require('./views/yirenjiekuan/Coupon.vue')), 'YRJKCoupon')
 const YRJKCouponRule = resolve => require.ensure([], () => resolve(require('./views/yirenjiekuan/CouponRule.vue')), 'YRJKCouponRule')
@@ -75,6 +75,13 @@ let routes = [{
         hidden: true
     },
     {
+        path: '/mobilePhonerecyclingCoupon',
+        component: mobilePhonerecyclingCoupon,
+        name: '我的增价卷',
+        hidden: true
+    },
+
+    {
         path: '/MSSDfeedback',
         component: MSSDFeedback,
         name: '意见反馈',
@@ -96,6 +103,12 @@ let routes = [{
         path: '/MSSDaboutUs',
         component: MSSDAboutUs,
         name: '关于我们',
+        hidden: true
+    },
+    {
+        path: '/Phonerecyclingcoupon',
+        component: Phonerecyclingcoupon,
+        name: '我的加价卷',
         hidden: true
     },
     {
@@ -222,12 +235,12 @@ let routes = [{
         name: '绑定银行卡',
         hidden: true
     },
-    {
-        path: '/myCoupon',
-        component: MyCoupon,
-        name: '优惠券规则',
-        hidden: true
-    },
+    // {
+    //     path: '/myCoupon',
+    //     component: MyCoupon,
+    //     name: '优惠券规则',
+    //     hidden: true
+    // },
     {
         path: '/aboutUs',
         component: AboutUs,

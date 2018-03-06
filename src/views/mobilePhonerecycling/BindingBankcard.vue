@@ -18,7 +18,7 @@
 	</div>
 </template>
 <script>
-import alertTip from '../common/alertTip'
+import alertTip from '../../common/alertTip'
 export default {
 	components: {
         alertTip,

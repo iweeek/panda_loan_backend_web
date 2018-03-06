@@ -255,6 +255,10 @@
       if(!this.loading){
         this.getProduct();
       }
+    },
+    created(){
+        document.documentElement.scrollTop=0
+        document.body.scrollTop = 0
     }
   };
 </script>
@@ -471,7 +475,7 @@
         bottom: 0;
         width: 100%;
         height: 120*$rem;
-        background:rgba(255,255,255,0.5) !important;
+        background:rgba(255,255,255,1);
         overflow: hidden;
     }
     .downPandaImg{

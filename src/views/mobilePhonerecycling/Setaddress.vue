@@ -198,7 +198,7 @@
         line-height: 100*$rem;
         font-size: 28*$rem ;
         color: #999;
-        background: #fff url('../assets/localtions.png') no-repeat right center;
+        background: #fff url('../../assets/localtions.png') no-repeat right center;
         background-size:20*$rem;
         background-position-x: 550*$rem;
     }
