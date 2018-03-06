@@ -60,6 +60,8 @@
             recommendProducts(
                 pageNumber:$pageNumber
                 pageSize:$pageSize
+                packageName: "com.h5"
+                channelId: "14"
             ){
                 id
                 title
