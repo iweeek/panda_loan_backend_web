@@ -160,7 +160,7 @@
                 })
             },
             getProduct() { //请求数据
-                             this.loadingIf = true
+                this.loadingIf = true
                 let params = {
                     "pageSize": this.pageSize,
                     "pageNumber": this.pageNumber,
