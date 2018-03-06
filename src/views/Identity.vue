@@ -37,7 +37,7 @@
         </mt-picker>
       </div>
     </div>
-    <div class="identity-info-button" @click="applyNow">立即申请</div>
+    <div class="identity-info-button" @click="applyNow" v-bind:class="{unclick:unclick}">立即申请</div>
   </div>
 </template>
 
@@ -80,6 +80,7 @@ import resources from '../resources'
 export default {
   data () {
     return {
+      unclick: false,
       personName: '',
       personCard: '',
       picker1: false,
@@ -98,6 +99,7 @@ export default {
       education: [{
         values: ['博士及以上', '硕士', '大学本科', '大学专科', '高中/中专/技校', '初中', '初中以下']
       }],
+      aCity:{11:"北京",12:"天津",13:"河北",14:"山西",15:"内蒙古",21:"辽宁",22:"吉林",23:"黑龙江",31:"上海",32:"江苏",33:"浙江",34:"安徽",35:"福建",36:"江西",37:"山东",41:"河南",42:"湖北",43:"湖南",44:"广东",45:"广西",46:"海南",50:"重庆",51:"四川",52:"贵州",53:"云南",54:"西藏",61:"陕西",62:"甘肃",63:"青海",64:"宁夏",65:"新疆",71:"台湾",81:"香港",82:"澳门",91:"国外"} 
     }
   },
   methods: {
@@ -126,11 +128,48 @@ export default {
       //       console.log(response);
       //     });
       // },
+      isCardID(sId){
+        var iSum=0 ;
+        var info="" ;
+        if(!/^\d{17}(\d|x)$/i.test(sId)) return "你输入的身份证长度或格式错误";
+        sId=sId.replace(/x$/i,"a");
+        if(this.aCity[parseInt(sId.substr(0,2))]==null) return "你的身份证地区非法";
+        var sBirthday=sId.substr(6,4)+"-"+Number(sId.substr(10,2))+"-"+Number(sId.substr(12,2));
+        var d=new Date(sBirthday.replace(/-/g,"/")) ;
+        if(sBirthday!=(d.getFullYear()+"-"+ (d.getMonth()+1) + "-" + d.getDate()))return "身份证上的出生日期非法";
+        for(var i = 17;i>=0;i --) iSum += (Math.pow(2,i) % 11) * parseInt(sId.charAt(17 - i),11) ;
+        if(iSum%11!=1) return "你输入的身份证号非法";
+        //aCity[parseInt(sId.substr(0,2))]+","+sBirthday+","+(sId.substr(16,1)%2?"男":"女");//此次还可以判断出输入的身份证号的人性别
+        return true;
+      },
+      countDown() {
+        var count = 5;
+          var timer = setInterval(() => {
+            if (count > 0 ) {
+                count--;
+            } else {
+              this.unclick = false;
+              clearInterval(timer);
+            }
+          }, 1000)
+      },
       applyNow () {
+        if (this.unclick) {
+          return;
+        }
         var ua = navigator.userAgent.toLowerCase();
         var isIphone = true;
         if (ua.indexOf("iphone") == -1) {
           isIphone = false;
+        }
+
+        if (this.isCardID(this.personCard) != true) {
+          if (isIphone) {
+            window.webkit.messageHandlers.showAlert.postMessage(this.isCardID(this.personCard)); 
+          } else {
+            panda.showAlert(this.isCardID(this.personCard));
+          }
+          return;
         }
 
         if (this.personName == '') {
@@ -141,15 +180,6 @@ export default {
             panda.showAlert("姓名不能为空");
             return;
           }
-        }
-
-        if (this.personCard == '' || this.personCard.length != 18) {
-          if (isIphone) {
-            window.webkit.messageHandlers.showAlert.postMessage("身份证信息不正确"); 
-          } else {
-            panda.showAlert("身份证信息不正确");
-          }
-          return;
         }
         
         if (this.picker1Value == '请选择') {
@@ -188,8 +218,16 @@ export default {
         };
 
         if (isIphone) {
+          //不可点击
+          this.unclick = true;
+          this.countDown();
+
           window.webkit.messageHandlers.verifyIdentity.postMessage(params);
         } else {
+          //不可点击
+          this.unclick = true;
+          this.countDown();
+
           panda.verifyIdentity(this.personName, this.personCard, this.picker3Value, this.picker2Value, this.picker1Value);
         }
         
@@ -222,7 +260,7 @@ export default {
         //   }
         // })
     }
-  }
+  },
 }
 </script>
 
@@ -230,7 +268,9 @@ export default {
   #app{
       background: #f2f3f9;
   }
-  
+  .unclick{
+    background: #999999 !important;
+  }
   .identity {
     background: #f2f3f9;
     .identity-info-top {
