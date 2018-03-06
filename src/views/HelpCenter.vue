@@ -93,7 +93,7 @@
                 line-height: 2rem;
                 font-size: 0.65rem;
                 padding-left: 1rem;
-                color: rgb(129, 175, 252);
+                color: #fedb31;
             }
         }
         .help-middle{
@@ -102,7 +102,7 @@
                 .middle-border{
                     background-color: #f5f5f5;
                     width: 100%;
-                    height: 2px;
+                    height:2.1px;
                     margin-left: 1rem;
                 }
                 .middlet-left{
@@ -130,7 +130,7 @@
                     .middle-point{
                         margin-left: 1rem;
                         display: inline-block;
-                        color: rgb(129, 175, 252);
+                        color: #fedb31;
                         line-height: 2rem;
                         //font-size: 0.1rem;
                     }

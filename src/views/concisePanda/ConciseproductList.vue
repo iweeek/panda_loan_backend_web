@@ -196,15 +196,18 @@
                     'Package-Name': 'com.h5'
                 }
                 }).then(res => {
+                   
                     var array = res.data.data.recommendProducts;
                     for (var i = 0; i < array.length ;i ++) {
                         array[i].firstTagArray = array[i].firstTags.split("|");
                     }
+                    console.log(res.data.data.recommendProducts.length)
                     if(res.data.data.recommendProducts.length==0){
                         this.showLoading = false
                         return
                     }
                     this.allProduct = this.allProduct.concat(array);
+                    console.log(this.allProduct)
                     this.loading = false;
                     this.allProduct.forEach(item => {
                     if (item.maxAmount > 10000) {
@@ -219,11 +222,12 @@
                     }
                     });
                 })
-                },1000);
+                },700);
             },
             loadMore() { //底部判断
                 if(!this.loading) {
                     this.pageNumber ++
+                    console.log(this.pageNumber)
                     this.getProduct();
                 }
             },
@@ -358,22 +362,26 @@
                     height:auto;
                 .title-word{
                     float: left;
-                    padding-top:2*$rem;
                     display: inline-block;
-                    vertical-align: middle;
+                    width: auto;
+                    height: 40*$rem;
+                    line-height: 42*$rem;
+                    overflow: hidden;
                     color:rgb(51,51,51);
                     font-size:30*$rem;
                 }
                 .firstTages-border{
                     display: inline-block;
-                    vertical-align: middle;
-                    margin-left:20*$rem;
-                    padding:8*$rem 10*$rem;
-                    color: #999;
-                    border: 2.1*$rem solid #999;
+                    width: auto;
+                    padding: 0rem 10*$rem;
+                    height: 40*$rem;
+                    line-height: 41*$rem;
+                    border:2.1*$rem solid #999;
+                    overflow: hidden;
+                    border-radius: 5px;
                     font-size:18*$rem;
-                    border-radius:5px;
-                    line-height:18*$rem;
+                    color: #999;
+                    margin-left:20*$rem;
                 }
             }
             .main-mes{
@@ -391,9 +399,15 @@
                     border-right:2.1*$rem solid rgb(238,238,238);
                     overflow: hidden;
                     .left-top{
+                        // padding-top:2px;
                         display: inline-block;
                         color: rgb(236, 18, 16);
+                        width: auto;
+                        height: auto;
+                        height: 26*$rem;
+                        line-height:32*$rem;
                         font-size: 26*$rem;
+                        // line-height:32*$rem;
                     }
                     .left-bottom{
                         padding-top: 0.25rem;
@@ -456,8 +470,8 @@
         position: fixed;
         bottom: 0;
         width: 100%;
-        height: auto;
-        background: rgba(255,255,255,1);
+        height: 120*$rem;
+        background:rgba(255,255,255,0.5) !important;
         overflow: hidden;
     }
     .downPandaImg{

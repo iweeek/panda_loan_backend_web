@@ -62,8 +62,7 @@ const Concisedetails = resolve => require.ensure([], () => resolve(require('./vi
 const Conciselogin = resolve => require.ensure([], () => resolve(require('./views/concisePanda/Conciselogin.vue')), 'Conciselogin') //简版登录
 const ConciseproductList = resolve => require.ensure([], () => resolve(require('./views/concisePanda/ConciseproductList.vue')), 'ConciseproductList') //简版列表
 
-let routes = [
-    {
+let routes = [{
         path: '/Setaddress',
         component: Setaddress,
         name: '添加地址',
@@ -345,19 +344,19 @@ let routes = [
     {
         path: '/Concisedetails', //详情
         component: Concisedetails,
-        name: 'Concisedetails',
+        name: '熊猫贷款',
         hidden: true
     },
     {
         path: '/Conciselogin/:Uid', //登录
         component: Conciselogin,
-        name: 'Conciselogin',
+        name: '熊猫贷款',
         hidden: true
     },
     {
         path: '/ConciseproductList', //产品列表
         component: ConciseproductList,
-        name: 'ConciseproductList',
+        name: '熊猫贷款',
         hidden: true
     }
 

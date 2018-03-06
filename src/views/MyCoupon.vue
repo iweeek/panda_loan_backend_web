@@ -5,16 +5,16 @@
               使用规则
             </div>
             <div class="titleNameson">
-                <div class="titleCircular">●</div> 1.优惠券仅能偿还本期账单，逾期时不可使用。
+                <div class="titleCircular">●</div> 优惠券仅能偿还本期账单，逾期时不可使用。
             </div>
             <div class="titleNameson">
-                <div class="titleCircular">●</div> 2.优惠券仅可用于抵扣利息，不可抵扣本金和其它费用。
+                <div class="titleCircular">●</div> 优惠券仅可用于抵扣利息，不可抵扣本金和其它费用。
             </div>
             <div class="titleNameson">
-                <div class="titleCircular">●</div> 3.优惠券仅限有效期内使用，过期无效。
+                <div class="titleCircular">●</div> 优惠券仅限有效期内使用，过期无效。
             </div>
             <div class="titleNameson" style="border:none">
-                <div class="titleCircular">●</div> 4.优惠券一经使用，立即失效。
+                <div class="titleCircular">●</div> 优惠券一经使用，立即失效。
             </div>
         </div>
 	</div>
@@ -49,7 +49,7 @@ $rem: 1rem/40; //rem配置
   height: 80*$rem;
   line-height: 80*$rem;
   font-size: 26*$rem;
-  color: #000;
+  color: #fedb31;
   border-bottom: 1px solid #d6d7dc;
   padding-left: 24*$rem;
   overflow: hidden;
@@ -61,7 +61,7 @@ $rem: 1rem/40; //rem配置
   margin-top: .1*$rem;
   font-size: 10*$rem;
   display: inline;
-  color: #fec946;
+  color: #fedb31;
 }
 .titleNameson {
   width: 100%;
@@ -69,7 +69,7 @@ $rem: 1rem/40; //rem配置
   line-height: 80*$rem;
   font-size: 26*$rem;
   color: #111;
-  border-bottom: 1px solid #d6d7dc;
+  border-bottom: 2.1*$rem solid #d6d7dc;
   margin-left: 24*$rem;
   overflow: hidden;
 }
