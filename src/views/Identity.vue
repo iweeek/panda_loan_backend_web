@@ -287,9 +287,11 @@ export default {
       .preson-name {
         background: url('../assets/images/icon-name.png') no-repeat left center;
         background-size: 32px 32px;
+        font-size: 0.74rem;        
         border-bottom: #E7E8F1 solid 1px; /*no*/
       }
       .preson-card {
+        font-size: 0.74rem;  
         background: url('../assets/images/icon-card.png') no-repeat left center;
         background-size: 32px 32px;
       }
