@@ -21,7 +21,7 @@
                     <input type="button" class="comfirm-button" v-bind:class="{canClick:is_click}" value="立即借款" @click="comfirm()"/>
                 </div>
                 <div class="text-hint" @click="agreement()" >
-                    <span class="text-left">点击立即借款既表示同意</span><span class="text-right">《熊猫贷款平台服务协议》</span>
+                    <span class="text-left">点击立即借款既表示同意</span><span class="text-right">《平台服务协议》</span>
                 </div>
             </div>
            

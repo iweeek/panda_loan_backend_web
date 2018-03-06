@@ -26,7 +26,8 @@
                 </div>
                 <div class="yntext-hint">
                     <span class="yntext-left">点击立即借款既表示同意</span><span class="yntext-right" @click="agreement()">
-                        《<span v-if="!iphone" class="yntext-right">熊猫贷款</span><span v-if="iphone" class="yntext-right">熊猫钱包</span>平台服务协议》</span>
+                        <!-- 《<span v-if="!iphone" class="yntext-right">熊猫贷款</span><span v-if="iphone" class="yntext-right">熊猫钱包</span>平台服务协议》</span> -->
+                        《平台服务协议》</span>
                 </div>
             </div>
         </div>
