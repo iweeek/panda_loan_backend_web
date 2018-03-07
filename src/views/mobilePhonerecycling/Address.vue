@@ -14,11 +14,9 @@
                     <span>{{item.detailedAddress}}</span>
                 </div>
             </div>
-            <div class="delImg" @click="delAddress(index)">
-                <img src="~@/assets/155360463700638034.png" alt="">
-                    <span>默认</span>
-                <div class="del">
-                    <img src="~@/assets/apple.png" alt="" class="delimgs">
+            <div class="delImg" >
+                <div class="del" @click="delAddress(index)">
+                    <img src="~@/assets/814288334974768703_03.png" alt="" class="delimgs">
                     <span>删除</span>
                 </div>
             </div>
@@ -30,7 +28,6 @@
 </template>
 
 <script>
-    import resources from "../resources";
     export default {
         data() {
             return {
@@ -47,8 +44,8 @@
             delAddress(index){
                 console.log(index)
                 this.haveBeensavedArrar.splice(index,1);
-                console.log( this.haveBeensavedArrar.length)
-
+                console.log('22')
+                console.log( this.haveBeensavedArrar)
                 localStorage.setItem('addressData',JSON.stringify(this.haveBeensavedArrar))
                if(this.haveBeensavedArrar.length==0){
                     this.noaddress = true
@@ -56,14 +53,18 @@
                 }
             },
             watchCount(){
-                var str = localStorage.getItem('addressData')
-                this.haveBeensavedArrar = JSON.parse(str)
-                if(this.haveBeensavedArrar.length==0){
-                    this.noaddress = true
+                if(localStorage.getItem('addressData')==null){
+                     this.noaddress = true
                     this.newsetAddress= false;
+                }else{
+                    var str = localStorage.getItem('addressData')
+                    this.haveBeensavedArrar = JSON.parse(str)
+                    if(this.haveBeensavedArrar.length==0){
+                        this.noaddress = true
+                        this.newsetAddress= false;
+                    }
                 }
                 console.log( this.haveBeensavedArrar)
-              
             }
         },
         mounted() {
@@ -83,20 +84,20 @@
         width: 100%;
         height:100%;
         background: #f5f5f5;
-        overflow: hidden;
+        // overflow: hidden;
     }
 
     .noaddress{
-        padding-top: 445*$rem;
+        padding-top: 40%;
         text-align: center;
         img{
-            width: 320*$rem;
+            width: 300*$rem;
         }
         overflow: hidden;
     }
     .noaddressbutton{
         margin: 0 auto;
-        margin-top: 45*$rem;
+        margin-top: 50*$rem;
         width: 250*$rem;
         height: 88*$rem;
         line-height: 88*$rem;
@@ -109,11 +110,11 @@
    
     .setAddress{  // 添加地址按钮
         margin: 0 auto;
-        margin-top: 45*$rem;
+        margin-top: 50*$rem;
         width: 700*$rem;
-        height: 88*$rem;
-        line-height: 88*$rem;
-        color: #000002;
+        height: 100*$rem;
+        line-height: 100*$rem;
+        color: #000;
         text-align: center;
         background: #fddb31;
         border-radius: 5px;
@@ -137,19 +138,31 @@
         .addressnameone{
             float: left;
             width: auto;
-            height: auto;
+            height: 28*$rem;
+            line-height:32*$rem;
             font-size: 28*$rem;
             color: #666;
+         
             overflow: hidden;
         }
         .addressphone{
             float: right;
-            color: #666;
+            width: auto;
+            height: 28*$rem;
+            line-height:32*$rem;
             font-size: 28*$rem;
+            color: #666;
+            overflow: hidden;
         }
         .localtiondata{
             margin-top: 25*$rem;
             font-size: 28*$rem;
+            line-height: 32*$rem;
+            width: 600*$rem;
+            overflow: hidden;
+            text-overflow: ellipsis; //3.设置超出样式为省略号
+            -webkit-line-clamp: 1;   //4.设置2行应用省略
+            -webkit-box-orient: vertical;
             span{
                 color: #999;
             }
@@ -176,7 +189,7 @@
         .del{
             width: auto;
             height: 80*$rem;
-            line-height: 80*$rem;
+            line-height: 81*$rem;
             float: right;
             overflow: hidden;
             img{
@@ -187,4 +200,6 @@
             }
         }
     }
+
+
 </style>

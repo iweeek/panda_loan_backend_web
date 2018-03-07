@@ -7,11 +7,18 @@
             <div class="Independentsmall-input" @click="showAlerttoast">短信验证码</div>
         </div>
         <div class="confirmButton" >确认</div>
+        <!-- 协议 -->
+        <div class="yntext-hint">
+            <span class="yntext-left">本人已阅读并同意厦门有限责任公司</span>
+            <span class="yntext-right" @click="agreement()">《自动扣款协议书》</span>
+        </div>
         <alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
+                      
+  
 	</div>
 </template>
 <script>
-import alertTip from '../common/alertTip'
+import alertTip from '../../common/alertTip'
 export default {
 	components: {
         alertTip,
@@ -32,7 +39,10 @@ export default {
             setTimeout(function(){
                 _this.closeTip()
             },2000)
-        }
+        },
+        agreement(){ //跳转协议
+            this.$router.push({ path: '/agreement' })
+        },
   },
   mounted(){
 
@@ -107,4 +117,24 @@ $rem:1rem/40; //rem配置
     background: #d1d1d1;
     color: #fff;
 }
+
+    .yntext-hint{ //协议
+        margin: 0 auto;
+        margin-top:30*$rem;
+        width: 600*$rem;
+        height: auto;
+        overflow: hidden;
+      
+        text-align: center;
+        padding-top: 0.1rem;
+        overflow: hidden;
+        .yntext-left{   
+            color: #666;
+            font-size: 22*$rem;
+        }
+        .yntext-right{
+            color: #fedb31;
+            font-size: 22*$rem;
+        }
+    }
 </style>

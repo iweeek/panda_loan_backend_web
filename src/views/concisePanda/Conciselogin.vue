@@ -367,6 +367,7 @@
                     border-radius: 0.2rem;
                     font-size: 0.7rem;
                     line-height:86*$rem;
+                    color:#f79f55;
                 }
                 .ynimage-code{
                     vertical-align:middle;//img图片和div在同一排
@@ -399,6 +400,7 @@
                     border-radius: 0.2rem;
                     font-size: 0.7rem;
                     line-height: 86*$rem;
+                    color:#f79f55;
                 }
                 .yncomfirm-button{
                     margin: 0 auto;
@@ -416,12 +418,14 @@
                     text-align: left;
                     color: #d3d3d6;
                     font-size: 0.7rem;
+                    color:#f79f55;
 
                 }
                 .yncode-input::-webkit-input-placeholder{
                     text-align: left;
                     color: #d3d3d6;
                     font-size: 0.7rem;
+                    color:#f79f55;
                 }
                 .yntext-hint{ //协议
                     margin: 0 auto;
