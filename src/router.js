@@ -9,7 +9,12 @@ const Phonerecyclingcoupon = resolve => require.ensure([], () => resolve(require
 const BindingBankcard = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/BindingBankcard.vue')), 'BindingBankcard')
 const mobilePhonerecyclingCoupon = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/Coupon.vue')), 'mobilePhonerecyclingCoupon') //增价卷
 const mobilePhonerecyclingFeedback = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/Feedback.vue')), 'mobilePhonerecyclingFeedback')
-    // 其他
+
+// 不登录版本熊猫贷款
+const NologinproductList = resolve => require.ensure([], () => resolve(require('./views/nologinpanda/NologinproductList.vue')), 'NologinproductList') //不登录产品列表页面
+const Nologindetails = resolve => require.ensure([], () => resolve(require('./views/nologinpanda/Nologindetails.vue')), 'Nologindetails') //不登录第三方页面
+
+// 其他
 const HomePage = resolve => require.ensure([], () => resolve(require('@/views/HomePage.vue')), 'HomePage')
 const HelpCenterPage = resolve => require.ensure([], () => resolve(require('@/views/HelpCenterPage.vue')), 'HelpCenterPage')
 const About = resolve => require.ensure([], () => resolve(require('@/views/About.vue')), 'About')
@@ -22,7 +27,6 @@ const LoanRate = resolve => require.ensure([], () => resolve(require('@/views/Lo
 const NewYearLanding = resolve => require.ensure([], () => resolve(require('@/views/NewYearLanding.vue')), 'NewYearLanding')
 const Product = resolve => require.ensure([], () => resolve(require('@/views/Product.vue')), 'Product')
 const Coupon = resolve => require.ensure([], () => resolve(require('./views/Coupon.vue')), 'Coupon')
-
 const AboutUs = resolve => require.ensure([], () => resolve(require('./views/AboutUs.vue')), 'AboutUs')
 const MSSDHelpCenter = resolve => require.ensure([], () => resolve(require('./views/mashangsudai/HelpCenter.vue')), 'MSSDHelpCenter')
 const MSSDCoupon = resolve => require.ensure([], () => resolve(require('@/views/mashangsudai/Coupon.vue')), 'MSSDCoupon')
@@ -63,6 +67,20 @@ const Conciselogin = resolve => require.ensure([], () => resolve(require('./view
 const ConciseproductList = resolve => require.ensure([], () => resolve(require('./views/concisePanda/ConciseproductList.vue')), 'ConciseproductList') //简版列表
 
 let routes = [
+
+    // 不登录熊猫贷款
+    {
+        path: '/NologinproductList/:Uid',
+        component: NologinproductList,
+        name: '熊猫贷款',
+        hidden: true
+    },
+    {
+        path: '/Nologindetails',
+        component: Nologindetails,
+        name: '熊猫贷款',
+        hidden: true
+    },
 
     // 手机回收h5页面
     {
