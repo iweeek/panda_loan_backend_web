@@ -121,7 +121,7 @@
                     }
                 }).then(res => {
                     this.keySMSCapt = res.data.obj1.keySMSCapt;
-                    console.log(res)
+                    // console.log(res)
                 })
             },
             comfirm(){
@@ -175,7 +175,7 @@
                 }
 
                 var qs = require('qs');
-                console.log(params)
+                // console.log(params)
 
                 this.$ajax.post(url, qs.stringify(params), {
                     headers: {
@@ -184,10 +184,10 @@
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                 }).then(res => {
-                    console.log(res)
+                    // console.log(res)
                     sessionStorage.setItem("userId",res.data.obj1.id)
                     this.toProduct()
-                    console.log('跳转')
+                    // console.log('跳转')
                     //this.download = true;
                 }).catch(error => {
                     //this.lackMessage(error.response.data.statusMsg)
@@ -215,7 +215,7 @@
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                 }).then(res => {
-                    console.log(res)
+                    // console.log(res)
                 })
             },
             getImageCode(){ //获取验证码
@@ -234,7 +234,7 @@
                     },
                     responseType: 'arraybuffer'
                 }).then(res => {
-                    console.log(res.headers.keyimagecapt)
+                    // console.log(res.headers.keyimagecapt)
                     this.keyImage = res.headers.keyimagecapt
                     return 'data:image/jpeg;base64,' + btoa(
                     new Uint8Array(res.data)
@@ -272,12 +272,12 @@
             //alert(this.Sid)
         },
         created(){
-            console.log(sessionStorage.getItem("userId"))
+            // console.log(sessionStorage.getItem("userId"))
             if(sessionStorage.getItem("userId")==null){
-                console.log('我没有登录奥')
+                // console.log('我没有登录奥')
             }else{
                 this.$router.push({ path: '/ConciseproductList' })
-                console.log('已经登录了奥')
+                // console.log('已经登录了奥')
             }
         }
     };

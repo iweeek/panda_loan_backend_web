@@ -144,8 +144,8 @@
     },
     methods: {
             getUrl(pid,index){ //数据通知与跳转详情
-                console.log('第几个')
-                console.log(index)
+                // console.log('第几个')
+                // console.log(index)
                 let url = resources.recordUrl();
                 let params = {
                     'userId': sessionStorage.getItem("userId"),
@@ -163,7 +163,7 @@
                         'Package-Name': 'com.h5'
                     },
                 }).then(res => {
-                    console.log(res.data)
+                    // console.log(res.data)
                     // window.location.href = res.data
                     var explorer =navigator.userAgent ;
                     var isiOS = !!explorer.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
@@ -201,13 +201,13 @@
                     for (var i = 0; i < array.length ;i ++) {
                         array[i].firstTagArray = array[i].firstTags.split("|");
                     }
-                    console.log(res.data.data.recommendProducts.length)
+                    // console.log(res.data.data.recommendProducts.length)
                     if(res.data.data.recommendProducts.length==0){
                         this.showLoading = false
                         return
                     }
                     this.allProduct = this.allProduct.concat(array);
-                    console.log(this.allProduct)
+                    // console.log(this.allProduct)
                     this.loading = false;
                     this.allProduct.forEach(item => {
                     if (item.maxAmount > 10000) {
@@ -227,7 +227,7 @@
             loadMore() { //底部判断
                 if(!this.loading) {
                     this.pageNumber ++
-                    console.log(this.pageNumber)
+                    // console.log(this.pageNumber)
                     this.getProduct();
                 }
             },
@@ -247,9 +247,9 @@
             }
     },
     mounted() { //第一次请求数据
-        console.log(document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top)
+        // console.log(document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top)
         this.wrapperHeight = (document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top)-60;
-      console.log(this.wrapperHeight)
+    //   console.log(this.wrapperHeight)
 
       this.getProduct()
       if(!this.loading){

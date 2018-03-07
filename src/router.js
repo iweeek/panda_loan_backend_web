@@ -8,8 +8,8 @@ const HelpCenter = resolve => require.ensure([], () => resolve(require('./views/
 const Phonerecyclingcoupon = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/MyCoupon.vue')), 'Phonerecyclingcoupon')
 const BindingBankcard = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/BindingBankcard.vue')), 'BindingBankcard')
 const mobilePhonerecyclingCoupon = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/Coupon.vue')), 'mobilePhonerecyclingCoupon') //增价卷
-
-// 其他
+const mobilePhonerecyclingFeedback = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/Feedback.vue')), 'mobilePhonerecyclingFeedback')
+    // 其他
 const HomePage = resolve => require.ensure([], () => resolve(require('@/views/HomePage.vue')), 'HomePage')
 const HelpCenterPage = resolve => require.ensure([], () => resolve(require('@/views/HelpCenterPage.vue')), 'HelpCenterPage')
 const About = resolve => require.ensure([], () => resolve(require('@/views/About.vue')), 'About')
@@ -22,7 +22,7 @@ const LoanRate = resolve => require.ensure([], () => resolve(require('@/views/Lo
 const NewYearLanding = resolve => require.ensure([], () => resolve(require('@/views/NewYearLanding.vue')), 'NewYearLanding')
 const Product = resolve => require.ensure([], () => resolve(require('@/views/Product.vue')), 'Product')
 const Coupon = resolve => require.ensure([], () => resolve(require('./views/Coupon.vue')), 'Coupon')
-const Feedback = resolve => require.ensure([], () => resolve(require('./views/Feedback.vue')), 'Feedback')
+
 const AboutUs = resolve => require.ensure([], () => resolve(require('./views/AboutUs.vue')), 'AboutUs')
 const MSSDHelpCenter = resolve => require.ensure([], () => resolve(require('./views/mashangsudai/HelpCenter.vue')), 'MSSDHelpCenter')
 const MSSDCoupon = resolve => require.ensure([], () => resolve(require('@/views/mashangsudai/Coupon.vue')), 'MSSDCoupon')
@@ -62,7 +62,10 @@ const Concisedetails = resolve => require.ensure([], () => resolve(require('./vi
 const Conciselogin = resolve => require.ensure([], () => resolve(require('./views/concisePanda/Conciselogin.vue')), 'Conciselogin') //简版登录
 const ConciseproductList = resolve => require.ensure([], () => resolve(require('./views/concisePanda/ConciseproductList.vue')), 'ConciseproductList') //简版列表
 
-let routes = [{
+let routes = [
+
+    // 手机回收h5页面
+    {
         path: '/Setaddress',
         component: Setaddress,
         name: '添加地址',
@@ -77,7 +80,19 @@ let routes = [{
     {
         path: '/mobilePhonerecyclingCoupon',
         component: mobilePhonerecyclingCoupon,
-        name: '我的增价卷',
+        name: '我的加价卷',
+        hidden: true
+    },
+    {
+        path: '/mobilePhonerecyclingFeedback',
+        component: mobilePhonerecyclingFeedback,
+        name: '意见反馈',
+        hidden: true
+    },
+    {
+        path: '/bindingBankcard',
+        component: BindingBankcard,
+        name: '绑定银行卡',
         hidden: true
     },
 
@@ -223,18 +238,7 @@ let routes = [{
     //     hidden: true
     // },
 
-    {
-        path: '/feedBack',
-        component: Feedback,
-        name: '意见反馈',
-        hidden: true
-    },
-    {
-        path: '/bindingBankcard',
-        component: BindingBankcard,
-        name: '绑定银行卡',
-        hidden: true
-    },
+
     // {
     //     path: '/myCoupon',
     //     component: MyCoupon,

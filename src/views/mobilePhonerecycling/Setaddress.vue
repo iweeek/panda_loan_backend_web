@@ -23,11 +23,13 @@
         <div class="setAddress" @click="saveAddress">
             保存地址
         </div>
+        <alert-tip v-if="showAlert" :showHide="showAlert"  :alertText="alertText"></alert-tip>
     </div>
 </template>
 
 
 <script>
+    import alertTip from '../../common/alertTip'
     const address = { //地址
         '北京': ['北京','朝阳','东城', '西城'],
         '广东': ['广州', '深圳', '珠海', '汕头', '韶关', '佛山', '江门', '湛江', '茂名', '肇庆', '惠州', '梅州', '汕尾', '河源', '阳江', '清远', '东莞', '中山', '潮州', '揭阳', '云浮'],
@@ -65,8 +67,13 @@
         '台湾': ['台北市', '高雄市', '台北县', '桃园县', '新竹县', '苗栗县', '台中县', '彰化县', '南投县', '云林县', '嘉义县', '台南县', '高雄县', '屏东县', '宜兰县', '花莲县', '台东县', '澎湖县', '基隆市', '新竹市', '台中市', '嘉义市', '台南市']
     }
     export default {
+        components: {
+            alertTip,
+        },
         data() {
             return {
+                showAlert: false, //显示提示组件
+                alertText: '请填写完整地址信息', //提示的内容
                 detailedAddress:'',
                 name:'',
                 phone:'',
@@ -98,21 +105,30 @@
         },
         methods: {
             saveAddress(){  //跳转到添加页面
-                if(localStorage.getItem('addressData')==null){
-                    var localtions = this.addressProvince + this.addressCity + this.detailedAddress
-                    this.serise = this.serise.concat({name:this.name,phone:this.phone,detailedAddress:localtions})
-                    localStorage.setItem('addressData',JSON.stringify(this.serise))
-                    this.$router.push({ path: '/Address'})
-                }else{
-                    var str = localStorage.getItem('addressData')
-                    this.serise = JSON.parse(str)
-                    var localtions = this.addressProvince + this.addressCity + this.detailedAddress
-                    console.log(this.addressProvince)
-                    console.log(localtions)
-                    this.serise = this.serise.concat({name:this.name,phone:this.phone,detailedAddress:localtions})
-                    localStorage.setItem('addressData',JSON.stringify( this.serise))
-                    this.$router.push({ path: '/Address'})
+                if(this.detailedAddress=="" || this.name=="" ||this.phone.length<11){ //判断为空
+                    this.showAlert = true;
+                    var _this = this;
+                    setTimeout(function(){
+                        _this.showAlert = false;
+                    },800)
+                }else{ //不为空执行
+                    if(localStorage.getItem('addressData')==null){
+                        var localtions = this.addressProvince + this.addressCity + this.detailedAddress
+                        this.serise = this.serise.concat({name:this.name,phone:this.phone,detailedAddress:localtions})
+                        localStorage.setItem('addressData',JSON.stringify(this.serise))
+                        this.$router.push({ path: '/Address'})
+                    }else{
+                        var str = localStorage.getItem('addressData')
+                        this.serise = JSON.parse(str)
+                        var localtions = this.addressProvince + this.addressCity + this.detailedAddress
+                        console.log(this.addressProvince)
+                        console.log(localtions)
+                        this.serise = this.serise.concat({name:this.name,phone:this.phone,detailedAddress:localtions})
+                        localStorage.setItem('addressData',JSON.stringify( this.serise))
+                        this.$router.push({ path: '/Address'})
+                    }
                 }
+
             },
             open(picker) { //打开选择地址
                 this[picker] = !this[picker]
