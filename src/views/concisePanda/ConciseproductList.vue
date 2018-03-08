@@ -98,8 +98,8 @@
             $pageSize: Int
         ){
             recommendProducts(
-                pageNumber:$pageNumber
-                pageSize:$pageSize
+                pageNumber: $pageNumber
+                pageSize: $pageSize
                 packageName: "com.h5"
                 channelId: "99"
             ){
@@ -157,10 +157,10 @@
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'Version': '1',
                         'User-Id': sessionStorage.getItem("userId"),
-                        'Channel-Id': '14',
+                        'Channel-Id': '99',
                         'Device-Id': '111',
                         'Request-Uri': this.allProduct[index].url,
-                        'Package-Name': 'com.h5'
+                        'Package-Name': sessionStorage.getItem("Uid"),
                     },
                 }).then(res => {
                     // console.log(res.data)
@@ -190,10 +190,10 @@
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'Version': '1',
                     'User-Id': sessionStorage.getItem("userId"),
-                    'Channel-Id': '14',
+                    'Channel-Id': '99',
                     'Device-Id': '111',
                     'Request-Uri': 'https://api.pinganzhiyuan.com/panda_loan/graphql/query',
-                    'Package-Name': 'com.h5'
+                    'Package-Name': sessionStorage.getItem("Uid"),
                 }
                 }).then(res => {
                    
@@ -235,7 +235,7 @@
                 var ua = navigator.userAgent.toLowerCase();
                 if (ua.indexOf("iphone") == -1) {
                     //安卓跳转
-                    window.location.href = "http://sj.qq.com/myapp/detail.htm?apkName=com.mg.pandawalletdaikuan";
+                    window.location.href = "http://download.pinganzhiyuan.com/pandawalletdaikuan/1.0.2/app-cdn-release.apk";
                 } else {
                     //苹果跳转
                     window.location.href = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1330125527&mt=8";
