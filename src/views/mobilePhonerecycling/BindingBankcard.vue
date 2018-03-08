@@ -14,7 +14,7 @@
             <div class="confirmButton" >确认</div>
             <!-- 协议 -->
             <div class="yntext-hint">
-                <span class="yntext-left">本人已阅读并同意厦门有限责任公司</span>
+                <span class="yntext-left">本人已阅读并同意与厦门励马金融技术服务有限公司签署</span>
                 <span class="yntext-right" @click="agreement()">《代收付协议》</span>
             </div>
         </div>
@@ -147,11 +147,10 @@ $rem:1rem/40; //rem配置
     .yntext-hint{ //协议
         margin: 0 auto;
         margin-top:30*$rem;
-        width: 600*$rem;
+        width: auto;
         height: auto;
         overflow: hidden;
-      
-        text-align: center;
+        text-align: left;
         padding-top: 0.1rem;
         overflow: hidden;
         .yntext-left{   
@@ -159,6 +158,8 @@ $rem:1rem/40; //rem配置
             font-size: 22*$rem;
         }
         .yntext-right{
+            display: inline-block;
+            padding-top: 0.2rem;
             color: #fedb31;
             font-size: 22*$rem;
         }

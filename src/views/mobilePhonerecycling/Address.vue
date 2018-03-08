@@ -39,7 +39,7 @@
         methods: {
             setAddress(){
                 //跳转到添加页面
-                this.$router.push({path: '/Setaddress'});
+                this.$router.push({path: '/XHBKSetaddress'});
             },
             delAddress(index){
                 console.log(index)

@@ -116,7 +116,7 @@
                         var localtions = this.addressProvince + this.addressCity + this.detailedAddress
                         this.serise = this.serise.concat({name:this.name,phone:this.phone,detailedAddress:localtions})
                         localStorage.setItem('addressData',JSON.stringify(this.serise))
-                        this.$router.push({ path: '/Address'})
+                        this.$router.push({ path: '/XHBKAddress'})
                     }else{
                         var str = localStorage.getItem('addressData')
                         this.serise = JSON.parse(str)
@@ -125,7 +125,7 @@
                         console.log(localtions)
                         this.serise = this.serise.concat({name:this.name,phone:this.phone,detailedAddress:localtions})
                         localStorage.setItem('addressData',JSON.stringify( this.serise))
-                        this.$router.push({ path: '/Address'})
+                        this.$router.push({ path: '/XHBKAddress'})
                     }
                 }
 

@@ -75,7 +75,7 @@
             .discount{
                 color: #ffffff;
                 font-size: 34*$rem;
-                margin-left:375*$rem;
+                margin-left:355*$rem;
                 padding-top:165*$rem;
             }
             .validity{
