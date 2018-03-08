@@ -3,7 +3,7 @@
         <div class="companyDiv">
             <div class="companyCount">
                 <div class="companyLogo"> <!--logo文字-->
-                    <img src="~@/assets/mssdlogo.png" alt="">
+                    <img src="~@/assets/xhbklogo.png" alt="">
                     <div class="companyName">
                         小花白卡
                     </div>
