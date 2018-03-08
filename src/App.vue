@@ -1,9 +1,9 @@
 <template>
 	<div id="app">
 		<transition name="fade" mode="out-in">
-			<!-- <keep-alive include="demo3"> -->
+			<keep-alive include="NologinproductList">
 				<router-view ></router-view>
-			<!-- </keep-alive> -->
+			</keep-alive>
 		</transition>
 	</div>
 </template>

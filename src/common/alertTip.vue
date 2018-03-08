@@ -47,7 +47,7 @@
         margin-top: 120%;
         width: 9rem;
         animation: tipMove .4s ;
-        background-color: rgba(0,0,0,0.5);
+        background-color: rgba(0, 0, 0, 0.5);
         border: 1px;
         display: flex;
         justify-content: center;

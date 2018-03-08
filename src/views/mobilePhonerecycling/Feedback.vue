@@ -1,6 +1,5 @@
 <template>
 	<div id="app">
-
         <!-- 时间 -->
         <div class="thisTime" v-model="time">
             {{time}}
@@ -8,7 +7,7 @@
         <!-- 机主消息 -->
         <div class="myInfo" v-if="news">
             <div class="myImg">
-                <img src="../assets/boy.png" alt="">
+                <img src="~@/assets/boy.png" alt="">
             </div>
             <div class="myInfodata" v-html="myData">
             </div>
@@ -17,7 +16,7 @@
         <!-- 反馈消息 -->
         <div class="outherInfo" v-if="outher">
             <div class="outherImg">
-                <img src="../assets/girl.png" alt="">
+                <img src="~@/assets/girl.png" alt="">
             </div>
             <div class="outherInfodata">
                 感谢您的反馈，对于您的意见和建议，我们将认真对待，并视情况予以回复！请您保持电话畅通，客服同事可能会与您联系。
@@ -128,7 +127,7 @@ $rem:1rem/40; //rem配置
     width: 160*$rem;
     height: 75*$rem;
     line-height: 75*$rem;
-    background: #81b0fb;
+    background: #fedb31;
     border-radius: 10px;
     color: #fff;
     font-size: 28*$rem;
@@ -177,7 +176,7 @@ $rem:1rem/40; //rem配置
     word-break: break-all;
     padding: 25*$rem;
     border-radius: 20px;
-    background  : #81b0fb;
+    background  : #fedb31;
     color:#fff;
     font-size: 25*$rem;
     line-height: 40*$rem;
@@ -192,7 +191,7 @@ $rem:1rem/40; //rem配置
     top: 8*$rem; /*向下偏移量是矩形边框宽度的1.4（根号2）倍，即8.4，top值为-26-（-8.4）*/
     right:-14*$rem;
     border-top: 30*$rem solid transparent;
-    border-left: 30*$rem solid #81b0fb;
+    border-left: 30*$rem solid #fedb31;
     border-bottom: 30*$rem solid transparent;
 }
 
@@ -236,7 +235,7 @@ $rem:1rem/40; //rem配置
     max-width: 500*$rem;
     word-break: break-all;
     border-radius: 20px;
-    background  : #81b0fb;
+    background  : #fedb31;
     color: #fff;
     font-size: 25*$rem;
     padding: 25*$rem;
@@ -252,7 +251,7 @@ $rem:1rem/40; //rem配置
     top: 23*$rem; /*向下偏移量是矩形边框宽度的1.4（根号2）倍，即8.4，top值为-26-（-8.4）*/
     left:-14*$rem;
     border-top:30*$rem solid transparent;
-    border-right: 30*$rem solid #81b0fb;
+    border-right: 30*$rem solid #fedb31;
     border-bottom: 30*$rem solid transparent;
 }
 

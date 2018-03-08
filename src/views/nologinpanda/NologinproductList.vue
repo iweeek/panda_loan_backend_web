@@ -1,8 +1,5 @@
 <template> <!--基础部分-->
   <div class="page-infinite">
-    <!-- <div class="header" v-show="noHeader">
-        <Xheader v-if="showBack" :showBack="showBack" :nameText="nameText" :backone="backone"   :backtwo="backtwo" ></Xheader>
-    </div> -->
     <div class="infiniteWai"> <!--组件外层div为了现在底部下载熊猫贷款特加的-->
         <div class="page-infinite-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }"> <!--最外层盒子-->
             <div class="page-infinite-list" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="50" >
@@ -16,7 +13,6 @@
                             <div class="title">
                                 <span class="title-word">{{product.title}}</span>
                                 <div>
-                                    <!-- <span v-if="product.isNew"><span class="firstTages-border">新上线</span></span> -->
                                     <span v-for="(FirstTag,index) in product.firstTagArray" :key="index"  class="firstTages-border">{{FirstTag}}</span>
                                 </div>
                             </div>
@@ -86,20 +82,28 @@
             </div>
         </div>
     </div>
+
+    <!-- 登录框 -->
+    <div class="alet_container" v-if="clickDetails" @touchmove.prevent>
+	    <section class="tip_text_container">
+            <input type="text" class="alet_login" :placeholder="placeholder" v-model="logonphone" maxlength="11" @focus="focus()" @blur="blur()">
+            <div class="loginbutton" @click="loginDeterminebutton">确定</div>
+        </section>
+    </div>
   </div>
 </template>
 
 <script> //js部分
     import resources from '../../resources'
-    import Xheader from '../common/X-header'
+    import { Toast } from 'mint-ui';
     const productQuery = `
         query(
             $pageNumber: Int
             $pageSize: Int
         ){
             recommendProducts(
-                pageNumber: $pageNumber
-                pageSize: $pageSize
+                pageNumber:$pageNumber
+                pageSize:$pageSize
                 packageName: "com.h5"
                 channelId: "99"
             ){
@@ -120,59 +124,132 @@
             }
 	}`
   export default {
-    name:'Conciselogin',
-    components: {
-        Xheader
-    },
+    name:'NologinproductList',
     data() {
       return {
         showLoading:true, //底部显示加载还是到底
         loading: false, //加载中
-        wrapperHeight: 0,
-        showBack:true,
-        nameText:'热门推荐',
-        noHeader:true,
-        safari:false,
-        backone:false,
-        backtwo:true,
-        allProduct:[],
-        pageSize: 6,
-        pageNumber: 1,
+        wrapperHeight: 0, //列表高度
+        allProduct:[], //数组
+        pageSize: 6, //每页条数
+        pageNumber: 1,//当前页
         showLoading:true, //底部显示加载还是到底
-        downshow:true
+        downshow:true, //底部是否显示
+        clickDetails:false, //遮挡层是否显示
+        logonphone:'', //遮挡层手机号
+        pid:'', //列表pid
+        listIndex:'', //第几个点击
+        Sid: '0', //记录
+        Uid: this.$route.params.Uid,    //记录
+        placeholder:'填写手机号加入快速申请通道'
       };
     },
     methods: {
-            getUrl(pid,index){ //数据通知与跳转详情
-                // console.log('第几个')
-                // console.log(index)
-                let url = resources.recordUrl();
-                let params = {
-                    'userId': sessionStorage.getItem("userId"),
-                    'pid': pid,
+            loginDeterminebutton(){ //弹框确认按钮
+                var phoneReg = /(^1[3|4|5|7|8]\d{9}$)|(^09\d{8}$)/
+                if (phoneReg.test(this.logonphone)) {
+                    this.postMes()
+                } else {
+                    Toast('请检查手机号是否正确');
                 }
+            },
+            postMes(){ //登录
+                let url = resources.token();
+                let params = {}
+                params = {
+                    'username':this.logonphone,
+                    'keySMSCapt':'999',
+                    'smsCapt': '0000',
+                }
+                var qs = require('qs')
+                this.$ajax.post(url,qs.stringify(params),{
+                    headers:{
+                        'Landing-Channel-Uid': this.Uid,
+                        'Sid': this.Sid,
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).then(res => {
+                        sessionStorage.setItem("userId",res.data.obj1.id)
+                        this.getUrl(this.pid,this.listIndex)
+                }).catch(error =>{
+                        console.log(error)
+                })
+            },
+            getUrl(pid,index){ //已登录跳转详情
+                if(sessionStorage.getItem('userId')==null){
+                    this.clickDetails = true
+                    this.pid = pid;
+                    this.listIndex = index
+                    // return;
+                }else{
+                    this.clickDetails = false;
+                    let url = resources.recordUrl();
+                    let params = {
+                        'userId': sessionStorage.getItem("userId"),
+                        'pid': pid,
+                    }
+                    var qs = require('qs');
+                    this.$ajax.post(url,qs.stringify(params),{
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Version': '1',
+                            'User-Id': sessionStorage.getItem("userId"),
+                            'Channel-Id': '14',
+                            'Device-Id': '111',
+                            'Request-Uri': this.allProduct[index].url,
+                            'Package-Name': this.Uid
+                        },
+                    }).then(res => {
+                        var explorer =navigator.userAgent ;
+                        var isiOS = !!explorer.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+                        if(isiOS){
+                            window.location.href = res.data
+                        }else{
+                            this.$router.push({path: '/Concisedetails?url=' +  res.data + '&title=' +   this.allProduct[index].title});
+                        }
+                    })
+                }
+            },
+            loadMore() { //底部判断
+                if(!this.loading) {
+                    this.pageNumber ++
+                    // console.log(this.pageNumber)
+                    this.getProduct();
+                }
+            },
+            downloadApp(){ //下载跳转
+                var ua = navigator.userAgent.toLowerCase();
+                if (ua.indexOf("iphone") == -1) {
+                    //安卓跳转
+                    window.location.href = "http://download.pinganzhiyuan.com/pandawalletdaikuan/1.0.2/app-cdn-release.apk";
+                } else {
+                    //苹果跳转
+                    window.location.href = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1330125527&mt=8";
+                }
+            },
+            downExit(){ //关闭下载
+                this.downshow = false;
+                this.wrapperHeight = (document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top);
+            },
+            enterMes(){ //记录进入当前次数页面方法
+                let url = resources.landingPage();
                 var qs = require('qs');
+                let params = { }
                 this.$ajax.post(url,qs.stringify(params),{
                     headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Version': '1',
-                        'User-Id': sessionStorage.getItem("userId"),
-                        'Channel-Id': '99',
-                        'Device-Id': '111',
-                        'Request-Uri': this.allProduct[index].url,
-                        'Package-Name': sessionStorage.getItem("Uid"),
+                        'Landing-Channel-Uid': this.Uid,
+                        'Sid': this.Sid,
+                        'Content-Type': 'application/x-www-form-urlencoded'
                     },
+                   
                 }).then(res => {
-                    // console.log(res.data)
-                    // window.location.href = res.data
-                    var explorer =navigator.userAgent ;
-                    var isiOS = !!explorer.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-                    if(isiOS){
-                        window.location.href = res.data
-                    }else{
-                        this.$router.push({path: '/Concisedetails?url=' +  res.data + '&title=' +   this.allProduct[index].title});
-                    }
                 })
+            },
+            createSid(){  //生成用户操作唯一标识
+                this.Sid = this.S4()+"-"+this.S4()+"-"+this.S4()+"-"+this.S4()+"-"+(new Date()).valueOf().toString(16);
+            },
+            S4() {  //生成一个4位16进制字符串
+                return (((1+Math.random())*0x10000)|0).toString(16).substring(1);  
             },
             getProduct() { //请求数据
                 this.loading = true;
@@ -189,11 +266,11 @@
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'Version': '1',
-                    'User-Id': sessionStorage.getItem("userId"),
-                    'Channel-Id': '99',
+                    'User-Id': '0',
+                    'Channel-Id': '14',
                     'Device-Id': '111',
                     'Request-Uri': 'https://api.pinganzhiyuan.com/panda_loan/graphql/query',
-                    'Package-Name': sessionStorage.getItem("Uid"),
+                    'Package-Name': this.Uid
                 }
                 }).then(res => {
                    
@@ -224,37 +301,25 @@
                 })
                 },700);
             },
-            loadMore() { //底部判断
-                if(!this.loading) {
-                    this.pageNumber ++
-                    // console.log(this.pageNumber)
-                    this.getProduct();
-                }
+            focus(){ //获取焦点的时候让显示文字为空
+                this.placeholder = ''
             },
-            downloadApp(){
-                var ua = navigator.userAgent.toLowerCase();
-                if (ua.indexOf("iphone") == -1) {
-                    //安卓跳转
-                    window.location.href = "http://download.pinganzhiyuan.com/pandawalletdaikuan/1.0.2/app-cdn-release.apk";
-                } else {
-                    //苹果跳转
-                    window.location.href = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1330125527&mt=8";
+            blur(){ //失去焦点的时候
+                if(this.logonphone==''){
+                    this.placeholder = '填写手机号加入快速申请通道'
                 }
-            },
-            downExit(){
-                this.downshow = false;
-                this.wrapperHeight = (document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top);
             }
     },
     mounted() { //第一次请求数据
-        // console.log(document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top)
-        this.wrapperHeight = (document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top)-60;
-    //   console.log(this.wrapperHeight)
-
-      this.getProduct()
-      if(!this.loading){
-        this.getProduct();
-      }
+        this.wrapperHeight = (document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top)-58;
+        // 获取数据
+        this.getProduct()
+        if(!this.loading){
+            this.getProduct();
+        }
+        // 记录与生成id
+        this.enterMes()
+        this.createSid()
     },
     created(){
         document.documentElement.scrollTop=0
@@ -284,10 +349,59 @@
         border-left-color:  rgb(56, 137, 255) !important;
         border-bottom-color:  rgb(56, 137, 255) !important;
     }
+    .mint-toast.is-placemiddle{
+        top:28% !important;
+    }
 </style>
 
 <style lang="scss" scoped> /*单页面样式*/
     $rem:1rem/40;
+
+    // 登录弹出框
+    .alet_container{
+    	position: fixed;
+    	top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.3);
+        z-index: 200;
+    }
+    .tip_text_container{
+        margin: 0 auto;
+        margin-top:385*$rem;
+        padding:34*$rem 36*$rem;
+        padding-top:80*$rem;
+        width:595*$rem;
+        height:auto;
+        background:#fff;
+        flex-direction: column;
+        border-radius: 0.2rem;
+        overflow: hidden;
+    }
+    .alet_login{
+        margin:0 auto;
+        width: 520*$rem;
+        height: 80*$rem;
+        line-height: 80*$rem;
+        font-size:32*$rem;
+        color:rgb(51,51,51);
+        border-bottom:2.1*$rem solid rgb(217,218,222);
+        border-radius:0rem;
+        text-align:center;
+    }
+    .loginbutton{
+        margin:0 auto;
+        margin-top:50*$rem;
+        width: 520*$rem;
+        height: 90*$rem;
+        line-height: 90*$rem;
+        font-size:39*$rem;
+        text-align:center;
+        background:#ffb14d;
+        color:rgb(255,255,255);
+    }
+
     // 内容外层背景
     .productExternal{
         padding: 10*$rem;
@@ -330,7 +444,6 @@
     .page-infinite-wrapper{ /*样式最外层*/
         overflow: scroll;
         -webkit-overflow-scrolling: touch;
-        // margin-top: 88*$rem;
         .product{
             position: relative;
             margin: 0 auto;
@@ -475,8 +588,9 @@
         bottom: 0;
         width: 100%;
         height: 120*$rem;
+        border-top:2.1*$rem solid #eaeaea;
         background:rgba(255,255,255,1);
-        overflow: hidden;
+        // overflow: hidden;
     }
     .downPandaImg{
         float: left;

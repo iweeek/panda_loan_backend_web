@@ -13,11 +13,10 @@
             <div class="center-text">您没有可使用的优惠券</div>
         </div>
         <div class="coupon-top" v-if="used">
-            <div class="discount">9.8折</div>
+            <div class="discount">有效期至：2018-4-30</div>
             <!-- <img src="~@/assets/coupon.png" class="coupon"> -->
             <div class="validity">
-                <div class="validity-top">有效期至：2017.8.8-2018.2.10</div>
-                <div class="validity-bottom">借款金额满3000元可用,最高抵扣9元</div>
+               订单满3000元即可使用
             </div>
         </div>
         <div class="center" v-if="expired">
@@ -55,37 +54,37 @@
     }
 </script>
 <style lang="scss" scoped>
+    $rem:1rem/45;
     .click{
-        color: #2ea0fe;
+        color: #fedb31;
     }
     .copon{
         height: 100%;
         //width:100%;
         background-color: #f5f5f5;
         .coupon-top{
-            height: 7.5rem;
-            background: url(~@/assets/mssdcoupon.png) no-repeat scroll;
-            background-size: 95%;
-            background-position-x: 0.5rem;
+            margin: 0 auto;
+            width: 700*$rem;
+            height: 310*$rem;
+            background: url(~@/assets/youhuijuan.png) no-repeat scroll;
+            background-size: 100%;
             margin-top: 0.5rem;
             .discount{
                 color: #ffffff;
-                font-size: 1.95rem;
-                margin-left: 12rem;
-                padding-top: 1.3rem;
+                font-size: 32*$rem;
+                margin-left:315*$rem;
+                padding-top:150*$rem;
             }
             .validity{
-                margin-left: 1.4rem;
-                margin-top: 1.8rem;
-                .validity-top{
-                    font-size: 0.6rem;
-                    color: rgb(153, 153, 153);
-                }
-                .validity-bottom{
-                    margin-top: 0.45rem;
-                    color: rgb(153, 153, 153);
-                    font-size: 0.6rem;
-                }
+                margin: 0 auto;
+                width: 640*$rem;
+                height: auto;
+                font-size: 48*$rem;
+                margin-top:60*$rem;
+                text-align: center;
+                color: #fff;
+                // border-bottom: 3px solid #fff;
+                overflow: hidden;
             }
         }
         .center{
@@ -121,12 +120,12 @@
         .hint-top{
             //width: 100%;
             height:1.5rem;
-            background-color: #d6ecff;
+            background-color: #fffbd6;
             .hint-text{
                 display: inline-block;
                 line-height: 1.5rem;
                 font-size: 0.65rem;
-                color: #64b9ff;
+                color: #fedb31;
                 text-align: center;
                 width: 100%;
             }
