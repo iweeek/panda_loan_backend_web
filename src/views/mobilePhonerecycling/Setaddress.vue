@@ -1,16 +1,16 @@
 <template>
     <div class="tianjiaaddress">
         <div class="boxInput"> 
-            <span>收件人</span><input type="text"  placeholder="请输入姓名" v-model="name" maxlength="15">
+            <span>收件人</span><input type="text"  placeholder="请输入姓名" v-model="name" maxlength="15" @blur="modalshow">
         </div>
         <div class="boxInput"> 
-            <span>联系电话</span><input type="text"  placeholder="请输入11位手机号" v-model="phone" maxlength="11">
+            <span>联系电话</span><input type="text"  placeholder="请输入11位手机号" v-model="phone" maxlength="11" @blur="modalshow">
         </div>
         <div class="boxInput"> 
             <span>所在地区</span>
-            <div class="selectcity" @click="open('picker3')">  {{addressProvince}} {{addressCity}}</div>
+            <div class="selectcity" @click="open('picker3')"> <span class="defaultcity" v-if="defaultcity">北京市</span> {{addressProvince}} {{addressCity}}</div>
             <div class="localtionsimg"></div>
-                <mt-picker :slots="addressSlots" @change="onAddressChange" :visible-item-count="5" v-if="picker3" showToolbar>
+                <mt-picker :showToolbar="true" :slots="addressSlots" @change="onAddressChange" :visible-item-count="5" v-if="picker3" >
                     <div class="picker-header">
                         <div class="picker-cancel" @click="open('picker3')">取消</div>
                         <div class="picker-confirm" @click="changePickerValue('picker3')">确定</div>
@@ -18,7 +18,7 @@
                 </mt-picker>
         </div>
         <div class="boxInput"> 
-            <span>详细地址</span><input type="text"  placeholder="街道门牌信息" v-model="detailedAddress" maxlength="50">
+            <span>详细地址</span><input type="text"  placeholder="街道门牌信息" v-model="detailedAddress" maxlength="50" @blur="modalshow">
         </div>
         <div class="setAddress" @click="saveAddress">
             保存地址
@@ -74,12 +74,12 @@
             return {
                 showAlert: false, //显示提示组件
                 alertText: '请填写完整地址信息', //提示的内容
+                defaultcity:true,
                 detailedAddress:'',
                 name:'',
                 phone:'',
                 serise:[],
                 picker3: false,
-                picker3Value: '请选择啊',
                 addressSlots: [
                     {
                         flex: 1,
@@ -99,13 +99,13 @@
                         textAlign: 'center'
                     }
                 ],
-                addressProvince: '北京市',
-                addressCity: ''
+                addressProvince: '',
+                addressCity: '',
             }
         },
         methods: {
-            saveAddress(){  //跳转到添加页面
-                if(this.detailedAddress=="" || this.name=="" ||this.phone.length<11){ //判断为空
+            saveAddress(){  //跳转到添加页面`
+                if(this.detailedAddress=="" || this.name=="" ||this.phone.length<11 || this.addressProvince==""){ //判断为空
                     this.showAlert = true;
                     var _this = this;
                     setTimeout(function(){
@@ -137,9 +137,13 @@
                 this[picker] = !this[picker]
             },
             onAddressChange(picker, values) { //检测地址改变赋值函数
+                this.defaultcity = false
                 picker.setSlotValues(1, address[values[0]]);
                 this.addressProvince = values[0];
                 this.addressCity = values[1];
+            },
+            modalshow(){
+               this.picker3 = false
             }
         },
         mounted() {
@@ -152,6 +156,43 @@
 
 </script>
 
+<style lang="scss">
+    // 组件样式
+    $rem:1rem/40;
+    .picker {
+        position: absolute;
+        width: 100%;
+        height: auto;
+        left: 0rem;
+        background:#fff;
+        bottom: 0rem;
+        overflow: hidden;
+        .picker-toolbar {
+            height: 80px;
+            overflow: hidden;
+        }
+        .picker-header {
+            height: 80px;
+            padding: 0 32px;
+            line-height: 80px;
+            border-bottom: #E7E8F1 solid 2.1*$rem; /*no*/
+            .picker-cancel {
+                width: 50%;
+                float: left;
+                font-size: 24px;
+                color: #5F606D;
+            }
+            .picker-confirm {
+                width: 50%;
+                float: right;
+                text-align: right;
+                font-size: 24px;
+                color: #5F606D;
+            }
+        }
+    }
+</style>
+
 <style lang="scss" scoped>
     // 底部下载样式
     $rem:1rem/40;
@@ -160,6 +201,10 @@
         width: 100%;
         height:100%;
         background: #f5f5f5;
+    }
+    .defaultcity{
+        color:#999 !important;
+        padding:0rem !important;
     }
     // 表单样式
     .boxInput{
@@ -188,13 +233,13 @@
             height: 100*$rem;
             // line-height: 100*$rem;
             font-size: 28*$rem ;
-            color: #999;
+            color: #666;
         }
     }
     // 添加地址按钮
     .setAddress{
         margin: 0 auto;
-        margin-top: 50*$rem;
+        margin-top: 26*$rem;
         width: 700*$rem;
         height: 100*$rem;
         line-height: 100*$rem;
@@ -213,40 +258,10 @@
         height: 100*$rem;
         line-height: 100*$rem;
         font-size: 28*$rem ;
-        color: #999;
+        color: #666;
         background: #fff url('../../assets/localtions.png') no-repeat right center;
         background-size:20*$rem;
         background-position-x: 550*$rem;
-    }
-    // 组件样式
-    .picker {
-        position: absolute;
-        width: 100%;
-        left: 0;
-        background:#fff;
-        bottom: 0;
-        .picker-toolbar {
-            height: 80px;
-        }
-        .picker-header {
-            height: 80px;
-            padding: 0 32px;
-            line-height: 80px;
-            border-bottom: #E7E8F1 solid 2.1*$rem; /*no*/
-            .picker-cancel {
-                width: 50%;
-                float: left;
-                font-size: 24px;
-                color: #5F606D;
-            }
-            .picker-confirm {
-                width: 50%;
-                float: right;
-                text-align: right;
-                font-size: 24px;
-                color: #5F606D;
-            }
-        }
     }
     //右侧箭头
     .localtionsimg{

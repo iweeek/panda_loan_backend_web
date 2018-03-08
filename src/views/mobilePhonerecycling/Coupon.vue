@@ -9,6 +9,7 @@
             <span class="hint-text">若已领取优惠券可在10分钟后查看</span>
         </div>
         <div class="center" v-if="unused">
+            
             <img src="~@/assets/nocoupon.png" class="nocoupon">
             <div class="center-text">您没有可使用的优惠券</div>
         </div>
@@ -18,6 +19,8 @@
             <div class="validity">
                订单满3000元即可使用
             </div>
+        </div>
+        <div class="hint-top1" v-if="expired">
         </div>
         <div class="center" v-if="expired">
             <img src="~@/assets/nocoupon.png" class="nocoupon">
@@ -64,23 +67,23 @@
         background-color: #f5f5f5;
         .coupon-top{
             margin: 0 auto;
-            width: 700*$rem;
-            height: 310*$rem;
+            width: 780*$rem;
+            height: 350*$rem;
             background: url(~@/assets/youhuijuan.png) no-repeat scroll;
             background-size: 100%;
             margin-top: 0.5rem;
             .discount{
                 color: #ffffff;
-                font-size: 32*$rem;
-                margin-left:315*$rem;
-                padding-top:150*$rem;
+                font-size: 34*$rem;
+                margin-left:375*$rem;
+                padding-top:165*$rem;
             }
             .validity{
                 margin: 0 auto;
                 width: 640*$rem;
                 height: auto;
                 font-size: 48*$rem;
-                margin-top:60*$rem;
+                margin-top:70*$rem;
                 text-align: center;
                 color: #fff;
                 // border-bottom: 3px solid #fff;
@@ -129,6 +132,10 @@
                 text-align: center;
                 width: 100%;
             }
+        }
+        .hint-top1{
+            //width: 100%;
+            height:1.5rem;
         }
     }
 </style>

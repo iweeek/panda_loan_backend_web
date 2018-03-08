@@ -80,6 +80,7 @@ $rem:1rem/40; //rem配置
     font-size: 28*$rem;
     color:#999;
     img{
+        margin-top: -10px;
         margin-right: 15*$rem;
         width: 32*$rem;
         height: 41*$rem;
