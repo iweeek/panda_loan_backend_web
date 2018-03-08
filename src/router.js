@@ -2,13 +2,15 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 // 手机回收H5页面
-const Address = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/Address.vue')), 'Address') //地址
-const Setaddress = resolve => require.ensure([], () => resolve(require('@/views/mobilePhonerecycling/Setaddress.vue')), 'Setaddress') //新增地址
-const HelpCenter = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/HelpCenter.vue')), 'HelpCenter')
-const Phonerecyclingcoupon = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/MyCoupon.vue')), 'Phonerecyclingcoupon')
-const BindingBankcard = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/BindingBankcard.vue')), 'BindingBankcard')
-const mobilePhonerecyclingCoupon = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/Coupon.vue')), 'mobilePhonerecyclingCoupon') //增价卷
-const mobilePhonerecyclingFeedback = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/Feedback.vue')), 'mobilePhonerecyclingFeedback')
+const XHBKAboutUs = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/AboutUs.vue')), 'XHBKAboutUs')
+const XHBKAddress = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/Address.vue')), 'XHBKAddress') //地址
+const XHBKSetaddress = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/Setaddress.vue')), 'XHBKSetaddress') //新增地址
+const XHBKHelpCenter = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/HelpCenter.vue')), 'XHBKHelpCenter')
+const XHBKMyCoupon = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/MyCoupon.vue')), 'XHBKMyCoupon')
+const XHBKBindingBankcard = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/BindingBankcard.vue')), 'XHBKBindingBankcard')
+const XHBKCoupon = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/Coupon.vue')), 'XHBKCoupon') //增价卷
+const XHBKmobilePhonerecyclingFeedback = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/Feedback.vue')), 'XHBKmobilePhonerecyclingFeedback')
+const XHBKFeeDeductionAgreement = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/FeeDeductionAgreement.vue')), 'XHBKFeeDeductionAgreement')
     // 其他
 const HomePage = resolve => require.ensure([], () => resolve(require('@/views/HomePage.vue')), 'HomePage')
 const HelpCenterPage = resolve => require.ensure([], () => resolve(require('@/views/HelpCenterPage.vue')), 'HelpCenterPage')
@@ -66,33 +68,57 @@ let routes = [
 
     // 手机回收h5页面
     {
-        path: '/Setaddress',
-        component: Setaddress,
+        path: '/XHBKHelpCenter',
+        component: XHBKHelpCenter,
+        name: '帮助中心',
+        hidden: true
+    },
+    {
+        path: '/XHBKAboutUs',
+        component: XHBKAboutUs,
+        name: '关于',
+        hidden: true
+    },
+    {
+        path: '/XHBKSetaddress',
+        component: XHBKSetaddress,
         name: '添加地址',
         hidden: true
     },
     {
-        path: '/Address',
-        component: Address,
+        path: '/XHBKAddress',
+        component: XHBKAddress,
         name: '我的收货地址',
         hidden: true
     },
     {
-        path: '/mobilePhonerecyclingCoupon',
-        component: mobilePhonerecyclingCoupon,
+        path: '/XHBKCoupon',
+        component: XHBKCoupon,
         name: '我的加价卷',
         hidden: true
     },
     {
-        path: '/mobilePhonerecyclingFeedback',
-        component: mobilePhonerecyclingFeedback,
+        path: '/XHBKmobilePhonerecyclingFeedback',
+        component: XHBKmobilePhonerecyclingFeedback,
         name: '意见反馈',
         hidden: true
     },
     {
-        path: '/bindingBankcard',
-        component: BindingBankcard,
+        path: '/XHBKbindingBankcard',
+        component: XHBKBindingBankcard,
         name: '绑定银行卡',
+        hidden: true
+    },
+    {
+        path: '/XHBKfeeDeductionAgreement',
+        component: XHBKFeeDeductionAgreement,
+        name: '自动划扣协议',
+        hidden: true
+    },
+    {
+        path: '/XHBKMyCoupon',
+        component: XHBKMyCoupon,
+        name: '使用规则',
         hidden: true
     },
 
@@ -118,12 +144,6 @@ let routes = [
         path: '/MSSDaboutUs',
         component: MSSDAboutUs,
         name: '关于我们',
-        hidden: true
-    },
-    {
-        path: '/Phonerecyclingcoupon',
-        component: Phonerecyclingcoupon,
-        name: '我的加价卷',
         hidden: true
     },
     {
@@ -255,12 +275,6 @@ let routes = [
         path: '/coupon',
         component: Coupon,
         name: '我的优惠券',
-        hidden: true
-    },
-    {
-        path: '/helpCenter',
-        component: HelpCenter,
-        name: '帮助中心',
         hidden: true
     },
     {

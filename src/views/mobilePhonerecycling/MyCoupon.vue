@@ -5,16 +5,16 @@
               使用规则
             </div>
             <div class="titleNameson">
-                <div class="titleCircular">●</div> 优惠券仅能偿还本期账单，逾期时不可使用。
+                <div class="titleCircular">●</div> 加价券仅能使用一次，逾期时不可使用。
             </div>
             <div class="titleNameson">
-                <div class="titleCircular">●</div> 优惠券仅可用于抵扣利息，不可抵扣本金和其它费用。
+                <div class="titleCircular">●</div> 加价券仅可用于一台手机。
             </div>
             <div class="titleNameson">
-                <div class="titleCircular">●</div> 优惠券仅限有效期内使用，过期无效。
+                <div class="titleCircular">●</div> 加价券仅限有效期内使用，过期无效。
             </div>
             <div class="titleNameson" style="border:none">
-                <div class="titleCircular">●</div> 优惠券一经使用，立即失效。
+                <div class="titleCircular">●</div> 加价券一经使用，立即失效。
             </div>
         </div>
 	</div>

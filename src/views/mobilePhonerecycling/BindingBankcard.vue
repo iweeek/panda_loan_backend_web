@@ -15,7 +15,7 @@
             <!-- 协议 -->
             <div class="yntext-hint">
                 <span class="yntext-left">本人已阅读并同意厦门有限责任公司</span>
-                <span class="yntext-right" @click="agreement()">《自动扣款协议书》</span>
+                <span class="yntext-right" @click="agreement()">《代收付协议》</span>
             </div>
         </div>
         <alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
@@ -45,7 +45,7 @@ export default {
             },2000)
         },
         agreement(){ //跳转协议
-            this.$router.push({ path: '/agreement' })
+            this.$router.push({ path: '/XHBKFeeDeductionAgreement' })
         },
   },
   mounted(){

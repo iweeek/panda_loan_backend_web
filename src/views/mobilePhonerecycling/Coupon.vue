@@ -6,12 +6,12 @@
             <span class="top-text" v-bind:class="{click:expired}" @click="show(2)">已过期</span>
         </div>
         <div class="hint-top" v-if="unused">
-            <span class="hint-text">若已领取优惠券可在10分钟后查看</span>
+            <span class="hint-text">若已领取加价券可在10分钟后查看</span>
         </div>
         <div class="center" v-if="unused">
             
             <img src="~@/assets/nocoupon.png" class="nocoupon">
-            <div class="center-text">您没有可使用的优惠券</div>
+            <div class="center-text">您没有可使用的加价券</div>
         </div>
         <div class="coupon-top" v-if="used">
             <div class="discount">有效期至：2018-4-30</div>
@@ -24,7 +24,7 @@
         </div>
         <div class="center" v-if="expired">
             <img src="~@/assets/nocoupon.png" class="nocoupon">
-            <div class="center-text">您没有已过期的优惠券</div>
+            <div class="center-text">您没有已过期的加价券</div>
         </div>
     </div>
 </template>
