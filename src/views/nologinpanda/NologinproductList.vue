@@ -86,7 +86,7 @@
     <!-- 登录框 -->
     <div class="alet_container" v-if="clickDetails" @touchmove.prevent>
 	    <section class="tip_text_container">
-            <input type="text" class="alet_login" placeholder="填写手机号加入快速申请通道" v-model="logonphone" maxlength="11">
+            <input type="text" class="alet_login" :placeholder="placeholder" v-model="logonphone" maxlength="11" @focus="focus()" @blur="blur()">
             <div class="loginbutton" @click="loginDeterminebutton">确定</div>
         </section>
     </div>
@@ -141,6 +141,7 @@
         listIndex:'', //第几个点击
         Sid: '0', //记录
         Uid: this.$route.params.Uid,    //记录
+        placeholder:'填写手机号加入快速申请通道'
       };
     },
     methods: {
@@ -300,6 +301,14 @@
                 })
                 },700);
             },
+            focus(){ //获取焦点的时候让显示文字为空
+                this.placeholder = ''
+            },
+            blur(){ //失去焦点的时候
+                if(this.logonphone==''){
+                    this.placeholder = '填写手机号加入快速申请通道'
+                }
+            }
     },
     mounted() { //第一次请求数据
         this.wrapperHeight = (document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top)-58;
