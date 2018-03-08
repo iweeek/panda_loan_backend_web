@@ -105,30 +105,56 @@
         },
         methods: {
             saveAddress(){  //跳转到添加页面`
-                if(this.detailedAddress=="" || this.name=="" ||this.phone.length<11 || this.addressProvince==""){ //判断为空
-                    this.showAlert = true;
-                    var _this = this;
-                    setTimeout(function(){
+                    var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;  
+                    if(this.name==""){
+                        this.alertText = "请填写收件人"
+                        this.showAlert = true;
+                        var _this = this;
+                        setTimeout(function(){
                         _this.showAlert = false;
-                    },800)
-                }else{ //不为空执行
-                    if(localStorage.getItem('addressData')==null){
-                        var localtions = this.addressProvince + this.addressCity + this.detailedAddress
-                        this.serise = this.serise.concat({name:this.name,phone:this.phone,detailedAddress:localtions})
-                        localStorage.setItem('addressData',JSON.stringify(this.serise))
-                        this.$router.push({ path: '/XHBKAddress'})
-                    }else{
-                        var str = localStorage.getItem('addressData')
-                        this.serise = JSON.parse(str)
-                        var localtions = this.addressProvince + this.addressCity + this.detailedAddress
-                        console.log(this.addressProvince)
-                        console.log(localtions)
-                        this.serise = this.serise.concat({name:this.name,phone:this.phone,detailedAddress:localtions})
-                        localStorage.setItem('addressData',JSON.stringify( this.serise))
-                        this.$router.push({ path: '/XHBKAddress'})
+                        },800)
                     }
-                }
-
+                    else if(!myreg.test(this.phone)){
+                        this.alertText = "请输入正确的手机号"
+                        this.showAlert = true;
+                        var _this = this;
+                        setTimeout(function(){
+                        _this.showAlert = false;
+                        },800)
+                    }
+                    else if(this.addressProvince==""){
+                        this.alertText = "请选择所在地区"
+                        this.showAlert = true;
+                        var _this = this;
+                        setTimeout(function(){
+                        _this.showAlert = false;
+                        },800)
+                    }
+                    else if(this.detailedAddress==""){
+                        this.alertText = "请填写详细地址"
+                        this.showAlert = true;
+                        var _this = this;
+                        setTimeout(function(){
+                        _this.showAlert = false;
+                        },800)
+                    }
+                    else{ //不为空执行
+                        if(localStorage.getItem('addressData')==null){
+                            var localtions = this.addressProvince + this.addressCity + this.detailedAddress
+                            this.serise = this.serise.concat({name:this.name,phone:this.phone,detailedAddress:localtions})
+                            localStorage.setItem('addressData',JSON.stringify(this.serise))
+                            this.$router.push({ path: '/XHBKAddress'})
+                        }else{
+                            var str = localStorage.getItem('addressData')
+                            this.serise = JSON.parse(str)
+                            var localtions = this.addressProvince + this.addressCity + this.detailedAddress
+                            console.log(this.addressProvince)
+                            console.log(localtions)
+                            this.serise = this.serise.concat({name:this.name,phone:this.phone,detailedAddress:localtions})
+                            localStorage.setItem('addressData',JSON.stringify( this.serise))
+                            this.$router.push({ path: '/XHBKAddress'})
+                        }
+                    }
             },
             open(picker) { //打开选择地址
                 this[picker] = !this[picker]
