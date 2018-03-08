@@ -39,7 +39,7 @@
         methods: {
             setAddress(){
                 //跳转到添加页面
-                this.$router.push({path: '/Setaddress'});
+                this.$router.push({path: '/XHBKSetaddress'});
             },
             delAddress(index){
                 console.log(index)
@@ -88,7 +88,7 @@
     }
 
     .noaddress{
-        padding-top: 40%;
+        padding-top: 445*$rem;
         text-align: center;
         img{
             width: 300*$rem;
@@ -110,7 +110,7 @@
    
     .setAddress{  // 添加地址按钮
         margin: 0 auto;
-        margin-top: 50*$rem;
+        margin-top: 26*$rem;
         width: 700*$rem;
         height: 100*$rem;
         line-height: 100*$rem;

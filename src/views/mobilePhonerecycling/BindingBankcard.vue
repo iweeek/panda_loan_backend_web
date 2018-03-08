@@ -1,20 +1,24 @@
 <template>
 	<div id="app">
-        <input type="text" class="normal-input" placeholder="银行借记卡卡号">
-        <input type="text" class="normal-input" placeholder="银行预留手机号">
-        <div class="phoneDiv"> <!--获取手机号-->
-            <input type="text" class="Independentlong-input" placeholder="填写短信验证码">
-            <div class="Independentsmall-input" @click="showAlerttoast">短信验证码</div>
+        <div class="bankcarddata">
+            <img src="~@/assets/light.png" alt="">
+            银行卡用于收取回收款项
         </div>
-        <div class="confirmButton" >确认</div>
-        <!-- 协议 -->
-        <div class="yntext-hint">
-            <span class="yntext-left">本人已阅读并同意厦门有限责任公司</span>
-            <span class="yntext-right" @click="agreement()">《自动扣款协议书》</span>
+        <div class="inputarray">
+            <input type="text" class="normal-input" placeholder="银行借记卡卡号">
+            <input type="text" class="normal-input" placeholder="银行预留手机号">
+            <div class="phoneDiv"> <!--获取手机号-->
+                <input type="text" class="Independentlong-input" placeholder="填写短信验证码">
+                <div class="Independentsmall-input" @click="showAlerttoast">短信验证码</div>
+            </div>
+            <div class="confirmButton" >确认</div>
+            <!-- 协议 -->
+            <div class="yntext-hint">
+                <span class="yntext-left">本人已阅读并同意与厦门励马金融技术服务有限公司签署</span>
+                <span class="yntext-right" @click="agreement()">《代收付协议》</span>
+            </div>
         </div>
         <alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
-                      
-  
 	</div>
 </template>
 <script>
@@ -41,7 +45,7 @@ export default {
             },2000)
         },
         agreement(){ //跳转协议
-            this.$router.push({ path: '/agreement' })
+            this.$router.push({ path: '/XHBKFeeDeductionAgreement' })
         },
   },
   mounted(){
@@ -57,10 +61,32 @@ export default {
 $rem:1rem/40; //rem配置   
 
 #app{
-    padding: 0 37*$rem;
+   
     background: #f5f5f5;
 }
 
+.inputarray{
+    background: #fff;
+    padding: 23*$rem 37*$rem 50*$rem 37*$rem;
+}
+// 银行卡用途
+.bankcarddata{
+    margin: 15*$rem 0rem;
+    padding-left: 37*$rem;
+    width: 100%;
+    height: 80*$rem;
+    line-height: 80*$rem;
+    background-color: #fff;
+    font-size: 28*$rem;
+    color:#999;
+    img{
+        margin-top: -10px;
+        margin-right: 15*$rem;
+        width: 32*$rem;
+        height: 41*$rem;
+        vertical-align: middle
+    }
+}
 // 普通表单长度
 .normal-input{
     margin-top: 24*$rem;
@@ -121,11 +147,10 @@ $rem:1rem/40; //rem配置
     .yntext-hint{ //协议
         margin: 0 auto;
         margin-top:30*$rem;
-        width: 600*$rem;
+        width: auto;
         height: auto;
         overflow: hidden;
-      
-        text-align: center;
+        text-align: left;
         padding-top: 0.1rem;
         overflow: hidden;
         .yntext-left{   
@@ -133,6 +158,8 @@ $rem:1rem/40; //rem配置
             font-size: 22*$rem;
         }
         .yntext-right{
+            display: inline-block;
+            padding-top: 0.2rem;
             color: #fedb31;
             font-size: 22*$rem;
         }

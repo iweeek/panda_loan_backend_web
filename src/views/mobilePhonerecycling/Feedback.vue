@@ -176,7 +176,7 @@ $rem:1rem/40; //rem配置
     word-break: break-all;
     padding: 25*$rem;
     border-radius: 20px;
-    background  : #fedb31;
+    background  : #f9bd07;
     color:#fff;
     font-size: 25*$rem;
     line-height: 40*$rem;
@@ -191,7 +191,7 @@ $rem:1rem/40; //rem配置
     top: 8*$rem; /*向下偏移量是矩形边框宽度的1.4（根号2）倍，即8.4，top值为-26-（-8.4）*/
     right:-14*$rem;
     border-top: 30*$rem solid transparent;
-    border-left: 30*$rem solid #fedb31;
+    border-left: 30*$rem solid #f9bd07;
     border-bottom: 30*$rem solid transparent;
 }
 
@@ -235,7 +235,7 @@ $rem:1rem/40; //rem配置
     max-width: 500*$rem;
     word-break: break-all;
     border-radius: 20px;
-    background  : #fedb31;
+    background  : #f9bd07;
     color: #fff;
     font-size: 25*$rem;
     padding: 25*$rem;
@@ -251,7 +251,7 @@ $rem:1rem/40; //rem配置
     top: 23*$rem; /*向下偏移量是矩形边框宽度的1.4（根号2）倍，即8.4，top值为-26-（-8.4）*/
     left:-14*$rem;
     border-top:30*$rem solid transparent;
-    border-right: 30*$rem solid #fedb31;
+    border-right: 30*$rem solid #f9bd07;
     border-bottom: 30*$rem solid transparent;
 }
 
