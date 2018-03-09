@@ -5,7 +5,7 @@
         </div>
         <div class="weixintarget">
             <button>
-                <a href="http://weixin://">测试微信跳转</a>
+                <a href="weixin://">测试微信跳转</a>
             </button>
         </div>
         <button @click="num" style="background-color:red;height:3rem;width:3rem;" v-if="show">点我</button>
