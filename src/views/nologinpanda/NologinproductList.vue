@@ -66,10 +66,10 @@
     <div class="downPanda" v-if="downshow"> 
         <div class="downlogoText">
                 <div class="downPandaImg">
-            <img src="~@/assets/pandaLogo.png" alt="">
+            <img src="~@/assets/pandalogo2.png" alt="">
             <div class="downText">
-                <p>熊猫钱包</p>
-                <p>好信用，不逾期</p>
+                <p>熊猫贷款</p>
+                <p>急用钱，用熊猫贷款</p>
             </div>
             </div>
         </div>
@@ -221,10 +221,10 @@
                 var ua = navigator.userAgent.toLowerCase();
                 if (ua.indexOf("iphone") == -1) {
                     //安卓跳转
-                    window.location.href = "http://download.pinganzhiyuan.com/pandawalletdaikuan/1.0.2/app-cdn-release.apk";
+                    window.location.href = "http://download.pinganzhiyuan.com/pandaloan/1.0.2/app-cdn-release.apk";
                 } else {
                     //苹果跳转
-                    window.location.href = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1330125527&mt=8";
+                    window.location.href = "https://itunes.apple.com/cn/app/%E7%86%8A%E7%8C%AB%E8%B4%B7%E6%AC%BE/id1290678368?mt=8";
                 }
             },
             downExit(){ //关闭下载
