@@ -3,6 +3,11 @@
         <div style="margin-top：30rem;">
             <button @click="num" class="button">测试退出</button>
         </div>
+        <div class="weixintarget">
+            <button>
+                <a href="http://weixin://">测试微信跳转</a>
+            </button>
+        </div>
         <button @click="num" style="background-color:red;height:3rem;width:3rem;" v-if="show">点我</button>
     </div>
 </template>
@@ -45,5 +50,13 @@
         background-color:green;
         height:3rem;
         width: 3rem;
+    }
+    .weixintarget{
+        margin-top:30px;
+        button{
+            background:#ccc;
+            height:3rem;
+            width: 3rem;
+        }
     }
 </style>
