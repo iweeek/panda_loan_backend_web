@@ -1,9 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+// 神马与奥丁安卓下载
+const Shenmalanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Shenmalanding.vue')), 'Shenmalanding')
+const Aodinglanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Aoding.vue')), 'Aodinglanding')
+
 // 不登录版本熊猫贷款
 const NologinproductList = resolve => require.ensure([], () => resolve(require('./views/nologinpanda/NologinproductList.vue')), 'NologinproductList') //不登录产品列表页面
 const Nologindetails = resolve => require.ensure([], () => resolve(require('./views/nologinpanda/Nologindetails.vue')), 'Nologindetails') //不登录第三方页面
+
 // 手机回收H5页面
 const XHBKAboutUs = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/AboutUs.vue')), 'XHBKAboutUs')
 const XHBKAddress = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/Address.vue')), 'XHBKAddress') //地址
@@ -14,6 +19,7 @@ const XHBKBindingBankcard = resolve => require.ensure([], () => resolve(require(
 const XHBKCoupon = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/Coupon.vue')), 'XHBKCoupon') //增价卷
 const XHBKmobilePhonerecyclingFeedback = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/Feedback.vue')), 'XHBKmobilePhonerecyclingFeedback')
 const XHBKFeeDeductionAgreement = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/FeeDeductionAgreement.vue')), 'XHBKFeeDeductionAgreement')
+
 // 其他
 const HomePage = resolve => require.ensure([], () => resolve(require('@/views/HomePage.vue')), 'HomePage')
 const HelpCenterPage = resolve => require.ensure([], () => resolve(require('@/views/HelpCenterPage.vue')), 'HelpCenterPage')
@@ -57,9 +63,6 @@ const yearLanding = resolve => require.ensure([], () => resolve(require('./views
 const ProductList = resolve => require.ensure([], () => resolve(require('./views/panda/ProductList.vue')), 'ProductList') //熊猫贷款产品页面
 const Detailspage = resolve => require.ensure([], () => resolve(require('./views/panda/Detailspage.vue')), 'Detailspage') //熊猫贷款第三方页面
 const DetailsOfclassification = resolve => require.ensure([], () => resolve(require('./views/panda/DetailsOfclassification.vue')), 'DetailsOfclassification') //熊猫贷款产品分类页面
-const demo = resolve => require.ensure([], () => resolve(require('./views/panda/demo.vue')), 'demo') //测试首页
-const demoClass = resolve => require.ensure([], () => resolve(require('./views/panda/demoClass.vue')), 'demoClass') //测试分类页
-const demo3 = resolve => require.ensure([], () => resolve(require('./views/panda/demo3.vue')), 'demo3') //测试
 
 // 熊猫贷款简版
 const Concisedetails = resolve => require.ensure([], () => resolve(require('./views/concisePanda/Concisedetails.vue')), 'Concisedetails') //简版详情页面
@@ -68,6 +71,17 @@ const ConciseproductList = resolve => require.ensure([], () => resolve(require('
 
 let routes = [
 
+    // 神马奥丁安卓下载地址
+    {
+        path: '/Shenmalanding/:Uid',
+        component: Shenmalanding,
+        name: '熊猫贷款'
+    },
+    {
+        path: '/Aodinglanding/:Uid',
+        component: Aodinglanding,
+        name: '熊猫贷款'
+    },
     // 不登录熊猫贷款
     {
         path: '/NologinproductList/:Uid',
@@ -367,25 +381,6 @@ let routes = [
         name: '',
         hidden: true
     },
-    {
-        path: '/demo',
-        component: demo,
-        name: 'demo',
-        hidden: true
-    },
-    {
-        path: '/demoClass',
-        component: demoClass,
-        name: 'demoClass',
-        hidden: true
-    },
-    {
-        path: '/demo3',
-        component: demo3,
-        name: 'demo3',
-        hidden: true
-    },
-
 
     //熊猫贷款简版
     {
@@ -415,6 +410,7 @@ let routes = [
 
 Vue.use(VueRouter)
 const router = new VueRouter({
+    // mode: 'history',
     routes
 })
 
