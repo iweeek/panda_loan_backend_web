@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-// 神马与奥丁安卓下载
+// 神马与奥丁和 Hackhome安卓下载
 const Shenmalanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Shenmalanding.vue')), 'Shenmalanding')
 const Aodinglanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Aoding.vue')), 'Aodinglanding')
+const Hackhome = resolve => require.ensure([], () => resolve(require('@/views/landing/Hackhome.vue')), 'Hackhome')
 
 // 不登录版本熊猫贷款
 const NologinproductList = resolve => require.ensure([], () => resolve(require('./views/nologinpanda/NologinproductList.vue')), 'NologinproductList') //不登录产品列表页面
@@ -82,6 +83,12 @@ let routes = [
         component: Aodinglanding,
         name: '熊猫贷款'
     },
+    {
+        path: '/Hackhome/:Uid',
+        component: Hackhome,
+        name: '熊猫贷款'
+    },
+
     // 不登录熊猫贷款
     {
         path: '/NologinproductList/:Uid',
