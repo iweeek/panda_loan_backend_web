@@ -176,7 +176,6 @@
 
                 var qs = require('qs');
                 // console.log(params)
-
                 this.$ajax.post(url, qs.stringify(params), {
                     headers: {
                         'Landing-Channel-Uid': this.Uid,

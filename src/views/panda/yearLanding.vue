@@ -234,6 +234,7 @@
                     },
                 }).then(res => {
                     console.log(res)
+                    sessionStorage.setItem("Uid",this.Uid)
                     sessionStorage.setItem("userId",res.data.obj1.id)
                     this.toProduct()
                     console.log('跳转')

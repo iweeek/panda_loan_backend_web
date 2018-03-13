@@ -153,7 +153,8 @@
                         'Channel-Id': '14',
                         'Device-Id': '111',
                         'Request-Uri': this.allProduct[index].url,
-                        'Package-Name': 'com.h5'
+                        'Package-Name': sessionStorage.getItem("Uid"),
+                        "Landing-Channel-Uid": sessionStorage.getItem("Uid")
                     },
                 }).then(res => {
                     console.log(res.data)
@@ -179,7 +180,7 @@
                         'Channel-Id': '14',
                         'Device-Id': '111',
                         'Request-Uri': 'https://api.pinganzhiyuan.com/panda_loan/graphql/query',
-                        'Package-Name': 'com.h5'
+                        'Package-Name': sessionStorage.getItem("Uid")
                     }
                 }).then(res => {
                     this.loadingIf = false

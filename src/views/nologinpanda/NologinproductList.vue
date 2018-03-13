@@ -197,7 +197,8 @@
                             'Channel-Id': '14',
                             'Device-Id': '111',
                             'Request-Uri': this.allProduct[index].url,
-                            'Package-Name': this.Uid
+                            'Package-Name': this.Uid,
+                            'Landing-Channel-Uid': sessionStorage.getItem("Uid")
                         },
                     }).then(res => {
                         var explorer =navigator.userAgent ;

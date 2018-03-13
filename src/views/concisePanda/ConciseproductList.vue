@@ -161,6 +161,7 @@
                         'Device-Id': '111',
                         'Request-Uri': this.allProduct[index].url,
                         'Package-Name': sessionStorage.getItem("Uid"),
+                        "Landing-Channel-Uid": sessionStorage.getItem("Uid")
                     },
                 }).then(res => {
                     // console.log(res.data)
