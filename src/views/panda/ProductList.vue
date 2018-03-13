@@ -147,6 +147,7 @@
                 var qs = require('qs');
                 this.$ajax.post(url,qs.stringify(params),{
                     headers: {
+                        'H5-Web-Name': 'yearLanding',
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'Version': '1',
                         'User-Id': sessionStorage.getItem("userId"),
@@ -215,7 +216,7 @@
             },
             toClassification(index){ //跳转商品分类详情
                 this.$router.push({
-                path: '/DetailsOfclassification?title=' + this.productListArrar[index].title  + '&id=' + this.productListArrar[index].id
+                    path: '/DetailsOfclassification?title=' + this.productListArrar[index].title  + '&id=' + this.productListArrar[index].id
                 });
             }
         },

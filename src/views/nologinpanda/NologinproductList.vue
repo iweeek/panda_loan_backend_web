@@ -139,7 +139,7 @@
         logonphone:'', //遮挡层手机号
         pid:'', //列表pid
         listIndex:'', //第几个点击
-        Sid: '0', //记录
+        Sid: '', //记录
         Uid: this.$route.params.Uid,    //记录
         placeholder:'填写手机号加入快速申请通道'
       };
@@ -311,16 +311,17 @@
                 }
             }
     },
-    mounted() { //第一次请求数据
+    mounted() { 
+        // 记录与生成id
+        this.createSid()
+        this.enterMes()
+        //第一次请求数据
         this.wrapperHeight = (document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top)-58;
         // 获取数据
         this.getProduct()
         if(!this.loading){
             this.getProduct();
         }
-        // 记录与生成id
-        this.enterMes()
-        this.createSid()
     },
     created(){
         document.documentElement.scrollTop=0
