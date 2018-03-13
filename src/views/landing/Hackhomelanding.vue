@@ -126,7 +126,19 @@
                 },500);
             },
             downloadApp(){
-                window.location.href = "http://download.pinganzhiyuan.com/pandaloan/1.0.2/app-hackhome-release.apk";
+                //下载    
+                var ua = navigator.userAgent.toLowerCase();
+                if(ua.match(/MicroMessenger/i)=="micromessenger") { 
+                    this.toast('请在手机浏览器中打开')
+                    return;
+                }
+                if (ua.indexOf("iphone") == -1) {
+                    //android
+                    window.location.href = "http://download.pinganzhiyuan.com/pandaloan/1.0.2/app-hackhome-release.apk";
+                } else {
+                    // ios
+                    window.location.href = "https://itunes.apple.com/cn/app/熊猫贷款/id1290678368?mt=8";
+                }
             },
             agreement(){
                 this.$router.push({ path: '/agreement' })
