@@ -14,17 +14,8 @@ if (debug) {
     // var host = 'http://127.0.0.1:8080/panda_loan'  
 } else {
     //正式环境地址 !!!注意，复制这里的地址的时候要去掉 https 中的 “s”，特此标记。
-<<<<<<< HEAD
     //var host = 'http://119.23.12.36:8081/panda_loan';
     var host = 'https://api.pinganzhiyuan.com/panda_loan';
-    //  var host = 'http://119.23.12.36:8081/panda_loan';
-||||||| merged common ancestors
-    //var host = 'http://119.23.12.36:8081/panda_loan';
-    var host = 'https://api.pinganzhiyuan.com/panda_loan';
-=======
-    var host = 'http://119.23.12.36:8081/panda_loan';
-    //var host = 'https://api.pinganzhiyuan.com/panda_loan';
->>>>>>> f_1365
 }
 console.warn('当前resource: ', host);
 
