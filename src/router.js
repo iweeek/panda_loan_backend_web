@@ -3,8 +3,8 @@ import VueRouter from 'vue-router'
 
 // 神马与奥丁和 Hackhome安卓下载
 const Shenmalanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Shenmalanding.vue')), 'Shenmalanding')
-const Aodinglanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Aoding.vue')), 'Aodinglanding')
-const Hackhome = resolve => require.ensure([], () => resolve(require('@/views/landing/Hackhome.vue')), 'Hackhome')
+const Aodinglanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Aodinglanding.vue')), 'Aodinglanding')
+const Hackhomelanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Hackhomelanding.vue')), 'Hackhomelanding')
 
 // 不登录版本熊猫贷款
 const NologinproductList = resolve => require.ensure([], () => resolve(require('./views/nologinpanda/NologinproductList.vue')), 'NologinproductList') //不登录产品列表页面
@@ -74,18 +74,18 @@ let routes = [
 
     // 神马奥丁安卓下载地址
     {
-        path: '/Shenmalanding/:Uid',
+        path: '/shenmalanding/:Uid',
         component: Shenmalanding,
         name: '熊猫贷款'
     },
     {
-        path: '/Aodinglanding/:Uid',
+        path: '/aodinglanding/:Uid',
         component: Aodinglanding,
         name: '熊猫贷款'
     },
     {
-        path: '/Hackhome/:Uid',
-        component: Hackhome,
+        path: '/hackhomelanding/:Uid',
+        component: Hackhomelanding,
         name: '熊猫贷款'
     },
 
