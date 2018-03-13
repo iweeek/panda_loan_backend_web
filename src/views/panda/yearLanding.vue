@@ -93,6 +93,27 @@
             };
         },
         methods: {
+            getDownloadUrl() {
+                let url = resources.h5DownloadUrl();
+                let params = new URLSearchParams();
+                this.$ajax.post(url,params,{
+                    headers: {
+                        'H5-Web-Name': 'yearLanding',
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Version': '1',
+                        'User-Id': '0',
+                        'Channel-Id': '14',
+                        'Device-Id': '111',
+                        'Request-Uri': 'http://119.23.12.36:8081/graphql/query',
+                        'Package-Name': this.Uid,
+                        'Landing-Channel-Uid': this.Uid,
+                        'Platform-Id': '0'
+                    }
+                })
+                    .then( res =>{
+                        console.log(res)
+                    })
+            },
             toast(msg){
                 setTimeout(function(){
                     document.getElementsByClassName('yntoast-wrap')[0].getElementsByClassName('yntoast-msg')[0].innerHTML=msg;
@@ -259,8 +280,7 @@
             enterMes(){
                 let url = resources.landingPage();
                 var qs = require('qs');
-                let params = { }
-
+                let params = { };
                 this.$ajax.post(url,qs.stringify(params),{
                     headers: {
                         'H5-Web-Name': 'yearLanding',
@@ -326,6 +346,7 @@
             this.phoneType();
             this.createSid();
             this.enterMes();
+            this.getDownloadUrl();
             //alert(this.Sid)
         },
         created(){

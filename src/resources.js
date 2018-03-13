@@ -41,6 +41,9 @@ let resources = {
     },
     recordUrl() {
         return `${host}\/recordH5`
+    },
+    h5DownloadUrl() {
+        return `${host}\/h5DownloadUrl`
     }
 };
 
