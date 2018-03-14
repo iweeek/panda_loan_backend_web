@@ -5,6 +5,9 @@ import VueRouter from 'vue-router'
 const Shenmalanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Shenmalanding.vue')), 'Shenmalanding')
 const Aodinglanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Aodinglanding.vue')), 'Aodinglanding')
 const Hackhomelanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Hackhomelanding.vue')), 'Hackhomelanding')
+const Jucailanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Jucailanding.vue')), 'Jucailanding')
+
+
 
 // 不登录版本熊猫贷款
 const NologinproductList = resolve => require.ensure([], () => resolve(require('./views/nologinpanda/NologinproductList.vue')), 'NologinproductList') //不登录产品列表页面
@@ -88,6 +91,12 @@ let routes = [
         component: Hackhomelanding,
         name: '熊猫贷款'
     },
+    {
+        path: '/jucailanding/:Uid',
+        component: Jucailanding,
+        name: '熊猫贷款'
+    },
+
 
     // 不登录熊猫贷款
     {
