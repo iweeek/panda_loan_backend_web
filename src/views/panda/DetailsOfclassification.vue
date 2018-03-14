@@ -54,33 +54,6 @@
 
     import resources from '../../resources'
     import Xheader from '../common/X-header'
-    // const recommendProductQuery = `
-    //     query(
-    //         $productTypeId: Long
-    //         $packageName: String
-    //         $channelId: Long
-    //     ){
-    //         recommendProducts(
-    //             productTypeId: $productTypeId
-    //             packageName: $packageName
-    //             channelId: $channelId
-    //         ){
-    //             id
-    //             title
-    //             isNew
-    //             firstTags
-    //             secondTags
-    //             description
-    //             imgUrl
-    //             url
-    //             minAmount
-    //             maxAmount
-    //             dayRate
-    //             creditAuth
-    //             maxTerm
-    //             minTerm
-    //         }
-	// }`
 
 	const recommendProductQuery = `
         query(
@@ -109,39 +82,38 @@
     }`
 
   export default {
-      components: {
+        components: {
             Xheader
         },
-    data() {
-      return {
-        showBottom:true,
-        list: [],
-        loading: true,
-        allLoaded: false,//这个
-        wrapperHeight: 0,
-        allProduct: [],
-        pageSize: 6,
-        pageNumber: 1,
-        tophint:true,
-        nomore:false,
-        noHeader:true,
-        showBack:true,
-        liwushow:false,
-        product:true,
-        loadingIf:true,
-        productthree:false,
-        pageloadmorewrapper:true,
-        // 切换背景
-        newBackgroundimg:false,
-        appleBackgroundimg:false,
-        kaBackgroundimg:false,
-        jijinBack:false,
-        loading:'正在加载',
-        nameText:'商品列表',
-        backone:true,
-        jijinTop:false,
-        productListArrar:[
-            {
+        data() {
+        return {
+            showBottom:true,
+            list: [],
+            loading: true,
+            allLoaded: false,//这个
+            wrapperHeight: 0,
+            allProduct: [],
+            pageSize: 6,
+            pageNumber: 1,
+            tophint:true,
+            nomore:false,
+            noHeader:true,
+            showBack:true,
+            liwushow:false,
+            product:true,
+            loadingIf:true,
+            productthree:false,
+            pageloadmorewrapper:true,
+            // 切换背景
+            newBackgroundimg:false,
+            appleBackgroundimg:false,
+            kaBackgroundimg:false,
+            jijinBack:false,
+            loading:'正在加载',
+            nameText:'商品列表',
+            backone:true,
+            jijinTop:false,
+            productListArrar:[{
                 title:'新品推荐',
                 id:'',
                 imgUrl:require("../../assets/new@2x.png")
@@ -160,9 +132,8 @@
                 title:'用公积金贷',
                 id:'',
                 imgUrl:require("../../assets/gongjijin@2x.png")
-            },
-        ],
-      };
+            }]
+        };
     },
     methods: {
         SetProduct(){ //添加数据
@@ -179,13 +150,15 @@
             var qs = require('qs');
             this.$ajax.post(url,qs.stringify(params),{
                 headers: {
+                    'H5-Web-Name': 'yearLanding',
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'Version': '1',
                     'User-Id': sessionStorage.getItem("userId"),
                     'Channel-Id': '14',
                     'Device-Id': '111',
                     'Request-Uri': this.allProduct[index].url,
-                    'Package-Name': 'com.h5'
+                    'Package-Name': sessionStorage.getItem("Uid"),
+                    'Landing-Channel-Uid': sessionStorage.getItem("Uid")
                 },
             }).then(res => {
                 console.log(res.data)
@@ -209,7 +182,7 @@
                     'Channel-Id': '14',
                     'Device-Id': '111',
                     'Request-Uri': 'https://api.pinganzhiyuan.com/panda_loan/graphql/query',
-                    'Package-Name': 'com.h5'
+                    'Package-Name': sessionStorage.getItem("Uid"),
                 }
                 }).then(res => {
                     console.log(res)
