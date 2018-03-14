@@ -154,7 +154,7 @@
                 this.$ajax.post(url,qs.stringify(params),{
                     headers: {
                         'H5-Web-Name': 'Conciselogin',
-                        'Landing-Channel-Uid': this.Uid,
+                        'Landing-Channel-Uid': sessionStorage.getItem("Uid"),
                         'Platform-Id': '0'
                     }
                 }).then( res => {
@@ -173,8 +173,8 @@
                         'Channel-Id': '14',
                         'Device-Id': '111',
                         'Request-Uri': 'http://119.23.12.36:8081/graphql/query',
-                        'Package-Name': this.Uid,
-                        'Landing-Channel-Uid': this.Uid,
+                        'Package-Name': sessionStorage.getItem("Uid"),
+                        'Landing-Channel-Uid': sessionStorage.getItem("Uid"),
                         'Platform-Id': '0'
                     }
                 }).then( res =>{
