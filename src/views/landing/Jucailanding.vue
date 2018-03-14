@@ -6,7 +6,7 @@
         </div>
         <div class="middle" v-if="!download">
             <div class="allinput">
-                <div> 
+                <div>
                     <input type="number" class="phone-input" placeholder="请填写注册手机号" v-model="phone"/>
                     <input type="button" class="code-button" v-bind:class="{cantClick:is_show}" :value="count+codeButtonText"  @click="getCode()"/>
                 </div>
@@ -134,7 +134,7 @@
                 }
                 if (ua.indexOf("iphone") == -1) {
                     //android
-                    window.location.href = "http://download.pinganzhiyuan.com/pandaloan/1.0.2/app-shenma-release.apk";
+                    window.location.href = "http://download.pinganzhiyuan.com/pandaloan/1.0.2/app-jucai-release.apk";
                 } else {
                     // ios
                     window.location.href = "  https://itunes.apple.com/cn/app/熊猫贷款/id1290678368?mt=8";
