@@ -114,6 +114,7 @@
                 var qs = require('qs');
                 this.$ajax.post(url, qs.stringify(params),{
                     headers: {
+                        'H5-Web-Name': 'Conciselogin',
                         'Landing-Channel-Uid': this.Uid,
                         'Sid': this.Sid,
                         'Content-Type': 'application/x-www-form-urlencoded'
@@ -148,14 +149,6 @@
             },
             postMes(){
                 let url = resources.token();
-                // let params = new URLSearchParams();
-                // params.append('username',this.phone)//用户名（手机号）
-                // params.append('keySMSCapt',this.keySMSCapt)//短信验证码的key
-                // params.append('smsCapt',this.smsCode)//短信验证码
-                // if (this.keyImage != '') {
-                //     params.append('keyImageCapt',this.keyImage)//图形验证码的key
-                //     params.append('imageCapt',this.imaCode)//图形验证码
-                // }
                 let params = { }
                 if (this.keyImage != '') {
                     params = {
@@ -172,25 +165,19 @@
                         'smsCapt': this.smsCode
                     }
                 }
-
                 var qs = require('qs');
-                // console.log(params)
-
                 this.$ajax.post(url, qs.stringify(params), {
                     headers: {
+                        'H5-Web-Name': 'Conciselogin',
                         'Landing-Channel-Uid': this.Uid,
                         'Sid': this.Sid,
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                 }).then(res => {
-                    //console.log(res)
                     sessionStorage.setItem("Uid",this.Uid)
                     sessionStorage.setItem("userId",res.data.obj1.id)
                     this.toProduct()
-                    // console.log('跳转')
-                    //this.download = true;
                 }).catch(error => {
-                    //this.lackMessage(error.response.data.statusMsg)
                     this.toast(error.response.data.statusMsg)
                     if (error.response.data.statusMsg === '短信验证码不正确') {
                         this.smsCode = '';
@@ -198,9 +185,6 @@
                     if (this.flagNum > 2) {
                         this.imaCode = '';
                         this.getImageCode()
-                        // if (!this.picCode) {
-                        //     this.getImageCode();
-                        // }
                     }
                 });
             },
@@ -210,6 +194,7 @@
                 let params = { }
                 this.$ajax.post(url,qs.stringify(params),{
                     headers: {
+                        'H5-Web-Name': 'Conciselogin',
                         'Landing-Channel-Uid': this.Uid,
                         'Sid': this.Sid,
                         'Content-Type': 'application/x-www-form-urlencoded'
@@ -228,6 +213,7 @@
                 let params = { };
                 this.$ajax.post(url, qs.stringify(params), {
                     headers: {
+                        'H5-Web-Name': 'Conciselogin',
                         'Landing-Channel-Uid': this.Uid,
                         'Sid': this.Sid,
                         'Content-Type': 'application/x-www-form-urlencoded'

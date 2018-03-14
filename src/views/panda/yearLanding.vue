@@ -69,6 +69,8 @@
 
 <script>
     import resources from "../../resources";
+    import qs from 'qs';
+
     export default {
         data() {
             return {
@@ -90,9 +92,46 @@
                 keySMSCapt: '',
                 keyImage:'',
                 Uid: this.$route.params.Uid,
+                AndroidDownloadUrl: '',
             };
         },
         methods: {
+            recordDownload() {
+                let url = resources.recordDownload();
+                let params = {
+                    'userId': 0,
+                    'downloadUrl': this.AndroidDownloadUrl
+                }
+                this.$ajax.post(url,qs.stringify(params),{
+                    headers: {
+                        'H5-Web-Name': 'yearLanding',
+                        'Landing-Channel-Uid': this.Uid,
+                        'Platform-Id': '0'
+                    }
+                }).then( res => {
+                    console.log(res)
+                })
+            },
+            getDownloadUrl() {
+                let url = resources.h5DownloadUrl();
+                let params = { };
+                this.$ajax.post(url,qs.stringify(params),{
+                    headers: {
+                        'H5-Web-Name': 'yearLanding',
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Version': '1',
+                        'User-Id': '0',
+                        'Channel-Id': '14',
+                        'Device-Id': '111',
+                        'Request-Uri': 'http://119.23.12.36:8081/graphql/query',
+                        'Package-Name': this.Uid,
+                        'Landing-Channel-Uid': this.Uid,
+                        'Platform-Id': '0'
+                    }
+                }).then( res =>{
+                    this.AndroidDownloadUrl = res.data.downloadUrl;
+                })
+            },
             toast(msg){
                 setTimeout(function(){
                     document.getElementsByClassName('yntoast-wrap')[0].getElementsByClassName('yntoast-msg')[0].innerHTML=msg;
@@ -107,7 +146,8 @@
                 var ua = navigator.userAgent.toLowerCase();
                 if (ua.indexOf("iphone") == -1) {
                     //安卓跳转
-                    window.location.href = "http://sj.qq.com/myapp/detail.htm?apkName=com.mg.pandawalletdaikuan";
+                    this.recordDownload();
+                    window.location.href = this.AndroidDownloadUrl;
                 } else {
                     //苹果跳转
                     window.location.href = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1330125527&mt=8";
@@ -161,6 +201,7 @@
                 var qs = require('qs');
                 this.$ajax.post(url, qs.stringify(params),{
                     headers: {
+                        'H5-Web-Name': 'yearLanding',
                         'Landing-Channel-Uid': this.Uid,
                         'Sid': this.Sid,
                         'Content-Type': 'application/x-www-form-urlencoded'
@@ -228,12 +269,14 @@
 
                 this.$ajax.post(url, qs.stringify(params), {
                     headers: {
+                        'H5-Web-Name': 'yearLanding',
                         'Landing-Channel-Uid': this.Uid,
                         'Sid': this.Sid,
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                 }).then(res => {
                     console.log(res)
+                    sessionStorage.setItem("Uid",this.Uid)
                     sessionStorage.setItem("userId",res.data.obj1.id)
                     this.toProduct()
                     console.log('跳转')
@@ -256,10 +299,10 @@
             enterMes(){
                 let url = resources.landingPage();
                 var qs = require('qs');
-                let params = { }
-
+                let params = { };
                 this.$ajax.post(url,qs.stringify(params),{
                     headers: {
+                        'H5-Web-Name': 'yearLanding',
                         'Landing-Channel-Uid': this.Uid,
                         'Sid': this.Sid,
                         'Content-Type': 'application/x-www-form-urlencoded'
@@ -278,6 +321,7 @@
                 let params = { };
                 this.$ajax.post(url, qs.stringify(params), {
                     headers: {
+                        'H5-Web-Name': 'yearLanding',
                         'Landing-Channel-Uid': this.Uid,
                         'Sid': this.Sid,
                         'Content-Type': 'application/x-www-form-urlencoded'
@@ -321,6 +365,7 @@
             this.phoneType();
             this.createSid();
             this.enterMes();
+            this.getDownloadUrl();
             //alert(this.Sid)
         },
         created(){

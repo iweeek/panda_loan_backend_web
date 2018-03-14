@@ -147,13 +147,15 @@
                 var qs = require('qs');
                 this.$ajax.post(url,qs.stringify(params),{
                     headers: {
+                        'H5-Web-Name': 'yearLanding',
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'Version': '1',
                         'User-Id': sessionStorage.getItem("userId"),
                         'Channel-Id': '14',
                         'Device-Id': '111',
                         'Request-Uri': this.allProduct[index].url,
-                        'Package-Name': 'com.h5'
+                        'Package-Name': sessionStorage.getItem("Uid"),
+                        "Landing-Channel-Uid": sessionStorage.getItem("Uid")
                     },
                 }).then(res => {
                     console.log(res.data)
@@ -179,7 +181,7 @@
                         'Channel-Id': '14',
                         'Device-Id': '111',
                         'Request-Uri': 'https://api.pinganzhiyuan.com/panda_loan/graphql/query',
-                        'Package-Name': 'com.h5'
+                        'Package-Name': sessionStorage.getItem("Uid")
                     }
                 }).then(res => {
                     this.loadingIf = false
@@ -214,7 +216,7 @@
             },
             toClassification(index){ //跳转商品分类详情
                 this.$router.push({
-                path: '/DetailsOfclassification?title=' + this.productListArrar[index].title  + '&id=' + this.productListArrar[index].id
+                    path: '/DetailsOfclassification?title=' + this.productListArrar[index].title  + '&id=' + this.productListArrar[index].id
                 });
             }
         },

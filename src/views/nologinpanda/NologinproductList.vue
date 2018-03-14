@@ -96,6 +96,7 @@
 <script> //js部分
     import resources from '../../resources'
     import { Toast } from 'mint-ui';
+    import qs from 'qs';
     const productQuery = `
         query(
             $pageNumber: Int
@@ -139,12 +140,50 @@
         logonphone:'', //遮挡层手机号
         pid:'', //列表pid
         listIndex:'', //第几个点击
-        Sid: '0', //记录
+        Sid: '', //记录
         Uid: this.$route.params.Uid,    //记录
-        placeholder:'填写手机号加入快速申请通道'
+        placeholder:'填写手机号加入快速申请通道',
+        AndroidDownloadUrl: '',
+        userId: 0
       };
     },
     methods: {
+            recordDownload() {
+                let url = resources.recordDownload();
+                let params = {
+                    'userId': this.userId,
+                    'downloadUrl': this.AndroidDownloadUrl
+                }
+                this.$ajax.post(url,qs.stringify(params),{
+                    headers: {
+                        'H5-Web-Name': 'NologinproductList',
+                        'Landing-Channel-Uid': this.Uid,
+                        'Platform-Id': '0'
+                    }
+                }).then( res => {
+                    console.log(res)
+                })
+            },
+            getDownloadUrl() {
+                let url = resources.h5DownloadUrl();
+                let params = { };
+                this.$ajax.post(url,qs.stringify(params),{
+                    headers: {
+                        'H5-Web-Name': 'NologinproductList',
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Version': '1',
+                        'User-Id': '0',
+                        'Channel-Id': '14',
+                        'Device-Id': '111',
+                        'Request-Uri': 'http://119.23.12.36:8081/graphql/query',
+                        'Package-Name': this.Uid,
+                        'Landing-Channel-Uid': this.Uid,
+                        'Platform-Id': '0'
+                    }
+                }).then( res =>{
+                    this.AndroidDownloadUrl = res.data.downloadUrl;
+                })
+            },
             loginDeterminebutton(){ //弹框确认按钮
                 var phoneReg = /(^1[3|4|5|7|8]\d{9}$)|(^09\d{8}$)/
                 if (phoneReg.test(this.logonphone)) {
@@ -164,11 +203,13 @@
                 var qs = require('qs')
                 this.$ajax.post(url,qs.stringify(params),{
                     headers:{
+                        'H5-Web-Name': 'NologinproductList',
                         'Landing-Channel-Uid': this.Uid,
                         'Sid': this.Sid,
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
                 }).then(res => {
+                        this.userId = res.data.obj1.id;
                         sessionStorage.setItem("userId",res.data.obj1.id)
                         this.getUrl(this.pid,this.listIndex)
                 }).catch(error =>{
@@ -191,13 +232,15 @@
                     var qs = require('qs');
                     this.$ajax.post(url,qs.stringify(params),{
                         headers: {
+                            'H5-Web-Name': 'NologinproductList',
                             'Content-Type': 'application/x-www-form-urlencoded',
                             'Version': '1',
                             'User-Id': sessionStorage.getItem("userId"),
                             'Channel-Id': '14',
                             'Device-Id': '111',
                             'Request-Uri': this.allProduct[index].url,
-                            'Package-Name': this.Uid
+                            'Package-Name': this.Uid,
+                            'Landing-Channel-Uid': this.Uid
                         },
                     }).then(res => {
                         var explorer =navigator.userAgent ;
@@ -221,7 +264,8 @@
                 var ua = navigator.userAgent.toLowerCase();
                 if (ua.indexOf("iphone") == -1) {
                     //安卓跳转
-                    window.location.href = "http://download.pinganzhiyuan.com/pandaloan/1.0.2/app-cdn-release.apk";
+                    this.recordDownload();
+                    window.location.href = this.AndroidDownloadUrl;
                 } else {
                     //苹果跳转
                     window.location.href = "https://itunes.apple.com/cn/app/%E7%86%8A%E7%8C%AB%E8%B4%B7%E6%AC%BE/id1290678368?mt=8";
@@ -237,6 +281,7 @@
                 let params = { }
                 this.$ajax.post(url,qs.stringify(params),{
                     headers: {
+                        'H5-Web-Name': 'NologinproductList',
                         'Landing-Channel-Uid': this.Uid,
                         'Sid': this.Sid,
                         'Content-Type': 'application/x-www-form-urlencoded'
@@ -310,16 +355,18 @@
                 }
             }
     },
-    mounted() { //第一次请求数据
+    mounted() { 
+        // 记录与生成id
+        this.getDownloadUrl()
+        this.createSid()
+        this.enterMes()
+        //第一次请求数据
         this.wrapperHeight = (document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top)-58;
         // 获取数据
         this.getProduct()
         if(!this.loading){
             this.getProduct();
         }
-        // 记录与生成id
-        this.enterMes()
-        this.createSid()
     },
     created(){
         document.documentElement.scrollTop=0
