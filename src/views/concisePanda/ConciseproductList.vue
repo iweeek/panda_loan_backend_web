@@ -92,6 +92,7 @@
 <script> //js部分
     import resources from '../../resources'
     import Xheader from '../common/X-header'
+    import qs from 'qs'
     const productQuery = `
         query(
             $pageNumber: Int
@@ -119,30 +120,67 @@
                 minTerm
             }
 	}`
-  export default {
-    name:'Conciselogin',
-    components: {
-        Xheader
-    },
-    data() {
-      return {
-        showLoading:true, //底部显示加载还是到底
-        loading: false, //加载中
-        wrapperHeight: 0,
-        showBack:true,
-        nameText:'热门推荐',
-        noHeader:true,
-        safari:false,
-        backone:false,
-        backtwo:true,
-        allProduct:[],
-        pageSize: 6,
-        pageNumber: 1,
-        showLoading:true, //底部显示加载还是到底
-        downshow:true
-      };
-    },
-    methods: {
+    export default {
+        name:'Conciselogin',
+        components: {
+            Xheader
+        },
+        data() {
+            return {
+                showLoading:true, //底部显示加载还是到底
+                loading: false, //加载中
+                wrapperHeight: 0,
+                showBack:true,
+                nameText:'热门推荐',
+                noHeader:true,
+                safari:false,
+                backone:false,
+                backtwo:true,
+                allProduct:[],
+                pageSize: 6,
+                pageNumber: 1,
+                showLoading:true, //底部显示加载还是到底
+                downshow:true,
+                AndroidDownloadUrl: '',
+            };
+        },
+        methods: {
+            recordDownload() {
+                let url = resources.recordDownload();
+                let params = {
+                    'userId': sessionStorage.getItem("userId"),
+                    'downloadUrl': this.AndroidDownloadUrl
+                }
+                this.$ajax.post(url,qs.stringify(params),{
+                    headers: {
+                        'H5-Web-Name': 'Conciselogin',
+                        'Landing-Channel-Uid': this.Uid,
+                        'Platform-Id': '0'
+                    }
+                }).then( res => {
+                    console.log(res)
+                })
+            },
+            getDownloadUrl() {
+                let url = resources.h5DownloadUrl();
+                let params = { };
+                this.$ajax.post(url,qs.stringify(params),{
+                    headers: {
+                        'H5-Web-Name': 'Conciselogin',
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Version': '1',
+                        'User-Id': '0',
+                        'Channel-Id': '14',
+                        'Device-Id': '111',
+                        'Request-Uri': 'http://119.23.12.36:8081/graphql/query',
+                        'Package-Name': this.Uid,
+                        'Landing-Channel-Uid': this.Uid,
+                        'Platform-Id': '0'
+                    }
+                }).then( res =>{
+                    this.AndroidDownloadUrl = res.data.downloadUrl;
+                })
+            },
             getUrl(pid,index){ //数据通知与跳转详情
                 // console.log('第几个')
                 // console.log(index)
@@ -154,6 +192,7 @@
                 var qs = require('qs');
                 this.$ajax.post(url,qs.stringify(params),{
                     headers: {
+                        'H5-Web-Name': 'Conciselogin',
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'Version': '1',
                         'User-Id': sessionStorage.getItem("userId"),
@@ -164,8 +203,6 @@
                         "Landing-Channel-Uid": sessionStorage.getItem("Uid")
                     },
                 }).then(res => {
-                    // console.log(res.data)
-                    // window.location.href = res.data
                     var explorer =navigator.userAgent ;
                     var isiOS = !!explorer.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
                     if(isiOS){
@@ -197,32 +234,29 @@
                     'Package-Name': sessionStorage.getItem("Uid"),
                 }
                 }).then(res => {
-                   
-                    var array = res.data.data.recommendProducts;
-                    for (var i = 0; i < array.length ;i ++) {
-                        array[i].firstTagArray = array[i].firstTags.split("|");
-                    }
-                    // console.log(res.data.data.recommendProducts.length)
-                    if(res.data.data.recommendProducts.length==0){
-                        this.showLoading = false
-                        return
-                    }
-                    this.allProduct = this.allProduct.concat(array);
-                    // console.log(this.allProduct)
-                    this.loading = false;
-                    this.allProduct.forEach(item => {
-                    if (item.maxAmount > 10000) {
-                        item.edu = item.maxAmount/10000 + '万';
-                    } else {
-                        item.edu = item.maxAmount;
-                    }
-                    if (item.firstTags === '') {
-                        item.isFirstTags = false;
-                    } else {
-                        item.isFirstTags = true;
-                    }
-                    });
-                })
+                        var array = res.data.data.recommendProducts;
+                        for (var i = 0; i < array.length ;i ++) {
+                            array[i].firstTagArray = array[i].firstTags.split("|");
+                        }
+                        if(res.data.data.recommendProducts.length==0){
+                            this.showLoading = false
+                            return
+                        }
+                        this.allProduct = this.allProduct.concat(array);
+                        this.loading = false;
+                        this.allProduct.forEach(item => {
+                        if (item.maxAmount > 10000) {
+                            item.edu = item.maxAmount/10000 + '万';
+                        } else {
+                            item.edu = item.maxAmount;
+                        }
+                        if (item.firstTags === '') {
+                            item.isFirstTags = false;
+                        } else {
+                            item.isFirstTags = true;
+                        }
+                        });
+                    })
                 },700);
             },
             loadMore() { //底部判断
@@ -236,7 +270,8 @@
                 var ua = navigator.userAgent.toLowerCase();
                 if (ua.indexOf("iphone") == -1) {
                     //安卓跳转
-                    window.location.href = "http://download.pinganzhiyuan.com/pandawalletdaikuan/1.0.2/app-cdn-release.apk";
+                    this.recordDownload();
+                    window.location.href = this.AndroidDownloadUrl;
                 } else {
                     //苹果跳转
                     window.location.href = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1330125527&mt=8";
@@ -246,22 +281,20 @@
                 this.downshow = false;
                 this.wrapperHeight = (document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top);
             }
-    },
-    mounted() { //第一次请求数据
-        // console.log(document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top)
-        this.wrapperHeight = (document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top)-60;
-    //   console.log(this.wrapperHeight)
-
-      this.getProduct()
-      if(!this.loading){
-        this.getProduct();
-      }
-    },
-    created(){
-        document.documentElement.scrollTop=0
-        document.body.scrollTop = 0
-    }
-  };
+        },
+        mounted() { 
+            this.getDownloadUrl();
+            this.wrapperHeight = (document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top)-60;
+            this.getProduct()
+            if(!this.loading){
+                this.getProduct();
+            }
+        },
+        created(){
+            document.documentElement.scrollTop=0
+            document.body.scrollTop = 0
+        }
+    };
 </script>
 
 <style lang="scss">

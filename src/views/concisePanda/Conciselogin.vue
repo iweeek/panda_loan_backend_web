@@ -115,6 +115,7 @@
                 var qs = require('qs');
                 this.$ajax.post(url, qs.stringify(params),{
                     headers: {
+                        'H5-Web-Name': 'Conciselogin',
                         'Landing-Channel-Uid': this.Uid,
                         'Sid': this.Sid,
                         'Content-Type': 'application/x-www-form-urlencoded'
@@ -168,6 +169,7 @@
                 var qs = require('qs');
                 this.$ajax.post(url, qs.stringify(params), {
                     headers: {
+                        'H5-Web-Name': 'Conciselogin',
                         'Landing-Channel-Uid': this.Uid,
                         'Sid': this.Sid,
                         'Content-Type': 'application/x-www-form-urlencoded'
@@ -193,6 +195,7 @@
                 let params = { }
                 this.$ajax.post(url,qs.stringify(params),{
                     headers: {
+                        'H5-Web-Name': 'Conciselogin',
                         'Landing-Channel-Uid': this.Uid,
                         'Sid': this.Sid,
                         'Content-Type': 'application/x-www-form-urlencoded'
@@ -211,6 +214,7 @@
                 let params = { };
                 this.$ajax.post(url, qs.stringify(params), {
                     headers: {
+                        'H5-Web-Name': 'Conciselogin',
                         'Landing-Channel-Uid': this.Uid,
                         'Sid': this.Sid,
                         'Content-Type': 'application/x-www-form-urlencoded'
