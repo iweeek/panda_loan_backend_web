@@ -264,8 +264,9 @@
                 var ua = navigator.userAgent.toLowerCase();
                 if (ua.indexOf("iphone") == -1) {
                     //安卓跳转
-                    this.recordDownload();
-                    window.location.href = this.AndroidDownloadUrl;
+                    //this.recordDownload();
+                    //window.location.href = this.AndroidDownloadUrl;
+                    window.location.href = "http://download.pinganzhiyuan.com/pandaloan/1.0.2/app-cdn-release.apk";
                 } else {
                     //苹果跳转
                     window.location.href = "https://itunes.apple.com/cn/app/%E7%86%8A%E7%8C%AB%E8%B4%B7%E6%AC%BE/id1290678368?mt=8";
@@ -357,7 +358,7 @@
     },
     mounted() { 
         // 记录与生成id
-        this.getDownloadUrl()
+        //this.getDownloadUrl()
         this.createSid()
         this.enterMes()
         //第一次请求数据
