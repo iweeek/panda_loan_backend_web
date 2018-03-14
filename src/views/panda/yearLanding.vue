@@ -69,6 +69,8 @@
 
 <script>
     import resources from "../../resources";
+    import qs from 'qs';
+
     export default {
         data() {
             return {
@@ -90,13 +92,30 @@
                 keySMSCapt: '',
                 keyImage:'',
                 Uid: this.$route.params.Uid,
+                AndroidDownloadUrl: '',
             };
         },
         methods: {
+            recordDownload() {
+                let url = resources.recordDownload();
+                let params = {
+                    'userId': 0,
+                    'downloadUrl': this.AndroidDownloadUrl
+                }
+                this.$ajax.post(url,qs.stringify(params),{
+                    headers: {
+                        'H5-Web-Name': 'yearLanding',
+                        'Landing-Channel-Uid': this.Uid,
+                        'Platform-Id': '0'
+                    }
+                }).then( res => {
+                    console.log(res)
+                })
+            },
             getDownloadUrl() {
                 let url = resources.h5DownloadUrl();
-                let params = new URLSearchParams();
-                this.$ajax.post(url,params,{
+                let params = { };
+                this.$ajax.post(url,qs.stringify(params),{
                     headers: {
                         'H5-Web-Name': 'yearLanding',
                         'Content-Type': 'application/x-www-form-urlencoded',
@@ -109,10 +128,9 @@
                         'Landing-Channel-Uid': this.Uid,
                         'Platform-Id': '0'
                     }
+                }).then( res =>{
+                    this.AndroidDownloadUrl = res.data.downloadUrl;
                 })
-                    .then( res =>{
-                        console.log(res)
-                    })
             },
             toast(msg){
                 setTimeout(function(){
@@ -128,7 +146,8 @@
                 var ua = navigator.userAgent.toLowerCase();
                 if (ua.indexOf("iphone") == -1) {
                     //安卓跳转
-                    window.location.href = "http://sj.qq.com/myapp/detail.htm?apkName=com.mg.pandawalletdaikuan";
+                    this.recordDownload();
+                    window.location.href = this.AndroidDownloadUrl;
                 } else {
                     //苹果跳转
                     window.location.href = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1330125527&mt=8";

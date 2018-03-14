@@ -44,7 +44,10 @@ let resources = {
     },
     h5DownloadUrl() {
         return `${host}\/h5DownloadUrl`
+    },
+    recordDownload() {
+        return `${host}\/recordDownload`
     }
-};
+}; 
 
 export default resources;
