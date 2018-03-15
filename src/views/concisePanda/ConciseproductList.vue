@@ -142,9 +142,21 @@
                 showLoading:true, //底部显示加载还是到底
                 downshow:true,
                 AndroidDownloadUrl: '',
+                unclick: false
             };
         },
         methods: {
+            countDown() {
+                var count = 5;
+                var timer = setInterval(() => {
+                    if (count > 0 ) {
+                        count--;
+                    } else {
+                    this.unclick = false;
+                    clearInterval(timer);
+                    }
+                }, 1000)
+            },
             recordDownload() {
                 let url = resources.recordDownload();
                 let params = {
@@ -158,7 +170,7 @@
                         'Platform-Id': '0'
                     }
                 }).then( res => {
-                    console.log(res)
+                    this.unclick = true;
                 })
             },
             getDownloadUrl() {
@@ -178,6 +190,9 @@
                         'Platform-Id': '0'
                     }
                 }).then( res =>{
+                    if (res.data == ''){
+                        this.downExit();
+                    }
                     this.AndroidDownloadUrl = res.data.downloadUrl;
                 })
             },
@@ -270,8 +285,12 @@
                 var ua = navigator.userAgent.toLowerCase();
                 if (ua.indexOf("iphone") == -1) {
                     //安卓跳转
+                    if (this.unclick) {
+                        return;
+                    }
                     this.recordDownload();
                     window.location.href = this.AndroidDownloadUrl;
+                    this.countDown();
                 } else {
                     //苹果跳转
                     window.location.href = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1330125527&mt=8";
