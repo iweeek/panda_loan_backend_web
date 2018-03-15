@@ -1,13 +1,23 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+
+// 安卓版本手机回收H5页面
+const AndroidAboutUs = resolve => require.ensure([], () => resolve(require('./views/androidrecycling/AboutUs.vue')), 'AndroidAboutUs')
+const AndroidAddress = resolve => require.ensure([], () => resolve(require('./views/androidrecycling/Address.vue')), 'AndroidAddress') //地址
+const AndroidSetaddress = resolve => require.ensure([], () => resolve(require('./views/androidrecycling/Setaddress.vue')), 'AndroidSetaddress') //新增地址
+const AndroidHelpCenter = resolve => require.ensure([], () => resolve(require('./views/androidrecycling/HelpCenter.vue')), 'AndroidHelpCenter')
+const AndroidMyCoupon = resolve => require.ensure([], () => resolve(require('./views/androidrecycling/MyCoupon.vue')), 'AndroidMyCoupon')
+const AndroidBindingBankcard = resolve => require.ensure([], () => resolve(require('./views/androidrecycling/BindingBankcard.vue')), 'AndroidBindingBankcard')
+const AndroidCoupon = resolve => require.ensure([], () => resolve(require('./views/androidrecycling/Coupon.vue')), 'AndroidCoupon') //增价卷
+const AndroidFeedback = resolve => require.ensure([], () => resolve(require('./views/androidrecycling/Feedback.vue')), 'AndroidFeedback')
+const AndroidAgreement = resolve => require.ensure([], () => resolve(require('./views/androidrecycling/FeeDeductionAgreement.vue')), 'AndroidAgreement')
+
 // 神马与奥丁和 Hackhome安卓下载
 const Shenmalanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Shenmalanding.vue')), 'Shenmalanding')
 const Aodinglanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Aodinglanding.vue')), 'Aodinglanding')
 const Hackhomelanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Hackhomelanding.vue')), 'Hackhomelanding')
 const Jucailanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Jucailanding.vue')), 'Jucailanding')
-
-
 
 // 不登录版本熊猫贷款
 const NologinproductList = resolve => require.ensure([], () => resolve(require('./views/nologinpanda/NologinproductList.vue')), 'NologinproductList') //不登录产品列表页面
@@ -74,6 +84,55 @@ const Conciselogin = resolve => require.ensure([], () => resolve(require('./view
 const ConciseproductList = resolve => require.ensure([], () => resolve(require('./views/concisePanda/ConciseproductList.vue')), 'ConciseproductList') //简版列表
 
 let routes = [
+
+    // 安卓手机回收页面
+
+    { //关于我们
+        path: '/androidAboutUs',
+        component: AndroidAboutUs,
+        name: '熊猫贷款'
+    },
+    { //添加地址
+        path: '/androidSetaddress',
+        component: AndroidSetaddress,
+        name: '熊猫贷款'
+    },
+    { //常见问题
+        path: '/androidHelpCenter',
+        component: AndroidHelpCenter,
+        name: '熊猫贷款'
+    },
+    { //使用规则
+        path: '/androidMyCoupon',
+        component: AndroidMyCoupon,
+        name: '熊猫贷款'
+    },
+    { //绑定银行卡
+        path: '/androidBindingBankcard',
+        component: AndroidBindingBankcard,
+        name: '熊猫贷款'
+    },
+    { //优惠券
+        path: '/androidCoupon',
+        component: AndroidCoupon,
+        name: '熊猫贷款'
+    },
+    { //反馈
+        path: '/androidFeedback',
+        component: AndroidFeedback,
+        name: '熊猫贷款'
+    },
+    { //协议
+        path: '/androidAgreement',
+        component: AndroidAgreement,
+        name: '熊猫贷款'
+    },
+    { //已有地址
+        path: '/androidAddress',
+        component: AndroidAddress,
+        name: '熊猫贷款'
+    },
+
 
     // 神马奥丁安卓下载地址
     {
