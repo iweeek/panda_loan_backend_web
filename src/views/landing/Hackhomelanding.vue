@@ -134,7 +134,7 @@
                 }
                 if (ua.indexOf("iphone") == -1) {
                     //android
-                    window.location.href = "http://download.pinganzhiyuan.com/pandaloan/1.0.2/app-hackhome-release.apk";
+                    window.location.href = "http://download.pinganzhiyuan.com/pandaloan/1.0.2/app-hackhomeh5-release.apk";
                 } else {
                     // ios
                     window.location.href = "https://itunes.apple.com/cn/app/熊猫贷款/id1290678368?mt=8";
