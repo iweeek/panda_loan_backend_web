@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+<<<<<<< HEAD
 
 // 黄色安卓版本手机回收H5页面
 const AndroidAboutUs = resolve => require.ensure([], () => resolve(require('./views/androidrecycling/AboutUs.vue')), 'AndroidAboutUs')
@@ -23,6 +24,22 @@ const IosBlueBindingBankcard = resolve => require.ensure([], () => resolve(requi
 const IosBlueCoupon = resolve => require.ensure([], () => resolve(require('./views/iosBluerecycling/Coupon.vue')), 'IosBlueCoupon') //增价卷
 const IosBlueFeedback = resolve => require.ensure([], () => resolve(require('./views/iosBluerecycling/Feedback.vue')), 'IosBlueFeedback')
 const IosBlueAgreement = resolve => require.ensure([], () => resolve(require('./views/iosBluerecycling/FeeDeductionAgreement.vue')), 'IosBlueAgreement')
+||||||| merged common ancestors
+// 神马与奥丁和 Hackhome安卓下载
+const Shenmalanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Shenmalanding.vue')), 'Shenmalanding')
+const Aodinglanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Aodinglanding.vue')), 'Aodinglanding')
+const Hackhomelanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Hackhomelanding.vue')), 'Hackhomelanding')
+const Jucailanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Jucailanding.vue')), 'Jucailanding')
+
+
+=======
+// 神马与奥丁和 Hackhome安卓下载
+const Shenmalanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Shenmalanding.vue')), 'Shenmalanding')
+const Aodinglanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Aodinglanding.vue')), 'Aodinglanding')
+const Hackhomelanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Hackhomelanding.vue')), 'Hackhomelanding')
+const Jucailanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Jucailanding.vue')), 'Jucailanding')
+const Qianjiazilanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Qianjiazilanding.vue')), 'Qianjiazilanding')
+>>>>>>> f_1397
 
 // ios黄色手机回收H5页面
 const XHBKAboutUs = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/AboutUs.vue')), 'XHBKAboutUs')
@@ -219,6 +236,12 @@ let routes = [
         component: Jucailanding,
         name: '熊猫贷款'
     },
+    {
+        path: '/qianjiazilanding/:Uid',
+        component: Qianjiazilanding,
+        name: '熊猫贷款'
+    },
+
 
 
     // 不登录熊猫贷款
