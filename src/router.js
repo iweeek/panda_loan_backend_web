@@ -104,47 +104,47 @@ let routes = [
     { //关于我们
         path: '/iosBlueAboutUs',
         component: IosBlueAboutUs,
-        name: '熊猫贷款'
+        name: '关于'
     },
     {
         path: '/iosBlueAddress',
         component: IosBlueAddress,
-        name: '熊猫贷款'
+        name: '我的收货地址'
     },
     {
         path: '/iosBlueSetaddress',
         component: IosBlueSetaddress,
-        name: '熊猫贷款'
+        name: '添加地址'
     },
     {
         path: '/iosBlueHelpCenter',
         component: IosBlueHelpCenter,
-        name: '熊猫贷款'
+        name: '帮助中心'
     },
     {
         path: '/iosBlueMyCoupon',
         component: IosBlueMyCoupon,
-        name: '熊猫贷款'
+        name: '使用规则'
     },
     {
         path: '/iosBlueBindingBankcard',
         component: IosBlueBindingBankcard,
-        name: '熊猫贷款'
+        name: '绑定银行卡'
     },
     {
         path: '/iosBlueCoupon',
         component: IosBlueCoupon,
-        name: '熊猫贷款'
+        name: '我的加价券'
     },
     {
         path: '/iosBlueFeedback',
         component: IosBlueFeedback,
-        name: '熊猫贷款'
+        name: '意见反馈'
     },
     {
         path: '/iosBlueAgreement',
         component: IosBlueAgreement,
-        name: '熊猫贷款'
+        name: '自动划扣协议'
     },
 
 
@@ -154,47 +154,47 @@ let routes = [
     { //关于我们
         path: '/androidAboutUs',
         component: AndroidAboutUs,
-        name: '熊猫贷款'
+        name: '关于'
     },
     { //添加地址
         path: '/androidSetaddress',
         component: AndroidSetaddress,
-        name: '熊猫贷款'
+        name: '添加地址'
     },
     { //常见问题
         path: '/androidHelpCenter',
         component: AndroidHelpCenter,
-        name: '熊猫贷款'
+        name: '帮助中心'
     },
     { //使用规则
         path: '/androidMyCoupon',
         component: AndroidMyCoupon,
-        name: '熊猫贷款'
+        name: '使用规则'
     },
     { //绑定银行卡
         path: '/androidBindingBankcard',
         component: AndroidBindingBankcard,
-        name: '熊猫贷款'
+        name: '绑定银行卡'
     },
     { //优惠券
         path: '/androidCoupon',
         component: AndroidCoupon,
-        name: '熊猫贷款'
+        name: '我的加价券'
     },
     { //反馈
         path: '/androidFeedback',
         component: AndroidFeedback,
-        name: '熊猫贷款'
+        name: '意见反馈'
     },
     { //协议
         path: '/androidAgreement',
         component: AndroidAgreement,
-        name: '熊猫贷款'
+        name: '自动划扣协议'
     },
     { //已有地址
         path: '/androidAddress',
         component: AndroidAddress,
-        name: '熊猫贷款'
+        name: '我的收货地址'
     },
 
 
@@ -263,7 +263,7 @@ let routes = [
     {
         path: '/XHBKCoupon',
         component: XHBKCoupon,
-        name: '我的加价卷',
+        name: '我的加价券',
         hidden: true
     },
     {
