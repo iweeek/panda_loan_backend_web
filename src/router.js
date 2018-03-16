@@ -6,8 +6,7 @@ const Shenmalanding = resolve => require.ensure([], () => resolve(require('@/vie
 const Aodinglanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Aodinglanding.vue')), 'Aodinglanding')
 const Hackhomelanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Hackhomelanding.vue')), 'Hackhomelanding')
 const Jucailanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Jucailanding.vue')), 'Jucailanding')
-
-
+const Qianjiazilanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Qianjiazilanding.vue')), 'Qianjiazilanding')
 
 // 不登录版本熊猫贷款
 const NologinproductList = resolve => require.ensure([], () => resolve(require('./views/nologinpanda/NologinproductList.vue')), 'NologinproductList') //不登录产品列表页面
@@ -96,6 +95,12 @@ let routes = [
         component: Jucailanding,
         name: '熊猫贷款'
     },
+    {
+        path: '/qianjiazilanding/:Uid',
+        component: Qianjiazilanding,
+        name: '熊猫贷款'
+    },
+
 
 
     // 不登录熊猫贷款
