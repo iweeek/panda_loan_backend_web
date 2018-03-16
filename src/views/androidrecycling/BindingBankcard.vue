@@ -14,7 +14,7 @@
             <div class="confirmButton" >确认</div>
             <!-- 协议 -->
             <div class="yntext-hint">
-                <span class="yntext-left">本人已阅读并同意与厦门励马金融技术服务有限公司签署</span>
+                <span class="yntext-left">本人已阅读并同意签署</span>
                 <span class="yntext-right" @click="agreement()">《代收付协议》</span>
             </div>
         </div>
