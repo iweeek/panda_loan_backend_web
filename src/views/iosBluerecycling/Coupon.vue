@@ -59,7 +59,7 @@
 <style lang="scss" scoped>
     $rem:1rem/45;
     .click{
-        color: #fedb31;
+        color: #5883e2;
     }
     .copon{
         height: 100%;
@@ -69,7 +69,7 @@
             margin: 0 auto;
             width: 780*$rem;
             height: 350*$rem;
-            background: url(~@/assets/youhuijuan.png) no-repeat scroll;
+            background: url(~@/assets/ioscouon.png) no-repeat scroll;
             background-size: 100%;
             margin-top: 0.5rem;
             .discount{
@@ -123,12 +123,12 @@
         .hint-top{
             //width: 100%;
             height:1.5rem;
-            background-color: #fffbd6;
+            background-color: #a0b7eb;
             .hint-text{
                 display: inline-block;
                 line-height: 1.5rem;
                 font-size: 0.65rem;
-                color: #fedb31;
+                color: #5883e2;
                 text-align: center;
                 width: 100%;
             }

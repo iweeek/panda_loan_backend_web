@@ -1,7 +1,7 @@
 <template>
     <div class="myReceivingaddress">
         <div class="noaddress" v-if="noaddress">
-            <img src="~@/assets/739573469119016340.png" alt="">
+            <img src="~@/assets/noaddress.png" alt="">
             <div class="noaddressbutton"  @click="setAddress">添加收货地址</div>
         </div>
         <div class="myaddress" v-for="(item,index) in haveBeensavedArrar" :key="index">
@@ -39,7 +39,7 @@
         methods: {
             setAddress(){
                 //跳转到添加页面
-                this.$router.push({path: '/androidSetaddress'});
+                this.$router.push({path: '/iosBlueSetaddress'});
             },
             delAddress(index){
                 this.haveBeensavedArrar.splice(index,1);
@@ -97,9 +97,9 @@
         width: 250*$rem;
         height: 88*$rem;
         line-height: 88*$rem;
-        color: #000002;
+        color: #fff;
         text-align: center;
-        background: #fddb31;
+        background: #5883e2;
         border-radius: 5px;
         font-size: 30*$rem;
     }
@@ -110,9 +110,9 @@
         width: 700*$rem;
         height: 100*$rem;
         line-height: 100*$rem;
-        color: #000;
+        color: #fff;
         text-align: center;
-        background: #fddb31;
+        background: #5883e2;
         border-radius: 5px;
         font-size: 30*$rem;
     }

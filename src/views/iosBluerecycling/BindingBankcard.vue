@@ -45,7 +45,7 @@ export default {
             },2000)
         },
         agreement(){ //跳转协议
-            this.$router.push({ path: '/AndroidAgreement' })
+            this.$router.push({ path: '/iosBlueAgreement' })
         },
   },
   mounted(){
@@ -160,7 +160,7 @@ $rem:1rem/40; //rem配置
         .yntext-right{
             display: inline-block;
             padding-top: 0.2rem;
-            color: #fedb31;
+            color: #5883e2;
             font-size: 22*$rem;
         }
     }

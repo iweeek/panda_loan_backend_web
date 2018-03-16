@@ -101,7 +101,7 @@
                 line-height: 2rem;
                 font-size: 0.65rem;
                 padding-left: 1rem;
-                color: #fedb31;
+                color: #5883e2;
             }
         }
         .help-middle{
@@ -138,7 +138,7 @@
                     .middle-point{
                         margin-left: 1rem;
                         display: inline-block;
-                        color: #fedb31;
+                        color: #5883e2;
                         line-height: 2rem;
                         //font-size: 0.1rem;
                     }

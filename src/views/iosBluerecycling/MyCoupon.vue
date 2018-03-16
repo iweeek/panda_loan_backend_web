@@ -49,7 +49,7 @@ $rem: 1rem/40; //rem配置
   height: 80*$rem;
   line-height: 80*$rem;
   font-size: 26*$rem;
-  color: #fedb31;
+  color: #5883e2;
   border-bottom: 1px solid #d6d7dc;
   padding-left: 24*$rem;
   overflow: hidden;
@@ -61,7 +61,7 @@ $rem: 1rem/40; //rem配置
   margin-top: .1*$rem;
   font-size: 10*$rem;
   display: inline;
-  color: #fedb31;
+  color: #5883e2;
 }
 .titleNameson {
   width: 100%;
