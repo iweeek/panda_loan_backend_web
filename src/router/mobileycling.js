@@ -132,7 +132,7 @@
      { //常见问题
          path: '/androidHelpCenter',
          component: AndroidHelpCenter,
-         name: '熊猫贷款'
+         name: '帮助中心'
      },
      { //使用规则
          path: '/androidMyCoupon',
@@ -170,47 +170,47 @@
      { //关于我们
          path: '/iosBlueAboutUs',
          component: IosBlueAboutUs,
-         name: '熊猫贷款'
+         name: '关于我们'
      },
      {
          path: '/iosBlueAddress',
          component: IosBlueAddress,
-         name: '熊猫贷款'
+         name: '我的收货地址'
      },
      {
          path: '/iosBlueSetaddress',
          component: IosBlueSetaddress,
-         name: '熊猫贷款'
+         name: '添加地址'
      },
      {
          path: '/iosBlueHelpCenter',
          component: IosBlueHelpCenter,
-         name: '熊猫贷款'
+         name: '帮助中心'
      },
      {
          path: '/iosBlueMyCoupon',
          component: IosBlueMyCoupon,
-         name: '熊猫贷款'
+         name: '使用规则'
      },
      {
          path: '/iosBlueBindingBankcard',
          component: IosBlueBindingBankcard,
-         name: '熊猫贷款'
+         name: '绑定银行卡'
      },
      {
          path: '/iosBlueCoupon',
          component: IosBlueCoupon,
-         name: '熊猫贷款'
+         name: '我的加价券'
      },
      {
          path: '/iosBlueFeedback',
          component: IosBlueFeedback,
-         name: '熊猫贷款'
+         name: '意见反馈'
      },
      {
          path: '/iosBlueAgreement',
          component: IosBlueAgreement,
-         name: '熊猫贷款'
+         name: '代收付协议'
      },
 
 
