@@ -146,8 +146,9 @@
                 var ua = navigator.userAgent.toLowerCase();
                 if (ua.indexOf("iphone") == -1) {
                     //安卓跳转
-                    this.recordDownload();
-                    window.location.href = this.AndroidDownloadUrl;
+                    //this.recordDownload();
+                    //window.location.href = this.AndroidDownloadUrl;
+                    window.location.href = "http://sj.qq.com/myapp/detail.htm?apkName=com.mg.pandawalletdaikuan";
                 } else {
                     //苹果跳转
                     window.location.href = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1330125527&mt=8";
@@ -365,7 +366,7 @@
             this.phoneType();
             this.createSid();
             this.enterMes();
-            this.getDownloadUrl();
+            //this.getDownloadUrl();
             //alert(this.Sid)
         },
         created(){

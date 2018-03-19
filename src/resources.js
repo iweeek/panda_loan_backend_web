@@ -10,6 +10,7 @@ if (debug) {
     // var host = 'http://192.168.199.166:8080';
     //  var host = 'http://192.168.2.116:8080/panda_loan';
     var host = 'http://119.23.12.36:8081/panda_loan';
+    // var host = 'http://192.168.2.116:8080/panda_loan';
     // var host = 'http://119.23.236.252:8080/panda_loan'
     // var host = 'https://api.pinganzhiyuan.com/panda_loan'
     // var host = 'http://127.0.0.1:8080/panda_loan'  
