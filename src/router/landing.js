@@ -4,6 +4,7 @@ const Aodinglanding = resolve => require.ensure([], () => resolve(require('@/vie
 const Hackhomelanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Hackhomelanding.vue')), 'Hackhomelanding')
 const Jucailanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Jucailanding.vue')), 'Jucailanding')
 const Qianjiazilanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Qianjiazilanding.vue')), 'Qianjiazilanding')
+const Ruipenglanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Ruipenglanding.vue')), 'Ruipenglanding')
 const Landing = resolve => require.ensure([], () => resolve(require('../views/Landing.vue')), 'Landing')
 
 export default [
@@ -38,4 +39,10 @@ export default [
         component: Landing,
         name: '熊猫贷款'
     },
+    {
+        path: '/ruipenglanding/:Uid',
+        component: Ruipenglanding,
+        name: '熊猫贷款'
+    },
+
 ]
