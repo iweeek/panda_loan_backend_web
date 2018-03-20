@@ -1,5 +1,6 @@
 <template>
     <div class="ynlanding-panda ynfirstpage">
+          <img style="position:absolute;left:0px;top:0px;width:35%;margin-left:10px;margin-top:10px;" src="~@/assets/XMDKFLOAT.png" />
         <div class="yntop"></div> <!--占位div-->
         <div class="ynmiddle">  <!--表单-->
             <div class="ynallinput">
@@ -23,6 +24,14 @@
                     <!-- <input type="button" class="yncomfirm-button" v-bind:class="{yncanClick:is_click}" value="立即借款" @click="comfirm()"/> -->
                 </div>
 
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="copytext">
+                Copyright © 2017 熊猫贷款 All Rights Reserved
+            </div>
+             <div class="copytext">
+                 闽ICP备17028012号-1 
             </div>
         </div>
         <!-- 提示框 -->
@@ -236,26 +245,11 @@
             },
             S4() {     //生成一个4位16进制字符串
                 return (((1+Math.random())*0x10000)|0).toString(16).substring(1);  
-            },
-            phoneType() {
-                var ua = navigator.userAgent.toLowerCase();
-                // if (ua.indexOf("iphone") == -1) {
-                //     //安卓
-                    // this.iphone = false;
-                    // document.title= "熊猫贷款";
-                // } else {
-                //     //苹果
-                    this.iphone = true;
-                    document.title = "熊猫钱包";
-                // }
             }
         },
         mounted() {
-            //alert(this.Uid)
-            this.phoneType();
             this.createSid();
             this.enterMes();
-            //alert(this.Sid)
         },
         created(){
             // console.log(sessionStorage.getItem("userId"))
@@ -274,6 +268,19 @@
     // 底部下载样式
     $rem:1rem/40;
     $height:(682/1438)*100;
+
+    .copyright{
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height:85*$rem;
+        .copytext{
+            text-align: center;
+            color:#fff;
+            font-size:24*$rem;
+            line-height: 1rem;
+        }
+    }
 
     // 底部下载
     .downzip{
@@ -326,14 +333,15 @@
 
     // 背景图以及最大外部div
     .ynfirstpage{
-        background: url(~@/assets/conciseloginBackgroungimg2.png) no-repeat scroll;
+        background: url(~@/assets/conciseloginBackgroungimg3.png) no-repeat scroll;
         background-size:100% 100%;
         height: 1438px;
         min-height:1438*$rem;
     }
     .ynlanding-panda{
+        position: relative;
         .yntop{ //占位样式
-            height:645*$rem;
+            height:690*$rem;
         }
         .ynmiddle{
             padding-top:70*$rem; 
