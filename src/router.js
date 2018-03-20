@@ -1,13 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-// 神马与奥丁和 Hackhome安卓下载
-const Shenmalanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Shenmalanding.vue')), 'Shenmalanding')
-const Aodinglanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Aodinglanding.vue')), 'Aodinglanding')
-const Hackhomelanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Hackhomelanding.vue')), 'Hackhomelanding')
-const Jucailanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Jucailanding.vue')), 'Jucailanding')
-const Qianjiazilanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Qianjiazilanding.vue')), 'Qianjiazilanding')
-
 // 黄色安卓版本手机回收H5页面
 const AndroidAboutUs = resolve => require.ensure([], () => resolve(require('./views/androidrecycling/AboutUs.vue')), 'AndroidAboutUs')
 const AndroidAddress = resolve => require.ensure([], () => resolve(require('./views/androidrecycling/Address.vue')), 'AndroidAddress') //地址
@@ -30,6 +23,7 @@ const IosBlueCoupon = resolve => require.ensure([], () => resolve(require('./vie
 const IosBlueFeedback = resolve => require.ensure([], () => resolve(require('./views/iosBluerecycling/Feedback.vue')), 'IosBlueFeedback')
 const IosBlueAgreement = resolve => require.ensure([], () => resolve(require('./views/iosBluerecycling/FeeDeductionAgreement.vue')), 'IosBlueAgreement')
 
+
 // 神马与奥丁和 Hackhome安卓下载
 const Shenmalanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Shenmalanding.vue')), 'Shenmalanding')
 const Aodinglanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Aodinglanding.vue')), 'Aodinglanding')
@@ -48,13 +42,9 @@ const XHBKCoupon = resolve => require.ensure([], () => resolve(require('./views/
 const XHBKmobilePhonerecyclingFeedback = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/Feedback.vue')), 'XHBKmobilePhonerecyclingFeedback')
 const XHBKFeeDeductionAgreement = resolve => require.ensure([], () => resolve(require('./views/mobilePhonerecycling/FeeDeductionAgreement.vue')), 'XHBKFeeDeductionAgreement')
 
-
-
 // 不登录版本熊猫贷款
 const NologinproductList = resolve => require.ensure([], () => resolve(require('./views/nologinpanda/NologinproductList.vue')), 'NologinproductList') //不登录产品列表页面
 const Nologindetails = resolve => require.ensure([], () => resolve(require('./views/nologinpanda/Nologindetails.vue')), 'Nologindetails') //不登录第三方页面
-
-
 
 // 其他
 const HomePage = resolve => require.ensure([], () => resolve(require('@/views/HomePage.vue')), 'HomePage')
@@ -564,6 +554,7 @@ let routes = [
 Vue.use(VueRouter)
 const router = new VueRouter({
     // mode: 'history',
+    base: "/panda_loan_mobile_web/",
     routes
 })
 
