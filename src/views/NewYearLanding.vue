@@ -52,6 +52,7 @@
 
 <script>
     import resources from "../resources";
+    import qs from "qs"
     export default {
         data() {
             return {
@@ -73,10 +74,62 @@
                 keySMSCapt: '',
                 keyImage:'',
                 Uid: this.$route.params.Uid,
+                unclick: false,  //防止重复点击
+                AndroidDownloadUrl: '', //安卓下载地址
             };
         },
         methods: {
-            toast(msg){
+            countDown(){ //防止重复点击
+                var count = 5;
+                var timer = setInterval(() => {
+                    if (count > 0 ) {
+                        count--;
+                    } else {
+                    this.unclick = false;
+                    clearInterval(timer);
+                    }
+                }, 1000)
+            },
+            recordDownload(){ //下载记录
+                let url = resources.recordDownload();
+                let params = {
+                    'userId':sessionStorage.getItem('userId'),
+                    'downloadUrl':this.AndroidDownloadUrl
+                }
+                this.$ajax.post(url,qs.stringify(params),{
+                    headers:{
+                        'H5-Web-Name':'nylanding',
+                        'Landing-Channel-Uid':this.Uid,
+                        'Platform-Id':'0'
+                    }
+                }).then( res => {
+                    this.unclick = true
+                })
+            },
+            getDownloadUrl(){
+                let url = resources.h5DownloadUrl();
+                let params = {};
+                this.$ajax.post(url,qs.stringify(params),{
+                    headers:{
+                        'H5-Web-Name': 'nylanding',
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Version': '1',
+                        'User-Id': '0',
+                        'Channel-Id': '14',
+                        'Device-Id': '111',
+                        'Request-Uri': 'http://119.23.12.36:8081/graphql/query',
+                        'Package-Name': this.Uid,
+                        'Landing-Channel-Uid':this.Uid,
+                        'Platform-Id': '0'
+                    }
+                }).then(res=>{
+                    if(res.data == ''){
+                        this.$toast('请刷新尝试')
+                    }
+                    this.AndroidDownloadUrl = res.data.downloadUrl;
+                })
+            },
+            toast(msg){ //提示框
                 setTimeout(function(){
                     document.getElementsByClassName('yntoast-wrap')[0].getElementsByClassName('yntoast-msg')[0].innerHTML=msg;
                     var toastTag = document.getElementsByClassName('yntoast-wrap')[0];
@@ -86,17 +139,22 @@
                     }, 100);
                 },500);
             },
-            downloadApp(){
+            downloadApp(){ //下载按钮
                 var ua = navigator.userAgent.toLowerCase();
                 if (ua.indexOf("iphone") == -1) {
                     //安卓跳转
-                    window.location.href = "http://sj.qq.com/myapp/detail.htm?apkName=com.mg.pandaloan";
+                    if(this.unclick){
+                        return;
+                    }
+                    this.recordDownload()
+                    window.location.href = this.AndroidDownloadUrl;
+                    this.countDown()
                 } else {
                     //苹果跳转
                     window.location.href = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1330125527&mt=8";
                 }
-            },
-            agreement(){
+            }, 
+            agreement(){ //跳转按钮
                 this.$router.push({ path: '/agreement' })
             },
             getCode(){
@@ -147,7 +205,6 @@
                     }
                 }).then(res => {
                     this.keySMSCapt = res.data.obj1.keySMSCapt;
-                    console.log(res)
                 })
             },    
 
@@ -204,8 +261,6 @@
                 }
 
                 var qs = require('qs');
-                console.log(params)
-
                 this.$ajax.post(url, qs.stringify(params), {
                     headers: {
                         'Landing-Channel-Uid': this.Uid,
@@ -213,8 +268,9 @@
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                 }).then(res => {
-                    console.log(res)
+                    sessionStorage.setItem("userId",res.data.obj1.id)
                     this.download = true;
+                    this.getDownloadUrl()
                 }).catch(error => {              
                     //this.lackMessage(error.response.data.statusMsg)
                     this.toast(error.response.data.statusMsg)
@@ -242,7 +298,6 @@
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                 }).then(res => {
-                    console.log(res)
                 })
             },
             getImageCode(){
@@ -261,7 +316,6 @@
                     },
                     responseType: 'arraybuffer'
                 }).then(res => {
-                    console.log(res.headers.keyimagecapt)
                     this.keyImage = res.headers.keyimagecapt
                     return 'data:image/jpeg;base64,' + btoa(
                     new Uint8Array(res.data)
