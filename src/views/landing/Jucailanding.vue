@@ -1,6 +1,7 @@
 <template>
     <div class="landing-panda firstpage" v-bind:class="{secondpage:download}">
-        <!-- <img style="position:absolute;left:0px;top:0px;width:100%;height:100%;z-Index:-1; border:1px solid blue" src="包囊.png" /> -->
+        <img style="position:absolute;left:0px;top:0px;width:35%;margin-left:10px;margin-top:10px;" src="~@/assets/XMDKFLOAT.png" />
+        <!-- <img src="~@/assets/xmdk.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%" v-if="iphone"> -->
         <div class="landing-top" v-if="!download">
             <!-- <img src="~@/assets/toppic.png" class="top-pic"> -->
         </div>
@@ -60,6 +61,9 @@
         <div class="copyright">
             <div class="footer">
                 Copyright © 2017 熊猫贷款 All Rights Reserved
+            </div>
+            <div class="footercopy">
+               闽ICP备17028012号-1 
             </div>
         </div>
 
@@ -366,11 +370,9 @@
                 return (((1+Math.random())*0x10000)|0).toString(16).substring(1);  
             }
         },
-        mounted: function () {
-            //alert(this.Uid)
+        mounted () {
             this.createSid();
             this.enterMes();
-            //alert(this.Sid)
 		}
     };
     
@@ -410,7 +412,7 @@
 
 
     .firstpage{
-        background: url(~@/assets/firstpage.jpg) no-repeat scroll; 
+        background: url(~@/assets/firstpage.1151c40.jpg) no-repeat scroll; 
         background-size:100% 100%;
         min-height: 32rem;
     }
@@ -600,14 +602,23 @@
         }
         
         .buttom{
-            margin-bottom: 1px;
-            height: 12%;
+            height: 9.4%;
         }
         .copyright{
             height: 6%;
             .footer{
                 position: relative;
                 top: 50%;
+                transform: translateY(-50%);
+                //margin-top:-1rem;
+                //height:0.5rem;
+                text-align: center;
+                color: #d9dadd;
+                font-size: 0.6rem;
+            }
+            .footercopy{
+                position: relative;
+                top: 70%;
                 transform: translateY(-50%);
                 //margin-top:-1rem;
                 //height:0.5rem;
