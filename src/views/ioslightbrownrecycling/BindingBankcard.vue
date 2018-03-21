@@ -14,7 +14,7 @@
             <div class="confirmButton" >确认</div>
             <!-- 协议 -->
             <div class="yntext-hint">
-                <span class="yntext-left">本人已阅读并同意与厦门宁静致远投资有限公司签署</span>
+                <span class="yntext-left">本人已阅读并同意与厦门光融未来网络借贷信息中介服务有限公司签署</span>
                 <span class="yntext-right" @click="agreement()">《代收付协议》</span>
             </div>
         </div>
