@@ -241,21 +241,21 @@
                     'h5WebName': 'Conciselogin',
                     'h5ChannelUid': sessionStorage.getItem("Uid"),
                     'platformId': '0',
-                    'productTypeId': '999'
+                    'productTypeId': '5'
                 };
                 setTimeout(() => { //延时请求数据
                 this.$ajax.post(`${resources.graphQlApi}`, {
                     'query': `${productQuery}`,
                     variables: params,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Version': '1',
-                    'User-Id': sessionStorage.getItem("userId"),
-                    'Channel-Id': '99',
-                    'Device-Id': '111',
-                    'Request-Uri': 'https://api.pinganzhiyuan.com/panda_loan/graphql/query',
-                    'Package-Name': sessionStorage.getItem("Uid"),
-                }
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Version': '1',
+                        'User-Id': sessionStorage.getItem("userId"),
+                        'Channel-Id': '99',
+                        'Device-Id': '111',
+                        'Request-Uri': 'https://api.pinganzhiyuan.com/panda_loan/graphql/query',
+                        'Package-Name': sessionStorage.getItem("Uid"),
+                    }
                 }).then(res => {
                         var array = res.data.data.h5RecommendProducts;
                         for (var i = 0; i < array.length ;i ++) {
