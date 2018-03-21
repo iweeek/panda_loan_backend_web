@@ -97,12 +97,18 @@
         query(
             $pageNumber: Int
             $pageSize: Int
+            $h5WebName: String
+            $h5ChannelUid: String
+            $platformId: String
+            $productTypeId: Long
         ){
-            recommendProducts(
+            h5RecommendProducts(
                 pageNumber: $pageNumber
-                pageSize: $pageSize
-                packageName: "com.h5"
-                channelId: "99"
+                pageSize: $pageSize 
+                h5WebName: $h5WebName
+                h5ChannelUid: $h5ChannelUid
+                platformId: $platformId
+                productTypeId: $productTypeId
             ){
                 id
                 title
@@ -232,8 +238,10 @@
                 let params = {
                     "pageSize": this.pageSize,
                     "pageNumber": this.pageNumber,
-                    "packageName": "com.h5",
-                    "channelId": "99"
+                    'h5WebName': 'Conciselogin',
+                    'h5ChannelUid': sessionStorage.getItem("Uid"),
+                    'platformId': '0',
+                    'productTypeId': '999'
                 };
                 setTimeout(() => { //延时请求数据
                 this.$ajax.post(`${resources.graphQlApi}`, {
@@ -249,11 +257,11 @@
                     'Package-Name': sessionStorage.getItem("Uid"),
                 }
                 }).then(res => {
-                        var array = res.data.data.recommendProducts;
+                        var array = res.data.data.h5RecommendProducts;
                         for (var i = 0; i < array.length ;i ++) {
                             array[i].firstTagArray = array[i].firstTags.split("|");
                         }
-                        if(res.data.data.recommendProducts.length==0){
+                        if(res.data.data.h5RecommendProducts.length==0){
                             this.showLoading = false
                             return
                         }
