@@ -1,3 +1,14 @@
+ // ios棕黄色手机回收H5页面
+ const IosBrownAboutUs = resolve => require.ensure([], () => resolve(require('../views/ioslightbrownrecycling/AboutUs.vue')), 'IosBrownAboutUs')
+ const IosBrownAddress = resolve => require.ensure([], () => resolve(require('../views/ioslightbrownrecycling/Address.vue')), 'IosBrownAddress')
+ const IosBrownSetaddress = resolve => require.ensure([], () => resolve(require('../views/ioslightbrownrecycling/Setaddress.vue')), 'IosBrownSetaddress')
+ const IosBrownHelpCenter = resolve => require.ensure([], () => resolve(require('../views/ioslightbrownrecycling/HelpCenter.vue')), 'IosBrownHelpCenter')
+ const IosBrownMyCoupon = resolve => require.ensure([], () => resolve(require('../views/ioslightbrownrecycling/MyCoupon.vue')), 'IosBrownMyCoupon')
+ const IosBrownBindingBankcard = resolve => require.ensure([], () => resolve(require('../views/ioslightbrownrecycling/BindingBankcard.vue')), 'IosBrownBindingBankcard')
+ const IosBrownCoupon = resolve => require.ensure([], () => resolve(require('../views/ioslightbrownrecycling/Coupon.vue')), 'IosBrownCoupon')
+ const IosBrownFeedback = resolve => require.ensure([], () => resolve(require('../views/ioslightbrownrecycling/Feedback.vue')), 'IosBrownFeedback')
+ const IosBrownAgreement = resolve => require.ensure([], () => resolve(require('../views/ioslightbrownrecycling/FeeDeductionAgreement.vue')), 'IosBrownAgreement')
+
  // ios黄色手机回收H5页面
  const XHBKAboutUs = resolve => require.ensure([], () => resolve(require('../views/mobilePhonerecycling/AboutUs.vue')), 'XHBKAboutUs')
  const XHBKAddress = resolve => require.ensure([], () => resolve(require('../views/mobilePhonerecycling/Address.vue')), 'XHBKAddress') //地址
@@ -62,7 +73,67 @@
 
  export default [
 
-     // 手机回收h5页面
+     // ios棕黄色手机回收h5页面
+     {
+         path: '/iosBrownHelpCenter',
+         component: IosBrownHelpCenter,
+         name: '帮助中心',
+         hidden: true
+     },
+     {
+         path: '/iosBrownAboutUs',
+         component: IosBrownAboutUs,
+         name: '关于我们',
+         hidden: true
+     },
+     {
+         path: '/iosBrownSetaddress',
+         component: IosBrownSetaddress,
+         name: '添加地址',
+         hidden: true
+     },
+     {
+         path: '/iosBrownAddress',
+         component: IosBrownAddress,
+         name: '我的收货地址',
+         hidden: true
+     },
+     {
+         path: '/iosBrownCoupon',
+         component: IosBrownCoupon,
+         name: '我的加价券',
+         hidden: true
+     },
+     {
+         path: '/iosBrownFeedback',
+         component: IosBrownFeedback,
+         name: '意见反馈',
+         hidden: true
+     },
+     {
+         path: '/iosBrownBindingBankcard',
+         component: IosBrownBindingBankcard,
+         name: '绑定银行卡',
+         hidden: true
+     },
+     {
+         path: '/iosBrownAgreement',
+         component: IosBrownAgreement,
+         name: '代收付协议',
+         hidden: true
+     },
+     {
+         path: '/iosBrownMyCoupon',
+         component: IosBrownMyCoupon,
+         name: '使用规则',
+         hidden: true
+     },
+
+
+
+     // 小花白卡手机回收h5页面
+
+
      {
          path: '/XHBKHelpCenter',
          component: XHBKHelpCenter,
@@ -90,7 +161,7 @@
      {
          path: '/XHBKCoupon',
          component: XHBKCoupon,
-         name: '我的加价卷',
+         name: '我的加价券',
          hidden: true
      },
      {
@@ -118,7 +189,12 @@
          hidden: true
      },
 
+
+
      //  安卓部分（黄色）
+
+
+
      {
          path: '/androidAboutUs',
          component: AndroidAboutUs,
@@ -165,7 +241,11 @@
          name: '熊猫贷款'
      },
 
+
+
      // ios蓝色手机回收页面
+
+
 
      { //关于我们
          path: '/iosBlueAboutUs',
@@ -215,6 +295,8 @@
 
 
      //  马上速贷手机回收
+
+
      {
          path: '/MSSDfeedback',
          component: MSSDFeedback,
