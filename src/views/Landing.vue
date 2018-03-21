@@ -73,7 +73,7 @@
 
 <script>
     import resources from "../resources";
-
+    import qs from 'qs'
     const versionQuery = `
         query (
             $platformId: Byte
@@ -112,9 +112,62 @@
                 keySMSCapt: '',
                 keyImage:'',
                 Uid: this.$route.params.Uid,
+                AndroidDownloadUrl: '',
+                unclick: false,
+                userId: 0
             };
         },
         methods: {
+            countDown(){ //防止重复点击
+                var count = 5;
+                var timer = setInterval(() => {
+                    if (count > 0 ) {
+                        count--;
+                    } else {
+                    this.unclick = false;
+                    clearInterval(timer);
+                    }
+                }, 1000)
+            },
+            recordDownload() { //下载记录
+                let url = resources.recordDownload();
+                let params = {
+                    'userId': this.userId,
+                    'downloadUrl': this.AndroidDownloadUrl
+                }
+                this.$ajax.post(url,qs.stringify(params),{
+                    headers: {
+                        'H5-Web-Name': 'landing',
+                        'Landing-Channel-Uid': this.Uid,
+                        'Platform-Id': '0'
+                    }
+                }).then( res => {
+                    console.log(res)
+                    this.unclick = true
+                })
+            },
+            getDownloadUrl() {
+                let url = resources.h5DownloadUrl();
+                let params = { };
+                this.$ajax.post(url,qs.stringify(params),{
+                    headers: {
+                        'H5-Web-Name': 'landing',
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Version': '1',
+                        'User-Id': '0',
+                        'Channel-Id': '14',
+                        'Device-Id': '111',
+                        'Request-Uri': 'http://119.23.12.36:8081/graphql/query',
+                        'Package-Name': this.Uid,
+                        'Landing-Channel-Uid': this.Uid,
+                        'Platform-Id': '0'
+                    }
+                }).then( res =>{
+                    console.log(res)
+                    console.log('我是链接')
+                    this.AndroidDownloadUrl = res.data.downloadUrl;
+                })
+            },
             toast(msg){
                 setTimeout(function(){
                     document.getElementsByClassName('toast-wrap')[0].getElementsByClassName('toast-msg')[0].innerHTML=msg;
@@ -126,7 +179,20 @@
                 },500);
             },
             downloadApp(){
-                window.location.href = "http://sj.qq.com/myapp/detail.htm?apkName=com.mg.pandaloan";
+                // window.location.href = "http://sj.qq.com/myapp/detail.htm?apkName=com.mg.pandaloan";
+                var ua = navigator.userAgent.toLowerCase();
+                if (ua.indexOf("iphone") == -1) {
+                    //安卓跳转
+                    if(this.unclick){
+                        return;
+                    }
+                    this.recordDownload();
+                    window.location.href = this.AndroidDownloadUrl;
+                    this.countDown()
+                } else {
+                    //苹果跳转
+                    window.location.href = "https://itunes.apple.com/cn/app/%E7%86%8A%E7%8C%AB%E8%B4%B7%E6%AC%BE/id1290678368?mt=8";
+                }
             },
             agreement(){
                 this.$router.push({ path: '/agreement' })
@@ -275,6 +341,8 @@
                     },
                 }).then(res => {
                     console.log(res)
+                    console.log('我出来了')
+                    this.getDownloadUrl()
                     this.download = true;
                 }).catch(error => {              
                     //this.lackMessage(error.response.data.statusMsg)

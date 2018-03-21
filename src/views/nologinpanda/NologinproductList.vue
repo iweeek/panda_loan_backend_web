@@ -144,10 +144,22 @@
         Uid: this.$route.params.Uid,    //记录
         placeholder:'填写手机号加入快速申请通道',
         AndroidDownloadUrl: '',
+        unclick: false,
         userId: 0
       };
     },
     methods: {
+            countDown(){ //防止重复点击
+                var count = 5;
+                var timer = setInterval(() => {
+                    if (count > 0 ) {
+                        count--;
+                    } else {
+                    this.unclick = false;
+                    clearInterval(timer);
+                    }
+                }, 1000)
+            },
             recordDownload() {
                 let url = resources.recordDownload();
                 let params = {
@@ -156,12 +168,14 @@
                 }
                 this.$ajax.post(url,qs.stringify(params),{
                     headers: {
-                        'H5-Web-Name': 'NologinproductList',
+                        'H5-Web-Name': 'nologinproductList',
                         'Landing-Channel-Uid': this.Uid,
                         'Platform-Id': '0'
                     }
                 }).then( res => {
                     console.log(res)
+                    console.log('记录成功')
+                    this.unclick = true
                 })
             },
             getDownloadUrl() {
@@ -169,7 +183,7 @@
                 let params = { };
                 this.$ajax.post(url,qs.stringify(params),{
                     headers: {
-                        'H5-Web-Name': 'NologinproductList',
+                        'H5-Web-Name': 'nologinproductList',
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'Version': '1',
                         'User-Id': '0',
@@ -181,6 +195,11 @@
                         'Platform-Id': '0'
                     }
                 }).then( res =>{
+                    console.log(res)
+                    console.log('获取成功')
+                    if (res.data == ''){
+                        this.downExit();
+                    }
                     this.AndroidDownloadUrl = res.data.downloadUrl;
                 })
             },
@@ -264,9 +283,12 @@
                 var ua = navigator.userAgent.toLowerCase();
                 if (ua.indexOf("iphone") == -1) {
                     //安卓跳转
-                    //this.recordDownload();
-                    //window.location.href = this.AndroidDownloadUrl;
-                    window.location.href = "http://download.pinganzhiyuan.com/pandaloan/1.0.2/app-cdn-release.apk";
+                    if(this.unclick){
+                        return;
+                    }
+                    this.recordDownload();
+                    window.location.href = this.AndroidDownloadUrl;
+                    this.countDown()
                 } else {
                     //苹果跳转
                     window.location.href = "https://itunes.apple.com/cn/app/%E7%86%8A%E7%8C%AB%E8%B4%B7%E6%AC%BE/id1290678368?mt=8";
@@ -358,7 +380,7 @@
     },
     mounted() { 
         // 记录与生成id
-        //this.getDownloadUrl()
+        this.getDownloadUrl()
         this.createSid()
         this.enterMes()
         //第一次请求数据
