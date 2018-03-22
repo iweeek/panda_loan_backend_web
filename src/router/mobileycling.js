@@ -31,6 +31,18 @@
  const AndroidFeedback = resolve => require.ensure([], () => resolve(require('../views/androidrecycling/Feedback.vue')), 'AndroidFeedback')
  const AndroidAgreement = resolve => require.ensure([], () => resolve(require('../views/androidrecycling/FeeDeductionAgreement.vue')), 'AndroidAgreement')
 
+ //  蓝色安卓手机回收页面
+
+ const AndroidBlueAboutUs = resolve => require.ensure([], () => resolve(require('../views/androBluerecycling/AboutUs.vue')), 'AndroidBlueAboutUs')
+ const AndroidBlueAddress = resolve => require.ensure([], () => resolve(require('../views/androBluerecycling/Address.vue')), 'AndroidBlueAddress') //地址
+ const AndroidBlueSetaddress = resolve => require.ensure([], () => resolve(require('../views/androBluerecycling/Setaddress.vue')), 'AndroidBlueSetaddress') //新增地址
+ const AndroidBlueHelpCenter = resolve => require.ensure([], () => resolve(require('../views/androBluerecycling/HelpCenter.vue')), 'AndroidBlueHelpCenter')
+ const AndroidBlueMyCoupon = resolve => require.ensure([], () => resolve(require('../views/androBluerecycling/MyCoupon.vue')), 'AndroidBlueMyCoupon')
+ const AndroidBlueBindingBankcard = resolve => require.ensure([], () => resolve(require('../views/androBluerecycling/BindingBankcard.vue')), 'AndroidBlueBindingBankcard')
+ const AndroidBlueCoupon = resolve => require.ensure([], () => resolve(require('../views/androBluerecycling/Coupon.vue')), 'AndroidBlueCoupon') //增价卷
+ const AndroidBlueFeedback = resolve => require.ensure([], () => resolve(require('../views/androBluerecycling/Feedback.vue')), 'AndroidBlueFeedback')
+ const AndroidBlueAgreement = resolve => require.ensure([], () => resolve(require('../views/androBluerecycling/FeeDeductionAgreement.vue')), 'AndroidBlueAgreement')
+
  // ios蓝色手机回收H5页面
  const IosBlueAboutUs = resolve => require.ensure([], () => resolve(require('../views/iosBluerecycling/AboutUs.vue')), 'IosBlueAboutUs')
  const IosBlueAddress = resolve => require.ensure([], () => resolve(require('../views/iosBluerecycling/Address.vue')), 'IosBlueAddress') //地址
@@ -73,6 +85,7 @@
 
  export default [
 
+<<<<<<< HEAD
      // ios棕黄色手机回收h5页面
      {
          path: '/iosBrownHelpCenter',
@@ -134,6 +147,60 @@
      // 小花白卡手机回收h5页面
 
 
+||||||| merged common ancestors
+     // 手机回收h5页面
+=======
+     // 安卓蓝色手机回收页面
+
+     {
+         path: '/androidBlueAboutUs',
+         component: AndroidBlueAboutUs,
+         name: '关于我们'
+     },
+     {
+         path: '/androidBlueAddress',
+         component: AndroidBlueAddress,
+         name: '我的收货地址'
+     },
+     {
+         path: '/androidBlueSetaddress',
+         component: AndroidBlueSetaddress,
+         name: '添加地址'
+     },
+     {
+         path: '/androidBlueHelpCenter',
+         component: AndroidBlueHelpCenter,
+         name: '帮助中心'
+     },
+     {
+         path: '/androidBlueMyCoupon',
+         component: AndroidBlueMyCoupon,
+         name: '使用规则'
+     },
+     {
+         path: '/androidBlueBindingBankcard',
+         component: AndroidBlueBindingBankcard,
+         name: '绑定银行卡'
+     },
+     {
+         path: '/androidBlueCoupon',
+         component: AndroidBlueCoupon,
+         name: '我的加价券'
+     },
+     {
+         path: '/androidBlueFeedback',
+         component: AndroidBlueFeedback,
+         name: '意见反馈'
+     },
+     {
+         path: '/androidBlueAgreement',
+         component: AndroidBlueAgreement,
+         name: '代收付协议'
+     },
+
+
+     // 手机回收h5页面
+>>>>>>> f_1408
      {
          path: '/XHBKHelpCenter',
          component: XHBKHelpCenter,
