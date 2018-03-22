@@ -132,7 +132,7 @@
             gotoUrl(pid,index){ //跳转链接
                 console.log( this.allProduct[index].url)
                 window.location.href =  this.allProduct[index].url;
-                window.location.href = 'https://at.umeng.com/Lv8vKf';
+                // window.location.href = 'https://at.umeng.com/Lv8vKf';
                 // let url = 'http://192.168.2.116:8080/panda_loan/record?pid=131&redirect=https%3A%2F%2Fat.umeng.com%2Femuuaq';
                 // let params = {}
                 // var qs = require('qs');
@@ -154,7 +154,7 @@
                 //     // this.$router.push({path: '/Detailspage?url=' +  res.data + '&title=' +   this.allProduct[index].title});
                 // })
             //    alert('222')
-                // window.location.href = 'http://192.168.2.116/panda_loan/record?pid=131&redirect=https%3A%2F%2Fat.umeng.com%2Femuuaq'
+                // window.location.href = 'http://192.168.2.116:8080/panda_loan/record?pid=131&redirect=https%3A%2F%2Fat.umeng.com%2Femuuaq'
             },
             getProduct() { //请求数据
                 this.loadingIf = true
