@@ -85,7 +85,6 @@
 
  export default [
 
-<<<<<<< HEAD
      // ios棕黄色手机回收h5页面
      {
          path: '/iosBrownHelpCenter',
@@ -142,14 +141,6 @@
          hidden: true
      },
 
-
-
-     // 小花白卡手机回收h5页面
-
-
-||||||| merged common ancestors
-     // 手机回收h5页面
-=======
      // 安卓蓝色手机回收页面
 
      {
@@ -198,9 +189,7 @@
          name: '代收付协议'
      },
 
-
      // 手机回收h5页面
->>>>>>> f_1408
      {
          path: '/XHBKHelpCenter',
          component: XHBKHelpCenter,
