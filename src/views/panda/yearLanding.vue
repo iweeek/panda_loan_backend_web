@@ -93,10 +93,22 @@
                 keyImage:'',
                 Uid: this.$route.params.Uid,
                 AndroidDownloadUrl: '',
+                unclick: false
             };
         },
         methods: {
-            recordDownload() {
+            countDown(){ //防止重复点击
+                var count = 5;
+                var timer = setInterval(() => {
+                    if (count > 0 ) {
+                        count--;
+                    } else {
+                    this.unclick = false;
+                    clearInterval(timer);
+                    }
+                }, 1000)
+            },
+            recordDownload() { //记录
                 let url = resources.recordDownload();
                 let params = {
                     'userId': 0,
@@ -110,9 +122,11 @@
                     }
                 }).then( res => {
                     console.log(res)
+                    console.log('记录成功')
+                    this.unclick = true
                 })
             },
-            getDownloadUrl() {
+            getDownloadUrl() { //获取下载链接
                 let url = resources.h5DownloadUrl();
                 let params = { };
                 this.$ajax.post(url,qs.stringify(params),{
@@ -129,6 +143,8 @@
                         'Platform-Id': '0'
                     }
                 }).then( res =>{
+                    console.log(res)
+                    console.log('成功获取下载链接')
                     this.AndroidDownloadUrl = res.data.downloadUrl;
                 })
             },
@@ -146,9 +162,12 @@
                 var ua = navigator.userAgent.toLowerCase();
                 if (ua.indexOf("iphone") == -1) {
                     //安卓跳转
-                    //this.recordDownload();
-                    //window.location.href = this.AndroidDownloadUrl;
-                    window.location.href = "http://sj.qq.com/myapp/detail.htm?apkName=com.mg.pandawalletdaikuan";
+                    if(this.unclick){
+                        return;
+                    }
+                    this.recordDownload();
+                    window.location.href = this.AndroidDownloadUrl;
+                    this.countDown()
                 } else {
                     //苹果跳转
                     window.location.href = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1330125527&mt=8";
@@ -366,7 +385,7 @@
             this.phoneType();
             this.createSid();
             this.enterMes();
-            //this.getDownloadUrl();
+            this.getDownloadUrl();
             //alert(this.Sid)
         },
         created(){

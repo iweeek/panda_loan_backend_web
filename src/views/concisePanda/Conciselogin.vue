@@ -333,7 +333,7 @@
 
     // 背景图以及最大外部div
     .ynfirstpage{
-        background: url(~@/assets/conciseloginBackgroungimg3.png) no-repeat scroll;
+        background: url(~@/assets/conciseloginBackgroungimg5.png) no-repeat scroll;
         background-size:100% 100%;
         height: 1438px;
         min-height:1438*$rem;
