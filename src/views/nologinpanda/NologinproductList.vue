@@ -178,7 +178,7 @@
                     this.unclick = true
                 })
             },
-            getDownloadUrl() {
+            getDownloadUrl() { //获取下载url链接
                 let url = resources.h5DownloadUrl();
                 let params = { };
                 this.$ajax.post(url,qs.stringify(params),{
