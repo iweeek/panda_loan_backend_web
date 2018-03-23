@@ -1,3 +1,8 @@
+// 熊猫贷款不登录
+const NoProductList = resolve => require.ensure([], () => resolve(require('../views/notLoginpanda/ProductList.vue')), 'NoProductList') //熊猫贷款产品页面
+const NoDetailspage = resolve => require.ensure([], () => resolve(require('../views/notLoginpanda/Detailspage.vue')), 'NoDetailspage') //熊猫贷款第三方页面
+const NoDetailsOfclassification = resolve => require.ensure([], () => resolve(require('../views/notLoginpanda/DetailsOfclassification.vue')), 'DetailsOfclassification') //熊猫贷款产品分类页面
+
 // 熊猫贷款简版
 const Concisedetails = resolve => require.ensure([], () => resolve(require('../views/concisePanda/Concisedetails.vue')), 'Concisedetails') //简版详情页面
 const Conciselogin = resolve => require.ensure([], () => resolve(require('../views/concisePanda/Conciselogin.vue')), 'Conciselogin') //简版登录
@@ -15,6 +20,26 @@ const Detailspage = resolve => require.ensure([], () => resolve(require('../view
 const DetailsOfclassification = resolve => require.ensure([], () => resolve(require('../views/panda/DetailsOfclassification.vue')), 'DetailsOfclassification') //熊猫贷款产品分类页面
 
 export default [
+
+    // 不登录版本熊猫贷款
+    {
+        path: '/noProductList/:Uid',
+        component: NoProductList,
+        name: '产品类表',
+        hidden: true
+    },
+    {
+        path: '/noDetailspage',
+        component: NoDetailspage,
+        name: '',
+        hidden: true
+    },
+    {
+        path: '/noClassification',
+        component: NoDetailsOfclassification,
+        name: '',
+        hidden: true
+    },
 
     //熊猫贷款简版
     {
