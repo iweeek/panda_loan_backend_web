@@ -3,7 +3,7 @@
         <div v-if="show">
             <div class="help-top">
                 <span class="top-text">常见问题</span>
-            </div>
+            </div> 
             <div class="help-middle">
                 <div class="middle-block" v-for="(item,index) in listQuestion" :key="index">
                     <div class="middle-border"></div>
@@ -37,6 +37,7 @@
 			return {
                 listQuestion: [
                     {value:"莫愁周转是什么？"},
+                    {value:"为什么莫愁周转需要使用我的通讯录？"},
                     {value:"我的机器多少钱回收？"},
                     {value:"莫愁周转的估价，可以议价吗？"},
                     {value:"莫愁周转回收哪些电子产品？"},
@@ -52,6 +53,7 @@
                 ],
                 listAnswer: [
                     {value:"莫愁周转是厦门光融未来网络借贷信息中介服务有限公司(简称：厦门光融未来)研发，专注为中国大陆地区互联网用户提供的智能终端的回收服务平台。"},
+                    {value:"平台在回收您的手机时，为了避免手机为脏机、黑机，平台会随机抽取两位联系人，电话核验您的身份及手机信息。"},
                     {value:"用户可以在首页点击‘马上评估’，根据产品流程完善设备信息，提交订单后系统会在30分钟内给出报价。"},
                     {value:"莫愁周转给出的价格为综合机器品牌、使用时间等信息后，给出的综合评估价格，不接受议价。"},
                     {value:"莫愁周转回收市场上多种品牌的智能手机及平板电脑。"},
