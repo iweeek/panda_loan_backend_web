@@ -35,7 +35,7 @@ export default [
         hidden: true
     },
     {
-        path: '/NoDetailsOfclassification',
+        path: '/noClassification',
         component: NoDetailsOfclassification,
         name: '',
         hidden: true

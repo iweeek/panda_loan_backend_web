@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 		<transition name="fade" mode="out-in">
-			<keep-alive include="NologinproductList">
+			<keep-alive include="NoProductList">
 				<router-view ></router-view>
 			</keep-alive>
 		</transition>

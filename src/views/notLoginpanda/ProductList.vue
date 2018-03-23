@@ -7,7 +7,7 @@
                     <p>{{item.title}}</p>
                 </div>
             </div>
-            <div v-for="(product,index) in allProduct" :key="product.id,index" class="product" @click="gotoUrl(product.id,index)">
+            <div v-for="(product,index) in allProduct" :key="product.id,index" class="product" @click="gotoUrl(index)">
                 <div class="title">
                     <img v-bind:src="product.imgUrl" alt="" class="avatar">
                     <span class="title-word">{{product.title}}</span>
@@ -76,6 +76,7 @@
             }
 	}`
     export default {
+        name:'NoProductList',
         data() {
             return {
                 topNavs:[],
@@ -129,32 +130,12 @@
                 _this.loadingIf = false
                 },1500)
             },
-            gotoUrl(pid,index){ //跳转链接
-                console.log( this.allProduct[index].url)
+            gotoUrl(index){ //跳转链接
                 window.location.href =  this.allProduct[index].url;
-                // window.location.href = 'https://at.umeng.com/Lv8vKf';
-                // let url = 'http://192.168.2.116:8080/panda_loan/record?pid=131&redirect=https%3A%2F%2Fat.umeng.com%2Femuuaq';
-                // let params = {}
-                // var qs = require('qs');
-                // this.$ajax.get(url,qs.stringify(params),{
-                //     headers: {
-                //         // 'H5-Web-Name': 'yearLanding',
-                //         // 'Content-Type': 'application/x-www-form-urlencoded',
-                //         // 'Version': '1',
-                //         // 'User-Id': sessionStorage.getItem("userId"),
-                //         'Channel-Id': '14',
-                //         // 'Device-Id': '111',
-                //         // 'Request-Uri': this.allProduct[index].url,
-                //         // 'Package-Name': sessionStorage.getItem("Uid"),
-                //         "Landing-Channel-Uid": sessionStorage.getItem("Uid")
-                //     },
-                // }).then(res => {
-                //     console.log(res.data)
-                //     window.location.href = res.data
-                //     // this.$router.push({path: '/Detailspage?url=' +  res.data + '&title=' +   this.allProduct[index].title});
-                // })
-            //    alert('222')
-                // window.location.href = 'http://192.168.2.116:8080/panda_loan/record?pid=131&redirect=https%3A%2F%2Fat.umeng.com%2Femuuaq'
+                let url = this.allProduct[index].url;
+                var str = 'redirect='
+                var stringUrl =  url.split(str)[1]
+                window.location.href = decodeURIComponent(stringUrl)
             },
             getProduct() { //请求数据
                 this.loadingIf = true
@@ -208,7 +189,7 @@
             },
             toClassification(index){ //跳转商品分类详情
                 this.$router.push({
-                    path: '/DetailsOfclassification?title=' + this.productListArrar[index].title  + '&id=' + this.productListArrar[index].id
+                    path: '/noClassification?title=' + this.productListArrar[index].title  + '&id=' + this.productListArrar[index].id
                 });
             }
         },

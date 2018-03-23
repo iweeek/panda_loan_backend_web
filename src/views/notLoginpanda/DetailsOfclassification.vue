@@ -8,7 +8,7 @@
                 <div class="lasttime" v-if="this.$route.query.id==1">
                     <!-- 最后更新： -->
                 </div>
-                <div v-for="(product,index) in allProduct" :key="product.id,index"  @click="getUrl(product.id,index)" :class="{product:product,productthree:productthree}">
+                <div v-for="(product,index) in allProduct" :key="product.id,index"  @click="gotoUrl(index)" :class="{product:product,productthree:productthree}">
                     <div class="title">
                         <img v-bind:src="product.imgUrl" alt="" class="avatar">
                         <span class="title-word">{{product.title}}</span>
@@ -136,35 +136,16 @@
         };
     },
     methods: {
+        gotoUrl(index){
+            window.location.href =  this.allProduct[index].url;
+            let url = this.allProduct[index].url;
+            var str = 'redirect='
+            var stringUrl =  url.split(str)[1]
+            window.location.href = decodeURIComponent(stringUrl)
+        },
         SetProduct(){ //添加数据
           this.pageNumber ++;
           this.getProduct()
-        },
-        getUrl(pid,index){
-            let url = resources.recordUrl();
-            let params = {
-                'userId': sessionStorage.getItem("userId"),
-                'pid': pid,
-            }
-            console.log(pid)
-            var qs = require('qs');
-            this.$ajax.post(url,qs.stringify(params),{
-                headers: {
-                    'H5-Web-Name': 'yearLanding',
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Version': '1',
-                    'User-Id': sessionStorage.getItem("userId"),
-                    'Channel-Id': '14',
-                    'Device-Id': '111',
-                    'Request-Uri': this.allProduct[index].url,
-                    'Package-Name': sessionStorage.getItem("Uid"),
-                    'Landing-Channel-Uid': sessionStorage.getItem("Uid")
-                },
-            }).then(res => {
-                console.log(res.data)
-                window.location.href = res.data //新标签页
-                // this.$router.push({path: '/Detailspage?url=' +  res.data + '&title=' +   this.allProduct[index].title}); 本vue
-            })
         },
         getRecommendProduct() {
             let params = {
