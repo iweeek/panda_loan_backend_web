@@ -20,6 +20,17 @@
  const XHBKmobilePhonerecyclingFeedback = resolve => require.ensure([], () => resolve(require('../views/mobilePhonerecycling/Feedback.vue')), 'XHBKmobilePhonerecyclingFeedback')
  const XHBKFeeDeductionAgreement = resolve => require.ensure([], () => resolve(require('../views/mobilePhonerecycling/FeeDeductionAgreement.vue')), 'XHBKFeeDeductionAgreement')
 
+ //  安卓棕色莫愁周转
+ const AndroidBrownAboutUs = resolve => require.ensure([], () => resolve(require('../views/androidlightbrownrecycling/AboutUs.vue')), 'AndroidBrownAboutUs')
+ const AndroidBrownAddress = resolve => require.ensure([], () => resolve(require('../views/androidlightbrownrecycling/Address.vue')), 'AndroidBrownAddress')
+ const AndroidBrownSetaddress = resolve => require.ensure([], () => resolve(require('../views/androidlightbrownrecycling/Setaddress.vue')), 'AndroidBrownSetaddress')
+ const AndroidBrownHelpCenter = resolve => require.ensure([], () => resolve(require('../views/androidlightbrownrecycling/HelpCenter.vue')), 'AndroidBrownHelpCenter')
+ const AndroidBrownMyCoupon = resolve => require.ensure([], () => resolve(require('../views/androidlightbrownrecycling/MyCoupon.vue')), 'AndroidBrownBindingBankcard')
+ const AndroidBrownBindingBankcard = resolve => require.ensure([], () => resolve(require('../views/androidlightbrownrecycling/BindingBankcard.vue')), 'AndroidBrownBindingBankcard')
+ const AndroidBrownCoupon = resolve => require.ensure([], () => resolve(require('../views/androidlightbrownrecycling/Coupon.vue')), 'AndroidBrownCoupon')
+ const AndroidBrownFeedback = resolve => require.ensure([], () => resolve(require('../views/androidlightbrownrecycling/Feedback.vue')), 'AndroidBrownFeedback')
+ const AndroidBrownAgreement = resolve => require.ensure([], () => resolve(require('../views/androidlightbrownrecycling/FeeDeductionAgreement.vue')), 'AndroidBrownAgreement')
+
  // 黄色安卓版本手机回收H5页面
  const AndroidAboutUs = resolve => require.ensure([], () => resolve(require('../views/androidrecycling/AboutUs.vue')), 'AndroidAboutUs')
  const AndroidAddress = resolve => require.ensure([], () => resolve(require('../views/androidrecycling/Address.vue')), 'AndroidAddress') //地址
@@ -84,6 +95,62 @@
  const YRJKFeeDeductionAgreement = resolve => require.ensure([], () => resolve(require('../views/yirenjiekuan/FeeDeductionAgreement.vue')), 'YRJKFeeDeductionAgreement')
 
  export default [
+
+     // android棕黄色手机回收h5页面
+     {
+         path: '/androidBrownHelpCenter',
+         component: AndroidBrownHelpCenter,
+         name: '帮助中心',
+         hidden: true
+     },
+     {
+         path: '/androidBrownAboutUs',
+         component: AndroidBrownAboutUs,
+         name: '关于我们',
+         hidden: true
+     },
+     {
+         path: '/androidBrownSetaddress',
+         component: AndroidBrownSetaddress,
+         name: '添加地址',
+         hidden: true
+     },
+     {
+         path: '/androidBrownAddress',
+         component: AndroidBrownAddress,
+         name: '我的收货地址',
+         hidden: true
+     },
+     {
+         path: '/androidBrownCoupon',
+         component: AndroidBrownCoupon,
+         name: '我的加价券',
+         hidden: true
+     },
+     {
+         path: '/androidBrownFeedback',
+         component: AndroidBrownFeedback,
+         name: '意见反馈',
+         hidden: true
+     },
+     {
+         path: '/androidBrownBindingBankcard',
+         component: AndroidBrownBindingBankcard,
+         name: '绑定银行卡',
+         hidden: true
+     },
+     {
+         path: '/androidBrownAgreement',
+         component: AndroidBrownAgreement,
+         name: '代收付协议',
+         hidden: true
+     },
+     {
+         path: '/androidBrownMyCoupon',
+         component: AndroidBrownMyCoupon,
+         name: '使用规则',
+         hidden: true
+     },
 
      // ios棕黄色手机回收h5页面
      {
