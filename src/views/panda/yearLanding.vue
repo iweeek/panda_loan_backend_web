@@ -121,8 +121,6 @@
                         'Platform-Id': '0'
                     }
                 }).then( res => {
-                    console.log(res)
-                    console.log('记录成功')
                     this.unclick = true
                 })
             },
@@ -143,8 +141,7 @@
                         'Platform-Id': '0'
                     }
                 }).then( res =>{
-                    console.log(res)
-                    console.log('成功获取下载链接')
+                    // console.log(res)
                     this.AndroidDownloadUrl = res.data.downloadUrl;
                 })
             },
@@ -228,7 +225,6 @@
                     }
                 }).then(res => {
                     this.keySMSCapt = res.data.obj1.keySMSCapt;
-                    console.log(res)
                 })
             },
 
@@ -285,8 +281,6 @@
                 }
 
                 var qs = require('qs');
-                console.log(params)
-
                 this.$ajax.post(url, qs.stringify(params), {
                     headers: {
                         'H5-Web-Name': 'yearLanding',
@@ -295,12 +289,9 @@
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                 }).then(res => {
-                    console.log(res)
                     sessionStorage.setItem("Uid",this.Uid)
                     sessionStorage.setItem("userId",res.data.obj1.id)
                     this.toProduct()
-                    console.log('跳转')
-                    //this.download = true;
                 }).catch(error => {
                     //this.lackMessage(error.response.data.statusMsg)
                     this.toast(error.response.data.statusMsg)
@@ -328,7 +319,6 @@
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                 }).then(res => {
-                    console.log(res)
                 })
             },
             getImageCode(){
@@ -348,7 +338,6 @@
                     },
                     responseType: 'arraybuffer'
                 }).then(res => {
-                    console.log(res.headers.keyimagecapt)
                     this.keyImage = res.headers.keyimagecapt
                     return 'data:image/jpeg;base64,' + btoa(
                     new Uint8Array(res.data)
@@ -389,12 +378,9 @@
             //alert(this.Sid)
         },
         created(){
-            console.log(sessionStorage.getItem("userId"))
             if(sessionStorage.getItem("userId")==null){
-                console.log('我没有登录奥')
             }else{
                 this.$router.push({ path: '/ProductList' })
-                console.log('已经登录了奥')
             }
         }
     };

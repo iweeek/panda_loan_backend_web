@@ -166,10 +166,10 @@
                     'Package-Name': sessionStorage.getItem("Uid"),
                 }
                 }).then(res => {
-                    console.log(res)
+                    // console.log(res)
                     this.loadingIf = false
                     this.loading = '点击加载'
-                    console.log(res.data.data.recommendProducts)
+                    // console.log(res.data.data.recommendProducts)
                     var array = res.data.data.recommendProducts;
                     for (var i = 0; i < array.length ;i ++) {
                         array[i].firstTagArray = array[i].firstTags.split("|");
@@ -201,7 +201,6 @@
             });
          },
         getTitle(){
-            console.log(this.$route.query.title)
             this.nameText = this.$route.query.title
         },
         demo(index){  //测试跳转

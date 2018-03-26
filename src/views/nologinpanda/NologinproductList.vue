@@ -173,12 +173,10 @@
                         'Platform-Id': '0'
                     }
                 }).then( res => {
-                    console.log(res)
-                    console.log('记录成功')
                     this.unclick = true
                 })
             },
-            getDownloadUrl() {
+            getDownloadUrl() { //获取下载url链接
                 let url = resources.h5DownloadUrl();
                 let params = { };
                 this.$ajax.post(url,qs.stringify(params),{
@@ -195,8 +193,6 @@
                         'Platform-Id': '0'
                     }
                 }).then( res =>{
-                    console.log(res)
-                    console.log('获取成功')
                     if (res.data == ''){
                         this.downExit();
                     }
@@ -232,7 +228,7 @@
                         sessionStorage.setItem("userId",res.data.obj1.id)
                         this.getUrl(this.pid,this.listIndex)
                 }).catch(error =>{
-                        console.log(error)
+                        // console.log(error)
                 })
             },
             getUrl(pid,index){ //已登录跳转详情
@@ -324,8 +320,10 @@
                 let params = {
                     "pageSize": this.pageSize,
                     "pageNumber": this.pageNumber,
-                    "packageName": "com.h5",
-                    "channelId": "99"
+                    'h5WebName':'NologinproductList',
+                    'h5ChannelUid':this.Uid,
+                    'platformId':'0',
+                    "productTypeId": '5'
                 };
                 setTimeout(() => { //延时请求数据
                 this.$ajax.post(`${resources.graphQlApi}`, {
