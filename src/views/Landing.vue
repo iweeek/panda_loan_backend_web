@@ -146,7 +146,6 @@
                         'Platform-Id': '0'
                     }
                 }).then( res => {
-                    console.log(res)
                     this.unclick = true
                 })
             },
@@ -167,8 +166,6 @@
                         'Platform-Id': '0'
                     }
                 }).then( res =>{
-                    console.log(res)
-                    console.log('我是链接')
                     this.AndroidDownloadUrl = res.data.downloadUrl;
                 })
             },
@@ -261,7 +258,7 @@
                     }
                 }).then(res => {
                     this.keySMSCapt = res.data.obj1.keySMSCapt;
-                    console.log(res)
+           
                 })
 
                 
@@ -335,8 +332,6 @@
                 }
 
                 var qs = require('qs');
-                console.log(params)
-
                 this.$ajax.post(url, qs.stringify(params), {
                     headers: {
                         'Landing-Channel-Uid': this.Uid,
@@ -344,8 +339,6 @@
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                 }).then(res => {
-                    console.log(res)
-                    console.log('我出来了')
                     this.getDownloadUrl()
                     this.download = true;
                 }).catch(error => {              
@@ -382,7 +375,7 @@
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                 }).then(res => {
-                    console.log(res)
+           
                 })
             },
             getImageCode(){
@@ -406,7 +399,7 @@
                     // if (this.flagNum === 3) {
                     //     this.smsCode = ''
                     // }
-                    console.log(res.headers.keyimagecapt)
+                
                     this.keyImage = res.headers.keyimagecapt
                     return 'data:image/jpeg;base64,' + btoa(
                     new Uint8Array(res.data)

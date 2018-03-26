@@ -129,7 +129,6 @@
                 var _this = this
                 _this.loadingIf = true
                 setTimeout(function(){
-                    console.log('正在等待')
                 _this.pageNumber ++;
                 _this.getProduct()
                 _this.loadingIf = false
@@ -137,8 +136,6 @@
 
             },
             getUrl(pid,index){
-                console.log('第几个')
-                console.log(index)
                 let url = resources.recordUrl();
                 let params = {
                     'userId': sessionStorage.getItem("userId"),
@@ -158,7 +155,6 @@
                         "Landing-Channel-Uid": sessionStorage.getItem("Uid")
                     },
                 }).then(res => {
-                    console.log(res.data)
                     window.location.href = res.data
                     // this.$router.push({path: '/Detailspage?url=' +  res.data + '&title=' +   this.allProduct[index].title});
                 })
@@ -168,8 +164,10 @@
                 let params = {
                     "pageSize": this.pageSize,
                     "pageNumber": this.pageNumber,
-                    "packageName": "com.h5",
-                    "channelId": "99"
+                    'h5WebName': 'yearLanding',
+                    'h5ChannelUid': sessionStorage.getItem("Uid"),
+                    'platformId': '0',
+                    'productTypeId': '5'
                 };
                 this.$ajax.post(`${resources.graphQlApi}`, {
                     'query': `${productQuery}`,
@@ -186,8 +184,6 @@
                 }).then(res => {
                     this.loadingIf = false
                     this.loading = '加载更多'
-                    console.log(res)
-                    // console.log(res.data.data.recommendProducts)
                     var array = res.data.data.recommendProducts;
                     for (var i = 0; i < array.length ;i ++) {
                         array[i].firstTagArray = array[i].firstTags.split("|");

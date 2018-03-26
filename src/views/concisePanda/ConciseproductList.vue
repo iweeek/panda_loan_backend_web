@@ -257,6 +257,7 @@
                         'Package-Name': sessionStorage.getItem("Uid"),
                     }
                 }).then(res => {
+                    console.log(res)
                         var array = res.data.data.h5RecommendProducts;
                         for (var i = 0; i < array.length ;i ++) {
                             array[i].firstTagArray = array[i].firstTags.split("|");
