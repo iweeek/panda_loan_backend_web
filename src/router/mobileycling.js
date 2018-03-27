@@ -22,6 +22,8 @@
 
  //  安卓棕色莫愁周转
  const AndroidBrownAboutUs = resolve => require.ensure([], () => resolve(require('../views/androidlightbrownrecycling/AboutUs.vue')), 'AndroidBrownAboutUs')
+ const SuiBianHuaAboutUs = resolve => require.ensure([], () => resolve(require('../views/androidlightbrownrecycling/SBHAboutUs.vue')), 'SuiBianHuaAboutUs')
+
  const AndroidBrownAddress = resolve => require.ensure([], () => resolve(require('../views/androidlightbrownrecycling/Address.vue')), 'AndroidBrownAddress')
  const AndroidBrownSetaddress = resolve => require.ensure([], () => resolve(require('../views/androidlightbrownrecycling/Setaddress.vue')), 'AndroidBrownSetaddress')
  const AndroidBrownHelpCenter = resolve => require.ensure([], () => resolve(require('../views/androidlightbrownrecycling/HelpCenter.vue')), 'AndroidBrownHelpCenter')
@@ -93,10 +95,16 @@
  const YRJKBindingBankcard = resolve => require.ensure([], () => resolve(require('../views/yirenjiekuan/BindingBankcard.vue')), 'YRJKBindingBankcard')
  const YRJKAboutUs = resolve => require.ensure([], () => resolve(require('../views/yirenjiekuan/AboutUs.vue')), 'YRJKAboutUs')
  const YRJKFeeDeductionAgreement = resolve => require.ensure([], () => resolve(require('../views/yirenjiekuan/FeeDeductionAgreement.vue')), 'YRJKFeeDeductionAgreement')
-
+ 
  export default [
-
+    //随便花关于我们
      // android棕黄色手机回收h5页面
+     {
+        path: '/suiBianHuaAboutUs',
+        component: SuiBianHuaAboutUs,
+        name: '帮助中心',
+        hidden: true
+     },
      {
          path: '/androidBrownHelpCenter',
          component: AndroidBrownHelpCenter,
