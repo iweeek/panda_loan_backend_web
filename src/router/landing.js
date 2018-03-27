@@ -6,9 +6,8 @@ const Jucailanding = resolve => require.ensure([], () => resolve(require('@/view
 const Qianjiazilanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Qianjiazilanding.vue')), 'Qianjiazilanding')
 const Ruipenglanding = resolve => require.ensure([], () => resolve(require('@/views/landing/Ruipenglanding.vue')), 'Ruipenglanding')
 const Landing = resolve => require.ensure([], () => resolve(require('../views/Landing.vue')), 'Landing')
-
+//随便花关于页面
 export default [
-
     {
         path: '/shenmalanding/:Uid',
         component: Shenmalanding,
