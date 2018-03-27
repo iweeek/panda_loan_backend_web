@@ -22,7 +22,7 @@
 
  //  安卓棕色莫愁周转
  const AndroidBrownAboutUs = resolve => require.ensure([], () => resolve(require('../views/androidlightbrownrecycling/AboutUs.vue')), 'AndroidBrownAboutUs')
- const SuiBianHuaAboutUs = resolve => require.ensure([], () => resolve(require('../views/androidlightbrownrecycling/SBHAboutUs.vue')), 'SuiBianHuaAboutUs')
+ const AnXinHuaAboutUs = resolve => require.ensure([], () => resolve(require('../views/androidlightbrownrecycling/AXHAboutUs.vue')), 'AnXinHuaAboutUs')
 
  const AndroidBrownAddress = resolve => require.ensure([], () => resolve(require('../views/androidlightbrownrecycling/Address.vue')), 'AndroidBrownAddress')
  const AndroidBrownSetaddress = resolve => require.ensure([], () => resolve(require('../views/androidlightbrownrecycling/Setaddress.vue')), 'AndroidBrownSetaddress')
@@ -100,8 +100,8 @@
     //随便花关于我们
      // android棕黄色手机回收h5页面
      {
-        path: '/suiBianHuaAboutUs',
-        component: SuiBianHuaAboutUs,
+        path: '/AnXinHuaAboutUs',
+        component: AnXinHuaAboutUs,
         name: '帮助中心',
         hidden: true
      },

@@ -4,14 +4,14 @@
             <div class="companyCount">
                 <div class="companyLogo" style="padding-top:4rem"> <!--logo文字-->
                     <img src="~@/assets/suibianhuaabout.png" alt="">
-                    <div class="companyName" style="padding-top:1rem">
-                        <span style="font-size:1rem;color:rgb(51, 51, 51);">极简的用钱记账软件</span>
+                    <div class="companyName" style="padding-top:0.6rem">
+                        <span style="font-size:0.9rem;color:rgb(51, 51, 51);">极简的用钱记账软件</span>
                     </div>
                 </div>
             </div>
-            <div class="companyFoot" style="padding-top:12rem"> <!--底部-->
+            <div class="companyFoot" style="padding-top:13rem"> <!--底部-->
                 <div class="companyaddress"> <!--公司地址-->
-                    <span style="font-size:0.8rem;color:rgb(102, 102, 102);">随便花 v1.0.0</span>
+                    <span style="font-size:0.8rem;color:rgb(102, 102, 102);">安心花 v1.0.0</span>
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@ $rem:1rem/40; //rem配置
 }
 
 .companyLogo img{
-    width: 225*$rem;
+    width: 200*$rem;
 }
 
 .companyName{
