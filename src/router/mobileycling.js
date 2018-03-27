@@ -321,12 +321,12 @@
      {
          path: '/androidAboutUs',
          component: AndroidAboutUs,
-         name: '熊猫贷款'
+         name: '关于我们'
      },
      { //添加地址
          path: '/androidSetaddress',
          component: AndroidSetaddress,
-         name: '熊猫贷款'
+         name: '添加地址'
      },
      { //常见问题
          path: '/androidHelpCenter',
@@ -336,32 +336,32 @@
      { //使用规则
          path: '/androidMyCoupon',
          component: AndroidMyCoupon,
-         name: '熊猫贷款'
+         name: '使用规则'
      },
      { //绑定银行卡
          path: '/androidBindingBankcard',
          component: AndroidBindingBankcard,
-         name: '熊猫贷款'
+         name: '绑定银行卡'
      },
      { //优惠券
          path: '/androidCoupon',
          component: AndroidCoupon,
-         name: '熊猫贷款'
+         name: '我的加价券'
      },
      { //反馈
          path: '/androidFeedback',
          component: AndroidFeedback,
-         name: '熊猫贷款'
+         name: '意见反馈'
      },
      { //协议
          path: '/androidAgreement',
          component: AndroidAgreement,
-         name: '熊猫贷款'
+         name: '代收付协议'
      },
      { //已有地址
          path: '/androidAddress',
          component: AndroidAddress,
-         name: '熊猫贷款'
+         name: '我的收货地址'
      },
 
 
