@@ -4,7 +4,7 @@ import panda from './panda'
 import mobileycling from './mobileycling'
 import landing from './landing'
 import single from './single'
-
+import baofeng from './baofeng'
 
 Vue.use(VueRouter)
 const router = new VueRouter({
@@ -13,7 +13,9 @@ const router = new VueRouter({
         ...mobileycling, // 手机回收
         ...panda, // 熊猫贷款
         ...landing, // 着陆页
+        ...baofeng, //暴风借到
         ...single //单页面
+
     ]
 })
 
