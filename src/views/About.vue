@@ -24,7 +24,7 @@
                     <span>微信公众号</span>
                 </div>
 				<div class="right-text" style="color:#999">
-                    <span class="gray">熊猫元宝</span>
+                    <span class="gray">敬请期待</span>
                     <!-- <i class="fa fa-angle-right"></i> -->
                 </div>
 			</div>
@@ -89,7 +89,7 @@ import resources from "../resources";
                 packageName: this.$route.query.packageName,
                 channelId: this.$route.query.channelId,
                 versionCode: this.$route.query.versionCode,
-                QQNumber:'617149963',
+                QQNumber:'敬请期待',
                 Image: ''
             };
         },
