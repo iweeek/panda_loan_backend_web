@@ -1,10 +1,6 @@
 <template>
     <div class="ynlanding-panda ynfirstpage" v-bind:class="{ynsecondpage:download}">
-        <!-- <img src="~@/assets/weidai.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%"> //微贷 --> 
-
-        <img src="~@/assets/XMDKFLOAT.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%" v-if="!iphone">
-        <img src="~@/assets/xmqb.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%" v-if="iphone">
-
+        <img src="~@/assets/XMDKFLOAT.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%" v-if="iphone">
         <div class="yntop" v-if="!download"></div>
         <div class="ynmiddle" v-if="!download">
             <div class="ynallinput">
@@ -25,7 +21,7 @@
                 </div>
                 <div class="yntext-hint">
                     <span class="yntext-left">点击立即借款既表示同意</span><span class="yntext-right" @click="agreement()">
-                        《<span v-if="!iphone" class="yntext-right">熊猫贷款</span><span v-if="iphone" class="yntext-right">熊猫钱包</span>平台服务协议》</span>
+                        《<span v-if="!iphone" class="yntext-right">熊猫贷款</span><span v-if="iphone" class="yntext-right">熊猫贷款</span>平台服务协议》</span>
                 </div>
             </div>
         </div>
@@ -39,7 +35,7 @@
         <div class="yntwobuttom" v-if="download"></div>
         <div class="yncopyright">
             <div class="ynfooter">
-                Copyright © 2017 <span v-if="!iphone" class="brand-text">熊猫贷款</span><span v-if="iphone" class="brand-text">熊猫钱包</span> All Rights Reserved
+                Copyright © 2017 <span v-if="!iphone" class="brand-text">熊猫贷款</span><span v-if="iphone" class="brand-text">熊猫贷款</span> All Rights Reserved
             </div>
         </div>
         <div class="yntoast-wrap">
@@ -343,7 +339,7 @@
                 } else {
                     //苹果
                     this.iphone = true;
-                    document.title = "熊猫钱包";
+                    document.title = "熊猫贷款";
                 }
             }
         },

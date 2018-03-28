@@ -70,10 +70,10 @@
     <div class="downPanda" v-if="downshow"> 
         <div class="downlogoText">
                 <div class="downPandaImg">
-            <img src="~@/assets/pandaLogo.png" alt="">
+            <img src="~@/assets/pandalogo2.png" alt="">
             <div class="downText">
-                <p>熊猫钱包</p>
-                <p>好信用，不逾期</p>
+                <p>熊猫贷款</p>
+                <p>急用钱找熊猫贷款</p>
             </div>
             </div>
         </div>
