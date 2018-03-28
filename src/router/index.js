@@ -8,6 +8,7 @@ import single from './single'
 
 Vue.use(VueRouter)
 const router = new VueRouter({
+    base: "/panda_loan_mobile_web/",
     routes: [
         ...mobileycling, // 手机回收
         ...panda, // 熊猫贷款
