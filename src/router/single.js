@@ -12,12 +12,18 @@
    const NewYearLanding = resolve => require.ensure([], () => resolve(require('../views/NewYearLanding.vue')), 'NewYearLanding')
    const Product = resolve => require.ensure([], () => resolve(require('../views/Product.vue')), 'Product')
    const Coupon = resolve => require.ensure([], () => resolve(require('../views/Coupon.vue')), 'Coupon')
+   const MyConter = resolve => require.ensure([], () => resolve(require('../views/myConter.vue')), 'MyConter') //个人中心页面测试
 
 
 
    export default [{
            path: '/',
            component: Product,
+           hidden: true
+       },
+       {
+           path: '/myConter',
+           component: MyConter,
            hidden: true
        },
        {
