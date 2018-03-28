@@ -120,7 +120,7 @@
                     }
                 }).then(res=>{
                     if(res.data == ''){
-                        this.$toast('请刷新尝试')
+
                     }
                     this.AndroidDownloadUrl = res.data.downloadUrl;
                 })
@@ -147,7 +147,7 @@
                     this.countDown()
                 } else {
                     //苹果跳转
-                    window.location.href = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1330125527&mt=8";
+                    window.location.href = "https://itunes.apple.com/cn/app/id1290678368?mt=8";
                 }
             }, 
             agreement(){ //跳转按钮
@@ -264,8 +264,8 @@
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                 }).then(res => {
-                    sessionStorage.setItem("userId",res.data.obj1.id)
                     this.download = true;
+                    sessionStorage.setItem("userId",res.data.obj1.id)
                     this.getDownloadUrl()
                 }).catch(error => {              
                     //this.lackMessage(error.response.data.statusMsg)
