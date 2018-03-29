@@ -70,10 +70,10 @@
     <div class="downPanda" v-if="downshow"> 
         <div class="downlogoText">
                 <div class="downPandaImg">
-            <img src="~@/assets/pandaLogo.png" alt="">
+            <img src="~@/assets/pandalogo2.png" alt="">
             <div class="downText">
-                <p>熊猫钱包</p>
-                <p>好信用，不逾期</p>
+                <p>熊猫贷款</p>
+                <p>急用钱找熊猫贷款</p>
             </div>
             </div>
         </div>
@@ -127,7 +127,7 @@
             }
 	}`
     export default {
-        name:'Conciselogin',
+        name:'baofenglogin',
         components: {
             Xheader
         },
@@ -171,7 +171,7 @@
                 }
                 this.$ajax.post(url,qs.stringify(params),{
                     headers: {
-                        'H5-Web-Name': 'Conciselogin',
+                        'H5-Web-Name': 'baofenglogin',
                         'Landing-Channel-Uid': sessionStorage.getItem("Uid"),
                         'Platform-Id': '0'
                     }
@@ -184,7 +184,7 @@
                 let params = { };
                 this.$ajax.post(url,qs.stringify(params),{
                     headers: {
-                        'H5-Web-Name': 'Conciselogin',
+                        'H5-Web-Name': 'baofenglogin',
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'Version': '1',
                         'User-Id': '0',
@@ -213,7 +213,7 @@
                 var qs = require('qs');
                 this.$ajax.post(url,qs.stringify(params),{
                     headers: {
-                        'H5-Web-Name': 'Conciselogin',
+                        'H5-Web-Name': 'baofenglogin',
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'Version': '1',
                         'User-Id': sessionStorage.getItem("userId"),
@@ -238,7 +238,7 @@
                 let params = {
                     "pageSize": this.pageSize,
                     "pageNumber": this.pageNumber,
-                    'h5WebName': 'Conciselogin',
+                    'h5WebName': 'baofenglogin',
                     'h5ChannelUid': sessionStorage.getItem("Uid"),
                     'platformId': '0',
                     'productTypeId': '5'
@@ -302,7 +302,7 @@
                     this.countDown();
                 } else {
                     //苹果跳转
-                    window.location.href = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1330125527&mt=8";
+                    window.location.href = "https://itunes.apple.com/cn/app/id1290678368?mt=8";
                 }
             },
             downExit(){

@@ -1,37 +1,46 @@
 <template>
-    <div class="ynlanding-panda ynfirstpage">
-          <img style="position:absolute;left:0px;top:0px;width:30%;margin-left:10px;margin-top:10px;" src="~@/assets/baofenglogo.png" />
+    <div class="ynlanding-panda">
+        <img class="logo" src="~@/assets/baofenglogo.png" />
         <div class="yntop"></div> <!--占位div-->
         <div class="ynmiddle">  <!--表单-->
             <div class="ynallinput">
-                <div> 
+                <!-- 手机号 -->
+                <div class="baofenginput"> 
+                    <div class="baofenginputimg">
+                        <img src="~@/assets/baofengphone.png" alt="">
+                    </div>
                     <input type="number" class="yncode-input" placeholder="请输入手机号码" v-model="phone"/>
                 </div>
-                <div>
-                    <input type="number" class="ynphone-input" placeholder="请填写短信验证码" v-model="smsCode"/>
-                    <input type="button" class="yncode-button" v-bind:class="{yncantClick:is_show}" :value="count+codeButtonText"  @click="getCode()"/>
+                <!-- 验证码 -->
+                <div class="piccodestyle"  v-if="picCode"> 
+                    <div class="piccodeinput">
+                        <div class="piccodestyleimg">
+                            <img src="~@/assets/baofengpass.png" alt="">
+                        </div>
+                        <input type="number" class="piccodenput" placeholder="请填写验证码" v-model="imaCode"/>
+                    </div>
+                    <img :src="imageCode" alt="" class="piccodeimg" @click="getImageCode">
                 </div>
-                <!-- 图片验证码 -->
-                <div v-if="picCode"> 
-                    <input type="number" class="ynphone-input" placeholder="请填写验证码" v-model="imaCode"/>
-                    <img :src="imageCode" alt="" class="ynimage-code" @click="getImageCode">
+                <!-- 短息验证 -->
+                <div class="ynmes">
+                    <input type="number" class="ynmes-input" placeholder="请填写短信验证码" v-model="smsCode"/>
+                    <input type="button" class="ynmes-button" v-bind:class="{yncantClick:is_show}" :value="count+codeButtonText"  @click="getCode()"/>
+                </div>
+                <!-- 提交按钮 -->
+                <div class="bfcomfirm-button" @click="comfirm()">
                 </div>
                 <!-- 协议 -->
-                <div class="yntext-hint"><span class="yntext-left">点击立即借款既表示同意</span><span class="yntext-right" @click="agreement()">
-                        《<span class="yntext-right"></span>平台服务协议》</span>
+                <div class="bftext-hint"><span class="yntext-left">点击立即申请既表示同意</span><span class="yntext-right" @click="agreement()">
+                    《<span class="yntext-right"></span>平台服务协议》</span>
                 </div>
-                <div class="yncomfirm-button" @click="comfirm()">
-                    <!-- <input type="button" class="yncomfirm-button" v-bind:class="{yncanClick:is_click}" value="立即借款" @click="comfirm()"/> -->
-                </div>
-
             </div>
         </div>
         <div class="copyright">
             <div class="copytext">
-                Copyright © 2017 熊猫贷款 All Rights Reserved
+                内蒙古惠风金融信息科技有限公司 蒙ICP备17005582号
             </div>
              <div class="copytext">
-                 闽ICP备17028012号-1 
+                本服务由熊猫科技提供技术支持
             </div>
         </div>
         <!-- 提示框 -->
@@ -40,7 +49,6 @@
         </div>
     </div>
 </template>
-
 <script>
     import resources from "../../resources";
     export default {
@@ -120,17 +128,16 @@
                 var qs = require('qs');
                 this.$ajax.post(url, qs.stringify(params),{
                     headers: {
-                        'H5-Web-Name': 'Conciselogin',
+                        'H5-Web-Name': 'baofenglogin',
                         'Landing-Channel-Uid': this.Uid,
                         'Sid': this.Sid,
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
                 }).then(res => {
                     this.keySMSCapt = res.data.obj1.keySMSCapt;
-                    // console.log(res)
                 })
             },
-            comfirm(){
+            comfirm(){ //立即申请调用
                 if (!this.is_click) {
                     return ;
                 }
@@ -173,15 +180,15 @@
                 var qs = require('qs');
                 this.$ajax.post(url, qs.stringify(params), {
                     headers: {
-                        'H5-Web-Name': 'Conciselogin',
+                        'H5-Web-Name': 'baofenglogin',
                         'Landing-Channel-Uid': this.Uid,
                         'Sid': this.Sid,
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                 }).then(res => {
+                    this.toProduct()
                     sessionStorage.setItem("Uid",this.Uid)
                     sessionStorage.setItem("userId",res.data.obj1.id)
-                    this.toProduct()
                 }).catch(error => {
                     this.toast(error.response.data.statusMsg)
                     if (error.response.data.statusMsg === '短信验证码不正确') {
@@ -199,7 +206,7 @@
                 let params = { }
                 this.$ajax.post(url,qs.stringify(params),{
                     headers: {
-                        'H5-Web-Name': 'Conciselogin',
+                        'H5-Web-Name': 'baofenglogin',
                         'Landing-Channel-Uid': this.Uid,
                         'Sid': this.Sid,
                         'Content-Type': 'application/x-www-form-urlencoded'
@@ -213,7 +220,7 @@
                 let params = { };
                 this.$ajax.post(url, qs.stringify(params), {
                     headers: {
-                        'H5-Web-Name': 'Conciselogin',
+                        'H5-Web-Name': 'baofenglogin',
                         'Landing-Channel-Uid': this.Uid,
                         'Sid': this.Sid,
                         'Content-Type': 'application/x-www-form-urlencoded'
@@ -244,6 +251,7 @@
         },
         created(){
             if(sessionStorage.getItem("userId")==null){
+
             }else{
                 this.$router.push({ path: '/baofengproductList' })
             }
@@ -256,10 +264,18 @@
     // 底部下载样式
     $rem:1rem/40;
     $height:(682/1438)*100;
-
+    // logo
+    .logo{
+       position:absolute;
+       left:0px;
+       top:0px;
+       width:193*$rem;
+       margin-left:24*$rem;
+       margin-top:24*$rem;
+    }
     .copyright{
         position: absolute;
-        bottom: 0;
+        bottom: 8*$rem;
         width: 100%;
         height:85*$rem;
         .copytext{
@@ -269,7 +285,6 @@
             line-height: 1rem;
         }
     }
-
     // 底部下载
     .downzip{
         float: right;
@@ -288,7 +303,6 @@
         font-size: 32*$rem;
         color:#fff;
     }
-
     // 提示框样式
     .yntoast-wrap{
         opacity: 0;
@@ -318,18 +332,14 @@
         75% {opacity: 1; z-index: 9999}
         100% {opacity: 0; z-index: 0}
     }
-
     // 背景图以及最大外部div
-    .ynfirstpage{
-        background: url(~@/assets/conciseloginBackgroungimg5.png) no-repeat scroll;
-        background-size:100% 100%;
-        height: 1438px;
-        min-height:1438*$rem;
-    }
     .ynlanding-panda{
         position: relative;
+        background: url(~@/assets/baofengloginbackground.png) no-repeat scroll;
+        background-size:100% 100%;
+        min-height:1489*$rem;
         .yntop{ //占位样式
-            height:690*$rem;
+            height:675*$rem;
         }
         .ynmiddle{
             padding-top:70*$rem; 
@@ -338,78 +348,136 @@
             .ynallinput{
                 //上面三行垂直居中
                 text-align:center;
-                // height: 3rem;
-                .ynphone-input{
+                .baofenginput{ //手机号
+                    margin:0 auto;
+                    padding: 30*$rem 0rem;
+                    width: 625*$rem;
+                    height: 115*$rem;
+                    line-height:115*$rem;
                     background: #FFFFFF;
-                    height: 86*$rem;
-                    width: 333*$rem;//1
-                    margin-top: 34*$rem;
-                    padding-left:30*$rem;
-                    //border:1px solid #d3d3d6;
                     border-radius: 0.2rem;
-                    font-size: 0.7rem;
-                    line-height:86*$rem;
-                    color:#f79f55;
+                    .baofenginputimg{
+                        float: left;
+                        width: 95*$rem;
+                        height: 55*$rem;
+                        line-height:55*$rem;
+                        border-right:2.1*$rem solid #cfcfcf; 
+                        img{
+                            vertical-align: middle;
+                            width:36*$rem;
+                        }
+                    }
+                    input{
+                        float: left;
+                        width: 400*$rem;
+                        height: 55*$rem;
+                        line-height:55*$rem;
+                        padding-left:30*$rem;
+                        font-size: 0.7rem;
+                        color:rgb(148,148,148);
+                    }
+                    input::-webkit-input-placeholder{
+                        text-align: left;
+                        color: #d3d3d6;
+                        font-size: 0.7rem;
+                        color:rgb(148,148,148);
+                    }
                 }
-                .ynimage-code{
-                    vertical-align:middle;//img图片和div在同一排
-                    height: 86*$rem;
-                    width: 190*$rem;//1
-                    margin-left: 0.1rem;
-                    margin-top: 34*$rem;
-                    border-radius: 0.2rem;
+                .piccodestyle{ //验证码
+                    margin:0 auto;
+                    margin-top: 26*$rem;
+                    width: 625*$rem;
+                    height: 115*$rem;
+                    line-height:115*$rem;
+                    .piccodeinput{
+                        float: left;
+                        padding: 30*$rem 0rem;
+                        width: 385*$rem;
+                        height: auto;
+                        background: #FFFFFF;
+                        border-radius: 0.2rem;
+                        overflow: hidden;
+                        .piccodestyleimg{
+                            float: left;
+                            width: 95*$rem;
+                            height: 55*$rem;
+                            line-height:55*$rem;
+                            border-right:2.1*$rem solid #cfcfcf; 
+                            img{
+                                vertical-align: middle;
+                                width:36*$rem;
+                            }
+                        }
+                        .piccodenput{
+                            float: left;
+                            width: 270*$rem;
+                            height: 55*$rem;
+                            line-height:55*$rem;
+                            padding-left:30*$rem;
+                            font-size: 0.7rem;
+                            color:rgb(148,148,148);
+                        }
+                        .piccodenput::-webkit-input-placeholder{
+                            text-align: left;
+                            color: #d3d3d6;
+                            font-size: 0.7rem;
+                            color:rgb(148,148,148);
+                        }
+                    }
+                    // 验证码图形
+                    .piccodeimg{
+                        float: right;
+                        vertical-align:middle;//img图片和div在同一排
+                        width: 215*$rem;
+                        height: 115*$rem;
+                        line-height:115*$rem;
+                        border-radius: 0.2rem;
+                    }
+             
                 }
-                .yncode-button{
-                    background:rgb(255,216,64);
-                    color: rgb(224,89,37);
-                    font-size: 0.7rem;
-                    height: 2.1rem;
-                    width: 190*$rem;
-                    margin-left: 0.05rem;
-                    margin-top: 34*$rem;
-                    //border:1px solid #d3d3d6;
+                
+                .ynmes{ //短信
+                    margin:0 auto;
+                    margin-top: 26*$rem;
+                    width: 625*$rem;
+                    height: 115*$rem;
+                    line-height:115*$rem;
                     border-radius: 0.2rem;
+                        .ynmes-input{
+                            float: left;
+                            padding-left:30*$rem;
+                            width: 385*$rem;//1
+                            height: 115*$rem;
+                            line-height:115*$rem;
+                            background: #FFFFFF;
+                            border-radius: 0.2rem;
+                            font-size: 32*$rem;
+                            color:rgb(148,148,148);
+                        }
+                        .ynmes-button{
+                            margin-left:24*$rem;
+                            width: 215*$rem;
+                            height: 115*$rem;
+                            line-height:115*$rem;
+                            font-size: 0.7rem;
+                            color: black;
+                            border-radius: 0.2rem;
+                            background:rgb(255,216,64);
+                        }
                 }
                 .yncantClick{
                     background: #d3d3d6;
-                    padding-top: 0.2rem;
                 }
-                .yncode-input{
-                    background: #FFFFFF;
-                    height: 86*$rem;
-                    width: 535*$rem;
-                    padding-left:30*$rem;
-                    border-radius: 0.2rem;
-                    font-size: 0.7rem;
-                    line-height: 86*$rem;
-                    color:#f79f55;
-                }
-                .yncomfirm-button{
+                // 立即申请按钮样式
+                .bfcomfirm-button{
                     margin: 0 auto;
-                    background: url(~@/assets/liji.png) no-repeat;
+                    margin-top:36*$rem;
+                    height:130*$rem;
+                    width: 625*$rem;
+                    background: url(~@/assets/baofengbutton.png) no-repeat;
                     background-size:100% 100%;
-                    margin-top:24*$rem;
-                    height:100*$rem;
-                    width: 460*$rem;
                 }
-                .yncanClick{
-                    background: #ffbb2b;
-                    border-bottom:0.1rem solid #b9121f;
-                }
-                .ynphone-input::-webkit-input-placeholder{
-                    text-align: left;
-                    color: #d3d3d6;
-                    font-size: 0.7rem;
-                    color:#f79f55;
-
-                }
-                .yncode-input::-webkit-input-placeholder{
-                    text-align: left;
-                    color: #d3d3d6;
-                    font-size: 0.7rem;
-                    color:#f79f55;
-                }
-                .yntext-hint{ //协议
+                .bftext-hint{ //协议
                     margin: 0 auto;
                     width: 540*$rem;
                     height: auto;
