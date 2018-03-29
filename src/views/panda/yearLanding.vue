@@ -1,10 +1,6 @@
 <template>
     <div class="ynlanding-panda ynfirstpage" v-bind:class="{ynsecondpage:download}">
-        <!-- <img src="~@/assets/weidai.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%"> //微贷 -->
-
-        <!-- <img src="~@/assets/XMDKFLOAT.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%" v-if="!iphone"> -->
-        <!-- <img src="~@/assets/xmqb.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%" v-if="iphone"> -->
-		<img src="~@/assets/xmqb.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%">
+		<img src="~@/assets/XMDKFLOAT.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%">
 
         <div class="yntop" v-if="!download"></div>
         <div class="ynmiddle" v-if="!download">
@@ -26,7 +22,7 @@
                 </div>
                 <div class="yntext-hint">
                     <span class="yntext-left">点击立即借款既表示同意</span><span class="yntext-right" @click="agreement()">
-                        <!-- 《<span v-if="!iphone" class="yntext-right">熊猫贷款</span><span v-if="iphone" class="yntext-right">熊猫钱包</span>平台服务协议》</span> -->
+                       
                         《平台服务协议》</span>
                 </div>
             </div>
@@ -35,22 +31,22 @@
         <div class="yndownload-top" v-if="download"></div>
         <div class="yndownload-bottom" v-if="download">
             <div style="text-align:center">
-                <img src="~@/assets/NYB.png" class="yndownload-button" @click="downloadApp()">
+                <img src="~@/assets/pandalogo2.png" class="yndownload-button" @click="downloadApp()">
             </div>
         </div>
         <div class="yntwobuttom" v-if="download"></div>
         <div class="yncopyright"> <!--版权-->
             <div class="ynfooter">
-                Copyright © 2017 <span v-if="!iphone" class="brand-text">熊猫贷款</span><span v-if="iphone" class="brand-text">熊猫钱包</span> All Rights Reserved
+                Copyright © 2017 <span v-if="!iphone" class="brand-text">熊猫贷款</span><span v-if="iphone" class="brand-text">熊猫贷款</span> All Rights Reserved
             </div>
         </div>
         <div class="downPanda"> <!--下载样式-->
             <div class="downlogoText">
                  <div class="downPandaImg"> <!--logo-->
-                <img src="~@/assets/pandaLogo.png" alt="">
+                <img src="~@/assets/pandalogo2.png" alt="">
                 <div class="downText">
-                    <p>熊猫钱包</p>
-                    <p>好信用，不逾期</p>
+                    <p>熊猫贷款</p>
+                    <p>急用钱找熊猫贷款</p>
                 </div>
                 </div>
             </div>
@@ -167,7 +163,7 @@
                     this.countDown()
                 } else {
                     //苹果跳转
-                    window.location.href = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1330125527&mt=8";
+                    window.location.href = "https://itunes.apple.com/cn/app/id1290678368?mt=8";
                 }
             },
             agreement(){
@@ -365,7 +361,7 @@
                 // } else {
                 //     //苹果
                     this.iphone = true;
-                    document.title = "熊猫钱包";
+                    document.title = "熊猫贷款";
                 // }
             }
         },

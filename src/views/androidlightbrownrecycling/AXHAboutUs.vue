@@ -9,7 +9,7 @@
                     </div>
                 </div>
             </div>
-            <div class="companyFoot" style="padding-top:13rem"> <!--底部-->
+            <div class="companyFoot" style="padding-top:8.5rem"> <!--底部-->
                 <div class="companyaddress"> <!--公司地址-->
                     <span style="font-size:0.8rem;color:rgb(102, 102, 102);">安心花 v1.0.0</span>
                 </div>
@@ -40,9 +40,10 @@ export default {
 
 $rem:1rem/40; //rem配置   
 
+
 .companyDiv{
     width: 100%;
-    height: auto;
+    height: 100%;
 }
 
 .companyCount{
