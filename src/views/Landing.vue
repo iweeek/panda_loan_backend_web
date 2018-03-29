@@ -339,8 +339,8 @@
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                 }).then(res => {
-                    this.getDownloadUrl()
                     this.download = true;
+                    this.getDownloadUrl()
                 }).catch(error => {              
                     //this.lackMessage(error.response.data.statusMsg)
                     this.toast(error.response.data.statusMsg)
