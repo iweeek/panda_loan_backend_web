@@ -12,7 +12,8 @@
                     <input type="number" class="yncode-input" placeholder="请输入手机号码" v-model="phone"/>
                 </div>
                 <!-- 验证码 -->
-                <div class="piccodestyle"  v-if="picCode"> 
+               
+                <div class="piccodestyle"  v-if="picCode" > 
                     <div class="piccodeinput">
                         <div class="piccodestyleimg">
                             <img src="~@/assets/baofengpass.png" alt="">
@@ -281,7 +282,7 @@
         .copytext{
             text-align: center;
             color:#fff;
-            font-size:24*$rem;
+            font-size:22*$rem;
             line-height: 1rem;
         }
     }
@@ -337,12 +338,12 @@
         position: relative;
         background: url(~@/assets/baofengloginbackground.png) no-repeat scroll;
         background-size:100% 100%;
-        min-height:1489*$rem;
+        height:1648*$rem;
         .yntop{ //占位样式
-            height:675*$rem;
+            height:760*$rem;
         }
         .ynmiddle{
-            padding-top:70*$rem; 
+            padding-top:50*$rem; 
             height:auto;
             overflow: hidden;
             .ynallinput{
@@ -373,13 +374,13 @@
                         height: 55*$rem;
                         line-height:55*$rem;
                         padding-left:30*$rem;
-                        font-size: 0.7rem;
+                        font-size: 32*$rem;
                         color:rgb(148,148,148);
                     }
                     input::-webkit-input-placeholder{
                         text-align: left;
                         color: #d3d3d6;
-                        font-size: 0.7rem;
+                        font-size: 32*$rem;
                         color:rgb(148,148,148);
                     }
                 }
@@ -414,13 +415,13 @@
                             height: 55*$rem;
                             line-height:55*$rem;
                             padding-left:30*$rem;
-                            font-size: 0.7rem;
+                            font-size: 32*$rem;
                             color:rgb(148,148,148);
                         }
                         .piccodenput::-webkit-input-placeholder{
                             text-align: left;
                             color: #d3d3d6;
-                            font-size: 0.7rem;
+                            font-size: 32*$rem;
                             color:rgb(148,148,148);
                         }
                     }
@@ -454,19 +455,26 @@
                             font-size: 32*$rem;
                             color:rgb(148,148,148);
                         }
+                        .ynmes-input::-webkit-input-placeholder{
+                            text-align: left;
+                            color:rgb(148,148,148);
+                            font-size: 32*$rem;
+                            color:rgb(148,148,148);
+                        }
                         .ynmes-button{
                             margin-left:24*$rem;
                             width: 215*$rem;
                             height: 115*$rem;
                             line-height:115*$rem;
-                            font-size: 0.7rem;
+                            font-size: 32*$rem;
                             color: black;
                             border-radius: 0.2rem;
                             background:rgb(255,216,64);
                         }
-                }
-                .yncantClick{
-                    background: #d3d3d6;
+                        .yncantClick{
+                            background: #d3d3d6;
+                            color:#fff;
+                        }
                 }
                 // 立即申请按钮样式
                 .bfcomfirm-button{
