@@ -285,9 +285,9 @@
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                 }).then(res => {
+                    this.toProduct()
                     sessionStorage.setItem("Uid",this.Uid)
                     sessionStorage.setItem("userId",res.data.obj1.id)
-                    this.toProduct()
                 }).catch(error => {
                     //this.lackMessage(error.response.data.statusMsg)
                     this.toast(error.response.data.statusMsg)
