@@ -302,7 +302,8 @@
                     this.countDown();
                 } else {
                     //苹果跳转
-                    window.location.href = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1330125527&mt=8";
+                    window.location.href = "https://itunes.apple.com/cn/app/id1290678368?mt=8";
+                   
                 }
             },
             downExit(){
