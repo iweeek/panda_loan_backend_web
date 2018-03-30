@@ -4,6 +4,8 @@ import panda from './panda'
 import mobileycling from './mobileycling'
 import landing from './landing'
 import single from './single'
+import mycenter from './mycenter'
+
 
 
 Vue.use(VueRouter)
@@ -12,7 +14,8 @@ const router = new VueRouter({
         ...mobileycling, // 手机回收
         ...panda, // 熊猫贷款
         ...landing, // 着陆页
-        ...single //单页面
+        ...single, //单页面
+        ...mycenter //个人中心单页面
     ]
 })
 

@@ -62,6 +62,6 @@ body {
 .fade-leave-active {
 	opacity: 0;
 }
-@import './assets/styles/reset.scss';
+@import 'styles/reset.scss';
 @import 'styles/main.scss';
 </style>

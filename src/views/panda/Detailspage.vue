@@ -13,7 +13,7 @@
 
 
 <script>
-    import Xheader from '../common/X-header'
+    import Xheader from 'common/X-header'
 
 export default {
     components: {

@@ -1,8 +1,10 @@
 <template>
 	<div id="app">
-        <h1>手机号：{{phone}}</h1>
+        <!-- <h1>手机号：{{phone}}</h1>
         <h1>名字：{{name}}</h1>
-        <h1>认证：{{authentication}}</h1>
+        <h1>版本{{versionCode}}</h1>
+        <h1>认证状态：{{isCertified}}</h1> -->
+      
 	</div>
 </template>
 <script>
@@ -12,14 +14,16 @@ export default {
     return {
         phone:'',
         name:'',
-        authentication:''
+        versionCode:'',
+        isCertified:'',
     };
   },
   methods: {
       getMycenterdata(){ //获取客户端传参
-        this.phone = this.$route.query.phone
-        this.name = this.$route.query.name
-        this.authentication = this.$route.query.authentication
+        this.phone = this.$route.query.phone //手机号码
+        this.name = this.$route.query.name //名称
+        this.versionCode = this.$route.query.versionCode //版本号
+        this.isCertified = this.$route.query.isCertified //认证状态
       }
   },
   mounted(){

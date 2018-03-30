@@ -91,7 +91,7 @@
 
 <script> //js部分
     import resources from '../../resources'
-    import Xheader from '../common/X-header'
+    import Xheader from 'common/X-header'
     import qs from 'qs'
     const productQuery = `
         query(
