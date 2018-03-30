@@ -1,6 +1,6 @@
 <template>
     <div class="landing-panda firstpage" v-bind:class="{secondpage:download}">
-        <img style="position:absolute;left:0px;top:0px;width:35%;margin-left:10px;margin-top:10px;" src="~@/assets/XMDKFLOAT.png" />
+        <img style="position:absolute;left:0px;top:0px;width:35%;margin-left:10px;margin-top:10px;" src="~@/assets/XMDKFLOAT.png" v-if="!download"/>
         <!-- <img src="~@/assets/xmdk.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%" v-if="iphone"> -->
         <div class="landing-top" v-if="!download">
             <!-- <img src="~@/assets/toppic.png" class="top-pic"> -->
@@ -25,7 +25,6 @@
                     <span class="text-left">点击立即借款既表示同意</span><span class="text-right">《平台服务协议》</span>
                 </div>
             </div>
-           
             <!-- <div class="download" v-if="false">
                 <div class="down">
                     <div class="pic"><img src="~@/assets/apple.png"></div>
@@ -37,9 +36,7 @@
                 </div>
             </div> -->
         </div>
-
         <div class="buttom" v-if="!download">
-
         </div>
 
         <div class="download-top" v-if="download">
@@ -47,10 +44,11 @@
         </div>
         <div class="download-bottom" v-if="download">
             <div style="text-align:center">
-                <span class="register-suc">恭喜你注册成功</span>
+                <!-- <span class="register-suc">恭喜你注册成功</span> -->
             </div>
             <div style="text-align:center">
-                <input type="button" class="download-button" value="立即下载熊猫贷款APP" @click="downloadApp()"/>
+                <img src="~@/assets/newSBB.png" style="width:78%;margin-top:8.5rem;" @click="downloadApp()"/>
+                <!-- <input type="button" class="download-button" value="立即下载熊猫贷款APP" @click="downloadApp()"/> -->
             </div>
         </div>
 
@@ -63,7 +61,7 @@
                 Copyright © 2017 熊猫贷款 All Rights Reserved
             </div>
             <div class="footercopy">
-               闽ICP备17028012号-1 
+                闽ICP备17028012号-1 
             </div>
         </div>
 
@@ -239,16 +237,10 @@
                 // 普通的ajax接口
                 // 使用 application/x-www-form-urlencoded 格式化 
                 // 参考：http://blog.csdn.net/fantian001/article/details/70193938
-                
                 let url = resources.smsCaptcha();
-
-                // let params = new URLSearchParams();
-                // params.append('phone',this.phone)
-
                 let params = {
                     'phone': this.phone
                 }
-                
                 var qs = require('qs');
                 this.$ajax.post(url, qs.stringify(params),{
                     headers: {
@@ -260,21 +252,6 @@
                     this.keySMSCapt = res.data.obj1.keySMSCapt;
            
                 })
-
-                
-
-                // let url = resources.smsCaptcha();
-                // let myParams = {
-				// 	phone: this.phone,
-                // };
-                // this.$ajax({
-                //     method: 'post',
-                //     url: url,
-                //     params: myParams
-                // }).then((res) => {
-                //     this.keySMSCapt = res.data.obj1.keySMSCapt;
-                //     console.log(res)
-                // })
             },    
 
             comfirm(){
@@ -303,17 +280,7 @@
                 }
             },          
             postMes(){
-
                 let url = resources.token();
-                // let params = new URLSearchParams();
-                // params.append('username',this.phone)//用户名（手机号）
-                // params.append('keySMSCapt',this.keySMSCapt)//短信验证码的key
-                // params.append('smsCapt',this.smsCode)//短信验证码
-                // if (this.keyImage != '') {
-                //     params.append('keyImageCapt',this.keyImage)//图形验证码的key 
-                //     params.append('imageCapt',this.imaCode)//图形验证码
-                // }
-
                 let params = { }
                 if (this.keyImage != '') {
                     params = {
@@ -340,7 +307,8 @@
                     },
                 }).then(res => {
                     this.download = true;
-                    this.getDownloadUrl()
+                    this.getDownloadUrl();
+                    sessionStorage.setItem("userId",res.data.obj1.id);
                 }).catch(error => {              
                     //this.lackMessage(error.response.data.statusMsg)
                     this.toast(error.response.data.statusMsg)
@@ -383,8 +351,6 @@
                 // 使用 application/x-www-form-urlencoded 格式化 
                 // 参考：http://blog.csdn.net/fantian001/article/details/70193938
                 let url = resources.imageCode();
-                //let params = new URLSearchParams();
-                
                 var qs = require('qs');
                 let params = { }
 
@@ -396,10 +362,6 @@
                     },
                     responseType: 'arraybuffer'
                 }).then(res => {
-                    // if (this.flagNum === 3) {
-                    //     this.smsCode = ''
-                    // }
-                
                     this.keyImage = res.headers.keyimagecapt
                     return 'data:image/jpeg;base64,' + btoa(
                     new Uint8Array(res.data)
@@ -466,7 +428,7 @@
         min-height: 32rem;
     }
     .secondpage{
-        background: url(~@/assets/secondpage.jpg) no-repeat scroll; 
+        background: url(~@/assets/sbbb.png) no-repeat scroll; 
         background-size:100% 100%;
     }
     .landing-panda{
@@ -654,7 +616,7 @@
             height: 9.4%;
         }
         .copyright{
-            height: 6%;
+            height: 2%;
             .footer{
                 position: relative;
                 top: 50%;
