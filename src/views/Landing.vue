@@ -56,11 +56,11 @@
 
         </div>
 
-        <div class="copyright">
-            <div class="footer">
+        <div class="copyright" :class="{setheight: download}">
+            <div class="footer" :class="{clolorfont: download}">
                 Copyright © 2017 熊猫贷款 All Rights Reserved
             </div>
-            <div class="footercopy">
+            <div class="footercopy" :class="{clolorfont: download}">
                 闽ICP备17028012号-1 
             </div>
         </div>
@@ -616,7 +616,7 @@
             height: 9.4%;
         }
         .copyright{
-            height: 2%;
+            height: 6%;
             .footer{
                 position: relative;
                 top: 50%;
@@ -638,6 +638,11 @@
                 font-size: 0.6rem;
             }
         }
-        
+        .setheight{
+            height: 2%;
+        }
+        .clolorfont{
+            color: #a4a4a4!important;
+        }
     }
 </style>
