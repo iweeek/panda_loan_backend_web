@@ -308,6 +308,7 @@
                 }).then(res => {
                     this.download = true;
                     this.getDownloadUrl();
+                    this.userId = res.data.obj1.id;
                     sessionStorage.setItem("userId",res.data.obj1.id);
                 }).catch(error => {              
                     //this.lackMessage(error.response.data.statusMsg)
