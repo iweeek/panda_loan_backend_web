@@ -115,8 +115,7 @@
                 keyImage:'',
                 Uid: this.$route.params.Uid,
                 AndroidDownloadUrl: '',
-                unclick: false,
-                userId: 0
+                unclick: false
             };
         },
         methods: {
@@ -134,7 +133,7 @@
             recordDownload() { //下载记录
                 let url = resources.recordDownload();
                 let params = {
-                    'userId': this.userId,
+                    'userId': sessionStorage.getItem('userId'),
                     'downloadUrl': this.AndroidDownloadUrl
                 }
                 this.$ajax.post(url,qs.stringify(params),{
@@ -306,10 +305,9 @@
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                 }).then(res => {
-                    this.download = true;
                     this.getDownloadUrl();
-                    this.userId = res.data.obj1.id;
                     sessionStorage.setItem("userId",res.data.obj1.id);
+                    this.download = true;
                 }).catch(error => {              
                     //this.lackMessage(error.response.data.statusMsg)
                     this.toast(error.response.data.statusMsg)
