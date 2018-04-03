@@ -187,7 +187,7 @@
                         'H5-Web-Name': 'baofenglogin',
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'Version': '1',
-                        'User-Id': '0',
+                        'User-Id': sessionStorage.getItem("userId"),
                         'Channel-Id': '14',
                         'Device-Id': '111',
                         'Request-Uri': 'http://119.23.12.36:8081/graphql/query',
