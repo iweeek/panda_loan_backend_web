@@ -200,6 +200,8 @@
                         this.downExit();
                     }
                     this.AndroidDownloadUrl = res.data.downloadUrl;
+                }).catch( error =>{
+                    this.downExit();
                 })
             },
             getUrl(pid,index){ //数据通知与跳转详情
