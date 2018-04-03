@@ -57,7 +57,7 @@
                     <div class="loadwrap" ref="loadwrap" style="height:1.8rem;" v-else>
                         <div class="nolive">
                             <div class="style-two" style="float:left"></div>
-                                更多产品请下载APP
+                                更多产品还在准备中哦
                             <div class="style-two" style="float:right"></div>
                         </div>
                     </div>
@@ -378,7 +378,7 @@
     }
     .nolive{  /*我是有底线的*/
         margin:0 auto;
-        width:450*$rem;
+        width:520*$rem;
         text-align: center;
         height: 1.8rem;
         line-height: 1.8rem;
