@@ -95,15 +95,15 @@
  const YRJKBindingBankcard = resolve => require.ensure([], () => resolve(require('../views/yirenjiekuan/BindingBankcard.vue')), 'YRJKBindingBankcard')
  const YRJKAboutUs = resolve => require.ensure([], () => resolve(require('../views/yirenjiekuan/AboutUs.vue')), 'YRJKAboutUs')
  const YRJKFeeDeductionAgreement = resolve => require.ensure([], () => resolve(require('../views/yirenjiekuan/FeeDeductionAgreement.vue')), 'YRJKFeeDeductionAgreement')
- 
+
  export default [
-    //随便花关于我们
+     //随便花关于我们
      // android棕黄色手机回收h5页面
      {
-        path: '/AnXinHuaAboutUs',
-        component: AnXinHuaAboutUs,
-        name: '帮助中心',
-        hidden: true
+         path: '/AnXinHuaAboutUs',
+         component: AnXinHuaAboutUs,
+         name: '关于',
+         hidden: true
      },
      {
          path: '/androidBrownHelpCenter',

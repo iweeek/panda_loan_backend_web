@@ -1,10 +1,6 @@
 <template>
     <div class="ynlanding-panda ynfirstpage" v-bind:class="{ynsecondpage:download}">
-        <!-- <img src="~@/assets/weidai.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%"> //微贷 --> 
-
-        <img src="~@/assets/XMDKFLOAT.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%" v-if="!iphone">
-        <img src="~@/assets/xmqb.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%" v-if="iphone">
-
+        <img src="~@/assets/XMDKFLOAT.png" style="float:left;padding-left:1rem;padding-top:1rem;width:40%" v-if="iphone">
         <div class="yntop" v-if="!download"></div>
         <div class="ynmiddle" v-if="!download">
             <div class="ynallinput">
@@ -25,7 +21,7 @@
                 </div>
                 <div class="yntext-hint">
                     <span class="yntext-left">点击立即借款既表示同意</span><span class="yntext-right" @click="agreement()">
-                        《<span v-if="!iphone" class="yntext-right">熊猫贷款</span><span v-if="iphone" class="yntext-right">熊猫钱包</span>平台服务协议》</span>
+                        《<span v-if="!iphone" class="yntext-right">熊猫贷款</span><span v-if="iphone" class="yntext-right">熊猫贷款</span>平台服务协议》</span>
                 </div>
             </div>
         </div>
@@ -39,7 +35,7 @@
         <div class="yntwobuttom" v-if="download"></div>
         <div class="yncopyright">
             <div class="ynfooter">
-                Copyright © 2017 <span v-if="!iphone" class="brand-text">熊猫贷款</span><span v-if="iphone" class="brand-text">熊猫钱包</span> All Rights Reserved
+                Copyright © 2017 <span v-if="!iphone" class="brand-text">熊猫贷款</span><span v-if="iphone" class="brand-text">熊猫贷款</span> All Rights Reserved
             </div>
         </div>
         <div class="yntoast-wrap">
@@ -124,7 +120,7 @@
                     }
                 }).then(res=>{
                     if(res.data == ''){
-                        this.$toast('请刷新尝试')
+
                     }
                     this.AndroidDownloadUrl = res.data.downloadUrl;
                 })
@@ -151,7 +147,7 @@
                     this.countDown()
                 } else {
                     //苹果跳转
-                    window.location.href = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1330125527&mt=8";
+                    window.location.href = "https://itunes.apple.com/cn/app/id1290678368?mt=8";
                 }
             }, 
             agreement(){ //跳转按钮
@@ -268,9 +264,9 @@
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                 }).then(res => {
-                    sessionStorage.setItem("userId",res.data.obj1.id)
                     this.download = true;
                     this.getDownloadUrl()
+                    sessionStorage.setItem("userId",res.data.obj1.id)
                 }).catch(error => {              
                     //this.lackMessage(error.response.data.statusMsg)
                     this.toast(error.response.data.statusMsg)
@@ -343,7 +339,7 @@
                 } else {
                     //苹果
                     this.iphone = true;
-                    document.title = "熊猫钱包";
+                    document.title = "熊猫贷款";
                 }
             }
         },

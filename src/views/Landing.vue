@@ -192,7 +192,7 @@
                     this.countDown()
                 } else {
                     //苹果跳转
-                    window.location.href = "https://itunes.apple.com/cn/app/%E7%86%8A%E7%8C%AB%E8%B4%B7%E6%AC%BE/id1290678368?mt=8";
+                    window.location.href = "https://itunes.apple.com/cn/app/id1290678368?mt=8";
                 }
             },
             agreement(){
@@ -339,8 +339,8 @@
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                 }).then(res => {
-                    this.getDownloadUrl()
                     this.download = true;
+                    this.getDownloadUrl()
                 }).catch(error => {              
                     //this.lackMessage(error.response.data.statusMsg)
                     this.toast(error.response.data.statusMsg)
