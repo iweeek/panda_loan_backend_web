@@ -10,12 +10,14 @@
             <div class="profile-title">我的</div>
             <img src="~@/assets/profileimg.png" alt="">
             <div class="profile-author">
-                未认证
+                {{isCertified|capitalize}}
+                <!-- 1通过 -->
+                <!-- 0未通过1 -->
             </div>
         </div>
-        <div class="profile-phone">17600045075</div>
+        <div class="profile-phone">{{phone}}</div>
         <div class="profile-name">
-            <div class="profile_namedata">无敌风火轮</div>
+            <div class="profile_namedata">{{name}}</div>
         </div>
     </div>
         <!-- 单个表格 -->
@@ -73,6 +75,15 @@ export default {
             versionCode:'',
             isCertified:'',
         };
+    },
+    filters:{
+        capitalize(value){
+            if(value==1){
+                return '已认证'
+            }else{
+                return '未认证'
+            }
+        }
     },
     methods: {
         getMycenterdata(){ //获取客户端传参

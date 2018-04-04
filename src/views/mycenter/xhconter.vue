@@ -13,11 +13,11 @@
             </div>
             <!-- 个人信息 -->
             <div class="prifile-text">
-                <div class="profile-phone">17600045075</div>
+                <div class="profile-phone">{{phone}}</div>
                 <div class="profile-name">
-                    <div class="profile_namedata">无敌小火锅</div>
+                    <div class="profile_namedata">{{name}}</div>
                     <div class="isCertifiedstyle">
-                        已认证
+                         {{isCertified|capitalize}}
                     </div>
                 </div>
             </div>
@@ -78,6 +78,15 @@ export default {
             versionCode:'',
             isCertified:'',
         };
+    },
+    filters:{
+        capitalize(value){
+            if(value==1){
+                return '已认证'
+            }else{
+                return '未认证'
+            }
+        }
     },
     methods: {
         getMycenterdata(){ //获取客户端传参
