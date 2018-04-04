@@ -25,7 +25,7 @@ export default [
     {
         path: '/noProductList/:Uid',
         component: NoProductList,
-        name: '产品类表',
+        name: '首页',
         hidden: true
     },
     {
