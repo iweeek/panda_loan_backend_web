@@ -38,7 +38,7 @@
                 <div class="profile-icons">
                     <img src="~@/assets/settingblue.png" alt="">
                 </div>
-                <div class="profile-tabmenu">
+                <div class="profile-tabmenu" @click="goSetting">
                     <div class="profileicon-texs">
                         设置
                     </div>
@@ -88,6 +88,9 @@ export default {
             this.name = this.$route.query.name //名称
             this.versionCode = this.$route.query.versionCode //版本号
             this.isCertified = this.$route.query.isCertified //认证状态
+        },
+        goSetting(){
+            this.$router.push({ path: '/setting' })
         }
     },
   mounted(){
