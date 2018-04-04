@@ -91,7 +91,6 @@
 
 <script> //js部分
     import resources from '../../resources'
-    import Xheader from '../common/X-header'
     import qs from 'qs'
     const productQuery = `
         query(
@@ -128,9 +127,6 @@
 	}`
     export default {
         name:'baofenglogin',
-        components: {
-            Xheader
-        },
         data() {
             return {
                 showLoading:true, //底部显示加载还是到底
@@ -231,7 +227,7 @@
                     if(isiOS){
                         window.location.href = res.data
                     }else{
-                        this.$router.push({path: '/Concisedetails?url=' +  res.data + '&title=' +   this.allProduct[index].title});
+                        this.$router.push({path: '/baofengdetails?url=' +  res.data + '&title=' +   this.allProduct[index].title});
                     }
                 })
             },
