@@ -48,6 +48,7 @@
 </template>
 <script type="text/babel">
     import resources from '../../resources'
+    // 请求列表
     const productQuery = `
         query(
             $pageNumber: Int
@@ -74,7 +75,33 @@
                 maxTerm
                 minTerm
             }
-	}`
+    }`
+    // 请求分类
+    const Classified = `
+        query(
+            $h5WebName:String
+            $h5ChannelUid:String
+            $platformId:String
+        )
+        {
+            h5Columns(
+               h5WebName: $h5WebName
+               h5ChannelUid: $h5ChannelUid
+               platformId:$platformId
+            ){
+                id
+                h5ColumnKey
+                h5ClientVersionId
+                status
+                name
+                title
+                subtitle
+                url
+                iconUrl
+            }
+        }
+    `
+
     export default {
         name:'NoProductList',
         data() {
@@ -136,6 +163,19 @@
                 var str = 'redirect='
                 var stringUrl =  url.split(str)[1]
                 window.location.href = decodeURIComponent(stringUrl)
+            },
+            getClassified(){ //请求分类
+                let params = {
+
+                };
+                this.$ajax.get(`${resources.graphQlApi}`,{
+                    `query`:`${Classified}`,
+                    variables:params,
+                    headers:{
+                        
+                    }
+                })
+               
             },
             getProduct() { //请求数据
                 this.loadingIf = true

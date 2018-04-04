@@ -5,12 +5,11 @@ if (debug) {
     // var host = 'http://120.77.72.16:8080/api';
     // var host = 'http://192.168.1.107:8080/api';
     // var host = 'http://192.168.2.131:8080/panda_loan';
-    // var host = 'http://192.168.2.116:8080'; //倪军本级
     // var host = 'http://47.94.250.23:8080/panda_loan'
     // var host = 'http://192.168.199.166:8080';
-    // var host = 'http://192.168.2.116:8080/panda_loan';
+    // var host = 'http://192.168.2.116:8080/panda_loan'; //倪军本级
     // var host = 'http://119.23.12.36:8081/panda_loan';
-    var host = 'http://47.104.109.123:8080/panda_loan/graphql/query'
+    var host = 'http://47.104.109.123:8080/panda_loan'
         // var host = 'http://192.168.2.116:8080/panda_loan';
         // var host = 'https://api.pinganzhiyuan.com/panda_loan';
 } else {
