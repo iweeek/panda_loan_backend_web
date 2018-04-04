@@ -51,7 +51,7 @@
 </template>
 <script type="text/babel">
     import resources from '../../resources'
-    import Xheader from '../common/X-header'
+    import Xheader from 'common/X-header'
     const productQuery = `
         query(
             $pageNumber: Int

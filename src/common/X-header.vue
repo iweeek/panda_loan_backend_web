@@ -2,14 +2,14 @@
 	<div>
 		<div class="styleone" v-if="backSss"> <!--样式1-->
 			<div class="back"  @click="goBack">
-				<img src="../../assets/backto.png" alt="" />
+				<img src="../assets/backto.png" alt="" />
 			</div>
 			<h3>{{nameText}}</h3>
 		</div>
 
 		<div class="styletwo" v-if="backSs"> <!--样式2-->
 			<div class="back" @click="goBack">
-			<img src="../../assets/headerBack.png" alt="" />
+			<img src="../assets/headerBack.png" alt="" />
 			</div>
 			<h3>{{nameText}}</h3>
 		</div>

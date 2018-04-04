@@ -285,14 +285,14 @@ export default {
         padding-left: 52px;
       }
       .preson-name {
-        background: url('../assets/images/icon-name.png') no-repeat left center;
+        background: url('../assets/icon-name.png') no-repeat left center;
         background-size: 32px 32px;
         font-size: 0.74rem;        
         border-bottom: #E7E8F1 solid 1px; /*no*/
       }
       .preson-card {
         font-size: 0.74rem;  
-        background: url('../assets/images/icon-card.png') no-repeat left center;
+        background: url('../assets/icon-card.png') no-repeat left center;
         background-size: 32px 32px;
       }
     }
@@ -327,7 +327,7 @@ export default {
           float: right;
           height: 97px;
           line-height: 97px;
-          background: #fff url('../assets/images/arrow-down.png') no-repeat right center;
+          background: #fff url('../assets/arrow-down.png') no-repeat right center;
           background-size: 25px 16px;
           min-width: 200px;
           text-align: right;
