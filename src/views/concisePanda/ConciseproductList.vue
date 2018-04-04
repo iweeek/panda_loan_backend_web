@@ -57,7 +57,7 @@
                     <div class="loadwrap" ref="loadwrap" style="height:1.8rem;" v-else>
                         <div class="nolive">
                             <div class="style-two" style="float:left"></div>
-                                更多产品请下载APP
+                                更多产品还在准备中哦
                             <div class="style-two" style="float:right"></div>
                         </div>
                     </div>
@@ -148,7 +148,8 @@
                 showLoading:true, //底部显示加载还是到底
                 downshow:true,
                 AndroidDownloadUrl: '',
-                unclick: false
+                unclick: false,
+                PlatformId:0 //请求downurl
             };
         },
         methods: {
@@ -163,6 +164,7 @@
                     }
                 }, 1000)
             },
+            
             recordDownload() {
                 let url = resources.recordDownload();
                 let params = {
@@ -193,13 +195,16 @@
                         'Request-Uri': 'http://119.23.12.36:8081/graphql/query',
                         'Package-Name': sessionStorage.getItem("Uid"),
                         'Landing-Channel-Uid': sessionStorage.getItem("Uid"),
-                        'Platform-Id': '0'
+                        'Platform-Id': this.PlatformId
                     }
                 }).then( res =>{
+                    console.log(res)
                     if (res.data == ''){
                         this.downExit();
                     }
                     this.AndroidDownloadUrl = res.data.downloadUrl;
+                }).catch( error=>{
+                    this.downExit();
                 })
             },
             getUrl(pid,index){ //数据通知与跳转详情
@@ -290,21 +295,25 @@
                     this.getProduct();
                 }
             },
-            downloadApp(){
+            getApp(){
                 var ua = navigator.userAgent.toLowerCase();
                 if (ua.indexOf("iphone") == -1) {
-                    //安卓跳转
-                    if (this.unclick) {
-                        return;
-                    }
-                    this.recordDownload();
-                    window.location.href = this.AndroidDownloadUrl;
-                    this.countDown();
+                    // 安卓
+                    this.PlatformId = 0
+                    this.getDownloadUrl()
                 } else {
-                    //苹果跳转
-                    window.location.href = "https://itunes.apple.com/cn/app/id1290678368?mt=8";
-                   
+                    // ios
+                    this.PlatformId = 1
+                    this.getDownloadUrl()
                 }
+            },
+            downloadApp(){ //点击下载
+                if(this.unclick){
+                    return;
+                }
+                this.recordDownload();
+                window.location.href = this.AndroidDownloadUrl;
+                this.countDown()
             },
             downExit(){
                 this.downshow = false;
@@ -312,7 +321,7 @@
             }
         },
         mounted() { 
-            this.getDownloadUrl();
+            this.getApp();
             this.wrapperHeight = (document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top)-60;
             this.getProduct()
             if(!this.loading){

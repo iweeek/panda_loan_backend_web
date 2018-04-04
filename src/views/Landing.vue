@@ -115,7 +115,8 @@
                 keyImage:'',
                 Uid: this.$route.params.Uid,
                 AndroidDownloadUrl: '',
-                unclick: false
+                unclick: false,
+                PlatformId:0 //请求downurl
             };
         },
         methods: {
@@ -129,6 +130,19 @@
                     clearInterval(timer);
                     }
                 }, 1000)
+            },
+            // 获取请求下载链接
+            getApp(){
+                var ua = navigator.userAgent.toLowerCase();
+                if (ua.indexOf("iphone") == -1) {
+                    // 安卓
+                    this.PlatformId = 0
+                    this.getDownloadUrl()
+                } else {
+                    // ios
+                    this.PlatformId = 1
+                    this.getDownloadUrl()
+                }
             },
             recordDownload() { //下载记录
                 let url = resources.recordDownload();
@@ -160,9 +174,10 @@
                         'Request-Uri': 'http://119.23.12.36:8081/graphql/query',
                         'Package-Name': this.Uid,
                         'Landing-Channel-Uid': this.Uid,
-                        'Platform-Id': '0'
+                        'Platform-Id': this.PlatformId
                     }
                 }).then( res =>{
+                    console.log(res)
                     this.AndroidDownloadUrl = res.data.downloadUrl;
                 })
             },
@@ -176,21 +191,13 @@
                     }, 100);
                 },500);
             },
-            downloadApp(){
-                // window.location.href = "http://sj.qq.com/myapp/detail.htm?apkName=com.mg.pandaloan";
-                var ua = navigator.userAgent.toLowerCase();
-                if (ua.indexOf("iphone") == -1) {
-                    //安卓跳转
-                    if(this.unclick){
-                        return;
-                    }
-                    this.recordDownload();
-                    window.location.href = this.AndroidDownloadUrl;
-                    this.countDown()
-                } else {
-                    //苹果跳转
-                    window.location.href = "https://itunes.apple.com/cn/app/id1290678368?mt=8";
+            downloadApp(){ //点击下载
+                if(this.unclick){
+                    return;
                 }
+                this.recordDownload();
+                window.location.href = this.AndroidDownloadUrl;
+                this.countDown()
             },
             agreement(){
                 this.$router.push({ path: '/agreement' })
@@ -305,7 +312,7 @@
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                 }).then(res => {
-                    this.getDownloadUrl();
+                    this.getApp();
                     sessionStorage.setItem("userId",res.data.obj1.id);
                     this.download = true;
                 }).catch(error => {              
