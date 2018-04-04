@@ -146,7 +146,6 @@
                 'userId': sessionStorage.getItem("userId"),
                 'pid': pid,
             }
-            console.log(pid)
             var qs = require('qs');
             this.$ajax.post(url,qs.stringify(params),{
                 headers: {
@@ -161,7 +160,6 @@
                     'Landing-Channel-Uid': sessionStorage.getItem("Uid")
                 },
             }).then(res => {
-                console.log(res.data)
                 window.location.href = res.data //新标签页
                 // this.$router.push({path: '/Detailspage?url=' +  res.data + '&title=' +   this.allProduct[index].title}); 本vue
             })
@@ -185,10 +183,8 @@
                     'Package-Name': sessionStorage.getItem("Uid"),
                 }
                 }).then(res => {
-                    console.log(res)
                     this.loadingIf = false
                     this.loading = '点击加载'
-                    console.log(res.data.data.recommendProducts)
                     var array = res.data.data.recommendProducts;
                     for (var i = 0; i < array.length ;i ++) {
                         array[i].firstTagArray = array[i].firstTags.split("|");
@@ -220,7 +216,6 @@
             });
          },
         getTitle(){
-            console.log(this.$route.query.title)
             this.nameText = this.$route.query.title
         },
         demo(index){  //测试跳转

@@ -124,7 +124,7 @@
                 var _this = this
                 _this.loadingIf = true
                 setTimeout(function(){
-                    console.log('正在等待')
+                    // console.log('正在等待')
                 _this.pageNumber ++;
                 _this.getProduct()
                 _this.loadingIf = false
@@ -142,8 +142,10 @@
                 let params = {
                     "pageSize": this.pageSize,
                     "pageNumber": this.pageNumber,
-                    "packageName": "com.h5",
-                    "channelId": "99"
+                    'h5WebName':'noProductList',
+                    'h5ChannelUid':this.Uid,
+                    'platformId':'0',
+                    "productTypeId": '5'
                 };
                 this.$ajax.post(`${resources.graphQlApi}`, {
                     'query': `${productQuery}`,
@@ -158,7 +160,7 @@
                         'Package-Name': this.Uid
                     }
                 }).then(res => {
-                    console.log(res)
+                    // console.log(res)
                     this.loadingIf = false
                     this.loading = '加载更多'
                     var array = res.data.data.recommendProducts;

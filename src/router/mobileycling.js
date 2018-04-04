@@ -22,6 +22,8 @@
 
  //  安卓棕色莫愁周转
  const AndroidBrownAboutUs = resolve => require.ensure([], () => resolve(require('../views/androidlightbrownrecycling/AboutUs.vue')), 'AndroidBrownAboutUs')
+ const AnXinHuaAboutUs = resolve => require.ensure([], () => resolve(require('../views/androidlightbrownrecycling/AXHAboutUs.vue')), 'AnXinHuaAboutUs')
+
  const AndroidBrownAddress = resolve => require.ensure([], () => resolve(require('../views/androidlightbrownrecycling/Address.vue')), 'AndroidBrownAddress')
  const AndroidBrownSetaddress = resolve => require.ensure([], () => resolve(require('../views/androidlightbrownrecycling/Setaddress.vue')), 'AndroidBrownSetaddress')
  const AndroidBrownHelpCenter = resolve => require.ensure([], () => resolve(require('../views/androidlightbrownrecycling/HelpCenter.vue')), 'AndroidBrownHelpCenter')
@@ -95,8 +97,14 @@
  const YRJKFeeDeductionAgreement = resolve => require.ensure([], () => resolve(require('../views/yirenjiekuan/FeeDeductionAgreement.vue')), 'YRJKFeeDeductionAgreement')
 
  export default [
-
+     //随便花关于我们
      // android棕黄色手机回收h5页面
+     {
+         path: '/AnXinHuaAboutUs',
+         component: AnXinHuaAboutUs,
+         name: '关于',
+         hidden: true
+     },
      {
          path: '/androidBrownHelpCenter',
          component: AndroidBrownHelpCenter,
@@ -321,12 +329,12 @@
      {
          path: '/androidAboutUs',
          component: AndroidAboutUs,
-         name: '熊猫贷款'
+         name: '关于我们'
      },
      { //添加地址
          path: '/androidSetaddress',
          component: AndroidSetaddress,
-         name: '熊猫贷款'
+         name: '添加地址'
      },
      { //常见问题
          path: '/androidHelpCenter',
@@ -336,32 +344,32 @@
      { //使用规则
          path: '/androidMyCoupon',
          component: AndroidMyCoupon,
-         name: '熊猫贷款'
+         name: '使用规则'
      },
      { //绑定银行卡
          path: '/androidBindingBankcard',
          component: AndroidBindingBankcard,
-         name: '熊猫贷款'
+         name: '绑定银行卡'
      },
      { //优惠券
          path: '/androidCoupon',
          component: AndroidCoupon,
-         name: '熊猫贷款'
+         name: '我的加价券'
      },
      { //反馈
          path: '/androidFeedback',
          component: AndroidFeedback,
-         name: '熊猫贷款'
+         name: '意见反馈'
      },
      { //协议
          path: '/androidAgreement',
          component: AndroidAgreement,
-         name: '熊猫贷款'
+         name: '代收付协议'
      },
      { //已有地址
          path: '/androidAddress',
          component: AndroidAddress,
-         name: '熊猫贷款'
+         name: '我的收货地址'
      },
 
 
