@@ -3,7 +3,7 @@
         <div class="companyDiv">
             <div class="companyCount">
                 <div class="companyLogo"> <!--logo文字-->
-                    <img src="~@/assets/xybk.png" alt="">
+                    <img src="~@/assets/suibianhuaabout.png" alt="">
                     <div class="companyName">
                         安心花
                     </div>
