@@ -3,7 +3,7 @@
         <div class="page-infinite-list page-loadmore-wrapper">
             <div class="productList-header"> <!--栏目-->
                 <div class="productListHeader-list" @click="toClassification(index)" v-for="(item,index) in productListArrar" :key="index"> <!--单个-->
-                    <img :src="item.imgUrl" alt="">
+                    <img :src="item.iconUrl" alt="">
                     <p>{{item.title}}</p>
                 </div>
             </div>
@@ -127,22 +127,22 @@
                 productListArrar:[{
                     title:'新品推荐',
                     id:'1',
-                    imgUrl:require("../../assets/new@2x.png")
+                    iconUrl:require("../../assets/new@2x.png")
                 },
                 {
                     title:'苹果专区',
                     id:'4',
-                    imgUrl:require("../../assets/apple@2x.png")
+                    iconUrl:require("../../assets/apple@2x.png")
                 },
                 {
                     title:'用信用卡贷',
                     id:'3',
-                    imgUrl:require("../../assets/xinyong@2x.png")
+                    iconUrl:require("../../assets/xinyong@2x.png")
                 },
                 {
                     title:'用公积金贷',
                     id:'2',
-                    imgUrl:require("../../assets/gongjijin@2x.png")
+                    iconUrl:require("../../assets/gongjijin@2x.png")
                 }],
             };
         },
@@ -166,15 +166,28 @@
             },
             getClassified(){ //请求分类
                 let params = {
-
+                    'h5WebName':'Conciselogin',
+                    'h5ChannelUid':this.Uid,
+                    'platformId':'0'
                 };
-                this.$ajax.get(`${resources.graphQlApi}`,{
-                    `query`:`${Classified}`,
+                this.$ajax.post(`${resources.graphQlApi}`,{
+                    'query':`${Classified}`,
                     variables:params,
                     headers:{
-                        
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Version': '1',
+                        'User-Id': '0',
+                        'Channel-Id': '14',
+                        'Device-Id': '111',
+                        'Request-Uri': 'https://api.pinganzhiyuan.com/panda_loan/graphql/query',
+                        'Package-Name': this.Uid
                     }
-                })
+                }).then( res => {
+                    console.log(res.data.data.h5Columns)
+                    this.productListArrar =  res.data.data.h5Columns
+                }).catch( error=>{
+                    console.log(error)
+                } )
                
             },
             getProduct() { //请求数据
@@ -237,6 +250,7 @@
         },
         mounted() {
             this.getProduct() //首次请求
+            this.getClassified() //分类
         }
     };
 </script>

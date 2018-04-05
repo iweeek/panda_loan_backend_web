@@ -1,5 +1,5 @@
 // 熊猫贷款不登录
-const NoProductList = resolve => require.ensure([], () => resolve(require('../views/notLoginpanda/ProductList.vue')), 'NoProductList') //熊猫贷款产品页面
+const AppProductList = resolve => require.ensure([], () => resolve(require('../views/notLoginpanda/ProductList.vue')), 'AppProductList') //熊猫贷款产品页面
 const NoDetailspage = resolve => require.ensure([], () => resolve(require('../views/notLoginpanda/Detailspage.vue')), 'NoDetailspage') //熊猫贷款第三方页面
 const NoDetailsOfclassification = resolve => require.ensure([], () => resolve(require('../views/notLoginpanda/DetailsOfclassification.vue')), 'DetailsOfclassification') //熊猫贷款产品分类页面
 
@@ -23,8 +23,8 @@ export default [
 
     // 不登录版本熊猫贷款
     {
-        path: '/noProductList/:Uid',
-        component: NoProductList,
+        path: '/appProductList/:Uid',
+        component: AppProductList,
         name: '首页',
         hidden: true
     },
