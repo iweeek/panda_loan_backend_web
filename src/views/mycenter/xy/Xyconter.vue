@@ -1,69 +1,66 @@
 <template>
     <div id="app">
-    <!-- <h1>手机号：{{phone}}</h1>
-    <h1>名字：{{name}}</h1>
-    <h1>版本{{versionCode}}</h1>
-    <h1>认证状态：{{isCertified}}</h1> -->
-    <!-- 信息 -->
-    <div class="profile-head">
-        <div class="profile-img">
+        <!-- <h1>手机号：{{phone}}</h1>
+        <h1>名字：{{name}}</h1>
+        <h1>版本{{versionCode}}</h1>
+        <h1>认证状态：{{isCertified}}</h1> -->
+        <!-- 信息 -->
+        <div class="profile-head">
             <div class="profile-title">我的</div>
-            <img src="~@/assets/profileimg.png" alt="">
-            <div class="profile-author">
-                {{isCertified|capitalize}}
-                <!-- 1通过 -->
-                <!-- 0未通过1 -->
+            <div class="profile-img">
+                <img src="~@/assets/profileimg.png" alt="">
+            </div>
+            <div class="profile-phone">{{phone}}</div>
+            <div class="profile-name">
+                <div class="profile_namedata">{{name}}</div>
+                <div class="isCertifiedstyle">
+                      {{isCertified|capitalize}}
+                </div>
             </div>
         </div>
-        <div class="profile-phone">{{phone}}</div>
-        <div class="profile-name">
-            <div class="profile_namedata">{{name}}</div>
-        </div>
-    </div>
         <!-- 单个表格 -->
-    <div class="profile-table">
-        <div class="profile-tab">
-            <div class="profile-icon">
-                <img src="~@/assets/helpcentericonblack.png" alt="">
-            </div>
-            <div class="profileicon-text">
-                帮助中心
-            </div>
-            <div class="profileicon-right">
-                <img src="~@/assets/localtions.png" alt="">
-            </div>
-        </div>
-    </div>
-       <!-- 多个表格 -->
-    <div class="profile-tables">
-        <div class="profile-tabs">
-            <div class="profile-icons">
-                <img src="~@/assets/settingblack.png" alt="">
-            </div>
-            <div class="profile-tabmenu" @click="goSetting">
-                <div class="profileicon-texs">
-                    设置
+        <div class="profile-table">
+            <div class="profile-tab"  @click="goHelp">
+                <div class="profile-icon">
+                    <img src="~@/assets/helpcentericonbule.png" alt="">
                 </div>
-                <div class="profileicons-right">
+                <div class="profileicon-text">
+                    帮助中心
+                </div>
+                <div class="profileicon-right">
                     <img src="~@/assets/localtions.png" alt="">
                 </div>
             </div>
         </div>
-        <div class="profile-tabs" >
-            <div class="profile-icons">
-                <img src="~@/assets/aboutsiconblack.png" alt="">
-            </div>
-            <div class="profile-tabmenu" style="border:none;">
-                <div class="profileicon-texs">
-                    关于我们
+        <!-- 多个表格 -->
+        <div class="profile-tables">
+            <div class="profile-tabs"  @click="goSetting">
+                <div class="profile-icons">
+                    <img src="~@/assets/settingblue.png" alt="">
                 </div>
-                <div class="profileicons-right">
-                    <img src="~@/assets/localtions.png" alt="">
+                <div class="profile-tabmenu">
+                    <div class="profileicon-texs">
+                        设置
+                    </div>
+                    <div class="profileicons-right">
+                        <img src="~@/assets/localtions.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="profile-tabs"  @click="goabouts" >
+                <div class="profile-icons">
+                    <img src="~@/assets/aboutsiconblue.png" alt="">
+                </div>
+                <div class="profile-tabmenu" style="border:none;">
+                    <div class="profileicon-texs">
+                        关于我们
+                    </div>
+                    <div class="profileicons-right">
+                        <img src="~@/assets/localtions.png" alt="">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
     </div>
 </template>
 <script>
@@ -94,6 +91,12 @@ export default {
         },
         goSetting(){
             this.$router.push({ path: '/setting' })
+        },
+        goHelp(){
+            this.$router.push({ path: '/xyhelpcenter' })
+        },
+        goabouts(){
+            this.$router.push({ path: '/xyaboutus' })
         }
     },
   mounted(){
@@ -101,8 +104,6 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 
 <style lang="scss" scoped>
 $rem:1rem/40; //rem配置   
@@ -114,7 +115,7 @@ $rem:1rem/40; //rem配置
     padding-bottom: 50*$rem;
     width: 100%;
     height:auto;
-    background:#fff;
+    background:url('~@/assets/backgroundimgblue.png');
     overflow: hidden;
     .profile-title{
         width: 100%;
@@ -123,59 +124,43 @@ $rem:1rem/40; //rem配置
         text-align: center;
         font-size: 30*$rem;
         color:#fff;
-        background:#222;
     }
     .profile-img{
-        position: relative;
-        width: 100%;
-        height: 232*$rem;
-        background: url("~@/assets/blackimg.png") no-repeat;
-        background-size:100% 100%;
+        margin: 15*$rem 0rem 18*$rem 0rem;
         text-align: center;
         img{
-            position: relative;
-            display: inline-block;
-            margin-top: 50*$rem;
-            border: 20px solid #fff;
-            border-radius:100%; 
-            width: 150*$rem;
-        }
-        .profile-author{
-            position: absolute;
-            left: 50%;
-            top:238*$rem;
-            width: auto;
-            padding: 5*$rem;
-            color:#222;
-            text-align: center;
-            background: #ffd768;
-            border-radius: 5*$rem;
+            width: 140*$rem;
         }
     }
     .profile-phone{
-        margin-top:75*$rem; 
         text-align: center;
         font-size: 32*$rem;
-        color:#222;
+        color:#fff;
         overflow: hidden;
     }
     .profile-name{
+        display: inline-block;
         margin-top: 15*$rem;
+        padding: 5*$rem 0;
         width: 100%;
         height:auto;
-        line-height: 40*$rem;
         text-align: center;
+        overflow: hidden;
         .profile_namedata{
-            padding: 5*$rem 0 ;
+            display: inline-block;
+            width:auto;
+            height: 32*$rem;
+            line-height: 32*$rem;
             font-size: 32*$rem;
-            color:#222;
+            color:#fff;
         }
         .isCertifiedstyle{
+            position: relative;
+            top:-4*$rem;
+            display: inline-block;
             margin-left:10*$rem;
-            float: left;
-            text-align: left;
             width:auto;
-            padding: 0 5*$rem;
+            padding: 5*$rem;
             border: 2.1*$rem solid #fff;
             border-radius:0.2rem; 
             font-size: 18*$rem;
