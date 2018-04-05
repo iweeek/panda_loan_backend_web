@@ -3,7 +3,7 @@
         <div class="page-infinite-list page-loadmore-wrapper">
             <div class="productList-header"> <!--栏目-->
                 <div class="productListHeader-list" @click="toClassification(index)" v-for="(item,index) in productListArrar" :key="index"> <!--单个-->
-                    <img :src="item.iconUrl" alt="">
+                    <img :src="item.iconUrl|imgdefault" alt="">
                     <p>{{item.title}}</p>
                 </div>
             </div>
@@ -146,6 +146,15 @@
                 }],
             };
         },
+        filters: {
+            imgdefault(value) {
+                if(value==''){
+                    return require("../../assets/gongjijin@2x.png")
+                }else{
+                    return value
+                }
+            }
+        },
         methods: {
             SetProduct(){ //添加数据
                 var _this = this
@@ -166,7 +175,7 @@
             },
             getClassified(){ //请求分类
                 let params = {
-                    'h5WebName':'Conciselogin',
+                    'h5WebName':'appProductList',
                     'h5ChannelUid':this.Uid,
                     'platformId':'0'
                 };
@@ -183,8 +192,9 @@
                         'Package-Name': this.Uid
                     }
                 }).then( res => {
-                    console.log(res.data.data.h5Columns)
-                    this.productListArrar =  res.data.data.h5Columns
+                    var productList = res.data.data.h5Columns
+                    productList.splice(3,1)
+                    this.productListArrar =  productList
                 }).catch( error=>{
                     console.log(error)
                 } )
