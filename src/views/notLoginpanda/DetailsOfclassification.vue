@@ -1,8 +1,5 @@
 <template>
     <div>
-        <div class="header" v-show="noHeader"> <!--头部信息-->
-            <Xheader v-if="showBack" :showBack="showBack" :nameText="nameText" :backone="backone"></Xheader>
-        </div>
         <div class="backgeound-img" :class="{ newBackgroundimg: newBackgroundimg,appleBackgroundimg:appleBackgroundimg,kaBackgroundimg:kaBackgroundimg,jijinBack:jijinBack}">
             <div class="pageloadmorewrapper" :class="{jijinTop:jijinTop,pageloadmorewrapper:pageloadmorewrapper}">
                 <div class="lasttime" v-if="this.$route.query.id==1">
@@ -48,13 +45,8 @@
     </div>
 </template>
 
-
-
 <script type="text/babel">
-
     import resources from '../../resources'
-    import Xheader from 'common/X-header'
-
 	const recommendProductQuery = `
         query(
             $productTypeId: Long
@@ -82,9 +74,6 @@
     }`
 
   export default {
-        components: {
-            Xheader
-        },
         data() {
         return {
             showBottom:true,
@@ -159,7 +148,7 @@
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'Version': '1',
-                    'User-Id': sessionStorage.getItem("userId"),
+                    'User-Id': '0',
                     'Channel-Id': '14',
                     'Device-Id': '111',
                     'Request-Uri': 'https://api.pinganzhiyuan.com/panda_loan/graphql/query',
@@ -210,8 +199,9 @@
         }
     },
     mounted() {
-      this.getRecommendProduct() //首次请求
-      this.getTitle()
+        this.getRecommendProduct() //首次请求
+        this.getTitle()
+        document.title = this.$route.query.title
     },
     created(){ //背景切换
         if(this.$route.query.id==1){
@@ -222,7 +212,7 @@
             this.productthree = true,
             this.product = false
             this.kaBackgroundimg = true
-        }else if(this.$route.query.id==2){
+        }else if(this.$route.query.id==7 ||this.$route.query.id==5 ||this.$route.query.id==2){
             this.jijinBack = true
             this.pageloadmorewrapper = false,
             this.jijinTop = true
@@ -241,8 +231,8 @@
         background: url("../../assets/new.png")  no-repeat;
         background-size:100%;
         background-color:#f6d085;
-        margin-top: 88*$rem;
         position: relative;
+        min-height: 1000*$rem;
         overflow:hidden;
     }
     .lasttime{
@@ -258,8 +248,8 @@
         background: url("../../assets/appleBack.png")  no-repeat;
         background-size:100%;
         background-color:#3b8dfb;
-        margin-top: 88*$rem;
         overflow:hidden;
+        min-height: 1000*$rem;
     }
     .kaBackgroundimg{    //信用卡
         width:100%;
@@ -267,7 +257,7 @@
         background: url("../../assets/xinyongka.png")  no-repeat;
         background-size:100%;
         background-color:#3d4ca9;
-        margin-top: 88*$rem;
+        min-height: 1000*$rem;
         overflow:hidden;
     }
     .jijinBack{ //基金
@@ -275,8 +265,9 @@
         height: auto;
         background: url("../../assets/jiben.png")  no-repeat;
         background-size:100%;
+        background-position-y: -40*$rem;
         background-color:#fb264a;
-        margin-top: 50*$rem;
+        min-height: 1334*$rem;
         overflow:hidden;
     }
     .jijinBottom{ //基金底部

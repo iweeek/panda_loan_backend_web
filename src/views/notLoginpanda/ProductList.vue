@@ -3,7 +3,7 @@
         <div class="page-infinite-list page-loadmore-wrapper">
             <div class="productList-header"> <!--栏目-->
                 <div class="productListHeader-list" @click="toClassification(index)" v-for="(item,index) in productListArrar" :key="index"> <!--单个-->
-                    <img :src="item.imgUrl" alt="">
+                    <img :src="item.iconUrl|imgdefault" alt="">
                     <p>{{item.title}}</p>
                 </div>
             </div>
@@ -48,6 +48,7 @@
 </template>
 <script type="text/babel">
     import resources from '../../resources'
+    // 请求列表
     const productQuery = `
         query(
             $pageNumber: Int
@@ -74,7 +75,33 @@
                 maxTerm
                 minTerm
             }
-	}`
+    }`
+    // 请求分类
+    const Classified = `
+        query(
+            $h5WebName:String
+            $h5ChannelUid:String
+            $platformId:String
+        )
+        {
+            h5Columns(
+               h5WebName: $h5WebName
+               h5ChannelUid: $h5ChannelUid
+               platformId:$platformId
+            ){
+                id
+                h5ColumnKey
+                h5ClientVersionId
+                status
+                name
+                title
+                subtitle
+                url
+                iconUrl
+            }
+        }
+    `
+
     export default {
         name:'NoProductList',
         data() {
@@ -100,24 +127,33 @@
                 productListArrar:[{
                     title:'新品推荐',
                     id:'1',
-                    imgUrl:require("../../assets/new@2x.png")
+                    iconUrl:require("../../assets/new@2x.png")
                 },
                 {
                     title:'苹果专区',
                     id:'4',
-                    imgUrl:require("../../assets/apple@2x.png")
+                    iconUrl:require("../../assets/apple@2x.png")
                 },
                 {
                     title:'用信用卡贷',
                     id:'3',
-                    imgUrl:require("../../assets/xinyong@2x.png")
+                    iconUrl:require("../../assets/xinyong@2x.png")
                 },
                 {
                     title:'用公积金贷',
                     id:'2',
-                    imgUrl:require("../../assets/gongjijin@2x.png")
+                    iconUrl:require("../../assets/gongjijin@2x.png")
                 }],
             };
+        },
+        filters: {
+            imgdefault(value) {
+                if(value==''){
+                    return require("../../assets/gongjijin@2x.png")
+                }else{
+                    return value
+                }
+            }
         },
         methods: {
             SetProduct(){ //添加数据
@@ -136,6 +172,33 @@
                 var str = 'redirect='
                 var stringUrl =  url.split(str)[1]
                 window.location.href = decodeURIComponent(stringUrl)
+            },
+            getClassified(){ //请求分类
+                let params = {
+                    'h5WebName':'appProductList',
+                    'h5ChannelUid':this.Uid,
+                    'platformId':'0'
+                };
+                this.$ajax.post(`${resources.graphQlApi}`,{
+                    'query':`${Classified}`,
+                    variables:params,
+                    headers:{
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Version': '1',
+                        'User-Id': '0',
+                        'Channel-Id': '14',
+                        'Device-Id': '111',
+                        'Request-Uri': 'https://api.pinganzhiyuan.com/panda_loan/graphql/query',
+                        'Package-Name': this.Uid
+                    }
+                }).then( res => {
+                    var productList = res.data.data.h5Columns
+                    productList.splice(3,1)
+                    this.productListArrar =  productList
+                }).catch( error=>{
+                    console.log(error)
+                } )
+               
             },
             getProduct() { //请求数据
                 this.loadingIf = true
@@ -197,6 +260,7 @@
         },
         mounted() {
             this.getProduct() //首次请求
+            this.getClassified() //分类
         }
     };
 </script>
