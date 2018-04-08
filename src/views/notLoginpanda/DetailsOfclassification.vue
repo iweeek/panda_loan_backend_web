@@ -159,9 +159,6 @@
                             item.isFirstTags = true;
                         }
                     });
-                    if(this.$route.query.id==2){
-                        this.liwushow = true
-                    }
 
                 })
             },
@@ -178,13 +175,13 @@
         if(this.$route.query.id==1){
             this.newBackgroundimg = true
         }else if(this.$route.query.id==4){
-            this.appleBackgroundimg = true
-        }else if(this.$route.query.id==3){
+            this.jijinBack = true
+        }else if(this.$route.query.id==2){
             this.productthree = true,
             this.product = false
             this.kaBackgroundimg = true
-        }else if(this.$route.query.id==7 ||this.$route.query.id==5 ||this.$route.query.id==2){
-            this.jijinBack = true
+        }else if(this.$route.query.id==7){
+            this.appleBackgroundimg = true
             this.pageloadmorewrapper = false,
             this.jijinTop = true
         }
@@ -251,7 +248,7 @@
         width: 100%;
     }
     .jijinTop{
-        margin-top: 666*$rem !important;
+        margin-top: 500*$rem !important;
     }
 
     .header{  //顶部header
