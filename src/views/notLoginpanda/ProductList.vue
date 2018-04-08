@@ -124,26 +124,28 @@
                 nameText:'热门推荐',
                 backone:true,
                 Uid:this.$route.params.Uid,
-                productListArrar:[{
-                    title:'新品推荐',
-                    id:'1',
-                    iconUrl:require("../../assets/new@2x.png")
-                },
-                {
-                    title:'苹果专区',
-                    id:'4',
-                    iconUrl:require("../../assets/apple@2x.png")
-                },
-                {
-                    title:'用信用卡贷',
-                    id:'3',
-                    iconUrl:require("../../assets/xinyong@2x.png")
-                },
-                {
-                    title:'用公积金贷',
-                    id:'2',
-                    iconUrl:require("../../assets/gongjijin@2x.png")
-                }],
+                productListArrar:[
+                //     {
+                //     title:'新品推荐',
+                //     id:'1',
+                //     iconUrl:require("../../assets/new@2x.png")
+                // },
+                // {
+                //     title:'苹果专区',
+                //     id:'4',
+                //     iconUrl:require("../../assets/apple@2x.png")
+                // },
+                // {
+                //     title:'用信用卡贷',
+                //     id:'3',
+                //     iconUrl:require("../../assets/xinyong@2x.png")
+                // },
+                // {
+                //     title:'用公积金贷',
+                //     id:'2',
+                //     iconUrl:require("../../assets/gongjijin@2x.png")
+                // }
+                ],
             };
         },
         filters: {
