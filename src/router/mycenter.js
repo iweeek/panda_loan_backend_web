@@ -22,7 +22,7 @@ export default [
     {
         path: '/axhconter',
         component: Axhconter,
-        name: '个人中心',
+        name: '我的',
         hidden: true
     },
     {
@@ -42,7 +42,7 @@ export default [
     {
         path: '/xyconter',
         component: Xyconter,
-        name: '个人中心',
+        name: '我的',
         hidden: true
     },
     {
@@ -62,7 +62,7 @@ export default [
     {
         path: '/mcconter',
         component: Mcconter,
-        name: '个人中心',
+        name: '我的',
         hidden: true
     },
     {
@@ -82,7 +82,7 @@ export default [
     {
         path: '/xhconter',
         component: Xhconter,
-        name: '个人中心',
+        name: '我的',
         hidden: true
     },
     {
