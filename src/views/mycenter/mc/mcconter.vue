@@ -7,7 +7,6 @@
     <!-- 信息 -->
     <div class="profile-head">
         <div class="profile-img">
-            <div class="profile-title">我的</div>
             <img src="~@/assets/profileimg.png" alt="">
             <div class="profile-author">
                 {{isCertified|capitalize}}
@@ -93,13 +92,13 @@ export default {
             this.isCertified = this.$route.query.isCertified //认证状态
         },
         goSetting(){
-            this.$router.push({ path: '/setting' })
+            window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/#/setting"
         },
         goHelp(){
-            this.$router.push({ path: '/mchelpCenter' })
+            window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/#/mchelpCenter"
         },
         goabouts(){
-            this.$router.push({ path: '/mcaboutus' })
+            window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/#/mcaboutus"
         }
     },
   mounted(){

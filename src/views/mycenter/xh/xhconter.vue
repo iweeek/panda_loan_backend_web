@@ -6,7 +6,6 @@
     <h1>认证状态：{{isCertified}}</h1> -->
     <!-- 信息 -->
     <div class="profile-head">
-        <div class="profile-title">我的</div>
         <div class="profile-backimg"> 
             <div class="profile-img">
                 <img src="~@/assets/profileimg.png" alt="">
@@ -96,13 +95,13 @@ export default {
             this.isCertified = this.$route.query.isCertified //认证状态
         },
         goSetting(){
-            this.$router.push({ path: '/setting' })
+            window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/#/setting"
         },
         goHelp(){
-            this.$router.push({ path: '/xhhelpcenter' })
+            window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/#/xhhelpcenter"
         },
         goabouts(){
-            this.$router.push({ path: '/xhAboutUs' })
+            window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/#/xhAboutUs"
         }
 
     },

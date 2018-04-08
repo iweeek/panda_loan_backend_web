@@ -88,7 +88,7 @@ $rem:1rem/40; //rem配置
 }
 
 .companyIntroduction{ 
-    margin-top: 700*$rem;
+    margin-top: 450*$rem;
     padding:0 33*$rem;
     width:100%;
     height: auto;

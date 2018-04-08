@@ -1,6 +1,5 @@
 <template>
     <div id="app">
-    <div class="profile-title">我的</div>
     <div class="minecenter">
         <!-- url信息 -->
         <div class="profile-head">
@@ -35,24 +34,11 @@
                     </div>
                 </div>
             </div>
-            <div class="profile-tabs"  @click="goabouts" >
-                <div class="profile-icons">
-                    <img src="~@/assets/anxinAbouts.png" alt="">
-                </div>
-                <div class="profile-tabmenu">
-                    <div class="profileicon-texs">
-                        关于我们
-                    </div>
-                    <div class="profileicons-right">
-                        <img src="~@/assets/localtions.png" alt="">
-                    </div>
-                </div>
-            </div>
             <div class="profile-tabs" @click="goHelp">
                 <div class="profile-icons">
                     <img src="~@/assets/axxinHelo.png" alt="">
                 </div>
-                <div class="profile-tabmenu"  style="border:none;">
+                <div class="profile-tabmenu" >
                     <div class="profileicon-texs">
                         帮助中心
                     </div>
@@ -61,6 +47,20 @@
                     </div>
                 </div>
             </div>
+            <div class="profile-tabs"  @click="goabouts" >
+                <div class="profile-icons">
+                    <img src="~@/assets/anxinAbouts.png" alt="">
+                </div>
+                <div class="profile-tabmenu"  style="border:none;">
+                    <div class="profileicon-texs">
+                        关于我们
+                    </div>
+                    <div class="profileicons-right">
+                        <img src="~@/assets/localtions.png" alt="">
+                    </div>
+                </div>
+            </div>
+
 
         </div>
     </div>
@@ -93,13 +93,13 @@ export default {
             this.isCertified = this.$route.query.isCertified //认证状态
         },
         goSetting(){
-            this.$router.push({ path: '/setting' })
+            window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/#/setting"
         },
         goHelp(){
-            this.$router.push({ path: '/axhelpcenter' })
+            window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/#/axhelpcenter"
         },
         goabouts(){
-            this.$router.push({ path: '/axaboutus' })
+            window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/#/axhaboutus"
         }
     },
   mounted(){
