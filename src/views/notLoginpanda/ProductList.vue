@@ -174,7 +174,7 @@ export default {
           variables: params,
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
-            Version: "1",
+            "Version": "1",
             "User-Id": "0",
             "Channel-Id": "14",
             "Device-Id": "111",
@@ -183,9 +183,16 @@ export default {
           }
         })
         .then(res => {
-          var productList = res.data.data.h5Columns;
-          productList.splice(3, 1);
-          this.productListArrar = productList;
+            console.log(res.data.data.h5Columns)
+            var productList = res.data.data.h5Columns;
+            for(var i =0;i<res.data.data.h5Columns.length;i++){
+                if(res.data.data.h5Columns[i].id=='5'){
+                    console.log(productList)
+                    console.log(i)
+                    productList.splice(i, 1);
+                    this.productListArrar = productList;
+                }
+            }
         })
         .catch(error => {
           console.log(error);
@@ -248,8 +255,10 @@ export default {
     },
     toClassification(index) {
       //跳转商品分类详情
-       window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/#/appClassification?title=" +this.productListArrar[index].title +"&id=" +this.productListArrar[index].id
-    }
+        window.location.href = "http://www.baidu.com/"
+        // window.location.href="http://192.168.2.156:8228/#/appClassification?title=" +this.productListArrar[index].title +"&id=" +this.productListArrar[index].id
+        //this.$router.push({path: '/appClassification?title=' +this.productListArrar[index].title +"&id=" +this.productListArrar[index].id});
+  }
   },
   mounted() {
     this.getProduct(); //首次请求
