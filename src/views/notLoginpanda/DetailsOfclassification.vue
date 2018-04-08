@@ -2,8 +2,8 @@
     <div>
         <div class="backgeound-img" :class="{ newBackgroundimg: newBackgroundimg,appleBackgroundimg:appleBackgroundimg,kaBackgroundimg:kaBackgroundimg,jijinBack:jijinBack}">
             <div class="pageloadmorewrapper" :class="{jijinTop:jijinTop,pageloadmorewrapper:pageloadmorewrapper}">
-                <div class="lasttime" v-if="this.$route.query.id==1">
-                    <!-- 最后更新： -->
+                <div class="lasttime" v-if="this.$route.query.id==3">
+                    <img src="~@/assets/sddzhand.png" alt="">
                 </div>
                 <div v-for="(product,index) in allProduct" :key="product.id,index"  @click="gotoUrl(index)" :class="{product:product,productthree:productthree}">
                     <div class="title">
@@ -180,7 +180,7 @@
             this.productthree = true,
             this.product = false
             this.kaBackgroundimg = true
-        }else if(this.$route.query.id==7){
+        }else if(this.$route.query.id==3){
             this.appleBackgroundimg = true
             this.pageloadmorewrapper = false,
             this.jijinTop = true
@@ -193,6 +193,11 @@
 <style lang="scss" scoped>
     $rem:1rem/40; //配置rem比例
 
+    .sdhand{
+        margin: 0 auto;
+        width: 100%;
+        height: auto;
+    }
     .newBackgroundimg{ //新品推荐
         width:100%;
         height: auto;
@@ -207,24 +212,28 @@
         font-size: 38*$rem;
         color: #fff;
         position: absolute;
-        top:380*$rem;
-        left:280*$rem;
+        top:270*$rem;
+        left:255*$rem;
+        img{
+            width: 260*$rem;
+            height: 225*$rem;
+        }
     }
     .appleBackgroundimg{    //苹果专区
         width:100%;
         height: auto;
-        background: url("../../assets/appleBack.png")  no-repeat;
+        background: url("../../assets/sddzback.png")  no-repeat;
         background-size:100%;
-        background-color:#3b8dfb;
+        background-color:#F4DA22;
         overflow:hidden;
         min-height: 1334*$rem;
     }
     .kaBackgroundimg{    //信用卡
         width:100%;
         height: auto;
-        background: url("../../assets/xinyongka.png")  no-repeat;
+        background: url("../../assets/jsxe.png")  no-repeat;
         background-size:100%;
-        background-color:#3d4ca9;
+        background-color:#0D25A6;
         min-height: 1000*$rem;
         overflow:hidden;
     }

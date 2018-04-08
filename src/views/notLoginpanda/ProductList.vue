@@ -1,5 +1,5 @@
 <template>
-    <div >
+    <div>
         <div class="page-infinite-list page-loadmore-wrapper">
             <div class="productList-header"> <!--栏目-->
                 <div class="productListHeader-list" @click="toClassification(index)" v-for="(item,index) in productListArrar" :key="index"> <!--单个-->
@@ -33,9 +33,7 @@
                         <img src="~@/assets/clickicon.png" class="click-icon">
                     </div>
                 </div>
-
             </div>
-
         </div>
          <div class="nomore" v-if="nomore">
                     <span class="nomore-border">—</span><span class="nomore-text">没有更多了哦</span><span class="nomore-border">—</span>
@@ -255,10 +253,11 @@ export default {
     },
     toClassification(index) {
       //跳转商品分类详情
-        window.location.href = "http://www.baidu.com/"
+        // window.location.href = "http://www.baidu.com/"
         // window.location.href="http://192.168.2.156:8228/#/appClassification?title=" +this.productListArrar[index].title +"&id=" +this.productListArrar[index].id
-        //this.$router.push({path: '/appClassification?title=' +this.productListArrar[index].title +"&id=" +this.productListArrar[index].id});
-  }
+        this.$router.push({path: '/appClassification?title=' +this.productListArrar[index].title +"&id=" +this.productListArrar[index].id});
+        // window.location.assign("http://192.168.2.156:8228/#/appClassification?title=" +this.productListArrar[index].title +"&id=" +this.productListArrar[index].id)
+    }
   },
   mounted() {
     this.getProduct(); //首次请求
