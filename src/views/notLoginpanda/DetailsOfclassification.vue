@@ -34,9 +34,6 @@
                 <div class="jijinBottom" v-if="liwushow">
                     <img src="../../assets/bottom2.png" alt="">
                 </div>
-                <p v-if="showBottom" class="page-infinite-loading" @click="SetProduct">
-                    <img src="~@/assets/loading.gif" alt="" v-if="loadingIf"> {{loading}}
-                </p>
                 <div class="nomore" v-if="nomore">
                     <span class="nomore-border">—</span><span class="nomore-text">没有更多了哦</span><span class="nomore-border">—</span>
                 </div>
@@ -47,14 +44,22 @@
 
 <script type="text/babel">
     import resources from '../../resources'
-	const recommendProductQuery = `
+	const h5RecommendProducts = `
         query(
-            $productTypeId: Long
+                $pageNumber: Int
+                $pageSize: Int
+                $h5WebName: String
+                $h5ChannelUid: String
+                $platformId: String
+                $productTypeId: Long
         ){
-            recommendProducts(
+            h5RecommendProducts(
+                pageNumber:$pageNumber
+                pageSize:$pageSize
+                h5WebName: $h5WebName
+                h5ChannelUid: $h5ChannelUid
+                platformId: $platformId
                 productTypeId: $productTypeId
-                packageName: "com.h5"
-                channelId: "99"
             ){
                 id
                 title
@@ -66,10 +71,10 @@
                 url
                 minAmount
                 maxAmount
-                dayRate
                 creditAuth
                 maxTerm
                 minTerm
+                dayRate
             }
     }`
 
@@ -90,7 +95,6 @@
             showBack:true,
             liwushow:false,
             product:true,
-            loadingIf:true,
             productthree:false,
             pageloadmorewrapper:true,
             // 切换背景
@@ -102,26 +106,7 @@
             nameText:'商品列表',
             backone:true,
             jijinTop:false,
-            productListArrar:[{
-                title:'新品推荐',
-                id:'',
-                imgUrl:require("../../assets/new@2x.png")
-            },
-            {
-                title:'苹果专区',
-                id:'',
-                imgUrl:require("../../assets/apple@2x.png")
-            },
-            {
-                title:'用信用卡贷',
-                id:'',
-                imgUrl:require("../../assets/xinyong@2x.png")
-            },
-            {
-                title:'用公积金贷',
-                id:'',
-                imgUrl:require("../../assets/gongjijin@2x.png")
-            }]
+            Uid: this.$route.params.Uid,
         };
     },
     methods: {
@@ -132,18 +117,17 @@
             var stringUrl =  url.split(str)[1]
             window.location.href = decodeURIComponent(stringUrl)
         },
-        SetProduct(){ //添加数据
-          this.pageNumber ++;
-          this.getProduct()
-        },
         getRecommendProduct() {
             let params = {
-                "productTypeId": this.$route.query.id,
-                "packageName": "com.h5",
-                "channelId": "99"
+                pageNumber:"1",
+                pageSize:"150",
+                h5WebName: "appProductList",
+                h5ChannelUid:sessionStorage.getItem('Uid'),
+                platformId: "0",
+                productTypeId: this.$route.query.id
             }
             this.$ajax.post(`${resources.graphQlApi}`,{
-                'query': `${recommendProductQuery}`,
+                'query': `${h5RecommendProducts}`,
                 variables:params,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -152,14 +136,11 @@
                     'Channel-Id': '14',
                     'Device-Id': '111',
                     'Request-Uri': 'https://api.pinganzhiyuan.com/panda_loan/graphql/query',
-                    'Package-Name': sessionStorage.getItem("Uid"),
+                    'Package-Name': this.Uid
                 }
                 }).then(res => {
-                    // console.log(res)
-                    this.loadingIf = false
-                    this.loading = '点击加载'
-                    // console.log(res.data.data.recommendProducts)
-                    var array = res.data.data.recommendProducts;
+                    console.log(res.data.data)
+                    var array = res.data.data.h5RecommendProducts;
                     for (var i = 0; i < array.length ;i ++) {
                         array[i].firstTagArray = array[i].firstTags.split("|");
                     }
@@ -184,18 +165,8 @@
 
                 })
             },
-        toClassification(index){ //跳转商品分类详情
-            this.$router.push({
-             path: '/DetailsOfclassification?title=' + this.productListArrar[index].title
-            });
-         },
         getTitle(){
             this.nameText = this.$route.query.title
-        },
-        demo(index){  //测试跳转
-            this.$router.push({
-                path: '/Detailspage?url=' +  this.allProduct[index].url +  '&title=' + this.allProduct[index].title
-            });
         }
     },
     mounted() {
@@ -232,7 +203,7 @@
         background-size:100%;
         background-color:#f6d085;
         position: relative;
-        min-height: 1000*$rem;
+        min-height: 1334*$rem;
         overflow:hidden;
     }
     .lasttime{
@@ -249,7 +220,7 @@
         background-size:100%;
         background-color:#3b8dfb;
         overflow:hidden;
-        min-height: 1000*$rem;
+        min-height: 1334*$rem;
     }
     .kaBackgroundimg{    //信用卡
         width:100%;
