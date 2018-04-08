@@ -251,7 +251,7 @@ export default {
     },
     toClassification(index) {
       //跳转商品分类详情
-        window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/#/appProductList?title=" +this.productListArrar[index].title +"&id=" +this.productListArrar[index].id + '&uid=' + this.Uid
+        window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/appClassification?title=" +this.productListArrar[index].title +"&id=" +this.productListArrar[index].id + '&uid=' + this.Uid
     }
   },
   mounted() {
