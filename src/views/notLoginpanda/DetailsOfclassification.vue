@@ -34,9 +34,6 @@
                 <div class="jijinBottom" v-if="liwushow">
                     <img src="../../assets/bottom2.png" alt="">
                 </div>
-                <p v-if="showBottom" class="page-infinite-loading" @click="SetProduct">
-                    <img src="~@/assets/loading.gif" alt="" v-if="loadingIf"> {{loading}}
-                </p>
                 <div class="nomore" v-if="nomore">
                     <span class="nomore-border">—</span><span class="nomore-text">没有更多了哦</span><span class="nomore-border">—</span>
                 </div>
@@ -47,11 +44,11 @@
 
 <script type="text/babel">
     import resources from '../../resources'
-	const recommendProductQuery = `
+	const h5RecommendProducts = `
         query(
             $productTypeId: Long
         ){
-            recommendProducts(
+            h5RecommendProducts(
                 productTypeId: $productTypeId
                 packageName: "com.h5"
                 channelId: "99"
@@ -90,7 +87,6 @@
             showBack:true,
             liwushow:false,
             product:true,
-            loadingIf:true,
             productthree:false,
             pageloadmorewrapper:true,
             // 切换背景
@@ -132,10 +128,6 @@
             var stringUrl =  url.split(str)[1]
             window.location.href = decodeURIComponent(stringUrl)
         },
-        SetProduct(){ //添加数据
-          this.pageNumber ++;
-          this.getProduct()
-        },
         getRecommendProduct() {
             let params = {
                 "productTypeId": this.$route.query.id,
@@ -143,7 +135,7 @@
                 "channelId": "99"
             }
             this.$ajax.post(`${resources.graphQlApi}`,{
-                'query': `${recommendProductQuery}`,
+                'query': `${h5RecommendProducts}`,
                 variables:params,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -155,10 +147,7 @@
                     'Package-Name': sessionStorage.getItem("Uid"),
                 }
                 }).then(res => {
-                    // console.log(res)
-                    this.loadingIf = false
-                    this.loading = '点击加载'
-                    // console.log(res.data.data.recommendProducts)
+                    console.log(res.data.data)
                     var array = res.data.data.recommendProducts;
                     for (var i = 0; i < array.length ;i ++) {
                         array[i].firstTagArray = array[i].firstTags.split("|");
@@ -232,7 +221,7 @@
         background-size:100%;
         background-color:#f6d085;
         position: relative;
-        min-height: 1000*$rem;
+        min-height: 1334*$rem;
         overflow:hidden;
     }
     .lasttime{
@@ -249,7 +238,7 @@
         background-size:100%;
         background-color:#3b8dfb;
         overflow:hidden;
-        min-height: 1000*$rem;
+        min-height: 1334*$rem;
     }
     .kaBackgroundimg{    //信用卡
         width:100%;
