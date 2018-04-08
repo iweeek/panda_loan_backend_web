@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="backgeound-img" :class="{ newBackgroundimg: newBackgroundimg,appleBackgroundimg:appleBackgroundimg,kaBackgroundimg:kaBackgroundimg,jijinBack:jijinBack}">
-            <div class="pageloadmorewrapper" :class="{jijinTop:jijinTop,pageloadmorewrapper:pageloadmorewrapper}">
-                <div class="lasttime" v-if="this.$route.query.id==3">
+            <div class="pageloadmorewrapper" :class="{jijinTop:jijinTop,pageloadmorewrapper:pageloadmorewrapper,jijintophand:jijintophand}">
+                <div class="lasttime" v-if="hands">
                     <img src="~@/assets/sddzhand.png" alt="">
                 </div>
                 <div v-for="(product,index) in allProduct" :key="product.id,index"  @click="gotoUrl(index)" :class="{product:product,productthree:productthree}">
@@ -107,6 +107,8 @@
             backone:true,
             jijinTop:false,
             Uid: this.$route.params.Uid,
+            hands:false,
+            jijintophand:false
         };
     },
     methods: {
@@ -180,10 +182,11 @@
             this.productthree = true,
             this.product = false
             this.kaBackgroundimg = true
-        }else if(this.$route.query.id==3){
+        }else if(this.$route.query.id==3 || this.$route.query.id==7){
             this.appleBackgroundimg = true
+            this.hands = true
             this.pageloadmorewrapper = false,
-            this.jijinTop = true
+            this.jijintophand = true
         }
     }
 
@@ -258,6 +261,9 @@
     }
     .jijinTop{
         margin-top: 500*$rem !important;
+    }
+    .jijintophand{
+        margin-top: 465*$rem !important;
     }
 
     .header{  //顶部header

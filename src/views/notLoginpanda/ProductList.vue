@@ -254,8 +254,8 @@ export default {
     toClassification(index) {
       //跳转商品分类详情
         // window.location.href = "http://www.baidu.com/"
-        // window.location.href="http://192.168.2.156:8228/#/appClassification?title=" +this.productListArrar[index].title +"&id=" +this.productListArrar[index].id
-        this.$router.push({path: '/appClassification?title=' +this.productListArrar[index].title +"&id=" +this.productListArrar[index].id});
+        window.location.href="http://47.104.72.197:83/#/appClassification?title=" +this.productListArrar[index].title +"&id=" +this.productListArrar[index].id
+        // this.$router.push({path: '/appClassification?title=' +this.productListArrar[index].title +"&id=" +this.productListArrar[index].id});
         // window.location.assign("http://192.168.2.156:8228/#/appClassification?title=" +this.productListArrar[index].title +"&id=" +this.productListArrar[index].id)
     }
   },
