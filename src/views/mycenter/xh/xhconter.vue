@@ -95,13 +95,13 @@ export default {
             this.isCertified = this.$route.query.isCertified //认证状态
         },
         goSetting(){
-            window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/#/setting"
+            window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/setting"
         },
         goHelp(){
-            window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/#/xhhelpcenter"
+            window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/xhhelpcenter"
         },
         goabouts(){
-            window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/#/xhAboutUs"
+            window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/xhAboutUs"
         }
 
     },
