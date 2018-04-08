@@ -99,7 +99,7 @@ export default {
             window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/#/axhelpcenter"
         },
         goabouts(){
-            window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/#/axhaboutus"
+            window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/#/axaboutus"
         }
     },
   mounted(){
