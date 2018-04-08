@@ -50,7 +50,7 @@
 import resources from "../../resources";
 // 请求列表
 const productQuery = `
-        query(
+        query( 
             $pageNumber: Int
             $pageSize: Int
             $h5WebName: String
@@ -178,8 +178,7 @@ export default {
             "User-Id": "0",
             "Channel-Id": "14",
             "Device-Id": "111",
-            "Request-Uri":
-              "https://api.pinganzhiyuan.com/panda_loan/graphql/query",
+            "Request-Uri":"https://api.pinganzhiyuan.com/panda_loan/graphql/query",
             "Package-Name": this.Uid
           }
         })
@@ -203,8 +202,7 @@ export default {
         platformId: "0",
         productTypeId: "5"
       };
-      this.$ajax
-        .post(`${resources.graphQlApi}`, {
+      this.$ajax.post(`${resources.graphQlApi}`, {
           query: `${productQuery}`,
           variables: params,
           headers: {
@@ -250,13 +248,7 @@ export default {
     },
     toClassification(index) {
       //跳转商品分类详情
-      this.$router.push({
-        path:
-          "/noClassification?title=" +
-          this.productListArrar[index].title +
-          "&id=" +
-          this.productListArrar[index].id
-      });
+       window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/#/appClassification?title=" +this.productListArrar[index].title +"&id=" +this.productListArrar[index].id
     }
   },
   mounted() {
