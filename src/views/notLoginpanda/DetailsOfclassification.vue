@@ -106,7 +106,7 @@
             nameText:'商品列表',
             backone:true,
             jijinTop:false,
-            Uid: this.$route.params.Uid,
+            Uid:this.$route.query.uid,
             hands:false,
             jijintophand:false
         };
@@ -124,7 +124,7 @@
                 pageNumber:"1",
                 pageSize:"150",
                 h5WebName: "appProductList",
-                h5ChannelUid:sessionStorage.getItem('Uid'),
+                h5ChannelUid:this.Uid,
                 platformId: "0",
                 productTypeId: this.$route.query.id
             }
@@ -141,7 +141,7 @@
                     'Package-Name': this.Uid
                 }
                 }).then(res => {
-                    console.log(res.data.data)
+                    // console.log(res.data.data)
                     var array = res.data.data.h5RecommendProducts;
                     for (var i = 0; i < array.length ;i ++) {
                         array[i].firstTagArray = array[i].firstTags.split("|");
@@ -169,6 +169,7 @@
         }
     },
     mounted() {
+    //    alert(window.location.host)
         this.getRecommendProduct() //首次请求
         this.getTitle()
         document.title = this.$route.query.title
