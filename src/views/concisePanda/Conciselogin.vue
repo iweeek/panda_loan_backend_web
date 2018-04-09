@@ -78,8 +78,7 @@
                 },500);
             },
             agreement(){ //跳转协议
-                // this.$router.push({ path: '/agreement' })
-                window.location.href="http://119.23.12.36:84/panda_loan_mobile_web/agreement"
+                this.$router.push({ path: '/agreement' })
             },
             toProduct(){ //跳转产品列表页面
                 this.$router.push({ path: '/ConciseproductList' })

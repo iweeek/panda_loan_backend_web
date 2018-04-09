@@ -10,7 +10,6 @@ import mycenter from './mycenter'
 Vue.use(VueRouter)
 const router = new VueRouter({
     base: "/panda_loan_mobile_web/",
-    mode: "history",
     routes: [
         ...mobileycling, // 手机回收
         ...panda, // 熊猫贷款
