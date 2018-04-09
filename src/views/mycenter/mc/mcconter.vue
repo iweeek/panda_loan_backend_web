@@ -140,7 +140,7 @@ $rem:1rem/40; //rem配置
         img{
             position: relative;
             display: inline-block;
-            margin-top: 50*$rem;
+            margin-top: 150*$rem;
             border: 20px solid #fff;
             border-radius:100%; 
             width: 150*$rem;
