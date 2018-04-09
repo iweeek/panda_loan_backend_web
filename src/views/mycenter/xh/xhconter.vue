@@ -6,25 +6,27 @@
     <h1>认证状态：{{isCertified}}</h1> -->
     <!-- 信息 -->
     <div class="profile-head">
-        <div class="profile-img">
-            <div class="profile-title">我的</div>
-            <img src="~@/assets/profileimg.png" alt="">
-            <div class="profile-author">
-                {{isCertified|capitalize}}
-                <!-- 1通过 -->
-                <!-- 0未通过1 -->
+        <div class="profile-backimg"> 
+            <div class="profile-img">
+                <img src="~@/assets/profileimg.png" alt="">
             </div>
-        </div>
-        <div class="profile-phone">{{phone}}</div>
-        <div class="profile-name">
-            <div class="profile_namedata">{{name}}</div>
+            <!-- 个人信息 -->
+            <div class="prifile-text">
+                <div class="profile-phone">{{phone}}</div>
+                <div class="profile-name">
+                    <div class="profile_namedata">{{name}}</div>
+                    <div class="isCertifiedstyle">
+                         {{isCertified|capitalize}}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
         <!-- 单个表格 -->
     <div class="profile-table">
-        <div class="profile-tab">
+        <div class="profile-tab" @click="goHelp">
             <div class="profile-icon">
-                <img src="~@/assets/helpcentericonblack.png" alt="">
+                <img src="~@/assets/helpcentericon.png" alt="">
             </div>
             <div class="profileicon-text">
                 帮助中心
@@ -36,11 +38,11 @@
     </div>
        <!-- 多个表格 -->
     <div class="profile-tables">
-        <div class="profile-tabs">
+        <div class="profile-tabs" @click="goSetting">
             <div class="profile-icons">
-                <img src="~@/assets/settingblack.png" alt="">
+                <img src="~@/assets/settingicon.png" alt="">
             </div>
-            <div class="profile-tabmenu" @click="goSetting">
+            <div class="profile-tabmenu" >
                 <div class="profileicon-texs">
                     设置
                 </div>
@@ -49,9 +51,9 @@
                 </div>
             </div>
         </div>
-        <div class="profile-tabs" >
+        <div class="profile-tabs"  @click="goabouts">
             <div class="profile-icons">
-                <img src="~@/assets/aboutsiconblack.png" alt="">
+                <img src="~@/assets/aboutsicon.png" alt="">
             </div>
             <div class="profile-tabmenu" style="border:none;">
                 <div class="profileicon-texs">
@@ -93,8 +95,15 @@ export default {
             this.isCertified = this.$route.query.isCertified //认证状态
         },
         goSetting(){
-            this.$router.push({ path: '/setting' })
+            window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/setting"
+        },
+        goHelp(){
+            window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/xhhelpcenter"
+        },
+        goabouts(){
+            window.location.href="http://www.pinganzhiyuan.com/panda_loan_mobile_web/xhAboutUs"
         }
+
     },
   mounted(){
     this.getMycenterdata()
@@ -111,10 +120,8 @@ $rem:1rem/40; //rem配置
 }
 // 个人信息
 .profile-head{
-    padding-bottom: 50*$rem;
     width: 100%;
     height:auto;
-    background:#fff;
     overflow: hidden;
     .profile-title{
         width: 100%;
@@ -122,65 +129,61 @@ $rem:1rem/40; //rem配置
         line-height: 88*$rem;
         text-align: center;
         font-size: 30*$rem;
-        color:#fff;
-        background:#222;
+        color:#000;
+        background: #fff;
     }
-    .profile-img{
-        position: relative;
+    .profile-backimg{
+        padding: 70*$rem 25*$rem;
         width: 100%;
-        height: 232*$rem;
-        background: url("~@/assets/blackimg.png") no-repeat;
-        background-size:100% 100%;
-        text-align: center;
-        img{
-            position: relative;
-            display: inline-block;
-            margin-top: 50*$rem;
-            border: 20px solid #fff;
-            border-radius:100%; 
-            width: 150*$rem;
-        }
-        .profile-author{
-            position: absolute;
-            left: 50%;
-            top:238*$rem;
-            width: auto;
-            padding: 5*$rem;
-            color:#222;
-            text-align: center;
-            background: #ffd768;
-            border-radius: 5*$rem;
-        }
-    }
-    .profile-phone{
-        margin-top:75*$rem; 
-        text-align: center;
-        font-size: 32*$rem;
-        color:#222;
+        height: auto;
         overflow: hidden;
-    }
-    .profile-name{
-        margin-top: 15*$rem;
-        width: 100%;
-        height:auto;
-        line-height: 40*$rem;
-        text-align: center;
-        .profile_namedata{
-            padding: 5*$rem 0 ;
-            font-size: 32*$rem;
-            color:#222;
-        }
-        .isCertifiedstyle{
-            margin-left:10*$rem;
-            float: left;
-            text-align: left;
-            width:auto;
-            padding: 0 5*$rem;
-            border: 2.1*$rem solid #fff;
-            border-radius:0.2rem; 
-            font-size: 18*$rem;
-            color:#fff;
-        }
+        background:url('~@/assets/backgroundimgyellow.png');
+            .profile-img{
+                float: left;
+                width: auto;
+                height: 120*$rem;
+                line-height: 120*$rem;
+                margin-right: 22*$rem;
+                img{
+                    vertical-align: middle;
+                    width: 120*$rem;
+                }
+            }
+            .prifile-text{
+                margin-top: 15*$rem;
+                .profile-phone{
+                    width: auto;
+                    font-size: 32*$rem;
+                    color:#fff;
+                    overflow: hidden;
+                }
+                .profile-name{
+                    margin-top: 15*$rem;
+                    width: auto;
+                    height:auto;
+                    line-height: 40*$rem;
+                    text-align: center;
+                    .profile_namedata{
+                        float: left;
+                        text-align: right;
+                        width:auto;
+                        padding: 5*$rem 0 ;
+                        font-size: 32*$rem;
+                        color:#fff;
+                    }
+                    .isCertifiedstyle{
+                        margin-left:10*$rem;
+                        float: left;
+                        text-align: left;
+                        width:auto;
+                        padding: 0 5*$rem;
+                        border: 2.1*$rem solid #fff;
+                        border-radius:0.2rem; 
+                        font-size: 18*$rem;
+                        color:#fff;
+                    }
+                }
+            }
     }
 }
 // 表格
