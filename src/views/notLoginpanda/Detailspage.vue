@@ -35,7 +35,6 @@ export default {
     methods: {
         getUrl(){
             this.htmlUrl = this.$route.query.url
-            console.log(  this.htmlUrl)
             this.title = this.$route.query.title
         },
     },
