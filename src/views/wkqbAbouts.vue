@@ -3,9 +3,9 @@
         <div class="companyDiv">
             <div class="companyCount">
                 <div class="companyLogo"> <!--logo文字-->
-                    <img src="~@/assets/suibianhuaabout.png" alt="">
+                    <img src="~@/assets/wkqbLogo.png" alt="">
                     <div class="companyName">
-                        <span>悟空钱包</span>
+                        <!-- <span>悟空钱包</span> -->
                         <p>用钱记账，交给悟空</p>
                     </div>
                    
@@ -70,7 +70,7 @@ $rem:1rem/40; //rem配置
 }
 
 .companyLogo img{
-    width: 225*$rem;
+    width: 200*$rem;
 }
 
 .companyName{
@@ -83,8 +83,9 @@ $rem:1rem/40; //rem配置
     font-family:微软雅黑,Arial, Helvetica, sans-serif;
     overflow: hidden;
     p{
-        color:#FF1E10 !important;
-        font-size: 42*$rem !important;
+        margin-top: 20*$rem;
+        color:#000 !important;
+        font-size: 38*$rem !important;
         text-align: center;
     }
 }
@@ -95,7 +96,7 @@ $rem:1rem/40; //rem配置
 }
 
 .companyIntroduction{ 
-    margin-top: 420*$rem;
+    margin-top: 470*$rem;
     padding:0 33*$rem;
     width:100%;
     height: auto;
