@@ -12,7 +12,7 @@
    const NewYearLanding = resolve => require.ensure([], () => resolve(require('../views/NewYearLanding.vue')), 'NewYearLanding')
    const Product = resolve => require.ensure([], () => resolve(require('../views/Product.vue')), 'Product')
    const Coupon = resolve => require.ensure([], () => resolve(require('../views/Coupon.vue')), 'Coupon')
-
+   const WkqbAbouts = resolve => require.ensure([], () => resolve(require('../views/wkqbAbouts.vue')), 'WkqbAbouts')
 
 
 
@@ -87,4 +87,11 @@
            name: '2018年贷款利率',
            hidden: true
        },
+       {
+           path: '/wkqbAbouts',
+           component: WkqbAbouts,
+           name: '关于我们',
+           hidden: true
+       },
+
    ]
